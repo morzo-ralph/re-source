@@ -1,0 +1,74 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <div>
+    <mat-card>
+        <div>
+            <p>
+                <mat-form-field appearance="outline">
+                    <mat-label>Product Name:</mat-label>
+                    <input matInput [(ngModel)]="prodName" placeholder="Product Name" type="text"/>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Product Description:</mat-label>
+                    <input matInput [(ngModel)]="prodDesc" placeholder="Product Desc" type="text"/>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Product Image:</mat-label>
+                    <input matInput [(ngModel)]="prodImg" placeholder="Product Image" type="text"/>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Product Price:</mat-label>
+                    <input matInput [(ngModel)]="prodPrice" placeholder="Product Price" type="number"/>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Product Quantity:</mat-label>
+                    <input matInput [(ngModel)]="prodQty" placeholder="Product Quantity" type="number"/>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Product Supplier:</mat-label>
+                    <input matInput [(ngModel)]="prodSupp" placeholder="Product Supplier" type="text"/>
+                </mat-form-field>
+                <br>
+                <button (click)="itemAdd()" mat-raised-button color="primary">Add Item</button>
+            </p>
+        </div>
+    </mat-card>
+    </div>
+
+
+
+<div>
+    <tr>
+        <th>Product Id</th>
+        <th>Product Name</th>
+        <th>Product Description</th>
+        <th>Product Quantity</th>
+        <th>Product Price</th>
+        <th>Product Supplier</th>
+        <th>created_at</th>
+        <th>Actions</th>
+    </tr>
+    
+    <tr *ngFor="let item of a; let i = index">
+        <ng-container *ngIf="item.isArchive === 0">
+            <td>{{ item._id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.supplier }}</td>
+            <td>{{ item.created_at | date: 'medium' }}</td>
+            <td>
+                <button><span class="material-icons" (click)="itemView(item)">visibility</span></button>
+                <button><span class="material-icons" (click)="itemUpdate(item)">edit</span></button>
+                <button><span class="material-icons" (click)="itemArchive(item._id)">archive</span></button>
+            </td>    
+        </ng-container>
+                
+    </tr>
+
+</div>

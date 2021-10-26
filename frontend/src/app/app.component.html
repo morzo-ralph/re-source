@@ -1,0 +1,26 @@
+<router-outlet> </router-outlet>
+
+<!--Footer-->
+
+<mat-toolbar color="primary" class="mat-elevation-z24" style="position:fixed; bottom: 0px; z-index: 100">
+  <mat-toolbar-row>
+    <span>This Application</span>
+    <span style="flex: 1 1 auto;"></span>
+    <button mat-mini-fab matBadge="7" matBadgeColor="warn" matBadgeSize="small" color="primary">
+      <mat-icon>explore</mat-icon>
+    </button>
+    <button mat-mini-fab matBadge="1" matBadgeColor="warn" matBadgeSize="small" color="primary">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <button mat-mini-fab color="primary">
+      <mat-icon>logout</mat-icon>
+    </button>
+   
+  </mat-toolbar-row>
+  <!--<mat-toolbar-row style="color: black; background-color: #E1E1E1" *ngIf="isMobile != true"> -->
+  <mat-toolbar-row style="color: black; background-color: #E1E1E1"> 
+    <span style="flex: 1 1 auto;"></span>
+    <span style="font-size: 10px">Powered by Pseudocode Developers @ Info</span>
+    <span style="flex: 1 1 auto;"></span>
+  </mat-toolbar-row>
+</mat-toolbar>
