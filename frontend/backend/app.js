@@ -69,6 +69,7 @@ app.get('/inventory/:inventoryId', (req, res) => {
 });
 
 app.put('/inventories/:_id', (req, res) => {
+    console.log(req.params);
     console.log(req.body);
     Inventory.findOneAndUpdate({"_id": req.params}, {$set: req.body.a})
         .then(inventory => res.send(inventory))
@@ -76,7 +77,6 @@ app.put('/inventories/:_id', (req, res) => {
 });
 
 app.patch('/inventories/:_id', (req, res) => {
-    console.log(req.params);
     Inventory.findOneAndUpdate({"_id": req.params}, {$set: req.body.a})
         .then(inventory => res.send(inventory))
         .catch(error => console.log(error));

@@ -20,15 +20,17 @@ export class TaskService {
   }
 
   getItem(id:any){
-    return this.data.get(`lists/${id}`);
+    return this.data.get(`inventories/${id}`);
   }
 
   updateItem(id: any, a: any){
-    return this.data.put(`lists/${id}`, {a})
+    console.log(id);
+    console.log(a);
+    return this.data.put(`inventories/${id}`, {a})
   }
 
   archiveItem(id: any, a: any){
-    return this.data.put(`inventories/${id}`, {a});
+    return this.data.patch(`inventories/${id}`, {a});
   }
 
 }

@@ -59,7 +59,7 @@ export class TestComponent implements OnInit {
     this.pushItemData.supplier = this.prodSupp;
     this.pushItemData.isArchive = 0;
     //this.pushItemData = timeStamp();
-    console.log(this.pushItemData);
+    console.log(this.pushItemData[0]);
     this.task.createItem(this.pushItemData).subscribe((data: any) => {
       this.a = data;
       console.log(this.a);
