@@ -1,0 +1,224 @@
+<mat-toolbar color="primary" class="mat-elevation-z22" style="z-index: 100">
+    <span style="flex: 1 1 auto;"></span>
+    <span>Home Page</span>
+    <span style="flex: 1 1 auto;"></span>
+  </mat-toolbar>
+  
+  <mat-tab-group>
+    <mat-tab label="Dashboard">
+      <div style="padding: 18px;">
+        <div class="resprofheader">
+          <h1 class="poppins-bold header">Finances</h1>
+        </div>
+            <div class="flex-container">
+
+            <div class="flex-item-left">
+              <mat-card class="maleStatsCard">
+                <mat-card-content>
+                    <mat-card-header>
+                        Cash Balance
+                    </mat-card-header>
+                        <google-chart style="width: 100%;height: 250px;"
+                          [title]="titleBalance"
+                          [type]="typeBalance"
+                          [data]="dataBalance"
+                          [columns]="chartColumnsBalance"
+                          [dynamicResize]="dynamicResize"
+                          >
+                        </google-chart>
+                </mat-card-content>
+              </mat-card>
+            </div>
+<br/>
+            <div class="flex-item-right">
+              <mat-card>
+                <mat-card-content>
+                    <mat-card-header>
+                        Sales
+                    </mat-card-header>
+                        <google-chart style="width: 100%;height: 250px;"
+                          [title]="titleSales"
+                          [type]="typeSales"
+                          [data]="dataSales"
+                          [columns]="chartColumnsSales"
+                          [dynamicResize]="dynamicResize"
+                        >                              
+                        </google-chart>
+                        <p>Legend</p><br/>
+                        <p>AP - Account Payable Turnover</p>
+                        <p>AR - Account Receivable Turnover</p>
+
+                </mat-card-content>
+              </mat-card>
+            </div>
+
+            </div>
+<br/>
+            <div>
+              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+            
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              </ng-container>
+            
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+            
+              <!-- Weight Column -->
+              <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef> Weight </th>
+                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+              </ng-container>
+            
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+              </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+           
+            </div> 
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Finances">
+      <div style="padding: 18px;">
+        <mat-card>
+          <mat-card-content>
+            <google-chart style="width: 75%;display: flex; margin: auto auto"
+            [title]="title"
+            [type]="myType"
+            [data]="data"
+            [columns]="chartColumns"
+            [dynamicResize]="dynamicResize">
+        </google-chart>
+          </mat-card-content>
+        </mat-card>
+        
+      </div>
+
+      <div style="margin:20px;">
+        <form class="example-form">
+          <button mat-raised-button color="primary">Add Finance Report</button>
+          <mat-form-field class="example-full-width" appearance="fill"  style="float:right; margin: 18px;">
+            <mat-label>Search Finances</mat-label>
+            <input matInput>
+          </mat-form-field>
+         </form> 
+      </div>
+
+      <div style="margin:20px;">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="weight">
+          <th mat-header-cell *matHeaderCellDef> Weight </th>
+          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+        </ng-container>
+      
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="symbol">
+          <th mat-header-cell *matHeaderCellDef> Symbol </th>
+          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+     
+      </div> 
+    </mat-tab>
+
+    <mat-tab label="Revenues">
+      <div style="padding: 18px;">
+        <mat-card>
+          <mat-card-content>
+            <google-chart style="width: 75%;display: flex; margin: auto auto"
+            [title]="title"
+            [type]="myType"
+            [data]="data"
+            [columns]="chartColumns"
+            [dynamicResize]="dynamicResize">
+        </google-chart>
+
+          </mat-card-content>
+        </mat-card>
+        
+      </div>
+      
+      <div style="margin:20px;">
+        <form class="example-form">
+          <button mat-raised-button color="primary">Add Revenue Report</button>
+          <mat-form-field class="example-full-width" appearance="fill"  style="float:right; margin: 18px;">
+            <mat-label>Search Finances</mat-label>
+            <input matInput>
+          </mat-form-field>
+         </form> 
+      </div>
+
+      <div style="margin:20px;">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="weight">
+          <th mat-header-cell *matHeaderCellDef> Weight </th>
+          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+        </ng-container>
+      
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="symbol">
+          <th mat-header-cell *matHeaderCellDef> Symbol </th>
+          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+     
+      </div> 
+    </mat-tab>
+  </mat-tab-group>

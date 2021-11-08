@@ -4,6 +4,7 @@ import { TestComponent } from './pages/test/test/test.component';
 import { HrComponent } from './pages/hr/hr/hr.component';
 import { IntefaceComponent } from './pages/inteface/inteface.component';
 import { HomeComponent } from './pages/home/home.component';
+import { FinanceComponent } from './pages/finance/finance/finance.component';
 
 const routes: Routes = [
 
@@ -24,6 +25,13 @@ const routes: Routes = [
     path: 'hr', component: IntefaceComponent, children:
       [
         { path: '', component: HrComponent },
+      ]
+  },
+
+  {
+    path: 'finance', component: IntefaceComponent, children:
+      [
+        { path: '', component: FinanceComponent },
       ]
   },
 

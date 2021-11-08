@@ -53,6 +53,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+//sweetalert
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppComponent } from './app.component';
 import { TestComponent } from './pages/test/test/test.component';
@@ -61,6 +63,7 @@ import { EditComponent } from './pages/test/test/edit/edit.component';
 import { IntefaceComponent } from './pages/inteface/inteface.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HrComponent } from './pages/hr/hr/hr.component';
+import { FinanceComponent } from './pages/finance/finance/finance.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,8 @@ import { HrComponent } from './pages/hr/hr/hr.component';
     EditComponent,
     IntefaceComponent,
     HomeComponent,
-    HrComponent
+    HrComponent,
+    FinanceComponent
   ],
   imports: [
     BrowserModule,
@@ -125,6 +129,8 @@ import { HrComponent } from './pages/hr/hr/hr.component';
     //Googlechart declaration
 
     GoogleChartsModule,
+
+    SweetAlert2Module.forRoot(),
 
   ],
   providers: [],

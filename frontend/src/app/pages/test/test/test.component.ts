@@ -7,6 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ViewComponent } from './view/view.component';
 import { EditComponent } from './edit/edit.component';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -70,11 +71,31 @@ export class TestComponent implements OnInit {
   
   
   itemArchive(i:any){
-    console.log(i);
-    this.idArchive = i;
-    this.task.archiveItem(this.idArchive, {"isArchive": 1}).subscribe((data: any) => {
 
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        //console.log(i);
+        this.idArchive = i;
+        this.task.archiveItem(this.idArchive, {"isArchive": 1}).subscribe((data: any) => {
+          
+        });
+        this.itemData();
+      }
     })
+    //this.itemData();
   }
 
   //modal
@@ -84,6 +105,8 @@ export class TestComponent implements OnInit {
         width: '50%',
         data: i
       });
+
+      dialogRef.afterClosed().subscribe(() => this.itemData());
     }
 
   itemUpdate(i: any){
@@ -91,6 +114,8 @@ export class TestComponent implements OnInit {
     width: '50%',
     data: i
    });
+
+   dialogRef2.afterClosed().subscribe(() => this.itemData());
   }
 
   clearForm(){
