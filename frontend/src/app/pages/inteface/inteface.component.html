@@ -1,0 +1,91 @@
+<div style="height: 100%; width: 100%">
+    <mat-toolbar color="primary" class="mat-elevation-z12" style="position:fixed; top: 0px; z-index: 100">
+      <button mat-mini-fab color="primary" (click)="drawer.toggle()">
+        <mat-icon>reorder</mat-icon>
+      </button> &nbsp;
+      <span>This Company Name</span>
+      <span style="flex: 1 1 auto;"></span>
+      <button mat-mini-fab color="primary">
+        <mat-icon>leaderboard</mat-icon>
+      </button>
+      <button mat-mini-fab matBadge="7" matBadgeColor="warn" matBadgeSize="small" color="primary">
+        <mat-icon>business_center</mat-icon>
+      </button>               
+      <button mat-mini-fab matBadge="!" matBadgeColor="warn" matBadgeSize="small" color="primary">
+        <mat-icon>settings</mat-icon>
+      </button>
+    </mat-toolbar>
+  
+    <mat-toolbar color="primary" class="mat-elevation-z12">
+    </mat-toolbar>
+  
+    <mat-drawer-container style="height: 100%" autosize>
+      <mat-drawer #drawer style="width: 30%; max-width: 200px;" mode="side">
+  
+        <mat-toolbar color="primary" class="mat-elevation-z12">
+          <ng-container *ngIf="isMobile == true">
+            <mat-icon>reorder</mat-icon> &nbsp; <h4>Menu</h4>
+          </ng-container>
+          <ng-container *ngIf="isMobile == false"> 
+            <h4>Application Menu</h4>
+          </ng-container>           
+        </mat-toolbar>
+  
+        <div style="padding: 8px">
+  
+          <!--If Mobile-->
+          <ng-container *ngIf="isMobile == true">
+            <mat-list style="text-align: center">
+              <mat-list-item>
+                <button mat-mini-fab color="primary">
+                  <mat-icon>explore</mat-icon>
+                </button>
+              </mat-list-item>
+              <mat-list-item>
+                <button mat-mini-fab color="primary">
+                  <mat-icon>explore</mat-icon>
+                </button>
+              </mat-list-item>
+              <mat-list-item>
+                <button mat-mini-fab color="primary">
+                  <mat-icon>explore</mat-icon>
+                </button>
+              </mat-list-item>
+            </mat-list>
+          </ng-container>
+  
+          <!--If Not Mobile-->
+          <ng-container *ngIf="isMobile == false">
+            <mat-list>
+              <mat-list-item>
+                <button mat-raised-button color="primary" style="width: 100%; text-align: left">
+                  <mat-icon>explore</mat-icon> &nbsp; HR 
+                </button>
+              </mat-list-item>
+              <mat-list-item>
+                <button mat-raised-button color="primary" style="width: 100%; text-align: left">
+                  <mat-icon>explore</mat-icon> &nbsp; Inventory
+                </button>
+              </mat-list-item>
+              <mat-list-item>
+                <button mat-raised-button color="primary" style="width: 100%; text-align: left">
+                  <mat-icon>explore</mat-icon> &nbsp; Button
+                </button>
+              </mat-list-item>
+            </mat-list>
+          </ng-container>
+  
+  
+        </div>
+  
+  
+      </mat-drawer>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-container>
+  
+  </div>
+  
+  
+  

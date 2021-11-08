@@ -21,32 +21,6 @@ app.use((req, res, next) => {
     next();
 });
 
-//lists model
-app.get('/lists', (req, res) => {
-    List.find({})
-        .then(lists => res.send(lists))
-        .catch(error => console.log(error));
-});
-
-app.post('/lists', (req, res) => {
-    (new List({'title' : req.body.title}))
-        .save()
-        .then((list) => res.send(list))
-        .catch((error) => console.log(error));
-});
-
-app.get('/lists/:listId', (req, res) => {
-    List.find({})
-        .then(lists => res.send(lists))
-        .catch(error => console.log(error));
-});
-
-app.patch('/lists/:listId', (req, res) => {
-    List.findOneAndUpdate({'id': req.params.listId}, {$set: req.body})
-        .then(lists => res.send(lists))
-        .catch(error => console.log(error));
-});
-
 //inventory
 app.get('/inventories', (req, res) => {
     Inventory.find({})
@@ -82,10 +56,39 @@ app.patch('/inventories/:_id', (req, res) => {
         .catch(error => console.log(error));
 });
 
-app.delete('/inventories/:inventoryId', (req, res) => {
-    Inventory.findByIdAndRemove(req.params.i)
-    .then(inventory => res.send(inventory))
-    .catch(error => console.log(error));
+//employee
+app.get('/employees', (req, res) => {
+    Employee.find({})
+        .then(employee => res.send(employee))
+        .catch(error => console.log(error));
+});
+
+app.post('/employees', (req, res) => {  
+    (new Employee(req.body.a))
+    .save()
+    .then((employee) => res.send(employee))
+    .catch((error) => console.log(error));
+    
+});
+
+app.get('/employees/:employeeId', (req, res) => {
+    Employee.find({})
+        .then(employee => res.send(employee))
+        .catch(error => console.log(error));
+});
+
+app.put('/employees/:_id', (req, res) => {
+    console.log(req.params);
+    console.log(req.body);
+    Employee.findOneAndUpdate({"_id": req.params}, {$set: req.body.a})
+        .then(employee => res.send(employee))
+        .catch(error => console.log(error));
+});
+
+app.patch('/employees/:_id', (req, res) => {
+    Employee.findOneAndUpdate({"_id": req.params}, {$set: req.body.a})
+        .then(employee => res.send(employee))
+        .catch(error => console.log(error));
 });
 
 /**

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/taskmanager',
 {
+    //promiseLibrary: require('bluebird'),
     //useNewUrlParser: true,
     //useUnifiedTopology: true,
     //useFindAndModify: false,

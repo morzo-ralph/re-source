@@ -58,13 +58,19 @@ import { AppComponent } from './app.component';
 import { TestComponent } from './pages/test/test/test.component';
 import { ViewComponent } from './pages/test/test/view/view.component';
 import { EditComponent } from './pages/test/test/edit/edit.component';
+import { IntefaceComponent } from './pages/inteface/inteface.component';
+import { HomeComponent } from './pages/home/home.component';
+import { HrComponent } from './pages/hr/hr/hr.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TestComponent,
     ViewComponent,
-    EditComponent
+    EditComponent,
+    IntefaceComponent,
+    HomeComponent,
+    HrComponent
   ],
   imports: [
     BrowserModule,
