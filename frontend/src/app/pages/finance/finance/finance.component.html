@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="mat-elevation-z22" style="z-index: 100">
     <span style="flex: 1 1 auto;"></span>
-    <span>Home Page</span>
+    <span>Finances & Revenues Page</span>
     <span style="flex: 1 1 auto;"></span>
   </mat-toolbar>
   
@@ -93,11 +93,11 @@
       </div>
     </mat-tab>
 
-    <mat-tab label="Finances">
+    <mat-tab label="Revenues">
       <div style="padding: 18px;">
         <mat-card>
           <mat-card-content>
-            <google-chart style="width: 75%;display: flex; margin: auto auto"
+            <google-chart style="width: 95%; display: flex; margin: auto auto"
             [title]="title"
             [type]="myType"
             [data]="data"
@@ -110,16 +110,26 @@
       </div>
 
       <div style="margin:20px;">
+        <div class="container">
+
+        </div>
         <form class="example-form">
-          <button mat-raised-button color="primary">Add Finance Report</button>
-          <mat-form-field class="example-full-width" appearance="fill"  style="float:right; margin: 18px;">
-            <mat-label>Search Finances</mat-label>
-            <input matInput>
+          <button mat-raised-button color="primary">Add Revenue Report</button>
+         </form>
+         
+         <br>
+         <hr>
+         <div style="display: flex; align-items: center; justify-content: center;">
+          <hr>
+          <mat-form-field appearance="fill">
+            <mat-label>Search Revenue Report</mat-label>
+            <input matInput >
           </mat-form-field>
-         </form> 
+         </div>
       </div>
 
-      <div style="margin:20px;">
+      <div class="sort">
+
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <!--- Note that these columns can be defined in any order.
@@ -157,34 +167,43 @@
       </div> 
     </mat-tab>
 
-    <mat-tab label="Revenues">
+    <mat-tab label="Expenses">
       <div style="padding: 18px;">
         <mat-card>
           <mat-card-content>
-            <google-chart style="width: 75%;display: flex; margin: auto auto"
+            <google-chart style="width: 95%; display: flex; margin: auto auto"
             [title]="title"
             [type]="myType"
             [data]="data"
             [columns]="chartColumns"
             [dynamicResize]="dynamicResize">
         </google-chart>
-
           </mat-card-content>
         </mat-card>
         
       </div>
-      
-      <div style="margin:20px;">
-        <form class="example-form">
-          <button mat-raised-button color="primary">Add Revenue Report</button>
-          <mat-form-field class="example-full-width" appearance="fill"  style="float:right; margin: 18px;">
-            <mat-label>Search Finances</mat-label>
-            <input matInput>
-          </mat-form-field>
-         </form> 
-      </div>
 
       <div style="margin:20px;">
+        <div class="container">
+
+        </div>
+        <form class="example-form">
+          <button mat-raised-button color = "primary" (click)="addExpenses()">Add Expenses Report</button>
+         </form>
+         
+         <br>
+         <hr>
+         <div style="display: flex; align-items: center; justify-content: center;">
+          <hr>
+          <mat-form-field appearance="fill">
+            <mat-label>Search Revenue Report</mat-label>
+            <input matInput >
+          </mat-form-field>
+         </div>
+      </div>
+
+      <div class="sort">
+
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <!--- Note that these columns can be defined in any order.
@@ -219,6 +238,7 @@
       </table>
 
      
-      </div> 
+      
+      </div>
     </mat-tab>
   </mat-tab-group>

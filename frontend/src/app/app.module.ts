@@ -64,6 +64,11 @@ import { IntefaceComponent } from './pages/inteface/inteface.component';
 import { HomeComponent } from './pages/home/home.component';
 import { HrComponent } from './pages/hr/hr/hr.component';
 import { FinanceComponent } from './pages/finance/finance/finance.component';
+import { AddRevenuesComponent } from './pages/finance/finance/add-revenues/add-revenues.component';
+import { EditRevenuesComponent } from './pages/finance/finance/edit-revenues/edit-revenues.component';
+import { EditExpensesComponent } from './pages/finance/finance/edit-expenses/edit-expenses.component';
+import { AddExpensesComponent } from './pages/finance/finance/add-expenses/add-expenses.component';
+
 
 @NgModule({
   declarations: [
@@ -74,7 +79,11 @@ import { FinanceComponent } from './pages/finance/finance/finance.component';
     IntefaceComponent,
     HomeComponent,
     HrComponent,
-    FinanceComponent
+    FinanceComponent,
+    AddRevenuesComponent,
+    EditRevenuesComponent,
+    EditExpensesComponent,
+    AddExpensesComponent,
   ],
   imports: [
     BrowserModule,

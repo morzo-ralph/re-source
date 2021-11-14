@@ -57,14 +57,14 @@ app.patch('/inventories/:_id', (req, res) => {
         .catch(error => console.log(error));
 });
 
-//employee
-app.get('/employees', (req, res) => {
+//finances
+app.get('/finances', (req, res) => {
     Employee.find({})
         .then(employee => res.send(employee))
         .catch(error => console.log(error));
 });
 
-app.post('/employees', (req, res) => {  
+app.post('/finances', (req, res) => {  
     (new Employee(req.body.a))
     .save()
     .then((employee) => res.send(employee))
@@ -72,13 +72,13 @@ app.post('/employees', (req, res) => {
     
 });
 
-app.get('/employees/:employeeId', (req, res) => {
+app.get('/finances/:financeId', (req, res) => {
     Employee.find({})
         .then(employee => res.send(employee))
         .catch(error => console.log(error));
 });
 
-app.put('/employees/:_id', (req, res) => {
+app.put('/finaces/:_id', (req, res) => {
     console.log(req.params);
     console.log(req.body);
     Employee.findOneAndUpdate({"_id": req.params}, {$set: req.body.a})
@@ -86,7 +86,42 @@ app.put('/employees/:_id', (req, res) => {
         .catch(error => console.log(error));
 });
 
-app.patch('/employees/:_id', (req, res) => {
+app.patch('/finances/:_id', (req, res) => {
+    Employee.findOneAndUpdate({"_id": req.params}, {$set: req.body.a})
+        .then(employee => res.send(employee))
+        .catch(error => console.log(error));
+});
+
+//revenues
+app.get('/revenues', (req, res) => {
+    Employee.find({})
+        .then(employee => res.send(employee))
+        .catch(error => console.log(error));
+});
+
+app.post('/revenues', (req, res) => {  
+    (new Employee(req.body.a))
+    .save()
+    .then((employee) => res.send(employee))
+    .catch((error) => console.log(error));
+    
+});
+
+app.get('/revenues/:revenueId', (req, res) => {
+    Employee.find({})
+        .then(employee => res.send(employee))
+        .catch(error => console.log(error));
+});
+
+app.put('/revenues/:_id', (req, res) => {
+    console.log(req.params);
+    console.log(req.body);
+    Employee.findOneAndUpdate({"_id": req.params}, {$set: req.body.a})
+        .then(employee => res.send(employee))
+        .catch(error => console.log(error));
+});
+
+app.patch('/revenues/:_id', (req, res) => {
     Employee.findOneAndUpdate({"_id": req.params}, {$set: req.body.a})
         .then(employee => res.send(employee))
         .catch(error => console.log(error));

@@ -69,7 +69,6 @@ export class TestComponent implements OnInit {
     });
   }
   
-  
   itemArchive(i:any){
 
     Swal.fire({
