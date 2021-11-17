@@ -24,6 +24,9 @@ export class TestComponent implements OnInit {
   prodSupp: any;
   prodImg: any;
 
+  pcAmount: any;
+  pcDate: any;
+
   idArchive: any;
 
   constructor(
@@ -35,18 +38,19 @@ export class TestComponent implements OnInit {
 
   ngOnInit(): void {
     this.itemData();
+    this.getAllPettyCash();
   }
   
-  a: any;
+  payload: any;
   //lists: List[] = [];
   pushItemData: any = {};
   itemData() {
-    console.log(this.task.getAllItem().subscribe((data: any) => this.a = data));
-    this.task.getAllItem()
-      .subscribe((a: any) => {
-        this.a = a;
+    console.log(this.task.getAllItem('inventories').subscribe((data: any) => this.payload = data));
+    this.task.getAllItem('inventories')
+      .subscribe((data: any) => {
+        this.payload = data;
         
-        console.log(this.a);
+        console.log(this.payload);
 
       }); 
   }
@@ -61,9 +65,9 @@ export class TestComponent implements OnInit {
     this.pushItemData.isArchive = 0;
     //this.pushItemData = timeStamp();
     console.log(this.pushItemData[0]);
-    this.task.createItem(this.pushItemData).subscribe((data: any) => {
-      this.a = data;
-      console.log(this.a);
+    this.task.createItem('inventories', this.pushItemData).subscribe((data: any) => {
+      this.payload = data;
+      console.log(this.payload);
       this.itemData()
       this.clearForm();
     });
@@ -88,7 +92,7 @@ export class TestComponent implements OnInit {
         )
         //console.log(i);
         this.idArchive = i;
-        this.task.archiveItem(this.idArchive, {"isArchive": 1}).subscribe((data: any) => {
+        this.task.archiveItem('inventories', this.idArchive, {"isArchive": 1}).subscribe((data: any) => {
           
         });
         this.itemData();
@@ -125,6 +129,22 @@ export class TestComponent implements OnInit {
     this.prodSupp = '';
     this.prodImg = '';
   }
-
-  
+  pushPettyCash: any = {};
+  itemAddPettyCash(){
+    this.pushPettyCash.pet_amount = this.pcAmount;
+    this.pushPettyCash.pet_date = this.pcDate;
+    this.pushPettyCash.isArchive = 0;
+    console.log(this.pushPettyCash);
+    this.task.createItem('pettycash', this.pushPettyCash).subscribe(( data: any) => {
+      this.payload = data;
+      this.getAllPettyCash();
+    });
+  }
+  payloadPetty: any;
+  getAllPettyCash(){
+    this.task.getAllItem('pettycash').subscribe(( data : any) => {
+      this.payloadPetty = data;
+      console.log(this.payloadPetty);
+    });
+  }
 }

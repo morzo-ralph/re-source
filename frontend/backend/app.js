@@ -1,11 +1,25 @@
 const express = require('express');
 const app = express();
 const mongoose = require('./database/mongoose');
-//const Router = require('router');
 
-const List = require('./database/models/list');
-const Task = require('./database/models/task');
-const Inventory = require('./database/models/inventory');
+//router import
+const drawsRouter = require('./routes/draws');
+const employeesRouter = require('./routes/employees');
+const expensesRouter = require('./routes/expenses');
+const inventoriesRouter = require('./routes/inventories');
+const pettycashRouter = require('./routes/pettycash');
+const purchasesRouter = require('./routes/purchases');
+const revenuesRouter = require('./routes/revenues');
+const salarytotalsRouter = require('./routes/salarytotals');
+const saldeltasRouter = require('./routes/saldeltas');
+const salesRouter = require('./routes/sales');
+const stocksRouter = require('./routes/stocks');
+
+
+//check localhost ip
+require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+    console.log('addr: ' + add);
+  })
 
 app.use(express.json());
 /*
@@ -22,110 +36,17 @@ app.use((req, res, next) => {
     next();
 });
 
-//inventory
-app.get('/inventories', (req, res) => {
-    Inventory.find({})
-        .then(inventory => res.send(inventory))
-        .catch(error => console.log(error));
-});
-
-app.post('/inventories', (req, res) => {  
-    (new Inventory(req.body.a))
-    .save()
-    .then((inventory) => res.send(inventory))
-    .catch((error) => console.log(error));
-    
-});
-
-app.get('/inventory/:inventoryId', (req, res) => {
-    Inventory.find({})
-        .then(lists => res.send(lists))
-        .catch(error => console.log(error));
-});
-
-app.put('/inventories/:_id', (req, res) => {
-    console.log(req.params);
-    console.log(req.body);
-    Inventory.findOneAndUpdate({"_id": req.params}, {$set: req.body.a})
-        .then(inventory => res.send(inventory))
-        .catch(error => console.log(error));
-});
-
-app.patch('/inventories/:_id', (req, res) => {
-    Inventory.findOneAndUpdate({"_id": req.params}, {$set: req.body.a})
-        .then(inventory => res.send(inventory))
-        .catch(error => console.log(error));
-});
-
-//finances
-app.get('/finances', (req, res) => {
-    Employee.find({})
-        .then(employee => res.send(employee))
-        .catch(error => console.log(error));
-});
-
-app.post('/finances', (req, res) => {  
-    (new Employee(req.body.a))
-    .save()
-    .then((employee) => res.send(employee))
-    .catch((error) => console.log(error));
-    
-});
-
-app.get('/finances/:financeId', (req, res) => {
-    Employee.find({})
-        .then(employee => res.send(employee))
-        .catch(error => console.log(error));
-});
-
-app.put('/finaces/:_id', (req, res) => {
-    console.log(req.params);
-    console.log(req.body);
-    Employee.findOneAndUpdate({"_id": req.params}, {$set: req.body.a})
-        .then(employee => res.send(employee))
-        .catch(error => console.log(error));
-});
-
-app.patch('/finances/:_id', (req, res) => {
-    Employee.findOneAndUpdate({"_id": req.params}, {$set: req.body.a})
-        .then(employee => res.send(employee))
-        .catch(error => console.log(error));
-});
-
-//revenues
-app.get('/revenues', (req, res) => {
-    Employee.find({})
-        .then(employee => res.send(employee))
-        .catch(error => console.log(error));
-});
-
-app.post('/revenues', (req, res) => {  
-    (new Employee(req.body.a))
-    .save()
-    .then((employee) => res.send(employee))
-    .catch((error) => console.log(error));
-    
-});
-
-app.get('/revenues/:revenueId', (req, res) => {
-    Employee.find({})
-        .then(employee => res.send(employee))
-        .catch(error => console.log(error));
-});
-
-app.put('/revenues/:_id', (req, res) => {
-    console.log(req.params);
-    console.log(req.body);
-    Employee.findOneAndUpdate({"_id": req.params}, {$set: req.body.a})
-        .then(employee => res.send(employee))
-        .catch(error => console.log(error));
-});
-
-app.patch('/revenues/:_id', (req, res) => {
-    Employee.findOneAndUpdate({"_id": req.params}, {$set: req.body.a})
-        .then(employee => res.send(employee))
-        .catch(error => console.log(error));
-});
+app.use("/draws", drawsRouter);
+app.use("/employees", employeesRouter);
+app.use("/expenses", expensesRouter);
+app.use("/inventories", inventoriesRouter);
+app.use("/pettycash", pettycashRouter);
+app.use("/purchases", purchasesRouter);
+app.use("/revenues", revenuesRouter);
+app.use("/salarytotals", salarytotalsRouter);
+app.use("/saldeltas", saldeltasRouter);
+app.use("/sales", salesRouter);
+app.use("/stocks", stocksRouter);
 
 /**
  * truncate collection
@@ -135,6 +56,5 @@ app.delete('/inventories/:inventoryId', (req, res) => {
     .catch(error => console.log(error));
 });
  */
-    
 
 app.listen(3000, () => console.log("Connected port 3000"));

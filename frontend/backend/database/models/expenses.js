@@ -1,13 +1,11 @@
 const mongoose = require('mongoose');
 
 const ExpensesSchema = new mongoose.Schema({
-    name: String, 
-    purpose: String,
-    manager: String,
-    desc: String,
-    from: Date,
-    to: Date,
-    // _itemId: {
+    exp_date: Date,
+    exp_desc: String,
+    exp_by: String,
+    exp_amount: Number,    
+       // _itemId: {
     //     type: mongoose.Types.ObjectId
     // },
 

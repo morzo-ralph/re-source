@@ -18,7 +18,7 @@ UserSchema.methods.generateToken = function () {
 }
 
 UserSchema.methods.hashPassword = function () {
-    this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10))
+    this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10)) 
 }
 
 UserSchema.methods.comparePassword = function (password) {

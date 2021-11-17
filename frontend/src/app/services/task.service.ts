@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
+
   constructor(
-    private data: DataService
+    private data: DataService,
+    private http: HttpClient
   ) { }
 
-  getAllItem() {
-    return this.data.get('inventories');
-    //return this.data.get('lists');
+  getAllItem(uri: any) {
+    return this.data.get(uri);
   }
 
-  createItem(a: any) {
-    return this.data.post('inventories', {a});
+  createItem(uri: any, data: any) {
+    return this.data.post(uri, {data});
   }
 
-  getItem(id:any){
-    return this.data.get(`inventories/${id}`);
+  getItem(uri: any, id:any){
+    return this.data.get(`${uri}/${id}`);
   }
 
-  updateItem(id: any, a: any){
-    console.log(id);
-    console.log(a);
-    return this.data.put(`inventories/${id}`, {a})
+  updateItem(uri: any, id: any, data: any){
+    return this.data.put(`${uri}/${id}`, {data})
   }
 
-  archiveItem(id: any, a: any){
-    return this.data.patch(`inventories/${id}`, {a});
+  archiveItem(uri: any, id: any, data: any){
+    return this.data.patch(`${uri}/${id}`, {data});
   }
-
+  
 }

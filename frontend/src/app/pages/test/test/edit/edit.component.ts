@@ -57,7 +57,7 @@ export class EditComponent implements OnInit {
 
     console.log(this.updatePushItem.name);
     //console.log('clicked')
-    this.task.updateItem(this.id, this.updatePushItem).subscribe((data: any) =>
+    this.task.updateItem('inventories', this.id, this.updatePushItem).subscribe((data: any) =>
     {
       
     });

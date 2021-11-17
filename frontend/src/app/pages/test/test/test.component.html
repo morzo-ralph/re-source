@@ -1,6 +1,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> 
     <div style="padding: 0;margin: 0;">
+        <h4>Inventory</h4>
     <mat-card>
         <div>
             <p>
@@ -54,7 +55,7 @@
         <th>Actions</th>
     </tr>
     
-    <tr *ngFor="let item of a; let i = index">
+    <tr *ngFor="let item of payload; let i = index">
         <ng-container *ngIf="item.isArchive === 0">
             <td>{{ item._id }}</td>
             <td>{{ item.name }}</td>
@@ -69,56 +70,32 @@
                 <button><span class="material-icons" (click)="itemArchive(item._id)">archive</span></button>
             </td>    
         </ng-container>
-                
+        
     </tr>
 
 </div>
-
+<br>
+<hr>
+<br>
     <div style="padding: 0;margin: 0;">
+        <h4>Petty Cash</h4>
     <mat-card>
         <div>
             <p>
                 <mat-form-field appearance="outline">
-                    <mat-label>Last Name:</mat-label>
-                    <input matInput [(ngModel)]="prodName" placeholder="Product Name" type="text"/>
+                    <mat-label>Amount</mat-label>
+                    <input matInput [(ngModel)]="pcAmount" placeholder="Product Supplier" type="number"/>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
-                    <mat-label>First Name:</mat-label>
-                    <input matInput [(ngModel)]="prodDesc" placeholder="Product Desc" type="text"/>
+                    <mat-label>Date</mat-label>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="pcDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Middle Name:</mat-label>
-                    <input matInput [(ngModel)]="prodDesc" placeholder="Product Desc" type="text"/>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label>Extension Name:</mat-label>
-                    <input matInput [(ngModel)]="prodDesc" placeholder="Product Desc" type="text"/>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label>Product Image:</mat-label>
-                    <input matInput [(ngModel)]="prodImg" placeholder="Product Image" type="text"/>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label>Product Price:</mat-label>
-                    <input matInput [(ngModel)]="prodPrice" placeholder="Product Price" type="number"/>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label>Product Quantity:</mat-label>
-                    <input matInput [(ngModel)]="prodQty" placeholder="Product Quantity" type="number"/>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label>Product Supplier:</mat-label>
-                    <input matInput [(ngModel)]="prodSupp" placeholder="Product Supplier" type="text"/>
-                </mat-form-field>
                 <br>
-                <button (click)="itemAdd()" mat-raised-button color="primary">Add Item</button>
+                <button (click)="itemAddPettyCash()" mat-raised-button color="primary">Add Item</button>
             </p>
         </div>
     </mat-card>
@@ -128,25 +105,16 @@
 
 <div>
     <tr>
-        <th>Product Id</th>
-        <th>Product Name</th>
-        <th>Product Description</th>
-        <th>Product Quantity</th>
-        <th>Product Price</th>
-        <th>Product Supplier</th>
-        <th>created_at</th>
+        <th>Petty Cash Amount</th>
+        <th>Petty Cash Date</th>
         <th>Actions</th>
     </tr>
     
-    <tr *ngFor="let item of a; let i = index">
+    <tr *ngFor="let item of payloadPetty; let i = index">
         <ng-container *ngIf="item.isArchive === 0">
             <td>{{ item._id }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.description }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.price }}</td>
-            <td>{{ item.supplier }}</td>
-            <td>{{ item.created_at | date: 'medium' }}</td>
+            <td>{{ item.pet_amount }}</td>
+            <td>{{ item.pet_date | date: 'medium' }}</td>
             <td>
                 <button><span class="material-icons" (click)="itemView(item)">visibility</span></button>
                 <button><span class="material-icons" (click)="itemUpdate(item)">edit</span></button>

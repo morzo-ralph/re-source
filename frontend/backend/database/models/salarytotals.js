@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
-const RevenuesSchema = new mongoose.Schema({
-    rev_date: Date,
-    rev_desc: String,
-    rev_by: String,
-    rev_amount: Number,    
+const SalarytotalsSchema = new mongoose.Schema({
+    pur_date: Date,
+    pur_desc: String,
+    pur_by: String,
+    pur_amount: Number,
+    pur_qty: Number,    
        // _itemId: {
     //     type: mongoose.Types.ObjectId
     // },
@@ -14,13 +15,13 @@ const RevenuesSchema = new mongoose.Schema({
     updated_at: Date
 });
 
-RevenuesSchema.pre('save', function (next) {
+SalarytotalsSchema.pre('save', function (next) {
     var currentDate = new Date();
     this.updated_at = currentDate;
     if (!this.created_at) this.created_at = currentDate;
     next();
 });
 
-const Revenues = mongoose.model('Revenues', RevenuesSchema);
+const Salarytotals = mongoose.model('Salarytotals', SalarytotalsSchema);
 
-module.exports = Revenues;
+module.exports = Salarytotals;

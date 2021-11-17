@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const RevenuesSchema = new mongoose.Schema({
-    rev_date: Date,
-    rev_desc: String,
-    rev_by: String,
-    rev_amount: Number,    
+const StocksSchema = new mongoose.Schema({
+    stock_name: String,
+    stock_unitPrice: Number,
+    stock_quantity: Number,
+    stock_desc: String,
        // _itemId: {
     //     type: mongoose.Types.ObjectId
     // },
@@ -14,13 +14,13 @@ const RevenuesSchema = new mongoose.Schema({
     updated_at: Date
 });
 
-RevenuesSchema.pre('save', function (next) {
+StocksSchema.pre('save', function (next) {
     var currentDate = new Date();
     this.updated_at = currentDate;
     if (!this.created_at) this.created_at = currentDate;
     next();
 });
 
-const Revenues = mongoose.model('Revenues', RevenuesSchema);
+const Stocks = mongoose.model('Stocks', StocksSchema);
 
-module.exports = Revenues;
+module.exports = Stocks;
