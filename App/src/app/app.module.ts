@@ -53,6 +53,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+
 //sweetalert
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 

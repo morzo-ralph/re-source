@@ -8,7 +8,6 @@ const RevenuesSchema = new mongoose.Schema({
        // _itemId: {
     //     type: mongoose.Types.ObjectId
     // },
-
     isArchive: Number,
     created_at: Date,
     updated_at: Date

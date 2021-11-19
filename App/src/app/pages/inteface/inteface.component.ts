@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
+import { LibraryService } from 'src/app/services/library.service';
 
 @Component({
   selector: 'app-inteface',
@@ -8,7 +9,7 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class IntefaceComponent implements OnInit {
 
-  constructor(public dataService: DataService) { }
+  constructor(public dataService: DataService, public libraryService: LibraryService) { }
 
   ngOnInit(): void {
     this.checkIfMobile()
@@ -17,7 +18,7 @@ export class IntefaceComponent implements OnInit {
   isMobile!: boolean
 
   checkIfMobile() {
-    this.isMobile = this.dataService.getIsMobile()
+    this.isMobile = this.libraryService.getIsMobile()
     console.log(this.isMobile)
 
 

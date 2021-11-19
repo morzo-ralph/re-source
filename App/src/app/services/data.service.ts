@@ -5,33 +5,27 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DataService {
-
  
   constructor(private http: HttpClient) { }
 
-  isMobile!: boolean
+  //SERVICES FOR DATA  
 
-  setIsMobile(status: boolean) {
-    this.isMobile = status
-  }
+  /*apiURL = "http://192.168.1.7/SIA-GIT/API/";*/
 
-  getIsMobile() {
-    return this.isMobile
-  }
-
-  apiURL = "http://192.168.1.7/SIA-GIT/API/";
   baseURL = "http://localhost:3000";
 
-  sendApiRequest(method: any, data: any) {
-    return <any>(
-      this.http.post(this.apiURL + method, btoa(JSON.stringify(data))
-      )
-    );
-  }
+  //sendApiRequest(method: any, data: any) {
+  //  return <any>(
+  //    this.http.post(this.apiURL + method, btoa(JSON.stringify(data))
+  //    )
+  //  );
+  //}
 
-  getIPAddress() {
-    return this.http.get("http://192.168.1.7/SIA-GIT/appAPI/checkAPI");
-  }
+  //getIPAddress() {
+  //  return this.http.get("http://192.168.1.7/SIA-GIT/appAPI/checkAPI");
+  //}
+
+  //General Methods
 
   get(uri: string) {
     return this.http.get(`${this.baseURL}/${uri}`);
@@ -47,6 +41,28 @@ export class DataService {
 
   patch(uri: string, payload: object) {
     return this.http.patch(`${this.baseURL}/${uri}`, payload);
+  }
+
+  //Data Methods
+
+  getAllItem(uri: any) {
+    return this.get(uri);
+  }
+
+  createItem(uri: any, data: any) {
+    return this.post(uri, { data });
+  }
+
+  getItem(uri: any, id: any) {
+    return this.get(`${uri}/${id}`);
+  }
+
+  updateItem(uri: any, id: any, data: any) {
+    return this.put(`${uri}/${id}`, { data })
+  }
+
+  archiveItem(uri: any, id: any, data: any) {
+    return this.patch(`${uri}/${id}`, { data });
   }
 
 }

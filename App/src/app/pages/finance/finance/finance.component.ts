@@ -9,37 +9,20 @@ import { AddExpensesComponent } from './add-expenses/add-expenses.component';
 import { AddRevenuesComponent } from './add-revenues/add-revenues.component';
 import { EditRevenuesComponent } from './edit-revenues/edit-revenues.component';
 import { EditExpensesComponent } from './edit-expenses/edit-expenses.component';
+import { DataService } from '../../../services/data.service';
+import { Data } from '@angular/router';
 
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+export interface RevenuesData {
+  id: string;
+  rev_date: Date;
+  rev_desc: string;
+  rev_by: string;
+  rev_amount: number;
+  isArchive: boolean;
+  created_at: Date;
+  updated_at: Date;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 
 @Component({
   selector: 'app-finance',
@@ -49,14 +32,71 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class FinanceComponent implements OnInit{
   constructor
   (
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dataService: DataService,
   ) { }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
+    this.load();
+    /*this.dataSource.paginator = this.paginator;*/
   }
+
+  //OOP
+
+  isLoaded: boolean = false
+  async load() {
+    this.isLoaded = false
+    await this.delay(1000)
+    //Event Loop Starts Here
+
+    this.getRevenues();
+
+
+
+
+
+    this.isLoaded = true
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  //FUNCTIONS
+
+  revenuesPayload: any;
+
+  revenuesData: RevenuesData[] = [];
+  revenuesDataSource = new MatTableDataSource(this.revenuesData);
+
+  getRevenues() {
+    this.dataService.getAllItem("revenues").subscribe((data: any) => this.revenuesPayload = data);
+    console.log(this.revenuesPayload);
+    this.revenuesData = this.revenuesPayload;
+    this.revenuesDataSource.data = this.revenuesData;     
+
+  }
+
+
+//  console.log(this.dataService.getAllItem('inventories').subscribe((data: any) => this.payload = data));
+//this.dataService.getAllItem('inventories')
+//  .subscribe((data: any) => {
+//    this.payload = data;
+
+//    console.log(this.payload);
+
+
+
+
+
+
+  //Arguments
+
+  dynamicResize = true;
+
+  //DATA
 
   title = 'Revenues for the past 4 years';
   myType = ChartType.LineChart;
@@ -74,9 +114,7 @@ export class FinanceComponent implements OnInit{
       vAxis:{
          title: ''
       },
-   };
-   dynamicResize = true;
-
+   }; 
 
    //CashBalance
    titleBalance = "Cash Balance";
@@ -99,16 +137,15 @@ export class FinanceComponent implements OnInit{
     ["2019",  8, 4],
     ["2020",  9, 3]
    ];
-   //dynamicResize = true;
 
    //table
-   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+    displayedColumns: string[] = ['Description', 'Amount', 'Date', 'Noted By', 'Actions'];
+
+   
 
    addExpenses(){
     const dialogRef = this.dialog.open(AddExpensesComponent, {
-      width: '50%',
-      //data: i
+      width: '50%'
     });
 
     dialogRef.afterClosed().subscribe(() => null );

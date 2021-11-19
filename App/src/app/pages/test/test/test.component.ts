@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-//import { DataService } from '../../../services/data.service';
-import { TaskService } from '../../../services/task.service';
+import { DataService } from '../../../services/data.service';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -30,7 +29,7 @@ export class TestComponent implements OnInit {
   idArchive: any;
 
   constructor(
-    private task: TaskService,
+    private dataService: DataService,
     private route: ActivatedRoute,
     private router: ActivatedRoute,
     private dialog: MatDialog
@@ -45,8 +44,8 @@ export class TestComponent implements OnInit {
   //lists: List[] = [];
   pushItemData: any = {};
   itemData() {
-    console.log(this.task.getAllItem('inventories').subscribe((data: any) => this.payload = data));
-    this.task.getAllItem('inventories')
+    console.log(this.dataService.getAllItem('inventories').subscribe((data: any) => this.payload = data));
+    this.dataService.getAllItem('inventories')
       .subscribe((data: any) => {
         this.payload = data;
         
@@ -65,7 +64,7 @@ export class TestComponent implements OnInit {
     this.pushItemData.isArchive = 0;
     //this.pushItemData = timeStamp();
     console.log(this.pushItemData[0]);
-    this.task.createItem('inventories', this.pushItemData).subscribe((data: any) => {
+    this.dataService.createItem('inventories', this.pushItemData).subscribe((data: any) => {
       this.payload = data;
       console.log(this.payload);
       this.itemData()
@@ -92,7 +91,7 @@ export class TestComponent implements OnInit {
         )
         //console.log(i);
         this.idArchive = i;
-        this.task.archiveItem('inventories', this.idArchive, {"isArchive": 1}).subscribe((data: any) => {
+        this.dataService.archiveItem('inventories', this.idArchive, {"isArchive": 1}).subscribe((data: any) => {
           
         });
         this.itemData();
@@ -135,14 +134,14 @@ export class TestComponent implements OnInit {
     this.pushPettyCash.pet_date = this.pcDate;
     this.pushPettyCash.isArchive = 0;
     console.log(this.pushPettyCash);
-    this.task.createItem('pettycash', this.pushPettyCash).subscribe(( data: any) => {
+    this.dataService.createItem('pettycash', this.pushPettyCash).subscribe(( data: any) => {
       this.payload = data;
       this.getAllPettyCash();
     });
   }
   payloadPetty: any;
   getAllPettyCash(){
-    this.task.getAllItem('pettycash').subscribe(( data : any) => {
+    this.dataService.getAllItem('pettycash').subscribe(( data : any) => {
       this.payloadPetty = data;
       console.log(this.payloadPetty);
     });

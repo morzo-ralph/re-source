@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from './services/data.service';
+import { LibraryService } from './services/library.service';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,11 @@ import { DataService } from './services/data.service';
 export class AppComponent {
   title = 'frontend';
 
-  constructor(public dataService : DataService) { }
+  constructor(public dataService: DataService, public libraryService: LibraryService) { }
 
   ngOnInit(): void {
     this.checkIfMobile()
     //this.checkIfServerActive()
-
   }
 
   isMobile: boolean = false;
@@ -25,6 +25,6 @@ export class AppComponent {
       this.isMobile = true;      
     }
     console.log(this.isMobile)
-    this.dataService.setIsMobile(this.isMobile)
+    this.libraryService.setIsMobile(this.isMobile)
   }
 }

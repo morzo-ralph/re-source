@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TaskService } from 'src/app/services/task.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-edit',
@@ -11,7 +11,7 @@ export class EditComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private task: TaskService,
+    private dataService: DataService,
 
   ) { }
 
@@ -57,7 +57,7 @@ export class EditComponent implements OnInit {
 
     console.log(this.updatePushItem.name);
     //console.log('clicked')
-    this.task.updateItem('inventories', this.id, this.updatePushItem).subscribe((data: any) =>
+    this.dataService.updateItem('inventories', this.id, this.updatePushItem).subscribe((data: any) =>
     {
       
     });
