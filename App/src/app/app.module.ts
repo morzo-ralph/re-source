@@ -69,6 +69,8 @@ import { AddRevenuesComponent } from './pages/finance/finance/add-revenues/add-r
 import { EditRevenuesComponent } from './pages/finance/finance/edit-revenues/edit-revenues.component';
 import { EditExpensesComponent } from './pages/finance/finance/edit-expenses/edit-expenses.component';
 import { AddExpensesComponent } from './pages/finance/finance/add-expenses/add-expenses.component';
+import { AddPettyCashComponent } from './pages/finance/finance/add-petty-cash/add-petty-cash.component';
+import { EditPettyCashComponent } from './pages/finance/finance/edit-petty-cash/edit-petty-cash.component';
 
 
 @NgModule({
@@ -85,6 +87,8 @@ import { AddExpensesComponent } from './pages/finance/finance/add-expenses/add-e
     EditRevenuesComponent,
     EditExpensesComponent,
     AddExpensesComponent,
+    AddPettyCashComponent,
+    EditPettyCashComponent,
   ],
   imports: [
     BrowserModule,

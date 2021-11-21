@@ -1,0 +1,19 @@
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()" style="float: right;">X</button>
+</div>
+<div style="display: flex; flex-direction: column;">
+    
+    <h5>Add Petty Cash Form</h5>
+    <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input matInput [(ngModel)]="petCashAmount" placeholder="Product Supplier" type="number"/>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline">
+        <mat-label>Product Supplier:</mat-label>
+        <input matInput [(ngModel)]="petCashDate" placeholder="Product Supplier" type="date"/>
+    </mat-form-field>
+    
+    <br/>
+    <button (click)="addPettyCash()" mat-raised-button color="primary">Add Petty Cash</button>
+</div>

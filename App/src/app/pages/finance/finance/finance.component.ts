@@ -11,6 +11,8 @@ import { EditRevenuesComponent } from './edit-revenues/edit-revenues.component';
 import { EditExpensesComponent } from './edit-expenses/edit-expenses.component';
 import { DataService } from '../../../services/data.service';
 import { Data } from '@angular/router';
+import { AddPettyCashComponent } from './add-petty-cash/add-petty-cash.component';
+
 
 
 export interface RevenuesData {
@@ -24,6 +26,10 @@ export interface RevenuesData {
   updated_at: Date;
 }
 
+export interface PettyCashData {
+
+}
+
 @Component({
   selector: 'app-finance',
   templateUrl: './finance.component.html',
@@ -32,7 +38,7 @@ export interface RevenuesData {
 export class FinanceComponent implements OnInit{
   constructor
   (
-    private dialog: MatDialog,
+    private matDialog: MatDialog,
     private dataService: DataService,
   ) { }
 
@@ -53,10 +59,6 @@ export class FinanceComponent implements OnInit{
 
     this.getRevenues();
 
-
-
-
-
     this.isLoaded = true
   }
 
@@ -65,9 +67,27 @@ export class FinanceComponent implements OnInit{
   }
 
   //FUNCTIONS
+  pettyCashPayload: any;
+  pettyCashData: PettyCashData[] = [];
+  pettyCashDataSource = new MatTableDataSource(this.pettyCashData);
+
+  getPettyCash() {
+    this.dataService.getAllItem("pettycash").subscribe((data: any) => this.pettyCashPayload = data);
+    console.log(this.pettyCashPayload);
+    this.pettyCashData = this.pettyCashPayload;
+    this.pettyCashDataSource.data = this.pettyCashPayload;
+  }
+
+  addPettyCash() {
+    const dialogRef = this.matDialog.open(AddPettyCashComponent, {
+      width: '50%'
+    });
+
+    dialogRef.afterClosed().subscribe(() => null );
+    this.getPettyCash();
+  }
 
   revenuesPayload: any;
-
   revenuesData: RevenuesData[] = [];
   revenuesDataSource = new MatTableDataSource(this.revenuesData);
 
@@ -144,7 +164,7 @@ export class FinanceComponent implements OnInit{
    
 
    addExpenses(){
-    const dialogRef = this.dialog.open(AddExpensesComponent, {
+    const dialogRef = this.matDialog.open(AddExpensesComponent, {
       width: '50%'
     });
 
