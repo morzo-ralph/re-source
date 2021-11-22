@@ -1,10 +1,10 @@
-//inventory
 const express = require("express");
 const router = express.Router();
 
 const Inventory = require('../database/models/inventory');
 
 router.get('/', (req, res) => {
+    console.log(res.body)
     Inventory.find({})
         .then(inventory => res.send(inventory))
         .catch(error => console.log(error));

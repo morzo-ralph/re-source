@@ -37,44 +37,10 @@
                 <br>
                 <button (click)="itemAdd()" mat-raised-button color="primary">Add Item</button>
             </p>
-        </div>
+        </div>  
     </mat-card>
     </div>
 
-
-
-<div>
-    <tr>
-        <th>Product Id</th>
-        <th>Product Name</th>
-        <th>Product Description</th>
-        <th>Product Quantity</th>
-        <th>Product Price</th>
-        <th>Product Supplier</th>
-        <th>created_at</th>
-        <th>Actions</th>
-    </tr>
-    
-    <tr *ngFor="let item of payload; let i = index">
-        <ng-container *ngIf="item.isArchive === 0">
-            <td>{{ item._id }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.description }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.price }}</td>
-            <td>{{ item.supplier }}</td>
-            <td>{{ item.created_at | date: 'medium' }}</td>
-            <td>
-                <button><span class="material-icons" (click)="itemView(item)">visibility</span></button>
-                <button><span class="material-icons" (click)="itemUpdate(item)">edit</span></button>
-                <button><span class="material-icons" (click)="itemArchive(item._id)">archive</span></button>
-            </td>    
-        </ng-container>
-        
-    </tr>
-
-</div>
-<br>
 <hr>
 <br>
     <div style="padding: 0;margin: 0;">
@@ -101,27 +67,6 @@
     </mat-card>
     </div>
 
-
-
-<div>
-    <tr>
-        <th>Petty Cash Amount</th>
-        <th>Petty Cash Date</th>
-        <th>Actions</th>
-    </tr>
-    
-    <tr *ngFor="let item of payloadPetty; let i = index">
-        <ng-container *ngIf="item.isArchive === 0">
-            <td>{{ item._id }}</td>
-            <td>{{ item.pet_amount }}</td>
-            <td>{{ item.pet_date | date: 'medium' }}</td>
-            <td>
-                <button><span class="material-icons" (click)="itemView(item)">visibility</span></button>
-                <button><span class="material-icons" (click)="itemUpdate(item)">edit</span></button>
-                <button><span class="material-icons" (click)="itemArchive(item._id)">archive</span></button>
-            </td>    
-        </ng-container>
-                
-    </tr>
-
-</div>
+    <div>
+        <h5>Image Upload</h5>
+    </div>

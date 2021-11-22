@@ -80,7 +80,8 @@ export class FinanceComponent implements OnInit{
 
   addPettyCash() {
     const dialogRef = this.matDialog.open(AddPettyCashComponent, {
-      width: '50%'
+      height: '50%',
+      width: '100%'
     });
 
     dialogRef.afterClosed().subscribe(() => null );

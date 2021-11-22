@@ -16,6 +16,7 @@ export class AddPettyCashComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    //this.dialogRef.updateSize('100%','50%');
   }
 
   petCashData: any = {};

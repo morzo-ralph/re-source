@@ -1,32 +1,20 @@
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const config = require('../config');
-const bcrypt = require('bcryptjs');
 
-const UserSchema = new mongoose.Schema({
-    fname: String,
-    lname: String,
-    mname: String,
-    extname: String,
+
+const UsersSchema = new mongoose.Schema({
     email: String,
     password: String,
-    userRole: number
+
+    isArchive: Number,
+    created_at: Date,
+    updated_at: Date
 });
 
-UserSchema.methods.generateToken = function () {
-    return jwt.sign({ id: this.email }, config.secret, { expiresIn: 86400 })
-}
+UsersSchema.pre('save', function (next) {
+    var currentDate = new Date();
+    this.updated_at = currentDate;
+    if (!this.created_at) this.created_at = currentDate;
+    next();
+});
 
-UserSchema.methods.hashPassword = function () {
-    this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10)) 
-}
-
-UserSchema.methods.comparePassword = function (password) {
-    return bcrypt.compareSync(password, this.password);
-}
-
-UserSchema.methods.log = function () {
-    console.log(this);
-}
-
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UsersSchema);

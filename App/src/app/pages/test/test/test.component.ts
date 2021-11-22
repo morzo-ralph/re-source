@@ -2,12 +2,20 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DataService } from '../../../services/data.service';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ViewComponent } from './view/view.component';
 import { EditComponent } from './edit/edit.component';
+import { GalleryServiceService } from 'src/app/services/gallery-service.service';
 import Swal from 'sweetalert2';
 
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null):boolean {
+  const isSubmitted = form && form.submitted;
+  return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-test',
@@ -15,6 +23,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./test.component.scss']
 })  
 export class TestComponent implements OnInit {
+  //gallerytry
+  galleryForm!: FormGroup;
+  imageFile!: File;
+  imageTitle = '';
+  imageDesc = '';
+  isLoadingResults = false;
+  matcher = new MyErrorStateMatcher();
   //product inputs
   prodName: any;
   prodDesc: any;
@@ -30,15 +45,33 @@ export class TestComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
+    private galleryService: GalleryServiceService,
+    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: ActivatedRoute,
+    private router: Router,
     private dialog: MatDialog
     ) { }
 
   ngOnInit(): void {
     this.itemData();
     this.getAllPettyCash();
+    this.galleryForm = this.formBuilder.group({
+      imageFile : [null, Validators.required],
+      imageTitle : [null, Validators.required],
+      imageDesc : [null, Validators.required]
+    });
   }
+
+  // onFormSubmit(): void {
+  //   this.isLoadingResults = true;
+  //   this.galleryService.addGallery(this.galleryForm.value, this.galleryForm.get('imageFile').value._files[0])
+  //     .subscribe((res: any) => {
+  //       this.isLoadingResults = false;
+  //       if (res.body) {
+  //         this.router.navigate(['', res.body._id]);
+  //       }
+  //     })
+  // }
   
   payload: any;
   //lists: List[] = [];

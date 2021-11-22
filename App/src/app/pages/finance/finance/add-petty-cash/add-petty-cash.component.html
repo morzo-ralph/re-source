@@ -1,9 +1,9 @@
-<div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()" style="float: right;">X</button>
+<div mat-dialog-actions style="padding: 0; margin: 0; display:flex; flex-direction: row-reverse;">
+    <button mat-button (click)="onNoClick()" style="flex-direction: row-reverse;">X</button>
 </div>
-<div style="display: flex; flex-direction: column;">
+<div style="display: flex; flex-direction: column; margin: 0;">
     
-    <h5>Add Petty Cash Form</h5>
+    <h2>Add Petty Cash Form</h2>
     <mat-form-field appearance="outline">
         <mat-label>Amount</mat-label>
         <input matInput [(ngModel)]="petCashAmount" placeholder="Product Supplier" type="number"/>

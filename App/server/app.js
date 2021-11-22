@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+const multer = require('multer');
+//const ejs = require('ejs');
+const path = require('path');
 const mongoose = require('./database/mongoose');
 
 //router import
@@ -14,6 +17,7 @@ const salarytotalsRouter = require('./routes/salarytotals');
 const saldeltasRouter = require('./routes/saldeltas');
 const salesRouter = require('./routes/sales');
 const stocksRouter = require('./routes/stocks');
+const galleryRouter = require('./routes/gallery');
 
 
 //check localhost ip
@@ -47,6 +51,7 @@ app.use("/salarytotals", salarytotalsRouter);
 app.use("/saldeltas", saldeltasRouter);
 app.use("/sales", salesRouter);
 app.use("/stocks", stocksRouter);
+app.use("/gallery", galleryRouter);
 
 /**
  * truncate collection
