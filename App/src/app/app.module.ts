@@ -71,6 +71,7 @@ import { EditExpensesComponent } from './pages/finance/finance/edit-expenses/edi
 import { AddExpensesComponent } from './pages/finance/finance/add-expenses/add-expenses.component';
 import { AddPettyCashComponent } from './pages/finance/finance/add-petty-cash/add-petty-cash.component';
 import { EditPettyCashComponent } from './pages/finance/finance/edit-petty-cash/edit-petty-cash.component';
+import { LoginComponent } from './login/login/login.component';
 
 
 @NgModule({
@@ -89,6 +90,7 @@ import { EditPettyCashComponent } from './pages/finance/finance/edit-petty-cash/
     AddExpensesComponent,
     AddPettyCashComponent,
     EditPettyCashComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -147,7 +149,7 @@ import { EditPettyCashComponent } from './pages/finance/finance/edit-petty-cash/
     SweetAlert2Module.forRoot(),
 
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

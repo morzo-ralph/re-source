@@ -1,15 +1,27 @@
-<mat-toolbar color="primary" class="mat-elevation-z22" style="z-index: 100">
-    <span style="flex: 1 1 auto;"></span>
-    <span>Human Resource Page</span>
-    <span style="flex: 1 1 auto;"></span>
-  </mat-toolbar>
-  
-  <mat-tab-group>
-    <mat-tab label="First">
-      <div style="padding: 18px; text-align: center; width: calc(100%-36px); height: calc(100%-36px) ">
-        <mat-table [dataSource]="dataSource" class="mat-elevation-z12">
-  
-          <ng-container matColumnDef="number">
+<mat-toolbar color="accent" class="mat-elevation-z22" style="z-index: 100">
+  <span style="flex: 1 1 auto;"></span>
+  <span>Human Resource Page</span>
+  <span style="flex: 1 1 auto;"></span>
+</mat-toolbar>
+
+<mat-tab-group (selectedTabChange)="load()">
+  <mat-tab label="Employees">
+
+    <div style="padding: 18px; text-align: center; width: calc(100%-36px); height: calc(100%-36px) ">
+
+      <ng-container *ngIf="isLoaded == false">
+        <mat-spinner style="margin: auto"></mat-spinner>
+      </ng-container>
+
+      <ng-container *ngIf="isLoaded != false">
+        <mat-form-field appearance="standard" style="width: 100%">
+          <mat-label>Filter</mat-label>
+          <input matInput placeholder="Ex. Mia" #input>
+        </mat-form-field>
+
+        <mat-table [dataSource]="empDataSource" class="mat-elevation-z12">
+
+          <ng-container matColumnDef="number">            
             <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.number}} </mat-cell>
           </ng-container>
@@ -21,53 +33,204 @@
             <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
           </ng-container>
+          <ng-container matColumnDef="department">
+            <mat-header-cell *matHeaderCellDef> Department </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+          </ng-container>
           <ng-container matColumnDef="position">
             <mat-header-cell *matHeaderCellDef> Position </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
           </ng-container>
-  
+
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <mat-chip-list>
+                <mat-chip color="primary" selected>
+                  <mat-icon>person</mat-icon>
+                  Available
+                </mat-chip>
+                <!--<mat-chip color="warn" selected>
+                  <mat-icon>person</mat-icon>
+                  Unavailable
+                </mat-chip>-->
+              </mat-chip-list>
+              <!--{{element.status}}-->
+            </mat-cell>
+          </ng-container>
+
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
             <mat-cell *matCellDef="let element">
               <button mat-button color="primary">
-                <mat-icon>settings</mat-icon>
+                <mat-icon>edit</mat-icon>
               </button>
-              <button mat-button color="primary">
-                <mat-icon>settings</mat-icon>
+              <button mat-button color="accent">
+                <mat-icon>archive</mat-icon>
               </button>
-              <button mat-button color="primary">
-                <mat-icon>settings</mat-icon>
+              <button mat-button color="warn">
+                <mat-icon>delete</mat-icon>
               </button>
             </mat-cell>
           </ng-container>
-  
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <mat-header-row *matHeaderRowDef="empColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: empColumns;"></mat-row>
         </mat-table>
-  
         <br />
         <mat-divider></mat-divider>
         <br />
-  
-        <p>dsdsdsdsd</p>
-  
-  
+        <div style="width: 100%; text-align: right">
+          <button mat-raised-button color="primary">
+            <mat-icon>add</mat-icon>
+            Add Employee
+          </button>
+        </div>
+
+      </ng-container>
+
+    </div>
+
+  </mat-tab>
+
+  <mat-tab label="Attendance">
+    <div style="padding: 18px; text-align: center; width: calc(100%-36px); height: calc(100%-36px) ">
+
+      <ng-container *ngIf="isLoaded == false">
+        <mat-spinner style="margin: auto"></mat-spinner>
+      </ng-container>
+
+      <ng-container *ngIf="isLoaded != false">
+        <div style="text-align:left">
+           <mat-form-field appearance="fill" style="margin-left: 10px">
+            <mat-label>{{getDate() | date : 'MMMM'}}</mat-label>
+            <mat-select>
+              <ng-container *ngFor="let month of monthsArray">
+                <mat-option>
+                  {{month}}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+          
+        
+
+        <div class="table-container mat-elevation-z12">
+          <mat-table [dataSource]="attDataSource" class="att-table">
+
+            <ng-container matColumnDef="name" sticky>
+              <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+              <mat-cell *matCellDef="let element">  </mat-cell>
+            </ng-container>
+
+            <ng-container *ngFor="let day of daysArray">
+              <ng-container matColumnDef="{{day}}">
+                <mat-header-cell *matHeaderCellDef class="att-cell"> {{day | date:'E'}} <br /> {{day | date:'d'}} </mat-header-cell>
+                <mat-cell *matCellDef="let element" class="att-cell">  </mat-cell>
+              </ng-container>
+            </ng-container>
+
+            <ng-container matColumnDef="total" stickyEnd>
+              <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+              <mat-cell *matCellDef="let element">  </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="attColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: attColumns;"></mat-row>
+          </mat-table>
+        </div>
+
+      </ng-container>
+    </div>
+  </mat-tab>
+
+
+
+
+  <mat-tab label="Deductions and Additions">
+    <div style="padding: 18px;">
+      <ng-container *ngIf="isLoaded == false">
+        <mat-spinner style="margin: auto"></mat-spinner>
+      </ng-container>
+      <ng-container *ngIf="isLoaded != false">
+      </ng-container>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Payroll">
+    <div style="padding: 18px;">
+
+     <ng-container *ngIf="isLoaded == false">
+        <mat-spinner style="margin: auto"></mat-spinner>
+      </ng-container>
+
+      <ng-container *ngIf="isLoaded != false">
+        <mat-form-field appearance="standard" style="width: 100%">
+        <mat-label>Filter</mat-label>
+        <input matInput placeholder="Ex. Mia" #input>
+      </mat-form-field>
+
+      <div style="display: flex;">
+        <div style="padding: 16px; width: 50%; height: 100%" >
+          <mat-card style="width: calc(100% - 32px); height: calc(100% - 32px)" class="mat-elevation-z12">
+            <mat-card-title>
+              <p> Name :</p>                  
+              <mat-divider></mat-divider>
+            </mat-card-title>
+            <mat-card-content>
+              <br />
+              <p>Deductions:</p>
+              <p>Object : Amount</p>
+              <br />
+              <mat-divider></mat-divider>                 
+              <br />
+              <p>Additions:</p>
+              <p>Object : Amount</p>
+              <br />
+              <mat-divider></mat-divider>           
+              <br />
+              <p>Wage:</p>
+              <p>Object : Amount</p>
+              <br />
+              <mat-divider></mat-divider>
+              <br />
+              <p>Transaction Data</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div style="padding: 16px; width: 50%; height: 100%" >
+          <mat-card style="width: calc(100% - 32px); height: calc(100% - 32px)" class="mat-elevation-z12">
+            <mat-card-title>
+              <p> Name :</p>                  
+              <mat-divider></mat-divider>
+            </mat-card-title>
+            <mat-card-content>
+              <br />
+              <p>Deductions:</p>
+              <p>Object : Amount</p>
+              <br />
+              <mat-divider></mat-divider>                 
+              <br />
+              <p>Additions:</p>
+              <p>Object : Amount</p>
+              <br />
+              <mat-divider></mat-divider>           
+              <br />
+              <p>Wage:</p>
+              <p>Object : Amount</p>
+              <br />
+              <mat-divider></mat-divider>
+              <br />
+              <p>Transaction Data</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
       </div>
-  
-  
-  
-    </mat-tab>
-  
-  
-  
-    <mat-tab label="Second">
-      <div style="padding: 18px;">
-        <p>Content</p>
-      </div>
-    </mat-tab>
-    <mat-tab label="Third">
-      <div style="padding: 18px;">
-        <p>Content</p>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
+      </ng-container>
+
+      
+    </div>
+  </mat-tab>
+
+</mat-tab-group>

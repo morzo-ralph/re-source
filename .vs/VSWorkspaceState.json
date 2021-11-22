@@ -1,11 +1,17 @@
 {
   "ExpandedNodes": [
     "",
-    "\\frontend",
-    "\\frontend\\backend\\database\\models",
-    "\\frontend\\src",
-    "\\frontend\\src\\app"
+    "\\App",
+    "\\App\\server",
+    "\\App\\server\\database",
+    "\\App\\server\\database\\models",
+    "\\App\\src",
+    "\\App\\src\\app",
+    "\\App\\src\\app\\pages",
+    "\\App\\src\\app\\pages\\finance",
+    "\\App\\src\\app\\pages\\finance\\finance",
+    "\\App\\src\\app\\pages\\home"
   ],
-  "SelectedNode": "\\frontend\\src\\app\\services",
+  "SelectedNode": "\\App\\server\\database\\models\\revenues.js",
   "PreviewInSolutionExplorer": false
 }
