@@ -16,7 +16,10 @@ const routes: Routes = [
   },
 
   {
-    path: 'test', component: TestComponent
+    path: 'test', component: IntefaceComponent, children:
+    [
+      { path: '', component: TestComponent },
+    ]
   },
 
   {

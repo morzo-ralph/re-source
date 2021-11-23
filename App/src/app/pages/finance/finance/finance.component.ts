@@ -16,18 +16,37 @@ import { AddPettyCashComponent } from './add-petty-cash/add-petty-cash.component
 
 
 export interface RevenuesData {
-  id: string;
+  _id: string;
   rev_date: Date;
   rev_desc: string;
   rev_by: string;
   rev_amount: number;
-  isArchive: boolean;
+
+  isArchive: number;
   created_at: Date;
   updated_at: Date;
 }
 
 export interface PettyCashData {
+  _id: string;
+  pet_date: Date;
+  pet_amount: number;
 
+  isArchive: number;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export interface ExpensesData {
+  _id: string;
+  exp_date: Date;
+  exp_desc: string;
+  exp_by: string;
+  exp_amount: number;
+
+  isArchive: number;
+  created_at: Date;
+  updated_at: Date;
 }
 
 @Component({
@@ -46,6 +65,7 @@ export class FinanceComponent implements OnInit{
 
   ngOnInit(): void {
     this.load();
+    this.getPettyCash();
     /*this.dataSource.paginator = this.paginator;*/
   }
 
@@ -70,23 +90,38 @@ export class FinanceComponent implements OnInit{
   pettyCashPayload: any;
   pettyCashData: PettyCashData[] = [];
   pettyCashDataSource = new MatTableDataSource(this.pettyCashData);
+  pettyCashDisplayedColumns = ['_id', 'pet_amount', 'pet_date', 'actions'];
 
   getPettyCash() {
-    this.dataService.getAllItem("pettycash").subscribe((data: any) => this.pettyCashPayload = data);
-    console.log(this.pettyCashPayload);
-    this.pettyCashData = this.pettyCashPayload;
-    this.pettyCashDataSource.data = this.pettyCashPayload;
+    this.dataService.getAllItem('pettycash').subscribe(( data : any) => {
+      this.pettyCashPayload = data;
+      console.log(this.pettyCashPayload);
+      this.pettyCashData = this.pettyCashPayload;
+      this.pettyCashDataSource.data = this.pettyCashPayload;
+    // this.dataService.getAllItem("pettycash").subscribe((data: any) => {
+    //   console.log(this.pettyCashPayload);
+    //   this.pettyCashData = this.pettyCashPayload;
+    //   this.pettyCashDataSource.data = this.pettyCashPayload;
+    });
   }
 
   addPettyCash() {
     const dialogRef = this.matDialog.open(AddPettyCashComponent, {
-      height: '50%',
+      height: '75%',
       width: '100%'
     });
 
     dialogRef.afterClosed().subscribe(() => null );
     this.getPettyCash();
   }
+
+  viewPettyCash(_id: any) {
+    console.log(_id);
+  }
+  editPettyCash(_id: any) {}
+  archivePettyCash(_id: any) {}
+
+
 
   revenuesPayload: any;
   revenuesData: RevenuesData[] = [];
@@ -107,10 +142,6 @@ export class FinanceComponent implements OnInit{
 //    this.payload = data;
 
 //    console.log(this.payload);
-
-
-
-
 
 
   //Arguments

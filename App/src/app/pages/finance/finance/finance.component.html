@@ -111,7 +111,7 @@
       <ng-container *ngIf="isLoaded != false">
         <div style="padding: 18px;">
           <div>
-            <h1>Finances</h1>
+            <h1>Petty Cash</h1>
           </div>
           <div class="flex-container">
 
@@ -156,38 +156,41 @@
 
           <br />
 
-          <!--<div>
-            <mat-table [dataSource]="dataSource" class="mat-elevation-z8">-->
+          <div>
+            <mat-table [dataSource]="pettyCashDataSource" class="mat-elevation-z8">
 
-              <!--Position Column-->
-              <!--<ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef> No. </th>
-                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-              </ng-container>-->
-
-              <!--Name Column-->
-              <!--<ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-              </ng-container>-->
-
-              <!--Weight Column-->
-              <!--<ng-container matColumnDef="weight">
-                <th mat-header-cell *matHeaderCellDef> Weight </th>
-                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-              </ng-container>-->
-
-              <!--Symbol Column-->
-              <!--<ng-container matColumnDef="symbol">
-                <th mat-header-cell *matHeaderCellDef> Symbol </th>
-                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+              <ng-container matColumnDef="_id">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let element"> {{element._id}} </td>
               </ng-container>
 
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              <ng-container matColumnDef="pet_amount">
+                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                <td mat-cell *matCellDef="let element"> {{element.pet_amount}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="pet_date">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.pet_date}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions</th>
+                <td mat-cell *matCellDef="let element">
+                  <button mat-button (click)="viewPettyCash(element._id)">View</button>
+                  <button mat-button (click)="editPettyCash(element._id)">Edit</button>
+                  <button mat-button (click)="archivePettyCash(element._id)">Archive</button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="pettyCashDisplayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: pettyCashDisplayedColumns;"></tr>
             </mat-table>
 
-          </div>-->
+          </div>
+          <br/>
+          <br/>
+          <br/>
         </div>
 
       </ng-container>
@@ -237,34 +240,34 @@
           </div>
         </div>
 
-        <div>
+        <!-- <div>
           <mat-table [dataSource]="revenuesDataSource" class="mat-elevation-z8" >
 
-            <!--Position Column-->
+            
             <ng-container matColumnDef="Description">
               <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.rev_desc}} </mat-cell>
             </ng-container>
 
-            <!--Amount Column-->
+            
             <ng-container matColumnDef="Amount">
               <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.rev_amount}} </mat-cell>
             </ng-container>
 
-            <!--Date Column-->
+            
             <ng-container matColumnDef="Date">
               <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.rev_date | date }} </mat-cell>
             </ng-container>
 
-            <!--Noted By Column-->
+            
             <ng-container matColumnDef="Noted By">
               <mat-header-cell *matHeaderCellDef> Noted By </mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.rev_by}} </mat-cell>
             </ng-container>
 
-            <!--Actions Column-->
+            
             <ng-container matColumnDef="Actions">
               <mat-header-cell *matHeaderCellDef> Noted By </mat-header-cell>
               <mat-cell *matCellDef="let element">
@@ -277,7 +280,7 @@
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
           </mat-table>
-        </div>
+        </div> -->
 
       </ng-container>
     </ng-template>

@@ -10,12 +10,12 @@ import { EditComponent } from './edit/edit.component';
 import { GalleryServiceService } from 'src/app/services/gallery-service.service';
 import Swal from 'sweetalert2';
 
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null):boolean {
-  const isSubmitted = form && form.submitted;
-  return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
+// export class MyErrorStateMatcher implements ErrorStateMatcher {
+//   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null):boolean {
+//   const isSubmitted = form && form.submitted;
+//   return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+//   }
+// }
 
 @Component({
   selector: 'app-test',
@@ -24,12 +24,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })  
 export class TestComponent implements OnInit {
   //gallerytry
-  galleryForm!: FormGroup;
-  imageFile!: File;
-  imageTitle = '';
-  imageDesc = '';
-  isLoadingResults = false;
-  matcher = new MyErrorStateMatcher();
+  // galleryForm!: FormGroup;
+  // imageFile!: File;
+  // imageTitle = '';
+  // imageDesc = '';
+  // isLoadingResults = false;
+  // matcher = new MyErrorStateMatcher();
   //product inputs
   prodName: any;
   prodDesc: any;
@@ -55,23 +55,12 @@ export class TestComponent implements OnInit {
   ngOnInit(): void {
     this.itemData();
     this.getAllPettyCash();
-    this.galleryForm = this.formBuilder.group({
-      imageFile : [null, Validators.required],
-      imageTitle : [null, Validators.required],
-      imageDesc : [null, Validators.required]
-    });
+    // this.galleryForm = this.formBuilder.group({
+    //   imageFile : [null, Validators.required],
+    //   imageTitle : [null, Validators.required],
+    //   imageDesc : [null, Validators.required]
+    // });
   }
-
-  // onFormSubmit(): void {
-  //   this.isLoadingResults = true;
-  //   this.galleryService.addGallery(this.galleryForm.value, this.galleryForm.get('imageFile').value._files[0])
-  //     .subscribe((res: any) => {
-  //       this.isLoadingResults = false;
-  //       if (res.body) {
-  //         this.router.navigate(['', res.body._id]);
-  //       }
-  //     })
-  // }
   
   payload: any;
   //lists: List[] = [];
