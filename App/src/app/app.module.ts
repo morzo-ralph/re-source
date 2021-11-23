@@ -72,6 +72,7 @@ import { AddExpensesComponent } from './pages/finance/finance/add-expenses/add-e
 import { AddPettyCashComponent } from './pages/finance/finance/add-petty-cash/add-petty-cash.component';
 import { EditPettyCashComponent } from './pages/finance/finance/edit-petty-cash/edit-petty-cash.component';
 import { LoginComponent } from './login/login/login.component';
+import { InventoryComponent } from './pages/inventory/inventory/inventory.component';
 
 
 @NgModule({
@@ -91,6 +92,7 @@ import { LoginComponent } from './login/login/login.component';
     AddPettyCashComponent,
     EditPettyCashComponent,
     LoginComponent,
+    InventoryComponent,
   ],
   imports: [
     BrowserModule,

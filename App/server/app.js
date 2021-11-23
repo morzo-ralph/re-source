@@ -18,6 +18,7 @@ const saldeltasRouter = require('./routes/saldeltas');
 const salesRouter = require('./routes/sales');
 const stocksRouter = require('./routes/stocks');
 const galleryRouter = require('./routes/gallery');
+const userRouter = require('./routes/user');
 
 
 //check localhost ip
@@ -52,6 +53,8 @@ app.use("/saldeltas", saldeltasRouter);
 app.use("/sales", salesRouter);
 app.use("/stocks", stocksRouter);
 app.use("/gallery", galleryRouter);
+
+app.use("/user", userRouter);
 
 /**
  * truncate collection

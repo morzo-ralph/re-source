@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const UsersSchema = new mongoose.Schema({
     email: String,
     password: String,
@@ -17,4 +16,6 @@ UsersSchema.pre('save', function (next) {
     next();
 });
 
-module.exports = mongoose.model('User', UsersSchema);
+const Users = mongoose.model('Users', UsersSchema);
+
+module.exports = Users;

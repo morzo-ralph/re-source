@@ -6,6 +6,7 @@ import { IntefaceComponent } from './pages/inteface/inteface.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FinanceComponent } from './pages/finance/finance/finance.component';
 import { LoginComponent } from './login/login/login.component';
+import { InventoryComponent } from './pages/inventory/inventory/inventory.component';
 
 const routes: Routes = [
 
@@ -40,6 +41,13 @@ const routes: Routes = [
     path: 'finance', component: IntefaceComponent, children:
       [
         { path: '', component: FinanceComponent },
+      ]
+  },
+
+  {
+    path: 'inventory', component: IntefaceComponent, children:
+      [
+        { path: '', component: InventoryComponent },
       ]
   },
 

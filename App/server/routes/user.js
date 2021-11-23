@@ -1,15 +1,19 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const Users = require("../database/models/users");
 const router = express.Router();
 
-//signup
-router.post('/signup', async (req, res) => {
-    const data = req.data;
+const Users = require("../database/models/users");
 
+//signup
+
+router.post("/signup", async (req, res) => {
+    const data = req.body;
+    console.log("succesfully entered");
+    console.log(data);
+    console.log('hello');
     if(!(data.email && data.password)) {
-        return res.status(400).send({error: "Data not formatted properly"})
-    }
+         return res.status(400).send({error: "Data not formatted properly"})
+     }
 
     //hashing
     const users = new Users(data);
