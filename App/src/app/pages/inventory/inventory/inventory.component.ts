@@ -7,6 +7,20 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GalleryServiceService } from 'src/app/services/gallery-service.service';
 import Swal from 'sweetalert2';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+
+export interface InventoriesData {
+  _id: string;
+  name: string;
+  description: string;
+  quantity: number;
+  price: number;
+  imageUrl: string
+
+  isArchive: number;
+  created_at: Date;
+  updated_at: Date;
+}
 
 @Component({
   selector: 'app-inventory',
@@ -18,10 +32,12 @@ export class InventoryComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private dialog : MatDialog,
+    
   ) { }
 
   ngOnInit(): void { 
     this.load();
+    this.getInventories();
   }
 
   //OOP
@@ -39,13 +55,19 @@ export class InventoryComponent implements OnInit {
   }
 
   inventoriesPayload: any;
+  inventoriesData: InventoriesData[] = [];
+  inventoriesDataSource = new MatTableDataSource(this.inventoriesData);
+  inventoriesDisplayedColumns = [];
+
   pushItemData: any = {};
   idArchive: any;
-  pullInventories() {
+  getInventories() {
     this.dataService.getAllItem('inventories')
       .subscribe((data: any) => {
+        console.log(data);
         this.inventoriesPayload = data;
-      }); 
+        this.inventoriesDataSource.data = this.inventoriesPayload;
+       }); 
   }
 
   itemAdd() {
@@ -60,7 +82,7 @@ export class InventoryComponent implements OnInit {
     console.log(this.pushItemData[0]);
     this.dataService.createItem('inventories', this.pushItemData).subscribe((data: any) => {
       this.inventoriesPayload = data;
-      this.pullInventories()
+      this.getInventories()
       this.clearForm();
     });
   }
@@ -87,7 +109,7 @@ export class InventoryComponent implements OnInit {
         this.dataService.archiveItem('inventories', this.idArchive, {"isArchive": 1}).subscribe((data: any) => {
           
         });
-        this.pullInventories();
+        this.getInventories();
       }
     })
     //this.itemData();

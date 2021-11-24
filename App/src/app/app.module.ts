@@ -73,6 +73,12 @@ import { AddPettyCashComponent } from './pages/finance/finance/add-petty-cash/ad
 import { EditPettyCashComponent } from './pages/finance/finance/edit-petty-cash/edit-petty-cash.component';
 import { LoginComponent } from './login/login/login.component';
 import { InventoryComponent } from './pages/inventory/inventory/inventory.component';
+import { AddItemComponent } from './pages/inventory/inventory/add-item/add-item.component';
+import { EditItemComponent } from './pages/inventory/inventory/edit-item/edit-item.component';
+import { AddPurchasesComponent } from './pages/inventory/inventory/add-purchases/add-purchases.component';
+import { EditPurchasesComponent } from './pages/inventory/inventory/edit-purchases/edit-purchases.component';
+import { AddSalesComponent } from './pages/inventory/inventory/add-sales/add-sales.component';
+import { EditSalesComponent } from './pages/inventory/inventory/edit-sales/edit-sales.component';
 
 
 @NgModule({
@@ -93,6 +99,12 @@ import { InventoryComponent } from './pages/inventory/inventory/inventory.compon
     EditPettyCashComponent,
     LoginComponent,
     InventoryComponent,
+    AddItemComponent,
+    EditItemComponent,
+    AddPurchasesComponent,
+    EditPurchasesComponent,
+    AddSalesComponent,
+    EditSalesComponent,
   ],
   imports: [
     BrowserModule,
