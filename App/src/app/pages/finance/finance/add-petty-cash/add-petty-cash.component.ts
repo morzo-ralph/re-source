@@ -40,6 +40,7 @@ export class AddPettyCashComponent implements OnInit {
         'success'
       )
       console.log(data)
+      this.dialogRef.close();
     });
  
   }

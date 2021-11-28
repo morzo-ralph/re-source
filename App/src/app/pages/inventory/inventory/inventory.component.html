@@ -34,7 +34,16 @@
                 <mat-card>
                     <ng-container  *ngFor="let item of inventoriesPayload">
                         <mat-card>
-                            <mat-card-subtitle>{{ item.name }}</mat-card-subtitle>
+                            <mat-card-title>{{ item.name }}</mat-card-title>
+                            <mat-card-content>
+                                <p> {{ item.desc}}</p>
+                                <p> {{ item.created_at}}</p>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-button> View </button>
+                                <button mat-button> Update </button>
+                                <button mat-button> Archive </button>
+                            </mat-card-actions>
                         </mat-card>
                     </ng-container>
                 </mat-card>

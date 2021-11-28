@@ -1,50 +1,29 @@
-<div>
-    <mat-card>
-        <div>
-            <p>
-                <mat-form-field appearance="outline">
-                    <mat-label>First Name</mat-label>
-                    <input matInput [(ngModel)]="expFname" placeholder="First Name" type="text"/>
-                </mat-form-field>
-        
-                <mat-form-field appearance="outline">
-                    <mat-label>Last Name</mat-label>
-                    <input matInput [(ngModel)]="expLname" placeholder="Last Name" type="text"/>
-                </mat-form-field>
+<div mat-dialog-actions style="padding: 0; margin: 0; display:flex; flex-direction: row-reverse;">
+    <button mat-button (click)="onNoClick()" style="flex-direction: row-reverse;">X</button>
+</div>
+<div style="display: flex; flex-direction: column; margin: 0;">
+    
+    <h2>Add Revenues Form</h2>
+    <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input matInput [(ngModel)]="expAmount" placeholder="amount..." type="number"/>
+    </mat-form-field>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Middle Name</mat-label>
-                    <input matInput [(ngModel)]="expMname" placeholder="Middle Name" type="text"/>
-                </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Date</mat-label>
+        <input matInput [(ngModel)]="expDate" placeholder="MM/DD/YY" type="date"/>
+    </mat-form-field>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Extension</mat-label>
-                    <input matInput [(ngModel)]="expExt" placeholder="Extension Name" type="text"/>
-                </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input matInput [(ngModel)]="expDesc" placeholder="Description..." type="string"/>
+    </mat-form-field>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Purpose</mat-label>
-                    <input matInput [(ngModel)]="expPurpose" placeholder="Product Name" type="text"/>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline">
-                    <mat-label>Description</mat-label>
-                    <input matInput [(ngModel)]="expDesc" placeholder="Product Name" type="text"/>
-                </mat-form-field>
-
-                <mat-form-field appearance="fill">
-                    <mat-label>Enter a date range</mat-label>
-                    <mat-date-range-input [rangePicker]="picker">
-                      <input matStartDate placeholder="Start date" matInput [(ngModel)]="expFrom">
-                      <input matEndDate placeholder="End date" matInput [(ngModel)]="expTo">
-                    </mat-date-range-input>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-date-range-picker #picker></mat-date-range-picker>
-                  </mat-form-field>
-
-                <br>
-                <button mat-dialog-close mat-raised-button color="primary">Update Item</button>
-            </p>
-        </div>
-    </mat-card>
-    </div>
+    <mat-form-field appearance="outline">
+        <mat-label>By</mat-label>
+        <input matInput [(ngModel)]="expBy" placeholder="Name..." type="string"/>
+    </mat-form-field>
+    
+    <br/>
+    <button (click)="addExpenses()" mat-raised-button color="primary">Add Expenses</button>
+</div>

@@ -79,6 +79,10 @@ import { AddPurchasesComponent } from './pages/inventory/inventory/add-purchases
 import { EditPurchasesComponent } from './pages/inventory/inventory/edit-purchases/edit-purchases.component';
 import { AddSalesComponent } from './pages/inventory/inventory/add-sales/add-sales.component';
 import { EditSalesComponent } from './pages/inventory/inventory/edit-sales/edit-sales.component';
+import { ViewPettyCashComponent } from './pages/finance/finance/view-petty-cash/view-petty-cash.component';
+import { ViewExpensesComponent } from './pages/finance/finance/view-expenses/view-expenses.component';
+import { ViewRevenuesComponent } from './pages/finance/finance/view-revenues/view-revenues.component';
+
 
 
 @NgModule({
@@ -105,6 +109,9 @@ import { EditSalesComponent } from './pages/inventory/inventory/edit-sales/edit-
     EditPurchasesComponent,
     AddSalesComponent,
     EditSalesComponent,
+    ViewPettyCashComponent,
+    ViewExpensesComponent,
+    ViewRevenuesComponent
   ],
   imports: [
     BrowserModule,

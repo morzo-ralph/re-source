@@ -12,6 +12,11 @@ import { EditExpensesComponent } from './edit-expenses/edit-expenses.component';
 import { DataService } from '../../../services/data.service';
 import { Data } from '@angular/router';
 import { AddPettyCashComponent } from './add-petty-cash/add-petty-cash.component';
+import { ViewPettyCashComponent } from './view-petty-cash/view-petty-cash.component';
+import { EditPettyCashComponent } from './edit-petty-cash/edit-petty-cash.component';
+import Swal from 'sweetalert2';
+import { ViewRevenuesComponent } from './view-revenues/view-revenues.component';
+import { ViewExpensesComponent } from './view-expenses/view-expenses.component';
 
 
 
@@ -66,6 +71,8 @@ export class FinanceComponent implements OnInit{
   ngOnInit(): void {
     this.load();
     this.getPettyCash();
+    this.getRevenues();
+    this.getExpenses();
     /*this.dataSource.paginator = this.paginator;*/
   }
 
@@ -91,6 +98,7 @@ export class FinanceComponent implements OnInit{
   pettyCashData: PettyCashData[] = [];
   pettyCashDataSource = new MatTableDataSource(this.pettyCashData);
   pettyCashDisplayedColumns = ['_id', 'pet_amount', 'pet_date', 'actions'];
+  pettyCashIdArchive: any;
 
   getPettyCash() {
     this.dataService.getAllItem('pettycash').subscribe(( data : any) => {
@@ -98,10 +106,6 @@ export class FinanceComponent implements OnInit{
       console.log(this.pettyCashPayload);
       this.pettyCashData = this.pettyCashPayload;
       this.pettyCashDataSource.data = this.pettyCashPayload;
-    // this.dataService.getAllItem("pettycash").subscribe((data: any) => {
-    //   console.log(this.pettyCashPayload);
-    //   this.pettyCashData = this.pettyCashPayload;
-    //   this.pettyCashDataSource.data = this.pettyCashPayload;
     });
   }
 
@@ -111,40 +115,194 @@ export class FinanceComponent implements OnInit{
       width: '100%'
     });
 
-    dialogRef.afterClosed().subscribe(() => null );
-    this.getPettyCash();
+    dialogRef.afterClosed().subscribe(() => this.getPettyCash);
   }
 
-  viewPettyCash(_id: any) {
-    console.log(_id);
+  viewPettyCash(pettyCash: any) {
+    const dialogRef = this.matDialog.open(ViewPettyCashComponent, {
+      height: '75%',
+      width: '100%',
+      data: pettyCash
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.getPettyCash );
   }
-  editPettyCash(_id: any) {}
-  archivePettyCash(_id: any) {}
+  
+  editPettyCash(pettyCash: any) {
+    const dialogRef = this.matDialog.open(EditPettyCashComponent, {
+      height: '75%',
+      width: '100%',
+      data: pettyCash
+    });
 
+    dialogRef.afterClosed().subscribe(() => this.getPettyCash );
+  }
 
+  archivePettyCash(_id: any) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        this.pettyCashIdArchive = _id;
+        this.dataService.archiveItem('pettycash', this.pettyCashIdArchive, {"isArchive": 1}).subscribe((data: any) => {
+        });
+        this.getPettyCash();
+      }
+    })
+  }
 
+  //revenues
   revenuesPayload: any;
   revenuesData: RevenuesData[] = [];
   revenuesDataSource = new MatTableDataSource(this.revenuesData);
 
-  getRevenues() {
-    this.dataService.getAllItem("revenues").subscribe((data: any) => this.revenuesPayload = data);
-    console.log(this.revenuesPayload);
-    this.revenuesData = this.revenuesPayload;
-    this.revenuesDataSource.data = this.revenuesData;     
+  revenuesDisplayedColumns = ['_id', 'rev_date', 'rev_amount', 'rev_desc', 'rev_by', 'actions'];
+  revenuesDataIsArchived: any;
 
+  getRevenues() {
+    this.dataService.getAllItem("revenues").subscribe((data: any) => {
+      this.revenuesPayload = data});
+      console.log(this.revenuesPayload);
+      this.revenuesData = this.revenuesPayload;
+      this.revenuesDataSource.data = this.revenuesData;  
+    
   }
 
+  addRevenues() {
+    const dialogRef = this.matDialog.open(AddRevenuesComponent, {
+      height: '75%',
+      width: '100%'
+    });
 
-//  console.log(this.dataService.getAllItem('inventories').subscribe((data: any) => this.payload = data));
-//this.dataService.getAllItem('inventories')
-//  .subscribe((data: any) => {
-//    this.payload = data;
+    dialogRef.afterClosed().subscribe(() => this.getPettyCash);
+  }
 
-//    console.log(this.payload);
+  viewRevenues(revenues: any) {
+    const dialogRef = this.matDialog.open(ViewRevenuesComponent, {
+      height: '75%',
+      width: '100%',
+      data: revenues
+    });
 
+    dialogRef.afterClosed().subscribe(() => this.getPettyCash );
+  }
+  
+  editRevenues(revenues: any) {
+    const dialogRef = this.matDialog.open(EditRevenuesComponent, {
+      height: '75%',
+      width: '100%',
+      data: revenues
+    });
 
-  //Arguments
+    dialogRef.afterClosed().subscribe(() => this.getPettyCash );
+  }
+
+  archiveRevenues(_id: any) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        this.revenuesDataIsArchived = _id;
+        this.dataService.archiveItem('revenues', this.revenuesDataIsArchived, {"isArchive": 1}).subscribe((data: any) => {
+          
+        });
+        this.getRevenues();
+      }
+    })
+  }
+
+  //expenses
+  expensesPayload: any;
+  expensesData: ExpensesData[] = [];
+  expensesDataSource = new MatTableDataSource(this.expensesData);
+  expensesDisplayedColumns = ['_id', 'exp_date', 'exp_amount', 'exp_desc', 'exp_by', 'actions'];
+  expensesDataIsArchived: any;
+
+  getExpenses() {
+    this.dataService.getAllItem("expenses").subscribe((data: any) => {
+      this.revenuesPayload = data});
+      console.log(this.revenuesPayload);
+      this.revenuesData = this.revenuesPayload;
+      this.revenuesDataSource.data = this.revenuesData;  
+    
+  }
+
+  addExpenses() {
+    const dialogRef = this.matDialog.open(AddExpensesComponent, {
+      height: '75%',
+      width: '100%'
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.getExpenses);
+  }
+
+  viewExpenses(expenses: any) {
+    const dialogRef = this.matDialog.open(ViewExpensesComponent, {
+      height: '75%',
+      width: '100%',
+      data: expenses
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.getPettyCash );
+  }
+  
+  editExpenses(expenses: any) {
+    const dialogRef = this.matDialog.open(EditExpensesComponent, {
+      height: '75%',
+      width: '100%',
+      data: expenses
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.getPettyCash );
+  }
+
+  archiveExpenses(_id: any) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        this.expensesDataIsArchived = _id;
+        this.dataService.archiveItem('expenses', this.expensesDataIsArchived, {"isArchive": 1}).subscribe((data: any) => {
+          
+        });
+        this.getExpenses();
+      }
+    })
+  }
+
 
   dynamicResize = true;
 
@@ -192,15 +350,5 @@ export class FinanceComponent implements OnInit{
 
    //table
     displayedColumns: string[] = ['Description', 'Amount', 'Date', 'Noted By', 'Actions'];
-
-   
-
-   addExpenses(){
-    const dialogRef = this.matDialog.open(AddExpensesComponent, {
-      width: '50%'
-    });
-
-    dialogRef.afterClosed().subscribe(() => null );
-   }
    
 }
