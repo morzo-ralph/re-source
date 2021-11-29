@@ -125,7 +125,7 @@ export class TestComponent implements OnInit {
         //console.log(i);
         this.idArchive = i;
         this.dataService.archiveItem('inventories', this.idArchive, {"isArchive": 1}).subscribe((data: any) => {
-          
+          console.log(data);
         });
         this.itemData();
       }

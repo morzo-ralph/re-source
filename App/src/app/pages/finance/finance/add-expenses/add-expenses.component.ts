@@ -28,10 +28,10 @@ export class AddExpensesComponent implements OnInit {
   }
   
   addExpenses() {
-    this.expensesData.rev_amount = this.expAmount;
-    this.expensesData.rev_by =  this.expBy;
-    this.expensesData.rev_date = this.expDate;
-    this.expensesData.rev_desc = this.expDesc;
+    this.expensesData.exp_amount = this.expAmount;
+    this.expensesData.exp_by =  this.expBy;
+    this.expensesData.exp_date = this.expDate;
+    this.expensesData.exp_desc = this.expDesc;
     this.expensesData.isArchive = 0;
     this.dataService.createItem('expenses', this.expensesData).subscribe(( data: any) => {
       Swal.fire(

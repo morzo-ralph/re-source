@@ -144,8 +144,8 @@
               <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Actions</th>
                 <td mat-cell *matCellDef="let element">
-                  <button mat-button (click)="viewPettyCash(element._id)">View</button>
-                  <button mat-button (click)="editPettyCash(element._id)">Edit</button>
+                  <button mat-button (click)="viewPettyCash(element)">View</button>
+                  <button mat-button (click)="editPettyCash(element)">Edit</button>
                   <button mat-button (click)="archivePettyCash(element._id)">Archive</button>
                 </td>
               </ng-container>
@@ -300,14 +300,51 @@
             </mat-form-field>
           </div>
         </div>
+        <div>
+          <mat-table [dataSource]="expensesDataSource" class="mat-elevation-z8">
 
-        <div class="sort">
+            <ng-container matColumnDef="_id">
+              <th mat-header-cell *matHeaderCellDef> ID </th>
+              <td mat-cell *matCellDef="let element"> {{element._id}} </td>
+            </ng-container>
 
-          
+            <ng-container matColumnDef="exp_amount">
+              <th mat-header-cell *matHeaderCellDef> Amount </th>
+              <td mat-cell *matCellDef="let element"> {{element.exp_amount}} </td>
+            </ng-container>
 
+            <ng-container matColumnDef="exp_desc">
+              <th mat-header-cell *matHeaderCellDef> Date </th>
+              <td mat-cell *matCellDef="let element"> {{element.exp_desc}} </td>
+            </ng-container>
 
+            <ng-container matColumnDef="exp_date">
+              <th mat-header-cell *matHeaderCellDef> Date </th>
+              <td mat-cell *matCellDef="let element"> {{element.exp_date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="exp_by">
+              <th mat-header-cell *matHeaderCellDef> Date </th>
+              <td mat-cell *matCellDef="let element"> {{element.exp_by}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Actions</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-button (click)="viewExpenses(element)">View</button>
+                <button mat-button (click)="editExpenses(element)">Edit</button>
+                <button mat-button (click)="archiveExpenses(element._id)">Archive</button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="expensesDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: expensesDisplayedColumns;"></tr>
+          </mat-table>
 
         </div>
+        <br/>
+        <br/>
+        <br/>
       </ng-container>
     </ng-template>
 

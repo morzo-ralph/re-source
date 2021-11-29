@@ -115,7 +115,7 @@ export class FinanceComponent implements OnInit{
       width: '100%'
     });
 
-    dialogRef.afterClosed().subscribe(() => this.getPettyCash);
+    dialogRef.afterClosed().subscribe(() => this.getPettyCash());
   }
 
   viewPettyCash(pettyCash: any) {
@@ -125,7 +125,7 @@ export class FinanceComponent implements OnInit{
       data: pettyCash
     });
 
-    dialogRef.afterClosed().subscribe(() => this.getPettyCash );
+    dialogRef.afterClosed().subscribe(() => this.getPettyCash() );
   }
   
   editPettyCash(pettyCash: any) {
@@ -135,7 +135,7 @@ export class FinanceComponent implements OnInit{
       data: pettyCash
     });
 
-    dialogRef.afterClosed().subscribe(() => this.getPettyCash );
+    dialogRef.afterClosed().subscribe(() => this.getPettyCash() );
   }
 
   archivePettyCash(_id: any) {
@@ -156,6 +156,7 @@ export class FinanceComponent implements OnInit{
         )
         this.pettyCashIdArchive = _id;
         this.dataService.archiveItem('pettycash', this.pettyCashIdArchive, {"isArchive": 1}).subscribe((data: any) => {
+          console.log(data);
         });
         this.getPettyCash();
       }
@@ -185,7 +186,7 @@ export class FinanceComponent implements OnInit{
       width: '100%'
     });
 
-    dialogRef.afterClosed().subscribe(() => this.getPettyCash);
+    dialogRef.afterClosed().subscribe(() => this.getRevenues());
   }
 
   viewRevenues(revenues: any) {
@@ -195,7 +196,7 @@ export class FinanceComponent implements OnInit{
       data: revenues
     });
 
-    dialogRef.afterClosed().subscribe(() => this.getPettyCash );
+    dialogRef.afterClosed().subscribe(() => this.getRevenues() );
   }
   
   editRevenues(revenues: any) {
@@ -205,7 +206,8 @@ export class FinanceComponent implements OnInit{
       data: revenues
     });
 
-    dialogRef.afterClosed().subscribe(() => this.getPettyCash );
+    dialogRef.afterClosed().subscribe(() => {} );
+    //this.getRevenues(), this.load()
   }
 
   archiveRevenues(_id: any) {
@@ -220,13 +222,13 @@ export class FinanceComponent implements OnInit{
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
+          'Archived!',
+          'Your file has been archived.',
           'success'
         )
         this.revenuesDataIsArchived = _id;
         this.dataService.archiveItem('revenues', this.revenuesDataIsArchived, {"isArchive": 1}).subscribe((data: any) => {
-          
+          console.log(data);
         });
         this.getRevenues();
       }
@@ -255,7 +257,7 @@ export class FinanceComponent implements OnInit{
       width: '100%'
     });
 
-    dialogRef.afterClosed().subscribe(() => this.getExpenses);
+    dialogRef.afterClosed().subscribe(() => this.getExpenses());
   }
 
   viewExpenses(expenses: any) {
@@ -265,7 +267,7 @@ export class FinanceComponent implements OnInit{
       data: expenses
     });
 
-    dialogRef.afterClosed().subscribe(() => this.getPettyCash );
+    dialogRef.afterClosed().subscribe(() => this.getExpenses() );
   }
   
   editExpenses(expenses: any) {
@@ -275,7 +277,7 @@ export class FinanceComponent implements OnInit{
       data: expenses
     });
 
-    dialogRef.afterClosed().subscribe(() => this.getPettyCash );
+    dialogRef.afterClosed().subscribe(() => this.getExpenses() );
   }
 
   archiveExpenses(_id: any) {
@@ -290,15 +292,16 @@ export class FinanceComponent implements OnInit{
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
+          'Archived!',
+          'Your file has been archived.',
           'success'
         )
         this.expensesDataIsArchived = _id;
         this.dataService.archiveItem('expenses', this.expensesDataIsArchived, {"isArchive": 1}).subscribe((data: any) => {
-          
+          console.log(data);
         });
         this.getExpenses();
+        this.load();
       }
     })
   }
