@@ -173,11 +173,11 @@ export class FinanceComponent implements OnInit{
 
   getRevenues() {
     this.dataService.getAllItem("revenues").subscribe((data: any) => {
-      this.revenuesPayload = data});
+      this.revenuesPayload = data
       console.log(this.revenuesPayload);
       this.revenuesData = this.revenuesPayload;
       this.revenuesDataSource.data = this.revenuesData;  
-    
+    });
   }
 
   addRevenues() {
@@ -206,7 +206,7 @@ export class FinanceComponent implements OnInit{
       data: revenues
     });
 
-    dialogRef.afterClosed().subscribe(() => {} );
+    dialogRef.afterClosed().subscribe(() => { this.getRevenues()} );
     //this.getRevenues(), this.load()
   }
 
@@ -244,11 +244,11 @@ export class FinanceComponent implements OnInit{
 
   getExpenses() {
     this.dataService.getAllItem("expenses").subscribe((data: any) => {
-      this.revenuesPayload = data});
-      console.log(this.revenuesPayload);
-      this.revenuesData = this.revenuesPayload;
-      this.revenuesDataSource.data = this.revenuesData;  
-    
+      this.expensesPayload = data;
+      console.log(this.expensesPayload);
+      this.expensesData = this.expensesPayload;
+      this.expensesDataSource.data = this.expensesData;  
+    });
   }
 
   addExpenses() {

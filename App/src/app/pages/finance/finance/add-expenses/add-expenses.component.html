@@ -11,7 +11,9 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Date</mat-label>
-        <input matInput [(ngModel)]="expDate" placeholder="MM/DD/YY" type="date"/>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="expDate" placeholder="MM/DD/YY"/>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field appearance="outline">

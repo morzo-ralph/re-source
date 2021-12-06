@@ -1,6 +1,8 @@
 const express = require('express');
-const app = express();
 const multer = require('multer');
+const bodyParser = require('body-parser');
+const app = express();
+
 //const ejs = require('ejs');
 const path = require('path');
 const mongoose = require('./database/mongoose');
@@ -20,18 +22,17 @@ const stocksRouter = require('./routes/stocks');
 const galleryRouter = require('./routes/gallery');
 const usersRouter = require('./routes/users');
 
-
 //check localhost ip
-require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-    console.log('addr: ' + add);
-  })
+// require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+//     console.log('addr: ' + add);
+//   })
 
-app.use(express.json());
+app.use(bodyParser.json());
 /*
 *CORS
 *localhost:3000 - backend
 *localhost:4200 - frontend
-*list and task crud
+*list and task crud 
 */
 
 app.use((req, res, next) => {

@@ -5,13 +5,15 @@
     
     <h2>Add Petty Cash Form</h2>
     <mat-form-field appearance="outline">
-        <mat-label>Amount</mat-label>
-        <input matInput [(ngModel)]="petCashAmount" placeholder="Product Supplier" type="number"/>
+        <mat-label>Petty Cash Amount</mat-label>
+        <input matInput [(ngModel)]="petCashAmount" placeholder="55.00" type="number"/>
     </mat-form-field>
     
     <mat-form-field appearance="outline">
-        <mat-label>Product Supplier:</mat-label>
-        <input matInput [(ngModel)]="petCashDate" placeholder="Product Supplier" type="date"/>
+        <mat-label>Date:</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="petCashDate" placeholder="MM/DD/YY"/>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     
     <br/>
