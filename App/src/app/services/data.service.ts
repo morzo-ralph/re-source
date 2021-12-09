@@ -52,6 +52,9 @@ export class DataService {
   createItem(uri: any, data: any) {
     return this.post(uri, { data });
   }
+  createItemInv(uri: any, data: any, file: any) {
+    return this.post(uri, { data, file });
+  }
 
   getItem(uri: any, id: any) {
     return this.get(`${uri}/${id}`);

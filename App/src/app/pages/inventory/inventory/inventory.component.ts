@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { GalleryServiceService } from 'src/app/services/gallery-service.service';
 import Swal from 'sweetalert2';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { AddItemComponent } from './add-item/add-item.component';
 
 export interface InventoriesData {
   _id: string;
@@ -70,20 +71,16 @@ export class InventoryComponent implements OnInit {
        }); 
   }
 
-  itemAdd() {
-    // this.pushItemData.name = this.prodName;
-    // this.pushItemData.description = this.prodDesc;
-    // this.pushItemData.quantity = this.prodQty;
-    // this.pushItemData.price = this.prodPrice;
-    // this.pushItemData.image = this.prodImg;
-    // this.pushItemData.supplier = this.prodSupp;
-    this.pushItemData.isArchive = 0;
-    //this.pushItemData = timeStamp();
-    console.log(this.pushItemData[0]);
-    this.dataService.createItem('inventories', this.pushItemData).subscribe((data: any) => {
-      this.inventoriesPayload = data;
-      this.getInventories()
-      this.clearForm();
+  addItem() {
+    // const dialogRef = this.dialog.open(AddItemComponent, {
+    //   height: '75%',
+    //   width: '100%'
+    // });
+
+    // dialogRef.afterClosed().subscribe(() => this.getInventories());
+    const dialogRef = this.dialog.open(AddItemComponent, {
+      height: '75%',
+      width: '100%'
     });
   }
   

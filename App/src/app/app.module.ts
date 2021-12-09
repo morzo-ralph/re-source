@@ -82,6 +82,7 @@ import { EditSalesComponent } from './pages/inventory/inventory/edit-sales/edit-
 import { ViewPettyCashComponent } from './pages/finance/finance/view-petty-cash/view-petty-cash.component';
 import { ViewExpensesComponent } from './pages/finance/finance/view-expenses/view-expenses.component';
 import { ViewRevenuesComponent } from './pages/finance/finance/view-revenues/view-revenues.component';
+import { GalleryComponent } from './pages/test/test/gallery/gallery.component';
 
 
 
@@ -111,7 +112,8 @@ import { ViewRevenuesComponent } from './pages/finance/finance/view-revenues/vie
     EditSalesComponent,
     ViewPettyCashComponent,
     ViewExpensesComponent,
-    ViewRevenuesComponent
+    ViewRevenuesComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,

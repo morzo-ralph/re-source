@@ -1,21 +1,60 @@
 const express = require("express");
+const multer = require('multer');
 const router = express.Router();
+const path = require('path');
 
 const Inventory = require('../database/models/inventory');
+
+const MIME_TYPE_MAP = {
+    'image/png': 'png', 
+    'image/jpeg': 'jpg',
+    'image/jpg': 'jpg'
+};
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const isValid = MIME_TYPE_MAP[file.mimetype];
+        let error = new Error('Invalid mime type');
+        if(isValid) { error = null; } 
+        cb(error, path.join(__dirname, '../uploads/'));
+    },
+    filename: (req, file, cb) => {
+        const ext = MIME_TYPE_MAP[file.mimetype];
+        cb(null, 'image-' + Date.now() + '.' + ext);
+        
+   }
+});
+
+const upload = multer({storage: storage});
+
+router.post("/", upload.single('file'), (req, res, next) => {
+    console.log(req.body);
+    if(!req.file) {
+        return res.status(500).send({ message: 'Upload Failed'});
+    } else {
+        req.body.imageUrl = 'http://192.168.0.7:3000/uploads/' + req.file.filename;
+        req.body.isArchive = 0;
+        (new Inventory(req.body))
+        .save()
+        .then((inventory) => res.send(inventory))
+        .catch((error) => (error));
+    }
+// router.post('/', multer({storage: storage}).single("image"), (req, res) => {  
+//     (new Inventory(req.body.data))
+//     .save()
+//     .then((inventory) => res.send(inventory))
+//     .catch((error) => console.log(error));
+    
+// });
+
+});
+
 
 router.get('/', (req, res) => {
     console.log(res.body)
     Inventory.find({})
         .then(inventory => res.send(inventory))
         .catch(error => console.log(error));
-});
-
-router.post('/', (req, res) => {  
-    (new Inventory(req.body.data))
-    .save()
-    .then((inventory) => res.send(inventory))
-    .catch((error) => console.log(error));
-    
 });
 
 router.get('/:inventoryId', (req, res) => {

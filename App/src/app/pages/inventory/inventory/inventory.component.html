@@ -17,19 +17,25 @@
           </ng-container>
     
           <ng-container *ngIf="isLoaded != false">
-            <div style="padding: 18px;">
-                <div>
-                    <h1>Inventory</h1>
+            <div style="margin:20px;">
+                <div class="container">
+      
                 </div>
-
-                <button mat-button color="primary">Add Item</button>
+                <form class="example-form">
+                  <button mat-raised-button color="primary" (click)="addItem()">Add Item</button>
+                </form>
+      
+                <br>
                 <hr>
-                <div style="display: flex; flex-direction: row-reverse;">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Search...</mat-label>
-                            <input matInput placeholder="Search Item" type="text"/>
-                        </mat-form-field>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                  <hr>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Search Item...</mat-label>
+                    <input matInput>
+                  </mat-form-field>
                 </div>
+              </div>
+              
 
                 <mat-card>
                     <ng-container  *ngFor="let item of inventoriesPayload">
@@ -38,6 +44,7 @@
                             <mat-card-content>
                                 <p> {{ item.desc}}</p>
                                 <p> {{ item.created_at}}</p>
+                                <p> {{item.imageUrl}}</p>
                             </mat-card-content>
                             <mat-card-actions>
                                 <button mat-button> View </button>
@@ -48,7 +55,6 @@
                     </ng-container>
                 </mat-card>
                
-            </div>
         </ng-container>
                   
     </mat-tab>

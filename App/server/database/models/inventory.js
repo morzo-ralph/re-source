@@ -6,7 +6,7 @@ const InventorySchema = new mongoose.Schema({
         quantity: Number,
         price: Number,
         imageUrl: String,
-    
+
         isArchive: Number,
         created_at: Date,
         updated_at: Date

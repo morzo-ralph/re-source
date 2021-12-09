@@ -7,6 +7,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { FinanceComponent } from './pages/finance/finance/finance.component';
 import { LoginComponent } from './login/login/login.component';
 import { InventoryComponent } from './pages/inventory/inventory/inventory.component';
+import { GalleryComponent } from './pages/test/test/gallery/gallery.component';
 
 const routes: Routes = [
 
@@ -50,6 +51,20 @@ const routes: Routes = [
         { path: '', component: InventoryComponent },
       ]
   },
+  {
+    path: 'gallery',
+    component: GalleryComponent,
+    data: { title: 'List of Sales' }
+  },
+  // {
+  //   path: 'gallery-details/:id',
+  //   component: GalleryDetailsComponent,
+  //   data: { title: 'Sales Details' }
+  // },
+  // { path: '',
+  //   redirectTo: '/gallery',
+  //   pathMatch: 'full'
+  // }
 
   
 ]
