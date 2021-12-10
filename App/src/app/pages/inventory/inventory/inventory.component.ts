@@ -5,10 +5,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { GalleryServiceService } from 'src/app/services/gallery-service.service';
 import Swal from 'sweetalert2';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { AddItemComponent } from './add-item/add-item.component';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 export interface InventoriesData {
   _id: string;
@@ -33,7 +35,7 @@ export class InventoryComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private dialog : MatDialog,
-    
+    private httpClient: HttpClient,
   ) { }
 
   ngOnInit(): void { 
@@ -62,6 +64,7 @@ export class InventoryComponent implements OnInit {
 
   pushItemData: any = {};
   idArchive: any;
+  handleError: any;
   getInventories() {
     this.dataService.getAllItem('inventories')
       .subscribe((data: any) => {
@@ -69,6 +72,11 @@ export class InventoryComponent implements OnInit {
         this.inventoriesPayload = data;
         this.inventoriesDataSource.data = this.inventoriesPayload;
        }); 
+  }
+
+  getImage(imageUrl: string): Observable<any> {
+    return this.httpClient.get(imageUrl).pipe(
+      catchError(this.handleError));
   }
 
   addItem() {
