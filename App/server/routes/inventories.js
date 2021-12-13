@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
         const isValid = MIME_TYPE_MAP[file.mimetype];
         let error = new Error('Invalid mime type');
         if(isValid) { error = null; } 
-        cb(error, path.join(__dirname, '../uploads/'));
+        cb(error, path.join(__dirname, '../uploads'));
     },
     filename: (req, file, cb) => {
         const ext = MIME_TYPE_MAP[file.mimetype];
@@ -32,7 +32,7 @@ router.post("/", upload.single('file'), (req, res, next) => {
     if(!req.file) {
         return res.status(500).send({ message: 'Upload Failed'});
     } else {
-        req.body.imageUrl = 'http://192.168.0.7:3000/uploads/' + req.file.filename;
+        req.body.imageUrl = 'http://localhost:3000/uploads/' + req.file.filename;
         req.body.isArchive = 0;
         (new Inventory(req.body))
         .save()

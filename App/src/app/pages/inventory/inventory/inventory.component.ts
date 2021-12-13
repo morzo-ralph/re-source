@@ -120,8 +120,8 @@ export class InventoryComponent implements OnInit {
     //this.itemData();
   }
 
-  itemView(i: any){ 
-    console.log(i);
+  itemView(data: any){ 
+    console.log(data);
       // const dialogRef = this.dialog.open(ViewComponent, {
       //   width: '50%',
       //   data: i
@@ -130,7 +130,7 @@ export class InventoryComponent implements OnInit {
       // dialogRef.afterClosed().subscribe(() => this.itemData());
     }
 
-  itemUpdate(i: any){
+  itemUpdate(data: any){
   // const dialogRef2 = this.dialog.open(EditComponent, {
   //   width: '50%',
   //   data: i

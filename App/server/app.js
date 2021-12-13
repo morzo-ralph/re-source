@@ -23,9 +23,9 @@ const galleryRouter = require('./routes/gallery');
 const usersRouter = require('./routes/users');
 
 //check localhost ip
-// require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-//     console.log('addr: ' + add);
-//   })
+ require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+     console.log('addr: ' + add);
+   })
 
 app.use(bodyParser.json());
 /*
@@ -41,6 +41,8 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use("/draws", drawsRouter);
 app.use("/employees", employeesRouter);

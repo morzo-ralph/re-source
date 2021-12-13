@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="mat-elevation-z22" style="z-index: 100;">
     <span style="flex: 1 1 auto;"></span>
-    <span>Finances & Revenues Page</span>
+    <span>Inventory Page</span>
     <span style="flex: 1 1 auto;"></span>
   </mat-toolbar>
   
@@ -44,12 +44,15 @@
                             <mat-card-content>
                                 <p> {{ item.desc}}</p>
                                 <p> {{ item.created_at}}</p>
-                                <!-- <img src="  {{ item.imageUrl }}" alt="http://localhost:3000/uploads/image-1639037285822.png"> -->
+                                <p> {{ item.imageUrl}}</p>
+                                
+                                <img src="{{item.imageUrl}}" alt="">
+                                
                             </mat-card-content>
                             <mat-card-actions>
-                                <button mat-button> View </button>
-                                <button mat-button> Update </button>
-                                <button mat-button> Archive </button>
+                                <button mat-button (click)="itemView(item)"> View </button>
+                                <button mat-button (click)="itemUpdate(item)"> Update </button>
+                                <button mat-button (click)="itemArchive(item)"> Archive </button>
                             </mat-card-actions>
                         </mat-card>
                     </ng-container>
