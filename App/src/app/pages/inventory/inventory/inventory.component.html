@@ -31,18 +31,18 @@
                   <hr>
                   <mat-form-field appearance="fill">
                     <mat-label>Search Item...</mat-label>
-                    <input matInput>
+                    <input matInput (keyup)="applyFilterInventories($any($event.target).value)" placeholder="Filter">
                   </mat-form-field>
                 </div>
               </div>
               
 
                 <mat-card>
-                    <ng-container  *ngFor="let item of inventoriesPayload">
+                    <ng-container  *ngFor="let item of this.inventoriesDataSource.filteredData">
                         <mat-card>
                             <mat-card-title>{{ item.name }}</mat-card-title>
                             <mat-card-content>
-                                <p> {{ item.desc}}</p>
+                                <p> {{ item.description}}</p>
                                 <p> {{ item.created_at}}</p>
                                 <p> {{ item.imageUrl}}</p>
                                 
