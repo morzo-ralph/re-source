@@ -10,7 +10,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { AddItemComponent } from './add-item/add-item.component';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, filter } from 'rxjs/operators';
 
 export interface InventoriesData {
   _id: string;
@@ -60,23 +60,27 @@ export class InventoryComponent implements OnInit {
   inventoriesPayload: any;
   inventoriesData: InventoriesData[] = [];
   inventoriesDataSource = new MatTableDataSource(this.inventoriesData);
-  inventoriesDisplayedColumns = [];
+  inventoriesDisplayedColumns = ['name', 'description', 'quantity', 'price', 'imageUrl'];
+  inventoriesIdArchive: any;
 
   pushItemData: any = {};
   idArchive: any;
   handleError: any;
+  filterValue: any;
+
+  applyFilterInventories(filterValue: string){ 
+    // this.filterValue = (event.target as HTMLInputElement).value;     
+      this.inventoriesDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   getInventories() {
     this.dataService.getAllItem('inventories')
       .subscribe((data: any) => {
         console.log(data);
         this.inventoriesPayload = data;
+        this.inventoriesData = this.inventoriesPayload;
         this.inventoriesDataSource.data = this.inventoriesPayload;
        }); 
-  }
-
-  getImage(imageUrl: string): Observable<any> {
-    return this.httpClient.get(imageUrl).pipe(
-      catchError(this.handleError));
   }
 
   addItem() {
@@ -120,8 +124,8 @@ export class InventoryComponent implements OnInit {
     //this.itemData();
   }
 
-  itemView(i: any){ 
-    console.log(i);
+  itemView(data: any){ 
+    console.log(data);
       // const dialogRef = this.dialog.open(ViewComponent, {
       //   width: '50%',
       //   data: i
@@ -130,7 +134,7 @@ export class InventoryComponent implements OnInit {
       // dialogRef.afterClosed().subscribe(() => this.itemData());
     }
 
-  itemUpdate(i: any){
+  itemUpdate(data: any){
   // const dialogRef2 = this.dialog.open(EditComponent, {
   //   width: '50%',
   //   data: i
