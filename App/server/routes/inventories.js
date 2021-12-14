@@ -32,7 +32,7 @@ router.post("/", upload.single('file'), (req, res, next) => {
     if(!req.file) {
         return res.status(500).send({ message: 'Upload Failed'});
     } else {
-        req.body.imageUrl = 'http://192.168.0.7:3000/uploads/' + req.file.filename;
+        req.body.imageUrl = 'http://localhost:3000/uploads/' + req.file.filename;
         req.body.isArchive = 0;
         (new Inventory(req.body))
         .save()

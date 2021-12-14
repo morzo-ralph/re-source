@@ -3,8 +3,6 @@
     "",
     "\\App",
     "\\App\\server",
-    "\\App\\server\\database",
-    "\\App\\server\\database\\models",
     "\\App\\src",
     "\\App\\src\\app",
     "\\App\\src\\app\\pages",
@@ -12,6 +10,6 @@
     "\\App\\src\\app\\pages\\finance\\finance",
     "\\App\\src\\app\\pages\\home"
   ],
-  "SelectedNode": "\\App\\server\\database\\models\\revenues.js",
+  "SelectedNode": "\\App\\src\\app\\pages\\finance\\finance\\finance.component.ts",
   "PreviewInSolutionExplorer": false
 }

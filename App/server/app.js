@@ -7,6 +7,8 @@ const app = express();
 const path = require('path');
 const mongoose = require('./database/mongoose');
 
+
+
 //router import
 const drawsRouter = require('./routes/draws');
 const employeesRouter = require('./routes/employees');
@@ -26,6 +28,8 @@ const usersRouter = require('./routes/users');
 // require('dns').lookup(require('os').hostname(), function (err, add, fam) {
 //     console.log('addr: ' + add);
 //   })
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(bodyParser.json());
 /*
