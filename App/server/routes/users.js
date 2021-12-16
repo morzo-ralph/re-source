@@ -25,13 +25,23 @@ router.post('/signup', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    Users.findOne({username: req.body.username})
-    .then(
-        
-        res.end()
-    )
-    .catch(
-        res.status(500).json({})
+    // let newUser = new Users(req.body);
+    let username = req.body.username;
+    let password = req.body.password;
+    Users.findOne({username})
+    .then((user) => {
+       if (user && bcrypt.compareSync(password, user.password)) {
+           res.status(200)
+           .json({ user })
+       } else if (user && !bcrypt.compareSync(password, user.password)) {
+           res.status(401).json({message: "Invalid Credentials"});
+       } else {
+           res.status(500).json({message: "Account doesn't Exist"})
+       }
+    })
+    .catch((error) => {
+        res.status(500).json({message: "Account doesn't exist! " + error });
+    }
     );
         // let users = new Users(req.body);
         // Users.findOne({ username : users.username}, (err, user) => {
