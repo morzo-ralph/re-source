@@ -34,7 +34,7 @@ router.post('/login', async (req, res) => {
     .then((user) => {
        if (user && bcrypt.compareSync(password, user.password)) {
            res.status(200)
-           .json({ user })
+           .json({ user, message: "Account logged in successful" })
        } else if (user && !bcrypt.compareSync(password, user.password)) {
            res.status(401).json({message: "Invalid Credentials"});
        } else {
