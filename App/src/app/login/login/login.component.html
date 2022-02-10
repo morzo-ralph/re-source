@@ -1,1 +1,98 @@
-<p>login works!</p>
+
+
+
+<div style="padding: 8px; background-image: url(../assets/images/bg.gif); background-blend-mode: multiply; background-color: #c2c894; background-position: center; background-size: 120%; height: calc(100% - 64px); width: calc(50% - 16px); overflow: hidden !important; margin: auto ">
+  <div style="padding: 8px; width: 50%; height: 80%; margin: auto; margin-top: 64px; background-color: whitesmoke; border-radius: 24px; box-shadow: 4px 4px 16px #888888; ">
+
+    <br />
+    <br />
+    <div style="width:24%;margin: auto; margin-top: 16px;">
+      <img src="../assets/images/logo.jpg" style="width: 100%; height: 100%"/>
+    </div>
+
+    <div style="width: 80%; margin: auto">
+
+
+      <h2 style="color:dimgrey; text-align:center">Welcome back! <br /> Please login to your account.</h2>
+
+      <mat-divider></mat-divider>
+
+      
+
+      <div style="width: 100%; text-align: center">
+        <br />
+        <br />
+
+        <mat-form-field appearance="fill">
+          <mat-label style="font-size: 12px;"><mat-icon style="font-size: 24px; color: #6ea548">account_circle</mat-icon> &nbsp; &nbsp;Account ID</mat-label>
+          <input type="text" matInput placeholder="Ex. 00xxxxx">
+        </mat-form-field>
+        <br />
+        <br />
+
+        <mat-form-field appearance="fill">
+          <mat-label style="font-size: 12px;"><mat-icon style="font-size: 24px; color: #6ea548">password</mat-icon> &nbsp; &nbsp;Password</mat-label>
+          <input type="password" matInput placeholder="">
+        </mat-form-field>
+
+        <br />
+        <br />
+        <button mat-raised-button color="primary">&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;</button>
+        <br />
+        <br />
+
+        <mat-divider></mat-divider>
+        <br />
+
+        <p style="color:dimgrey; text-align:center">Having trouble logging-in? <br /> Contact Support @support.info.</p>
+      </div>
+
+
+      
+
+    </div>
+
+
+
+    
+
+
+
+  </div>
+  <div>
+
+
+  </div>
+
+</div>
+
+
+
+
+<ng-container>
+  <!--<mat-card>
+      <mat-card-title>
+        dssdsd
+      </mat-card-title>
+      <mat-card-content>
+        dsdsd
+      </mat-card-content>
+    </mat-card>
+
+  </ng-container>-->
+
+  <!--<form class="example-form">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+           placeholder="Ex. pat@example.com">
+    <mat-hint>Errors appear instantly!</mat-hint>
+    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+</form>-->
+

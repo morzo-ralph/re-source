@@ -2,14 +2,16 @@
   "ExpandedNodes": [
     "",
     "\\App",
-    "\\App\\server",
     "\\App\\src",
     "\\App\\src\\app",
     "\\App\\src\\app\\pages",
-    "\\App\\src\\app\\pages\\finance",
-    "\\App\\src\\app\\pages\\finance\\finance",
-    "\\App\\src\\app\\pages\\home"
+    "\\App\\src\\app\\pages\\hr",
+    "\\App\\src\\app\\pages\\hr\\hr",
+    "\\App\\src\\app\\pages\\inteface",
+    "\\App\\src\\assets",
+    "\\App\\src\\assets\\images",
+    "\\App\\src\\environments"
   ],
-  "SelectedNode": "\\App\\src\\app\\pages\\finance\\finance\\finance.component.ts",
+  "SelectedNode": "\\App\\src\\assets",
   "PreviewInSolutionExplorer": false
 }
