@@ -52,6 +52,12 @@ export class DataService {
   createItem(uri: any, data: any) {
     return this.post(uri, { data });
   }
+
+  createItemss = async (uri: any, data: any) => {
+    const response : any = await this.post(uri, { data }).toPromise();
+    return response;
+  }
+
   createItemInv(uri: any, data: any, file: any) {
     return this.post(uri, { data, file });
   }

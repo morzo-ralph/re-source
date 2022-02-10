@@ -26,7 +26,7 @@ router.post('/signup', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     // let newUser = new Users(req.body);
-    let username = req.body.username;
+    let username = req.body.accountId;
     let password = req.body.password;
     Users.findOne({username})
     .then((user) => {
