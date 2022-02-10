@@ -6,10 +6,10 @@
       <span>MSSE Engineering and Construction Services</span>
       <span style="flex: 1 1 auto;"></span>
       <button mat-mini-fab color="primary">
-        <mat-icon>leaderboard</mat-icon>
+        <mat-icon>punch_clock</mat-icon>
       </button>
       <button mat-mini-fab matBadge="7" matBadgeColor="warn" matBadgeSize="small" color="primary">
-        <mat-icon>business_center</mat-icon>
+        <mat-icon>storefront</mat-icon>
       </button>               
       <button mat-mini-fab matBadge="!" matBadgeColor="warn" matBadgeSize="small" color="primary">
         <mat-icon>settings</mat-icon>
@@ -20,7 +20,7 @@
     </mat-toolbar>
   
     <mat-drawer-container style="height: 100%;" autosize>
-      <mat-drawer #drawer style="width: 30%; max-width: 240px;" mode="side">
+      <mat-drawer #drawer style="width: 30%; max-width: 240px;" mode="side" opened="isOpened" >
   
         <!--<mat-toolbar color="accent" class="mat-elevation-z12">-->
 
@@ -59,6 +59,11 @@
                   <mat-icon>explore</mat-icon>
                 </button>
               </mat-list-item>
+              <mat-list-item>
+                <button mat-mini-fab color="primary">
+                  <mat-icon>explore</mat-icon>
+                </button>
+              </mat-list-item>
             </mat-list>
           </ng-container>
   
@@ -66,23 +71,29 @@
           <ng-container *ngIf="isMobile == false">
             <mat-list>
               <mat-list-item>
-                <button mat-raised-button color="primary" class="mat-elevation-z8" style="width: 100%; text-align: left">
-                  <mat-icon>groups</mat-icon> &nbsp; Human Resources 
+                <button mat-raised-button color="primary" class="mat-elevation-z8" style="width: 100%; text-align: left" [routerLink]="['/home']">
+                  <mat-icon>home</mat-icon> &nbsp; Home
+                </button>
+              </mat-list-item>
+
+              <mat-list-item>
+                <button mat-raised-button color="primary" class="mat-elevation-z8" style="width: 100%; text-align: left" [routerLink]="['/hr']">
+                  <mat-icon>hail</mat-icon> &nbsp; Human Resources 
                 </button>
               </mat-list-item>
               <mat-list-item>
-                <button mat-raised-button color="primary" class="mat-elevation-z8" style="width: 100%; text-align: left">
+                <button mat-raised-button color="primary" class="mat-elevation-z8" style="width: 100%; text-align: left" [routerLink]="['/inventory']">
                   <mat-icon>inventory</mat-icon> &nbsp; Inventories
                 </button>
               </mat-list-item>
               <mat-list-item>
-                <button mat-raised-button color="primary" class="mat-elevation-z8" style="width: 100%; text-align: left">
+                <button mat-raised-button color="primary" class="mat-elevation-z8" style="width: 100%; text-align: left" [routerLink]="['/finance']">
                   <mat-icon>calculate</mat-icon> &nbsp; Finances
                 </button>
               </mat-list-item>
               <mat-list-item>
                 <button mat-raised-button color="primary" class="mat-elevation-z8" style="width: 100%; text-align: left">
-                  <mat-icon>calculate</mat-icon> &nbsp; Taskboard
+                  <mat-icon>inventory</mat-icon> &nbsp; Taskboard
                 </button>
               </mat-list-item>
 
