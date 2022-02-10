@@ -26,13 +26,15 @@ router.post('/signup', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     // let newUser = new Users(req.body);
-    let username = req.body.accountId;
-    let password = req.body.password;
+     username = req.body.data.username;
+    let password = req.body.data.password;
+    console.log(req.body.data);
+    console.log(username, password);
     Users.findOne({username})
     .then((user) => {
        if (user && bcrypt.compareSync(password, user.password)) {
            res.status(200)
-           .json({ user })
+           .json({ user, message: "Account logged in successful" })
        } else if (user && !bcrypt.compareSync(password, user.password)) {
            res.status(401).json({message: "Invalid Credentials"});
        } else {

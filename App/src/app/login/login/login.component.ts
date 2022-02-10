@@ -23,36 +23,25 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // addExpenses = async () : Promise <void> => {
+  // login = async () : Promise <void> => {
   //   try {
-  //     this.expensesData.exp_amount = this.expAmount;
-  //     this.expensesData.exp_by =  this.expBy;
-  //     this.expensesData.exp_date = this.expDate;
-  //     this.expensesData.exp_desc = this.expDesc;
-  //     this.expensesData.isArchive = 0;
-      
-  //     await this.dataService.createItemss('expenses', this.expensesData);
-  //       Swal.fire(
-  //         'Item Added!',
-  //         '',
-  //         'success'
-  //       )
-  //       this.dialogRef.close();
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
+  //     this.loginData.accountId = this.account_id
+  //     this.loginData.password = this.password
 
+  //     await this.dataService.createItemss('users/login', this.loginData)
+
+  //   } catch(error) {
+  //     console.log(error);
+  //   }    
   // }
 
-  login = async () : Promise <void> => {
-    try {
-      this.loginData.accountId = this.account_id
-      this.loginData.password = this.password
-
-      await this.dataService.createItemss('users/login', this.loginData)
-
-    } catch(error) {
-      console.log(error);
-    }    
+  login() {
+    this.loginData.username = this.account_id
+    this.loginData.password = this.password
+    
+    console.log(this.loginData);
+    this.dataService.createItem('users/login', this.loginData).subscribe((data: any) => {
+      console.log(data);
+    })
   }
 }
