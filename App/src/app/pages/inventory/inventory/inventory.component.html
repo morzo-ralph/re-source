@@ -60,8 +60,8 @@
                   <mat-card-content>
                     <img src="{{item.imageUrl}}" alt="" style="height: 40%; width: 100%; border-radius: 16px; margin-right: auto">
                     <p> Item Description : {{ item.description }}</p>
-                    <p> Item Amount :</p>                            
-                    <p> Item Price : </p>
+                    <p> Item Price : {{ item.price}}</p>                            
+                    <p> Item Amount : {{ item.quantity }}</p>
                     <p> Date Created : {{ item.created_at| date: "MMM dd, yyyy | hh:mm" }}</p>
                   </mat-card-content>
                 </mat-card>
