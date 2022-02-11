@@ -19,77 +19,77 @@
     <ng-container *ngIf="isLoaded != false">
 
       <div style=" width:100%; height: 100%">
-      <div class="mat-elevation-z2" style="background-color: lightgrey; width: calc(100% -16px); height: calc(100vh); padding: 8px; ">
-        <div style="width: calc(100%-16px); height: 8%; border-radius: 16px; background-color: whitesmoke; padding: 8px;">
-          <br>
-          <mat-form-field appearance="fill" style="font-size: 12px; width: 80%; border-radius: 16px !important; text-align: center">
-            <mat-label>Search Items...</mat-label>
-            <input matInput (keyup)="applyFilterInventories($any($event.target).value)" placeholder="Filter">
-          </mat-form-field> 
-          &nbsp;&nbsp;&nbsp;&nbsp;
-          <span style="flex:auto">&nbsp;</span>
-          <button mat-raised-button color="primary" (click)="addItem()" style="float: right; margin-right:32px;">Add Item</button>
-        </div>
+        <div class="mat-elevation-z2" style="background-color: lightgrey; width: calc(100% -16px); height: calc(100vh); padding: 8px; ">
+          <div style="width: calc(100%-16px); height: 8%; border-radius: 16px; background-color: whitesmoke; padding: 8px;">
+            <br>
+            <mat-form-field appearance="fill" style="font-size: 12px; width: 80%; border-radius: 16px !important; text-align: center">
+              <mat-label>Search Items...</mat-label>
+              <input matInput (keyup)="applyFilterInventories($any($event.target).value)" placeholder="Filter">
+            </mat-form-field>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="flex:auto">&nbsp;</span>
+            <button mat-raised-button color="primary" (click)="addItem()" style="float: right; margin-right:32px;">Add Item</button>
+          </div>
 
-        <br />
-        <mat-divider></mat-divider>
-        <br />
+          <br />
+          <mat-divider></mat-divider>
+          <br />
 
-        <div style=" width:100%; height: 80%">
-                 <mat-grid-list cols="6" rowHeight="1:2" gutterSize="8px;">
+          <div style=" width:100%; height: 80%">
+            <mat-grid-list cols="6" rowHeight="1:2" gutterSize="8px;">
 
-            <mat-grid-tile>
-              <div style="background-image: url(../assets/images/sampleObject.jpg); border-radius: 16px; background-size: cover; background-position: center; background-blend-mode: lighten; background-color: #c2c894; height: 100%; width: 100%">
-                <mat-card style="background:none; height: 100%; width: calc(100% -16px)">
-                  <mat-card-title>
-                    Item Name
-                  </mat-card-title>
-                  <mat-card-content>
-                    <img src="../assets/images/sampleObject.jpg" alt="" style="height: 40%; width: 100%; border-radius: 16px; margin-right: auto">
-                    <p> Item Description : </p>
-                    <p> Item Amount :</p>
-                    <p> Item Price : </p>
-                    <p> Date Created : </p>
-                    <p> </p>
-                  </mat-card-content>
-                </mat-card>
-              </div>
-            </mat-grid-tile>
-            <ng-container *ngFor="let item of this.inventoriesDataSource.filteredData">
               <mat-grid-tile>
                 <div style="background-image: url(../assets/images/sampleObject.jpg); border-radius: 16px; background-size: cover; background-position: center; background-blend-mode: lighten; background-color: #c2c894; height: 100%; width: 100%">
                   <mat-card style="background:none; height: 100%; width: calc(100% -16px)">
                     <mat-card-title>
-                      {{ item.name }}
+                      Item Name
                     </mat-card-title>
                     <mat-card-content>
-                      <img src="{{item.imageUrl}}" alt="" style="height: 40%; width: 100%; border-radius: 16px; margin-right: auto">
-                      <p> Item Description : {{ item.description }}</p>
+                      <img src="../assets/images/sampleObject.jpg" alt="" style="height: 40%; width: 100%; border-radius: 16px; margin-right: auto">
+                      <p> Item Description : </p>
                       <p> Item Amount :</p>
                       <p> Item Price : </p>
-                      <p> Date Created : {{ item.created_at| date: "MMM dd, yyyy | hh:mm" }}</p>
+                      <p> Date Created : </p>
+                      <p> </p>
                     </mat-card-content>
-                    <mat-card-footer style="text-align: center">
-                      <button mat-raised-button (click)="itemView(item)"> View </button> &nbsp;
-                      <button mat-raised-button (click)="itemUpdate(item)"> Update </button>   &nbsp;
-                      <button mat-raised-button (click)="itemArchive(item)"> Archive </button>
-                    </mat-card-footer>
                   </mat-card>
                 </div>
               </mat-grid-tile>
+              <ng-container *ngFor="let item of this.inventoriesDataSource.filteredData">
+                <mat-grid-tile>
+                  <div style="background-image: url(../assets/images/sampleObject.jpg); border-radius: 16px; background-size: cover; background-position: center; background-blend-mode: lighten; background-color: #c2c894; height: 100%; width: 100%">
+                    <mat-card style="background:none; height: 100%; width: calc(100% -16px)">
+                      <mat-card-title>
+                        {{ item.name }}
+                      </mat-card-title>
+                      <mat-card-content>
+                        <img src="{{item.imageUrl}}" alt="" style="height: 40%; width: 100%; border-radius: 16px; margin-right: auto">
+                        <p> Item Description : {{ item.description }}</p>
+                        <p> Item Amount :</p>
+                        <p> Item Price : </p>
+                        <p> Date Created : {{ item.created_at| date: "MMM dd, yyyy | hh:mm" }}</p>
+                      </mat-card-content>
+                      <mat-card-footer style="text-align: center">
+                        <button mat-raised-button (click)="itemView(item)"> View </button> &nbsp;
+                        <button mat-raised-button (click)="itemUpdate(item)"> Update </button>   &nbsp;
+                        <button mat-raised-button (click)="itemArchive(item)"> Archive </button>
+                      </mat-card-footer>
+                    </mat-card>
+                  </div>
+                </mat-grid-tile>
 
-            </ng-container>
+              </ng-container>
 
 
-          </mat-grid-list>
-        </div>
-          
-        
-        <mat-divider></mat-divider>
+            </mat-grid-list>
+          </div>
 
-        <div class="mat-elevation-z2" style="width: calc(100%-16px); height: 10%; border-radius: 16px; background-color: whitesmoke; padding: 8px;">
-          <button mat-raised-button color="primary" (click)="addItem()">Add Item</button>
-        </div>
+
+          <mat-divider></mat-divider>
+
+          <div class="mat-elevation-z2" style="width: calc(100%-16px); height: 10%; border-radius: 16px; background-color: whitesmoke; padding: 8px;">
+            <button mat-raised-button color="primary" (click)="addItem()">Add Item</button>
+          </div>
         </div>
       </div>
       <!--<mat-card>
