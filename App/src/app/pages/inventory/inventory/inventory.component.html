@@ -18,57 +18,93 @@
 
     <ng-container *ngIf="isLoaded != false">
 
-      <div class="mat-elevation-z2" style="background-color:lightgrey; width: 100%; padding: 8px; ">
-          <mat-grid-list cols="6" rowHeight="2:1">
-            <mat-grid-tile>
-              <mat-card style="background-image: url(../assets/images/sampleObject.png); background-size: contain; height: 100%; width: 100% ">
+
+      <div class="mat-elevation-z2" style="background-color: lightgrey; width: calc(100% -16px); height: calc(100vh); padding: 8px; ">
+        <div style="width: calc(100%-16px); height: 8%; border-radius: 16px; background-color: whitesmoke; padding: 8px;">
+          <br>
+          <mat-form-field appearance="fill" style="font-size:12px; width: 100%; border-radius: 16px; text-align:center">
+            <mat-label>Search Items...</mat-label>
+            <input matInput (keyup)="applyFilterInventories($any($event.target).value)" placeholder="Filter">
+          </mat-form-field>
+        </div>
+        <br />
+        <mat-divider></mat-divider>
+        <br />
+
+        <mat-grid-list cols="6" rowHeight="1:2" gutterSize="8px;">
+
+          <mat-grid-tile>
+            <div style="background-image: url(../assets/images/sampleObject.jpg); border-radius: 16px; background-size: cover; background-position: center; background-blend-mode: lighten; background-color: #c2c894; height: 100%; width: 100%">
+              <mat-card style="background:none; height: 100%; width: calc(100% -16px)">
                 <mat-card-title>
                   Item Name
-
-
                 </mat-card-title>
                 <mat-card-content>
-
-                  Item Content
-
+                  <img src="../assets/images/sampleObject.jpg" alt="" style="height: 40%; width: 100%; border-radius: 16px; margin-right: auto">
+                  <p> Item Description : </p>
+                  <p> Item Amount :</p>
+                  <p> Item Price : </p>
+                  <p> Date Created : </p>
+                  <p> </p>
                 </mat-card-content>
-
               </mat-card>
+            </div>
+          </mat-grid-tile>
+          <ng-container *ngFor="let item of this.inventoriesDataSource.filteredData">
+            <mat-grid-tile>
+              <div style="background-image: url(../assets/images/sampleObject.jpg); border-radius: 16px; background-size: cover; background-position: center; background-blend-mode: lighten; background-color: #c2c894; height: 100%; width: 100%">
+                <mat-card style="background:none; height: 100%; width: calc(100% -16px)">
+                  <mat-card-title>
+                    {{ item.name }}
+                  </mat-card-title>
+                  <mat-card-content>
+                    <img src="{{item.imageUrl}}" alt="" style="height: 40%; width: 100%; border-radius: 16px; margin-right: auto">
+                    <p> Item Description : {{ item.description }}</p>
+                    <p> Item Amount :</p>                            
+                    <p> Item Price : </p>
+                    <p> Date Created : {{ item.created_at| date: "MMM dd, yyyy | hh:mm" }}</p>
+                  </mat-card-content>
+                </mat-card>
+              </div>
             </mat-grid-tile>
-          </mat-grid-list>
+
+          </ng-container>
+
+
+        </mat-grid-list>
       </div>
-
-      
-
-
-
-
-
-
+    <!--<mat-card>
+    <ng-container *ngFor="let item of this.inventoriesDataSource.filteredData">
       <mat-card>
-        <ng-container *ngFor="let item of this.inventoriesDataSource.filteredData">
-          <mat-card>
-            <mat-card-title>{{ item.name }}</mat-card-title>
-            <mat-card-content>
-              <p> {{ item.description}}</p>
-              <p> {{ item.created_at}}</p>
-              <p> {{ item.imageUrl}}</p>
+        <mat-card-title>{{ item.name }}</mat-card-title>
+        <mat-card-content>
+          <p> {{ item.description}}</p>
+          <p> {{ item.created_at}}</p>
+          <p> {{ item.imageUrl}}</p>
 
-              <img src="{{item.imageUrl}}" alt="">
+          <img src="{{item.imageUrl}}" alt="">
 
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-button (click)="itemView(item)"> View </button>
-              <button mat-button (click)="itemUpdate(item)"> Update </button>
-              <button mat-button (click)="itemArchive(item)"> Archive </button>
-            </mat-card-actions>
-          </mat-card>
-        </ng-container>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="itemView(item)"> View </button>
+          <button mat-button (click)="itemUpdate(item)"> Update </button>
+          <button mat-button (click)="itemArchive(item)"> Archive </button>
+        </mat-card-actions>
       </mat-card>
+    </ng-container>
+  </mat-card>-->
+
+
+
+
+
+
+
+     
 
     </ng-container>
 
-    <div style="margin:20px;">
+    <!--<div style="margin:20px;">
       <div class="container">
 
       </div>
@@ -85,7 +121,7 @@
           <input matInput (keyup)="applyFilterInventories($any($event.target).value)" placeholder="Filter">
         </mat-form-field>
       </div>
-    </div>
+    </div>-->
 
   </mat-tab>
 
