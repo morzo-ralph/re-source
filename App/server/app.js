@@ -24,6 +24,7 @@ const stocksRouter = require('./routes/stocks');
 const galleryRouter = require('./routes/gallery');
 const usersRouter = require('./routes/users');
 const announcementRouter = require('./routes/announcement');
+const taskBoardRouter =  require('./routes/taskboard');
 
 //check localhost ip
  require('dns').lookup(require('os').hostname(), function (err, add, fam) {
@@ -62,6 +63,7 @@ app.use("/sales", salesRouter);
 app.use("/stocks", stocksRouter);
 app.use("/gallery", galleryRouter);
 app.use("/announcement", announcementRouter);
+app.use("/taskboard", taskBoardRouter);
 
 app.use("/users", usersRouter);
 
