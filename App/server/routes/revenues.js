@@ -11,19 +11,24 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {  
-    let revenues = new Revenues(req.body);
-    if (req.body.number == '')
-    Revenues.findOne({ number: req.number}, (err, revenue) => {
-        if(revenue) {
-            revenue++
-        } else {
-            (new Revenues(req.body.data))
-                .save()
-                .then((revenues) => res.send(revenues))
-                .catch((error) => console.log(error));
-        }
-    }).catch((error) => console.log(error));
+    // let revenues = new Revenues(req.body);
+    
+    // Revenues.findOne({ number: req.number}, (err, revenue) => {
+    //     if(revenue) {
+    //         revenue++
+    //     } else {
+    //         req.body.data.number = revenue;
+    //         (new Revenues(req.body.data))
+    //             .save()
+    //             .then((revenues) => res.send(revenues))
+    //             .catch((error) => console.log(error));
+    //     }
+    // }).catch((error) => console.log(error));
 
+    (new Revenues(req.body.data))
+        .save()
+        .then((revenues) => res.send(revenues))
+        .catch((error) => console.log(error));
 });
 
 router.get('/:_id', (req, res) => {

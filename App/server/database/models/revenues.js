@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const RevenuesSchema = new mongoose.Schema({
-    number: {type: Number, default: 1},
+    number: Number,
     rev_date: Date,
     rev_desc: String,
     rev_by: String,
