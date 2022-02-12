@@ -22,15 +22,29 @@ import { ViewExpensesComponent } from './view-expenses/view-expenses.component';
 
 
 export interface RevenuesData {
+  number: number;
   _id: string;
-  rev_date: Date;
+  rev_date: any;
   rev_desc: string;
   rev_by: string;
   rev_amount: number;
 
   isArchive: number;
-  created_at: Date;
-  updated_at: Date;
+  created_at: any;
+  updated_at: any;
+}
+
+export interface SalesData {
+  number: number;
+  _id: string;
+  sales_date: any;
+  sales_desc: string;
+  sales_by: string;
+  sales_amount: number;
+
+  isArchive: number;
+  created_at: any;
+  updated_at: any;
 }
 
 export interface PettyCashData {
@@ -55,6 +69,21 @@ export interface ExpensesData {
   updated_at: Date;
 }
 
+//SAMPLE
+
+const REV_DATA: RevenuesData[] = [
+  { number: 1, _id: '2021022', rev_date: "20011201", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 100000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', rev_date: "20011201", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 102000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', rev_date: "20011201", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 10100, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', rev_date: "20011201", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 9000, isArchive: 0, created_at: "20011201", updated_at: "20011201" }
+];
+
+const SALES_DATA: SalesData[] = [
+  { number: 1, _id: '2021022', sales_date: "20011201", sales_desc: "Sales", sales_by: "Position", sales_amount: 10003, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', sales_date: "20011201", sales_desc: "Sales", sales_by: "Position", sales_amount: 10003, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', sales_date: "20011201", sales_desc: "Sales", sales_by: "Position", sales_amount: 10003, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+];
+
 @Component({
   selector: 'app-finance',
   templateUrl: './finance.component.html',
@@ -74,6 +103,7 @@ export class FinanceComponent implements OnInit{
     this.load();
     this.getPettyCash();
     this.getRevenues();
+    this.getSales();
     this.getExpenses();
     /*this.dataSource.paginator = this.paginator;*/
   }
@@ -97,6 +127,8 @@ export class FinanceComponent implements OnInit{
   }
 
   //FUNCTIONS
+
+  //PETTY CASH 
   pettyCashPayload: any;
   pettyCashData: PettyCashData[] = [];
   pettyCashDataSource = new MatTableDataSource(this.pettyCashData);
@@ -166,22 +198,109 @@ export class FinanceComponent implements OnInit{
     })
   }
 
-  //revenues
+  //REVENUES and SALES
   revenuesPayload: any;
   revenuesData: RevenuesData[] = [];
   revenuesDataSource = new MatTableDataSource(this.revenuesData);
 
-  revenuesDisplayedColumns = ['_id', 'rev_date', 'rev_amount', 'rev_desc', 'rev_by', 'actions'];
+  salesPayload: any;
+  salesData: SalesData[] = [];
+  salesDataSource = new MatTableDataSource(this.salesData);
+
+  //number: number;
+  //_id: string;
+  //rev_date: any;
+  //rev_desc: string;
+  //rev_by: string;
+  //rev_amount: number;
+
+  //isArchive: number;
+  //created_at: any;
+  //updated_at: any;
+
+  revenuesDisplayedColumns : string[] = ['number', '_id', 'rev_date', 'rev_desc', 'rev_by', 'rev_amount', 'actions'];
   revenuesDataIsArchived: any;
 
+  salesDisplayedColumns: string[] = ['number', '_id', 'sales_date', 'sales_desc', 'sales_by', 'sales_amount', 'actions'];
+  salesDataIsArchived: any;
+
   getRevenues() {
-    this.dataService.getAllItem("revenues").subscribe((data: any) => {
-      this.revenuesPayload = data
-      console.log(this.revenuesPayload);
-      this.revenuesData = this.revenuesPayload;
-      this.revenuesDataSource.data = this.revenuesData;  
-    });
+
+    this.revenuesData = REV_DATA;
+    this.revenuesDataSource.data = this.revenuesData;
+    console.log(this.revenuesDataSource.data)
+
+    //this.dataService.getAllItem("revenues").subscribe((data: any) => {
+    //  this.revenuesPayload = data
+    //  console.log(this.revenuesPayload);
+    //  this.revenuesData = this.revenuesPayload;
+    //  this.revenuesDataSource.data = this.revenuesData;  
+    //});
+
+    this.getSales()
   }
+
+  getSales() {
+
+    this.salesData = SALES_DATA;
+    this.salesDataSource.data = this.salesData;
+    console.log(this.salesDataSource.data);
+
+    //this.dataService.getAllItem("revenues").subscribe((data: any) => {
+    //  this.revenuesPayload = data
+    //  console.log(this.revenuesPayload);
+    //  this.revenuesData = this.revenuesPayload;
+    //  this.revenuesDataSource.data = this.revenuesData;  
+    //});
+
+    this.getRevenuesData()
+  }
+
+  //Make Graph
+
+  //Load Data
+
+  graphVar: any[] = []
+
+  revenuesDataGraph: any[] = []
+
+  getRevenuesData() {
+    let revenuesData = this.revenuesData;
+    for (var data of revenuesData) {
+      this.graphVar = [data.rev_date, data.rev_amount]
+      this.revenuesDataGraph.push(this.graphVar)
+      console.log(this.revenuesDataGraph);
+      this.graphVar = [];
+    }
+    this.getSalesData()
+  }
+
+  salesDataGraph: any[] = []
+  
+  getSalesData() {
+    let salesdata = this.salesData;
+    for (var data of salesdata) {
+      this.graphVar = [data.sales_date, data.sales_amount]
+      this.salesDataGraph.push(this.graphVar)
+      console.log(this.salesDataGraph);
+      this.graphVar = [];
+    }
+    this.mergeGraphData()
+  }
+
+  //Merge Data
+
+  graphData: any[] =[]
+
+  mergeGraphData() {
+
+    this.graphData = this.revenuesDataGraph.concat(this.salesDataGraph);
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxx");
+    console.log(this.graphData);
+  }
+
+
+
 
   addRevenues() {
     const dialogRef = this.matDialog.open(AddRevenuesComponent, {
@@ -309,20 +428,24 @@ export class FinanceComponent implements OnInit{
     })
   }
 
+  
 
+  //Graphs
   dynamicResize = true;
+  //Revenues 
+  titleRevenues = 'Revenues for the past months';
+  typeRevenues = ChartType.LineChart;
 
-  //DATA
+  //dataRevenues = [
+  //  ["2017", 15000, 15000, 0],
+  //  ["2018", 14000, 0, 0],
+  //  ["2019", 16000, 18000, 0],
+  //  ["2020", 17500, 17000, 0]
+  //];
 
-  title = 'Revenues for the past past months';
-  myType = ChartType.LineChart;
-  data = [
-      ["2017",  15000, 15000],
-      ["2018",  14000, 13000],
-      ["2019",  16000, 18000],
-      ["2020",  17500, 17000]
-   ];
-   chartColumns = ["Revenues", "Net Income", "Revenue"];
+  dataRevenues = this.graphData
+;
+   chartColumnsRevenues = ["Year","Revenues", "Sales", "Net Revenues"];
    options = {   
       hAxis: {
          title: 'Month'

@@ -9,7 +9,7 @@ export interface Emp_Data {
   status: string;
 }
 
-const ELEMENT_DATA: Emp_Data[] = [
+const HR_DATA: Emp_Data[] = [
   { number: 1, id: '2021022', name: "John Doe", position: 'admin', status: 'status_code' },
   { number: 2, id: '2021023', name: "Jobs Steve", position: 'admin', status: 'status_code' },
   { number: 3, id: '2021024', name: "Adeg", position: 'admin', status: 'status_code' },
@@ -57,10 +57,10 @@ export class HrComponent implements OnInit {
   }
 
   empColumns: string[] = ['number', 'id', 'name', 'department', 'position', 'status', 'actions'];
-  empDataSource = ELEMENT_DATA;
+  empDataSource = HR_DATA;
 
   attColumns: string[] = [];
-  attDataSource = ELEMENT_DATA;
+  attDataSource = HR_DATA;
 
   getDate() {
     return this.library.getDate("EEEE, MMMM d, y")
