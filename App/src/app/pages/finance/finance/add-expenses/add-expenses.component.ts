@@ -16,7 +16,11 @@ export class AddExpensesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.countData();
   }
+
+  countdata: any;
+
   expensesData: any = {};
   expAmount: any;
   expBy: any;
@@ -51,6 +55,7 @@ export class AddExpensesComponent implements OnInit {
       this.expensesData.exp_by =  this.expBy;
       this.expensesData.exp_date = this.expDate;
       this.expensesData.exp_desc = this.expDesc;
+      this.expensesData.number = this.countdata + 1;
       this.expensesData.isArchive = 0;
       
       await this.dataService.createItemss('expenses', this.expensesData);
@@ -64,6 +69,12 @@ export class AddExpensesComponent implements OnInit {
       console.log(error)
     }
 
+  }
+
+  countData() {
+    this.dataService.getAllItem('expenses').subscribe((data : any) => {
+      this.countdata =  data.length;
+    })
   }
 
 }

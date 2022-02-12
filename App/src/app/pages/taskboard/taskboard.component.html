@@ -3,7 +3,10 @@
   <span>Taskboard</span>
   <span style="flex: 1 1 auto;"></span>
   
-  <!-- <div *ngFor="let t of task; let i = index">
-      <p> {{ t.taskBoard_name }} </p>
-  </div> -->
 </mat-toolbar>
+
+ <div *ngFor="let t of task; let i = index">
+      <p> {{ t.taskBoard_name }} </p>
+      <p> {{ t.taskBoard_content}}</p>
+      <img src="{{ t.imageUrl}}" alt="">
+  </div>
