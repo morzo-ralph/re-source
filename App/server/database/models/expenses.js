@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const ExpensesSchema = new mongoose.Schema({
+    number: Number,
     exp_date: Date,
     exp_desc: String,
     exp_by: String,

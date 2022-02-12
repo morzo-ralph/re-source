@@ -393,7 +393,7 @@
 
                   <mat-form-field appearance="standard" style="width: 100%">
                     <mat-label>Filter</mat-label>
-                    <input matInput placeholder="Ex. Mia" #input>
+                    <input matInput placeholder="Ex. Mia" (keyup)="applyFilterRevenues($any($event.target).value)">
                   </mat-form-field>
 
                   <mat-table [dataSource]="revenuesDataSource" class="mat-elevation-z12">
@@ -463,7 +463,7 @@
 
                   <mat-form-field appearance="standard" style="width: 100%">
                     <mat-label>Filter</mat-label>
-                    <input matInput placeholder="Ex. Mia" #input>
+                    <input matInput placeholder="Ex. Mia" (keyup)="applyFilterSales($any($event.target).value)">
                   </mat-form-field>
 
                   <mat-table [dataSource]="salesDataSource" class="mat-elevation-z12">
@@ -516,6 +516,7 @@
                         <button mat-button color="warn" (click)="archiveRevenues(element._id)"><mat-icon>delete</mat-icon></button>
                       </mat-cell>
                     </ng-container>
+                    
                     <mat-header-row *matHeaderRowDef="salesDisplayedColumns"></mat-header-row>
                     <mat-row *matRowDef="let row; columns: salesDisplayedColumns;"></mat-row>
                   </mat-table>
@@ -604,7 +605,7 @@
         <!--</div>-->
         <br />
         <div>
-          <mat-table [dataSource]="revenuesDataSource" class="mat-elevation-z8">
+          <!-- <mat-table [dataSource]="revenuesDataSource" class="mat-elevation-z8">
 
             <ng-container matColumnDef="number">
               <th mat-header-cell *matHeaderCellDef> ID </th>
@@ -647,7 +648,7 @@
 
             <tr mat-header-row *matHeaderRowDef="revenuesDisplayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: revenuesDisplayedColumns;"></tr>
-          </mat-table>
+          </mat-table> -->
 
         </div>
         <br />
@@ -684,6 +685,62 @@
 
         </div>
 
+        <div style="display: flex; align-items: center; justify-content: center;">
+          <hr>
+          <mat-form-field appearance="fill">
+            <mat-label>Search Expense Report</mat-label>
+            <input matInput (keyup)="applyFilterExpenses($any($event.target).value)" placeholder="Filter"/>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-table [dataSource]="expensesDataSource" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="number">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element"> {{element.number}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="_id">
+              <th mat-header-cell *matHeaderCellDef> ID </th>
+              <td mat-cell *matCellDef="let element"> {{element._id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="exp_amount">
+              <th mat-header-cell *matHeaderCellDef> Amount </th>
+              <td mat-cell *matCellDef="let element"> {{element.exp_amount}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="exp_desc">
+              <th mat-header-cell *matHeaderCellDef> Date </th>
+              <td mat-cell *matCellDef="let element"> {{element.exp_desc}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="exp_date">
+              <th mat-header-cell *matHeaderCellDef> Date </th>
+              <td mat-cell *matCellDef="let element"> {{element.exp_date | date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="exp_by">
+              <th mat-header-cell *matHeaderCellDef> Date </th>
+              <td mat-cell *matCellDef="let element"> {{element.exp_by}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Actions</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-button (click)="viewRevenues(element)">View</button>
+                <button mat-button (click)="editRevenues(element)">Edit</button>
+                <button mat-button (click)="archiveRevenues(element._id)">Archive</button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="expensesDisplayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: expensesDisplayedColumns;"></tr>
+          </mat-table>
+
+        </div>
+
         <div style="margin:20px;">
           <div class="container">
 
@@ -694,15 +751,11 @@
 
           <br>
           <hr>
-          <div style="display: flex; align-items: center; justify-content: center;">
-            <hr>
-            <mat-form-field appearance="fill">
-              <mat-label>Search Revenue Report</mat-label>
-              <input matInput>
-            </mat-form-field>
-          </div>
+        
         </div>
-        <div>
+
+        
+        <!-- <div>
           <mat-table [dataSource]="expensesDataSource" class="mat-elevation-z8">
 
             <ng-container matColumnDef="_id">
@@ -743,7 +796,7 @@
             <tr mat-row *matRowDef="let row; columns: expensesDisplayedColumns;"></tr>
           </mat-table>
 
-        </div>
+        </div> -->
         <br />
         <br />
         <br />

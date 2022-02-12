@@ -63,6 +63,7 @@ export interface PettyCashData {
 }
 
 export interface ExpensesData {
+  number: number;
   _id: string;
   exp_date: Date;
   exp_desc: string;
@@ -94,13 +95,13 @@ const SALES_DATA: SalesData[] = [
   templateUrl: './finance.component.html',
   styleUrls: ['./finance.component.scss']
 })
-export class FinanceComponent implements OnInit{
+export class FinanceComponent implements OnInit {
   constructor
-  (
-    private matDialog: MatDialog,
-    private dataService: DataService,
-    private libraryService: LibraryService
-  ) { }
+    (
+      private matDialog: MatDialog,
+      private dataService: DataService,
+      private libraryService: LibraryService
+    ) { }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -131,6 +132,18 @@ export class FinanceComponent implements OnInit{
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+  applyFilterExpenses(filterValue: string) {
+    this.expensesDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  applyFilterSales(filterValue: string) {
+    this.salesDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  applyFilterRevenues(filterValue: string) {
+    this.revenuesDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   //FUNCTIONS
 
   //PETTY CASH 
@@ -141,7 +154,7 @@ export class FinanceComponent implements OnInit{
   pettyCashIdArchive: any;
 
   getPettyCash() {
-    this.dataService.getAllItem('pettycash').subscribe(( data : any) => {
+    this.dataService.getAllItem('pettycash').subscribe((data: any) => {
       this.pettyCashPayload = data;
       console.log(this.pettyCashPayload);
       this.pettyCashData = this.pettyCashPayload;
@@ -165,9 +178,9 @@ export class FinanceComponent implements OnInit{
       data: pettyCash
     });
 
-    dialogRef.afterClosed().subscribe(() => this.getPettyCash() );
+    dialogRef.afterClosed().subscribe(() => this.getPettyCash());
   }
-  
+
   editPettyCash(pettyCash: any) {
     const dialogRef = this.matDialog.open(EditPettyCashComponent, {
       height: '75%',
@@ -175,7 +188,7 @@ export class FinanceComponent implements OnInit{
       data: pettyCash
     });
 
-    dialogRef.afterClosed().subscribe(() => this.getPettyCash() );
+    dialogRef.afterClosed().subscribe(() => this.getPettyCash());
   }
 
   archivePettyCash(_id: any) {
@@ -195,7 +208,7 @@ export class FinanceComponent implements OnInit{
           'success'
         )
         this.pettyCashIdArchive = _id;
-        this.dataService.archiveItem('pettycash', this.pettyCashIdArchive, {"isArchive": 1}).subscribe((data: any) => {
+        this.dataService.archiveItem('pettycash', this.pettyCashIdArchive, { "isArchive": 1 }).subscribe((data: any) => {
           console.log(data);
         });
         this.getPettyCash();
@@ -223,7 +236,7 @@ export class FinanceComponent implements OnInit{
   //created_at: any;
   //updated_at: any;
 
-  revenuesDisplayedColumns : string[] = ['number', '_id', 'rev_date', 'rev_desc', 'rev_by', 'rev_amount', 'actions'];
+  revenuesDisplayedColumns: string[] = ['number', '_id', 'rev_date', 'rev_desc', 'rev_by', 'rev_amount', 'actions'];
   revenuesDataIsArchived: any;
 
   salesDisplayedColumns: string[] = ['number', '_id', 'sales_date', 'sales_desc', 'sales_by', 'sales_amount', 'actions'];
@@ -282,7 +295,7 @@ export class FinanceComponent implements OnInit{
   }
 
   salesDataGraph: any[] = []
-  
+
   getSalesData() {
     let salesdata = this.salesData;
     for (var data of salesdata) {
@@ -296,7 +309,7 @@ export class FinanceComponent implements OnInit{
 
   //Merge Data
 
-  graphData: any[] =[]
+  graphData: any[] = []
 
   mergeGraphData() {
 
@@ -335,9 +348,9 @@ export class FinanceComponent implements OnInit{
       data: revenues
     });
 
-    dialogRef.afterClosed().subscribe(() => this.getRevenues() );
+    dialogRef.afterClosed().subscribe(() => this.getRevenues());
   }
-  
+
   editRevenues(revenues: any) {
     const dialogRef = this.matDialog.open(EditRevenuesComponent, {
       height: '75%',
@@ -345,7 +358,7 @@ export class FinanceComponent implements OnInit{
       data: revenues
     });
 
-    dialogRef.afterClosed().subscribe(() => { this.getRevenues()} );
+    dialogRef.afterClosed().subscribe(() => { this.getRevenues() });
     //this.getRevenues(), this.load()
   }
 
@@ -366,7 +379,7 @@ export class FinanceComponent implements OnInit{
           'success'
         )
         this.revenuesDataIsArchived = _id;
-        this.dataService.archiveItem('revenues', this.revenuesDataIsArchived, {"isArchive": 1}).subscribe((data: any) => {
+        this.dataService.archiveItem('revenues', this.revenuesDataIsArchived, { "isArchive": 1 }).subscribe((data: any) => {
           console.log(data);
         });
         this.getRevenues();
@@ -378,7 +391,7 @@ export class FinanceComponent implements OnInit{
   expensesPayload: any;
   expensesData: ExpensesData[] = [];
   expensesDataSource = new MatTableDataSource(this.expensesData);
-  expensesDisplayedColumns = ['_id', 'exp_date', 'exp_amount', 'exp_desc', 'exp_by', 'actions'];
+  expensesDisplayedColumns = ['number', '_id', 'exp_date', 'exp_amount', 'exp_desc', 'exp_by', 'actions'];
   expensesDataIsArchived: any;
 
   getExpenses() {
@@ -386,7 +399,7 @@ export class FinanceComponent implements OnInit{
       this.expensesPayload = data;
       console.log(this.expensesPayload);
       this.expensesData = this.expensesPayload;
-      this.expensesDataSource.data = this.expensesData;  
+      this.expensesDataSource.data = this.expensesData;
     });
   }
 
@@ -406,9 +419,9 @@ export class FinanceComponent implements OnInit{
       data: expenses
     });
 
-    dialogRef.afterClosed().subscribe(() => this.getExpenses() );
+    dialogRef.afterClosed().subscribe(() => this.getExpenses());
   }
-  
+
   editExpenses(expenses: any) {
     const dialogRef = this.matDialog.open(EditExpensesComponent, {
       height: '75%',
@@ -416,7 +429,7 @@ export class FinanceComponent implements OnInit{
       data: expenses
     });
 
-    dialogRef.afterClosed().subscribe(() => this.getExpenses() );
+    dialogRef.afterClosed().subscribe(() => this.getExpenses());
   }
 
   archiveExpenses(_id: any) {
@@ -436,7 +449,7 @@ export class FinanceComponent implements OnInit{
           'success'
         )
         this.expensesDataIsArchived = _id;
-        this.dataService.archiveItem('expenses', this.expensesDataIsArchived, {"isArchive": 1}).subscribe((data: any) => {
+        this.dataService.archiveItem('expenses', this.expensesDataIsArchived, { "isArchive": 1 }).subscribe((data: any) => {
           console.log(data);
         });
         this.getExpenses();
@@ -454,7 +467,7 @@ export class FinanceComponent implements OnInit{
     dialogRef.afterClosed().subscribe(() => this.getSales());
   }
 
-  
+
 
   //Graphs
   dynamicResize = true;
@@ -470,43 +483,43 @@ export class FinanceComponent implements OnInit{
   //];
 
   dataRevenues = this.graphData
-;
-   chartColumnsRevenues = ["Year","Revenues", "Sales", "Net Revenues"];
-   options = {   
-      hAxis: {
-         title: 'Month'
-      },
-      vAxis:{
-         title: 'Cash'
-      },
-   }; 
+    ;
+  chartColumnsRevenues = ["Year", "Revenues", "Sales", "Net Revenues"];
+  options = {
+    hAxis: {
+      title: 'Month'
+    },
+    vAxis: {
+      title: 'Cash'
+    },
+  };
 
-   //CashBalance
-   titleBalance = "Cash Balance";
-   typeBalance = ChartType.Bar;
-   chartColumnsBalance = ["Months", "Revenue", "Expenses"];
-   dataBalance = [
-     ["Jan",  15000, 12000],
-     ["Feb", 14000, 12000],
-     ["March", 16000, 12000],
-     ["April", 17500, 12000],
-     ["May", 17500, 12000],
-     ["June", 17500, 12000],
-     ["Junly", 17500, 12000],
-   ];
+  //CashBalance
+  titleBalance = "Cash Balance";
+  typeBalance = ChartType.Bar;
+  chartColumnsBalance = ["Months", "Revenue", "Expenses"];
+  dataBalance = [
+    ["Jan", 15000, 12000],
+    ["Feb", 14000, 12000],
+    ["March", 16000, 12000],
+    ["April", 17500, 12000],
+    ["May", 17500, 12000],
+    ["June", 17500, 12000],
+    ["Junly", 17500, 12000],
+  ];
 
-   //Sales
-   titleSales = "Sales";
-   typeSales = ChartType.Bar;
-   chartColumnsSales = ["Cash", "AR", "AP"];
-   dataSales = [
-    ["2017",  5, 6],
-    ["2018",  6, 5],
-    ["2019",  8, 4],
-    ["2020",  9, 3]
-   ];
+  //Sales
+  titleSales = "Sales";
+  typeSales = ChartType.Bar;
+  chartColumnsSales = ["Cash", "AR", "AP"];
+  dataSales = [
+    ["2017", 5, 6],
+    ["2018", 6, 5],
+    ["2019", 8, 4],
+    ["2020", 9, 3]
+  ];
 
-   //table
-    displayedColumns: string[] = ['Description', 'Amount', 'Date', 'Noted By', 'Actions'];
-   
+  //table
+  displayedColumns: string[] = ['Description', 'Amount', 'Date', 'Noted By', 'Actions'];
+
 }
