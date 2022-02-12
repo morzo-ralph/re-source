@@ -47,6 +47,11 @@ export interface SalesData {
   updated_at: any;
 }
 
+export interface RevGraph {
+  date: any;
+  amount: number
+}
+
 export interface PettyCashData {
   _id: string;
   pet_date: Date;
@@ -72,16 +77,16 @@ export interface ExpensesData {
 //SAMPLE
 
 const REV_DATA: RevenuesData[] = [
-  { number: 1, _id: '2021022', rev_date: "20011201", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 100000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', rev_date: "20011201", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 102000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', rev_date: "20011201", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 10100, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', rev_date: "20011201", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 9000, isArchive: 0, created_at: "20011201", updated_at: "20011201" }
+  { number: 1, _id: '2021022', rev_date: "2021-1-19", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 100000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', rev_date: "2021-2-19", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 102000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', rev_date: "2021-3-19", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 10100, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', rev_date: "2021-4-19", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 9000, isArchive: 0, created_at: "20011201", updated_at: "20011201" }
 ];
 
 const SALES_DATA: SalesData[] = [
-  { number: 1, _id: '2021022', sales_date: "20011201", sales_desc: "Sales", sales_by: "Position", sales_amount: 10003, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', sales_date: "20011201", sales_desc: "Sales", sales_by: "Position", sales_amount: 10003, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', sales_date: "20011201", sales_desc: "Sales", sales_by: "Position", sales_amount: 10003, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', sales_date: "2021-1-19", sales_desc: "Sales", sales_by: "Position", sales_amount: 10003, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', sales_date: "2021-2-19", sales_desc: "Sales", sales_by: "Position", sales_amount: 10003, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', sales_date: "2021-3-19", sales_desc: "Sales", sales_by: "Position", sales_amount: 10003, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
 ];
 
 @Component({
@@ -260,7 +265,7 @@ export class FinanceComponent implements OnInit{
 
   //Load Data
 
-  graphVar: any[] = []
+  graphVar: RevGraph[] = []
 
   revenuesDataGraph: any[] = []
 
@@ -294,7 +299,18 @@ export class FinanceComponent implements OnInit{
 
   mergeGraphData() {
 
-    this.graphData = this.revenuesDataGraph.concat(this.salesDataGraph);
+    let revenuesDataGraph = this.revenuesDataGraph;
+    for (var data of revenuesDataGraph) {
+      console.log(data.rev_date)
+
+      //this.graphVar = [data.rev_date, data.rev_amount]
+      //this.revenuesDataGraph.push(this.graphVar)
+      console.log(this.revenuesDataGraph);
+      this.graphVar = [];
+    }
+
+    /*this.graphData = this.revenuesDataGraph.concat(this.salesDataGraph);*/
+
     console.log("xxxxxxxxxxxxxxxxxxxxxxxxxx");
     console.log(this.graphData);
   }
