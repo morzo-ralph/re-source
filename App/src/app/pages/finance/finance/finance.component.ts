@@ -12,6 +12,7 @@ import { Data } from '@angular/router';
 
 import { AddExpensesComponent } from './add-expenses/add-expenses.component';
 import { AddRevenuesComponent } from './add-revenues/add-revenues.component';
+import { AddSalessComponent } from './add-saless/add-saless.component';
 import { EditRevenuesComponent } from './edit-revenues/edit-revenues.component';
 import { EditExpensesComponent } from './edit-expenses/edit-expenses.component';
 import { AddPettyCashComponent } from './add-petty-cash/add-petty-cash.component';
@@ -19,8 +20,6 @@ import { ViewPettyCashComponent } from './view-petty-cash/view-petty-cash.compon
 import { EditPettyCashComponent } from './edit-petty-cash/edit-petty-cash.component';
 import { ViewRevenuesComponent } from './view-revenues/view-revenues.component';
 import { ViewExpensesComponent } from './view-expenses/view-expenses.component';
-
-
 
 export interface RevenuesData {
   number: number;
@@ -444,6 +443,15 @@ export class FinanceComponent implements OnInit{
         this.load();
       }
     })
+  }
+
+  addSales() {
+    const dialogRef = this.matDialog.open(AddSalessComponent, {
+      height: '75%',
+      width: '100%'
+    });
+
+    dialogRef.afterClosed().subscribe(() => this.getSales());
   }
 
   
