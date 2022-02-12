@@ -457,7 +457,7 @@ export class FinanceComponent implements OnInit{
 
    //CashBalance
    titleBalance = "Cash Balance";
-   typeBalance = ChartType.Bar;
+   typeBalance = ChartType.BarChart;
    chartColumnsBalance = ["Months", "Revenue", "Expenses"];
    dataBalance = [
      ["Jan",  15000, 12000],

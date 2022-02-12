@@ -5,8 +5,8 @@ const router = express.Router();
 const Announcement = require('../database/models/announcement');
 
 router.get('/', (req, res) => {
-    Draws.find({})
-        .then(draws => res.send(draws))
+    Announcement.find({})
+        .then(announcement => res.send(announcement))
         .catch(error => console.log(error));
 });
 

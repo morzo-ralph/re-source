@@ -3,7 +3,7 @@ const multer = require('multer');
 const router = express.Router();
 const path = require('path');
 
-const Inventory = require('../database/models/inventory');
+const TaskBoard = require('../database/models/taskboard');
 
 const MIME_TYPE_MAP = {
     'image/png': 'png', 
@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
         const isValid = MIME_TYPE_MAP[file.mimetype];
         let error = new Error('Invalid mime type');
         if(isValid) { error = null; } 
-        cb(error, path.join(__dirname, '../uploads/inventory'));
+        cb(error, path.join(__dirname, '../uploads/taskboard'));
     },
     filename: (req, file, cb) => {
         const ext = MIME_TYPE_MAP[file.mimetype];
@@ -34,9 +34,9 @@ router.post("/", upload.single('file'), (req, res, next) => {
     } else {
         req.body.imageUrl = 'http://localhost:3000/uploads/' + req.file.filename;
         req.body.isArchive = 0;
-        (new Inventory(req.body))
+        (new TaskBoard(req.body))
         .save()
-        .then((inventory) => res.send(inventory))
+        .then((taskboard) => res.send(taskboard))
         .catch((error) => (error));
     }
 // router.post('/', multer({storage: storage}).single("image"), (req, res) => {  
@@ -52,28 +52,28 @@ router.post("/", upload.single('file'), (req, res, next) => {
 
 router.get('/', (req, res) => {
     console.log(res.body)
-    Inventory.find({})
-        .then(inventory => res.send(inventory))
+    TaskBoard.find({})
+        .then(taskboard => res.send(taskboard))
         .catch(error => console.log(error));
 });
 
 router.get('/:inventoryId', (req, res) => {
-    Inventory.find({})
-        .then(lists => res.send(lists))
+    TaskBoard.find({})
+        .then(taskboard => res.send(taskboard))
         .catch(error => console.log(error));
 });
 
 router.put('/:_id', (req, res) => {
     console.log(req.params);
     console.log(req.body);
-    Inventory.findOneAndUpdate({"_id": req.params}, {$set: req.body.data})
-        .then(inventory => res.send(inventory))
+    TaskBoard.findOneAndUpdate({"_id": req.params}, {$set: req.body.data})
+        .then(taskboard => res.send(taskboard))
         .catch(error => console.log(error));
 });
 
 router.patch('/:_id', (req, res) => {
-    Inventory.findOneAndUpdate({"_id": req.params}, {$set: req.body.data})
-        .then(inventory => res.send(inventory))
+    TaskBoard.findOneAndUpdate({"_id": req.params}, {$set: req.body.data})
+        .then(taskboard => res.send(taskboard))
         .catch(error => console.log(error));
 });
 
