@@ -83,6 +83,7 @@ import { ViewPettyCashComponent } from './pages/finance/finance/view-petty-cash/
 import { ViewExpensesComponent } from './pages/finance/finance/view-expenses/view-expenses.component';
 import { ViewRevenuesComponent } from './pages/finance/finance/view-revenues/view-revenues.component';
 import { GalleryComponent } from './pages/test/test/gallery/gallery.component';
+import { TaskboardComponent } from './pages/taskboard/taskboard.component';
 
 
 
@@ -113,7 +114,8 @@ import { GalleryComponent } from './pages/test/test/gallery/gallery.component';
     ViewPettyCashComponent,
     ViewExpensesComponent,
     ViewRevenuesComponent,
-    GalleryComponent
+    GalleryComponent,
+    TaskboardComponent
   ],
   imports: [
     BrowserModule,

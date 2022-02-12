@@ -8,6 +8,7 @@ import { FinanceComponent } from './pages/finance/finance/finance.component';
 import { LoginComponent } from './login/login/login.component';
 import { InventoryComponent } from './pages/inventory/inventory/inventory.component';
 import { GalleryComponent } from './pages/test/test/gallery/gallery.component';
+import { TaskboardComponent } from './pages/taskboard/taskboard.component';
 
 const routes: Routes = [
 
@@ -49,6 +50,13 @@ const routes: Routes = [
     path: 'inventory', component: IntefaceComponent, children:
       [
         { path: '', component: InventoryComponent },
+      ]
+  },
+
+  {
+    path: 'taskboard', component: IntefaceComponent, children:
+      [
+        { path: '', component: TaskboardComponent },
       ]
   },
   {
