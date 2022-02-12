@@ -16,7 +16,10 @@ export class AddRevenuesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.countData();
   }
+
+  countdata: any;
 
   revenuesData: any = {};
   revAmount: any;
@@ -34,6 +37,8 @@ export class AddRevenuesComponent implements OnInit {
     this.revenuesData.rev_date = this.revDate;
     this.revenuesData.rev_desc = this.revDesc;
     this.revenuesData.isArchive = 0;
+    this.revenuesData.number = this.countdata++;
+    console.log(this.revenuesData);
     this.dataService.createItem('revenues', this.revenuesData).subscribe(( data: any) => {
       Swal.fire(
         'Item Added!',
@@ -44,5 +49,14 @@ export class AddRevenuesComponent implements OnInit {
       console.log(data)
     });
   }
+
+  countData(){
+    this.dataService.getAllItem('revenues').subscribe((data: any) => {
+      console.log(data);
+      this.countdata = data.length;
+      console.log(this.countdata);
+    })
+  }
+
 
 }

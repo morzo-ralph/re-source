@@ -8,7 +8,7 @@ router.post('/signup', async (req, res) => {
     
     let users = new Users(req.body);
     const encryptedpword =  await bcrypt.hash(req.body.password, 10);
-    console.log(encryptedpword);
+    //console.log(encryptedpword);
     req.body.password = encryptedpword; 
     console.log(req.body);
     Users.findOne({ username: users.username}, (err, user) => {

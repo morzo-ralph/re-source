@@ -7,15 +7,16 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { LibraryService } from 'src/app/services/library.service';
+import Swal from 'sweetalert2';
+import { Data } from '@angular/router';
+
 import { AddExpensesComponent } from './add-expenses/add-expenses.component';
 import { AddRevenuesComponent } from './add-revenues/add-revenues.component';
 import { EditRevenuesComponent } from './edit-revenues/edit-revenues.component';
 import { EditExpensesComponent } from './edit-expenses/edit-expenses.component';
-import { Data } from '@angular/router';
 import { AddPettyCashComponent } from './add-petty-cash/add-petty-cash.component';
 import { ViewPettyCashComponent } from './view-petty-cash/view-petty-cash.component';
 import { EditPettyCashComponent } from './edit-petty-cash/edit-petty-cash.component';
-import Swal from 'sweetalert2';
 import { ViewRevenuesComponent } from './view-revenues/view-revenues.component';
 import { ViewExpensesComponent } from './view-expenses/view-expenses.component';
 
@@ -233,6 +234,7 @@ export class FinanceComponent implements OnInit{
 
     this.revenuesData = REV_DATA;
     this.revenuesDataSource.data = this.revenuesData;
+    console.log('kekwwww')
     console.log(this.revenuesDataSource.data)
 
     //this.dataService.getAllItem("revenues").subscribe((data: any) => {
@@ -473,7 +475,7 @@ export class FinanceComponent implements OnInit{
 
    //CashBalance
    titleBalance = "Cash Balance";
-   typeBalance = ChartType.BarChart;
+   typeBalance = ChartType.Bar;
    chartColumnsBalance = ["Months", "Revenue", "Expenses"];
    dataBalance = [
      ["Jan",  15000, 12000],
