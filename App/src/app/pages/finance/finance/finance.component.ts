@@ -66,15 +66,42 @@ export interface PettyCashData {
 export interface ExpensesData {
   number: number;
   _id: string;
-  exp_date: Date;
+  exp_date: any;
   exp_desc: string;
   exp_by: string;
   exp_amount: number;
 
   isArchive: number;
-  created_at: Date;
-  updated_at: Date;
+  created_at: any;
+  updated_at: any;
 }
+
+export interface PurchasesData {
+  number: number;
+  _id: string;
+  purc_date: any;
+  purc_desc: string;
+  purc_by: string;
+  purc_amount: number;
+
+  isArchive: number;
+  created_at: any;
+  updated_at: any;
+}
+
+export interface PayrollData {
+  number: number;
+  _id: string;
+  payr_date: any;
+  payr_desc: string;
+  payr_by: string;
+  payr_amount: number;
+
+  isArchive: number;
+  created_at: any;
+  updated_at: any;
+}
+
 
 //SAMPLE
 
@@ -89,6 +116,24 @@ const SALES_DATA: SalesData[] = [
   { number: 1, _id: '2021022', sales_date: "2022-01-11T16:00:00.000+00:00", sales_desc: "Sales", sales_by: "Position", sales_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
   { number: 1, _id: '2021022', sales_date: "2022-02-11T16:00:00.000+00:00", sales_desc: "Sales", sales_by: "Position", sales_amount: 2031, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
   { number: 1, _id: '2021022', sales_date: "2022-03-11T16:00:00.000+00:00", sales_desc: "Sales", sales_by: "Position", sales_amount: 123242, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+];
+
+const EXPE_DATA: ExpensesData[] = [
+  { number: 1, _id: '2021022', exp_date: "2022-01-11T16:00:00.000+00:00", exp_desc: "Sales", exp_by: "Position", exp_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', exp_date: "2022-02-11T16:00:00.000+00:00", exp_desc: "Sales", exp_by: "Position", exp_amount: 2031, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', exp_date: "2022-03-11T16:00:00.000+00:00", exp_desc: "Sales", exp_by: "Position", exp_amount: 123242, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+];
+
+const PURC_DATA: PurchasesData[] = [
+  { number: 1, _id: '2021022', purc_date: "2022-01-11T16:00:00.000+00:00", purc_desc: "Sales", purc_by: "Position", purc_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', purc_date: "2022-01-11T16:00:00.000+00:00", purc_desc: "Sales", purc_by: "Position", purc_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', purc_date: "2022-01-11T16:00:00.000+00:00", purc_desc: "Sales", purc_by: "Position", purc_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+];
+
+const PAYR_DATA: PayrollData[] = [
+  { number: 1, _id: '2021022', payr_date: "2022-01-11T16:00:00.000+00:00", payr_desc: "Sales", payr_by: "Position", payr_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', payr_date: "2022-01-11T16:00:00.000+00:00", payr_desc: "Sales", payr_by: "Position", payr_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', payr_date: "2022-01-11T16:00:00.000+00:00", payr_desc: "Sales", payr_by: "Position", payr_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
 ];
 
 @Component({
@@ -245,30 +290,30 @@ export class FinanceComponent implements OnInit {
 
   getRevenues() {
 
-    this.revenuesData = REV_DATA;
-    this.revenuesDataSource.data = this.revenuesData;
+    //this.revenuesData = REV_DATA;
+    //this.revenuesDataSource.data = this.revenuesData;
 
-    //this.dataService.getAllItem("revenues").subscribe((data: any) => {
-    //  this.revenuesPayload = data
-    //  console.log(this.revenuesPayload);
-    //  this.revenuesData = this.revenuesPayload;
-    //  this.revenuesDataSource.data = this.revenuesData;  
-    //});
+    this.dataService.getAllItem("revenues").subscribe((data: any) => {
+      this.revenuesPayload = data
+      console.log(this.revenuesPayload);
+      this.revenuesData = this.revenuesPayload;
+      this.revenuesDataSource.data = this.revenuesData;  
+    });
 
     this.getSales()
   }
 
   getSales() {
 
-    this.salesData = SALES_DATA;
-    this.salesDataSource.data = this.salesData;
+    //this.salesData = SALES_DATA;
+    //this.salesDataSource.data = this.salesData;
 
-    //this.dataService.getAllItem("revenues").subscribe((data: any) => {
-    //  this.revenuesPayload = data
-    //  console.log(this.revenuesPayload);
-    //  this.revenuesData = this.revenuesPayload;
-    //  this.revenuesDataSource.data = this.revenuesData;  
-    //});
+    this.dataService.getAllItem("sales").subscribe((data: any) => {
+      this.salesPayload = data
+      console.log(this.salesPayload);
+      this.salesData = this.salesPayload;
+      this.salesDataSource.data = this.salesData;
+    });
 
     this.getRevenuesData()
   }
@@ -306,20 +351,20 @@ export class FinanceComponent implements OnInit {
       this.salesDataGraph.push(this.graphVar)
       this.graphVar = [];
     }
-    this.mergeGraphData()
+    this.mergeRevGraphData()
   }
 
-  //Merge Data
+  //Merge RevData
 
-  graphData: GraphData[] = []
+  graphRevData: GraphData[] = []
 
-  mergeGraphData() {
+  mergeRevGraphData() {
 
     this.dataRevenues = [];
 
-    this.graphData = this.revenuesDataGraph.concat(this.salesDataGraph);
+    this.graphRevData = this.revenuesDataGraph.concat(this.salesDataGraph);
     console.log(this.revenuesDataGraph); 
-    let graphdata = this.graphData;
+    let graphrevdata = this.graphRevData;
 
     //HARD-CODING MONTHS HERE may better solutions pero fuck it
 
@@ -338,8 +383,8 @@ export class FinanceComponent implements OnInit {
 
     var feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec = 0
 
-    for (var data of graphdata) {
-      console.log(this.libraryService.getMonth(data.date));
+    for (var data of graphrevdata) {
+      console.log("xxxxxxxxxxxxx" +this.libraryService.getMonth(data.date));
 
       if (this.libraryService.getMonth(data.date) == "01" ) {
         if (data.type === "rev") {
@@ -348,7 +393,8 @@ export class FinanceComponent implements OnInit {
         if (data.type === "sales") {
           janSal = janSal + data.amount;
         }
-        janNet = janNet + data.amount;        
+        janNet = janNet + data.amount;
+        console.log(janNet)
       }
       if (this.libraryService.getMonth(data.date) == "02") {
         if (data.type === "rev") {
@@ -426,13 +472,6 @@ export class FinanceComponent implements OnInit {
     //console.log(this.graphData);
   }
 
-  loadGraph(){
-
-  }
-
-
-
-
   addRevenues() {
     const dialogRef = this.matDialog.open(AddRevenuesComponent, {
       height: '75%',
@@ -488,12 +527,24 @@ export class FinanceComponent implements OnInit {
     })
   }
 
-  //expenses
+  //EXPENSES PURCHASE PAYROLL
   expensesPayload: any;
   expensesData: ExpensesData[] = [];
   expensesDataSource = new MatTableDataSource(this.expensesData);
   expensesDisplayedColumns = ['number', '_id', 'exp_date', 'exp_amount', 'exp_desc', 'exp_by', 'actions'];
   expensesDataIsArchived: any;
+
+  purchasesPayload: any;
+  purchasesData: ExpensesData[] = [];
+  purchasesDataSource = new MatTableDataSource(this.purchasesData);
+  purchasesDisplayedColumns = ['number', '_id', 'purc_date', 'purc_amount', 'purc_desc', 'purc_by', 'actions'];
+  purchasesDataIsArchived: any;
+
+  payrollPayload: any;
+  payrollData: ExpensesData[] = [];
+  payrollDataSource = new MatTableDataSource(this.payrollData);
+  payrollDisplayedColumns = ['number', '_id', 'payr_date', 'payr_amount', 'payr_desc', 'payr_by', 'actions'];
+  payrollDataIsArchived: any;
 
   getExpenses() {
     this.dataService.getAllItem("expenses").subscribe((data: any) => {
@@ -572,15 +623,12 @@ export class FinanceComponent implements OnInit {
 
   //Graphs
   dynamicResize = true;
+
   //Revenues 
   titleRevenues = 'Revenues for the past months';
   typeRevenues = ChartType.LineChart;
-  dataRevenues = [
-    ["2017", 15000, 15000, 0],
-    ["2018", 14000, 0, 0],
-    ["2019", 16000, 18000, 0],
-    ["2020", 17500, 17000, 0]
-  ];
+  dataRevenues: any =[];
+
    chartColumnsRevenues = ["Year","Non-Sale Revenues", "Sales Revenues", "Net Revenues"];
    optionsRevenues = {      
       hAxis: {
@@ -590,7 +638,27 @@ export class FinanceComponent implements OnInit {
          title: 'Cash'
     },
     curveType: 'function', legend: { position: 'bottom' },
-   }; 
+  };
+
+  //Revenues 
+  titleExpenses = 'Revenues for the past months';
+  typeExpenses = ChartType.LineChart;
+  dataExpenses = [
+    ["2017", 15000, 15000, 0],
+    ["2018", 14000, 0, 0],
+    ["2019", 16000, 18000, 0],
+    ["2020", 17500, 17000, 0]
+  ];
+  chartColumnsExpenses = ["Year", "Non-Sale Revenues", "Sales Revenues", "Net Revenues"];
+  optionsExpenses = {
+    hAxis: {
+      title: 'Month'
+    },
+    vAxis: {
+      title: 'Cash'
+    },
+    curveType: 'function', legend: { position: 'bottom' },
+  };
 
   //CashBalance
   titleBalance = "Cash Balance";
