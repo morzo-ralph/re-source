@@ -121,7 +121,7 @@
 
             <ng-container matColumnDef="name" sticky>
               <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-              <mat-cell *matCellDef="let element">  </mat-cell>
+              <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
             </ng-container>
 
             <ng-container *ngFor="let day of daysArray">

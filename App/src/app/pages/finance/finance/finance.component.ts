@@ -5,11 +5,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DataService } from 'src/app/services/data.service';
+import { LibraryService } from 'src/app/services/library.service';
 import { AddExpensesComponent } from './add-expenses/add-expenses.component';
 import { AddRevenuesComponent } from './add-revenues/add-revenues.component';
 import { EditRevenuesComponent } from './edit-revenues/edit-revenues.component';
 import { EditExpensesComponent } from './edit-expenses/edit-expenses.component';
-import { DataService } from '../../../services/data.service';
 import { Data } from '@angular/router';
 import { AddPettyCashComponent } from './add-petty-cash/add-petty-cash.component';
 import { ViewPettyCashComponent } from './view-petty-cash/view-petty-cash.component';
@@ -64,6 +65,7 @@ export class FinanceComponent implements OnInit{
   (
     private matDialog: MatDialog,
     private dataService: DataService,
+    private libraryService: LibraryService
   ) { }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -87,6 +89,7 @@ export class FinanceComponent implements OnInit{
     this.getRevenues();
 
     this.isLoaded = true
+    //Event Loop End Here
   }
 
   delay(ms: number) {
@@ -311,7 +314,7 @@ export class FinanceComponent implements OnInit{
 
   //DATA
 
-  title = 'Revenues for the past 4 years';
+  title = 'Revenues for the past past months';
   myType = ChartType.LineChart;
   data = [
       ["2017",  15000, 15000],
@@ -325,19 +328,22 @@ export class FinanceComponent implements OnInit{
          title: 'Month'
       },
       vAxis:{
-         title: ''
+         title: 'Cash'
       },
    }; 
 
    //CashBalance
    titleBalance = "Cash Balance";
    typeBalance = ChartType.Bar;
-   chartColumnsBalance = ["Cash", "Balance"];
+   chartColumnsBalance = ["Months", "Revenue", "Expenses"];
    dataBalance = [
-    ["2017",  15000],
-    ["2018",  14000],
-    ["2019",  16000],
-    ["2020",  17500]
+     ["Jan",  15000, 12000],
+     ["Feb", 14000, 12000],
+     ["March", 16000, 12000],
+     ["April", 17500, 12000],
+     ["May", 17500, 12000],
+     ["June", 17500, 12000],
+     ["Junly", 17500, 12000],
    ];
 
    //Sales

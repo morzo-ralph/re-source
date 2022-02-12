@@ -10,13 +10,13 @@ export interface Emp_Data {
 }
 
 const ELEMENT_DATA: Emp_Data[] = [
-  { number: 1, id: '2021022', name: "elmar", position: 'admin', status: 'status_code' },
-  { number: 1, id: '2021022', name: "elmar", position: 'admin', status: 'status_code' },
-  { number: 1, id: '2021022', name: "elmar", position: 'admin', status: 'status_code' },
-  { number: 1, id: '2021022', name: "elmar", position: 'admin', status: 'status_code' },
-  { number: 1, id: '2021022', name: "elmar", position: 'admin', status: 'status_code' },
-  { number: 1, id: '2021022', name: "elmar", position: 'admin', status: 'status_code' },
-  { number: 1, id: '2021022', name: "elmar", position: 'admin', status: 'status_code' },
+  { number: 1, id: '2021022', name: "John Doe", position: 'admin', status: 'status_code' },
+  { number: 2, id: '2021023', name: "Jobs Steve", position: 'admin', status: 'status_code' },
+  { number: 3, id: '2021024', name: "Adeg", position: 'admin', status: 'status_code' },
+  { number: 4, id: '2021025', name: "Wisofi", position: 'admin', status: 'status_code' },
+  { number: 5, id: '2021026', name: "Disury", position: 'admin', status: 'status_code' },
+  { number: 6, id: '2021027', name: "Dies Irae", position: 'admin', status: 'status_code' },
+  { number: 7, id: '2021028', name: "Bob", position: 'admin', status: 'status_code' },
 ];
 
 @Component({
