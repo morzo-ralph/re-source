@@ -4,6 +4,7 @@ const TaskBoardSchema = new mongoose.Schema({
         taskBoard_name: String,
         taskBoard_content: String, 
         imageUrl: String,
+        uploaded_by: String,
 
         isArchive: Number,
         created_at: Date,
