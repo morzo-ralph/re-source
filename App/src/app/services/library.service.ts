@@ -70,5 +70,17 @@ export class LibraryService {
     return (monthsArray)
   }
 
+  getMonth(date: any) {
+    var month;
+    month = this.datepipe.transform(date, 'MM');
+    return (month);
+  }
+
+  decodeDate(date: any) {
+    var decode;
+    decode = this.datepipe.transform(date, 'mm-dd-yyyy');
+    return (decode);
+  }
+
 
 }

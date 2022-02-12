@@ -48,9 +48,10 @@ export interface SalesData {
   updated_at: any;
 }
 
-export interface RevGraph {
+export interface GraphData {
   date: any;
-  amount: number
+  amount: number;
+  type: any;
 }
 
 export interface PettyCashData {
@@ -78,16 +79,16 @@ export interface ExpensesData {
 //SAMPLE
 
 const REV_DATA: RevenuesData[] = [
-  { number: 1, _id: '2021022', rev_date: "2021-1-19", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 100000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', rev_date: "2021-2-19", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 102000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', rev_date: "2021-3-19", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 10100, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', rev_date: "2021-4-19", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 9000, isArchive: 0, created_at: "20011201", updated_at: "20011201" }
+  { number: 1, _id: '2021022', rev_date: "2022-01-11T16:00:00.000+00:00", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 2031, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', rev_date: "2022-02-11T16:00:00.000+00:00", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 1235, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', rev_date: "2022-03-11T16:00:00.000+00:00", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 1234, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', rev_date: "2022-04-11T16:00:00.000+00:00", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 0, isArchive: 0, created_at: "20011201", updated_at: "20011201" }
 ];
 
 const SALES_DATA: SalesData[] = [
-  { number: 1, _id: '2021022', sales_date: "2021-1-19", sales_desc: "Sales", sales_by: "Position", sales_amount: 10003, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', sales_date: "2021-2-19", sales_desc: "Sales", sales_by: "Position", sales_amount: 10003, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', sales_date: "2021-3-19", sales_desc: "Sales", sales_by: "Position", sales_amount: 10003, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', sales_date: "2022-01-11T16:00:00.000+00:00", sales_desc: "Sales", sales_by: "Position", sales_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', sales_date: "2022-02-11T16:00:00.000+00:00", sales_desc: "Sales", sales_by: "Position", sales_amount: 2031, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', sales_date: "2022-03-11T16:00:00.000+00:00", sales_desc: "Sales", sales_by: "Position", sales_amount: 123242, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
 ];
 
 @Component({
@@ -234,8 +235,6 @@ export class FinanceComponent implements OnInit{
 
     this.revenuesData = REV_DATA;
     this.revenuesDataSource.data = this.revenuesData;
-    console.log('kekwwww')
-    console.log(this.revenuesDataSource.data)
 
     //this.dataService.getAllItem("revenues").subscribe((data: any) => {
     //  this.revenuesPayload = data
@@ -251,7 +250,6 @@ export class FinanceComponent implements OnInit{
 
     this.salesData = SALES_DATA;
     this.salesDataSource.data = this.salesData;
-    console.log(this.salesDataSource.data);
 
     //this.dataService.getAllItem("revenues").subscribe((data: any) => {
     //  this.revenuesPayload = data
@@ -267,29 +265,33 @@ export class FinanceComponent implements OnInit{
 
   //Load Data
 
-  graphVar: RevGraph[] = []
+  graphVar: any = {};
 
-  revenuesDataGraph: any[] = []
+  revenuesDataGraph: GraphData[]  = []
 
   getRevenuesData() {
+    this.revenuesDataGraph = []
     let revenuesData = this.revenuesData;
     for (var data of revenuesData) {
-      this.graphVar = [data.rev_date, data.rev_amount]
+      this.graphVar.date = data.rev_date 
+      this.graphVar.amount = data.rev_amount
+      this.graphVar.type = "rev"
       this.revenuesDataGraph.push(this.graphVar)
-      console.log(this.revenuesDataGraph);
       this.graphVar = [];
     }
     this.getSalesData()
   }
 
-  salesDataGraph: any[] = []
+  salesDataGraph: GraphData[]  = []
   
   getSalesData() {
+    this.salesDataGraph = []
     let salesdata = this.salesData;
     for (var data of salesdata) {
-      this.graphVar = [data.sales_date, data.sales_amount]
+      this.graphVar.date = data.sales_date
+      this.graphVar.amount = data.sales_amount
+      this.graphVar.type = "sales"
       this.salesDataGraph.push(this.graphVar)
-      console.log(this.salesDataGraph);
       this.graphVar = [];
     }
     this.mergeGraphData()
@@ -297,24 +299,123 @@ export class FinanceComponent implements OnInit{
 
   //Merge Data
 
-  graphData: any[] =[]
+  graphData: GraphData[] = []
 
   mergeGraphData() {
 
-    let revenuesDataGraph = this.revenuesDataGraph;
-    for (var data of revenuesDataGraph) {
-      console.log(data.rev_date)
+    this.dataRevenues = [];
 
-      //this.graphVar = [data.rev_date, data.rev_amount]
-      //this.revenuesDataGraph.push(this.graphVar)
-      console.log(this.revenuesDataGraph);
-      this.graphVar = [];
+    this.graphData = this.revenuesDataGraph.concat(this.salesDataGraph);
+    console.log(this.revenuesDataGraph); 
+    let graphdata = this.graphData;
+
+    //HARD-CODING MONTHS HERE may better solutions pero fuck it
+
+    var janRev = 0; var janSal = 0; var janNet = 0;
+    var febRev = 0; var febSal = 0; var febNet = 0;
+    var marRev = 0; var marSal = 0; var marNet = 0;
+    var aprRev = 0; var aprSal = 0; var aprNet = 0;
+    var mayRev = 0; var maySal = 0; var mayNet = 0;
+    var junRev = 0; var junSal = 0; var junNet = 0;
+    var julRev = 0; var julSal = 0; var julNet = 0;
+    var augRev = 0; var augSal = 0; var augNet = 0;
+    var sepRev = 0; var sepSal = 0; var sepNet = 0;
+    var octRev = 0; var octSal = 0; var octNet = 0;
+    var novRev = 0; var novSal = 0; var novNet = 0;
+    var decRev = 0; var decSal = 0; var decNet = 0;
+
+    var feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec = 0
+
+    for (var data of graphdata) {
+      console.log(this.libraryService.getMonth(data.date));
+
+      if (this.libraryService.getMonth(data.date) == "01" ) {
+        if (data.type === "rev") {
+          janRev = janRev + data.amount;
+        }
+        if (data.type === "sales") {
+          janSal = janSal + data.amount;
+        }
+        janNet = janNet + data.amount;        
+      }
+      if (this.libraryService.getMonth(data.date) == "02") {
+        if (data.type === "rev") {
+          febRev = febRev + data.amount;
+        }
+        if (data.type === "sales") {
+          febSal = febSal + data.amount;
+        }
+        febNet = febNet + data.amount;
+      }
+      if (this.libraryService.getMonth(data.date) == "03") {
+        if (data.type === "rev") {
+          marRev = marRev + data.amount;
+        }
+        if (data.type === "sales") {
+          marSal = marSal + data.amount;
+        }
+        marNet = marNet + data.amount;
+      }
+      if (this.libraryService.getMonth(data.date) == "04") {
+        if (data.type === "rev") {
+          aprRev = aprRev + data.amount;
+        }
+        if (data.type === "sales") {
+          aprSal = aprSal + data.amount;
+        }
+        aprNet = aprNet + data.amount;
+      }
+      if (this.libraryService.getMonth(data.date) == "05") {
+        if (data.type === "rev") {
+          mayRev = mayRev + data.amount;
+        }
+        if (data.type === "sales") {
+          maySal = maySal + data.amount;
+        }
+        mayNet = mayNet + data.amount;
+      }
+      
     }
+
+    this.dataRevenues.push(["January", janRev, janSal, janNet]);
+    this.dataRevenues.push(["February", febRev, febSal, febNet]);
+    this.dataRevenues.push(["March", marRev, marSal, marNet]);
+    this.dataRevenues.push(["April", aprRev, aprSal, aprNet]);
+    this.dataRevenues.push(["May", mayRev, maySal, mayNet]);
+    this.dataRevenues.push(["June", mayRev, maySal, mayNet]);
+    this.dataRevenues.push(["July", mayRev, maySal, mayNet]);
+    this.dataRevenues.push(["August", mayRev, maySal, mayNet]);
+    this.dataRevenues.push(["September", mayRev, maySal, mayNet]);
+    this.dataRevenues.push(["October", mayRev, maySal, mayNet]);
+    this.dataRevenues.push(["November", mayRev, maySal, mayNet]);
+    this.dataRevenues.push(["December", mayRev, maySal, mayNet]);
+
+
+
+
+    //this.graphData = this.revenuesDataGraph.m(this.salesDataGraph);
+
+    //let graphData = this.graphData;
+    //for (var data of graphData) {
+
+    //  console.log("XXXXXXXXX" + this.libraryService.getMonth(data.date))
+
+    //  /*if (data.rev_date)*/
+
+    //  //this.graphVar = [data.rev_date, data.rev_amount]
+    //  //this.revenuesDataGraph.push(this.graphVar)
+    //  //console.log(this.revenuesDataGraph);
+    //  //this.graphVar = [];
+    //}
 
     /*this.graphData = this.revenuesDataGraph.concat(this.salesDataGraph);*/
 
-    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxx");
-    console.log(this.graphData);
+    //console.log("xxxxxxxxxxxxxxxxxxxxxxxxxx");
+    //console.log(this.graphData);
+  }
+
+  loadGraph(){
+
   }
 
 
@@ -453,24 +554,21 @@ export class FinanceComponent implements OnInit{
   //Revenues 
   titleRevenues = 'Revenues for the past months';
   typeRevenues = ChartType.LineChart;
-
-  //dataRevenues = [
-  //  ["2017", 15000, 15000, 0],
-  //  ["2018", 14000, 0, 0],
-  //  ["2019", 16000, 18000, 0],
-  //  ["2020", 17500, 17000, 0]
-  //];
-
-  dataRevenues = this.graphData
-;
-   chartColumnsRevenues = ["Year","Revenues", "Sales", "Net Revenues"];
-   options = {   
+  dataRevenues = [
+    ["2017", 15000, 15000, 0],
+    ["2018", 14000, 0, 0],
+    ["2019", 16000, 18000, 0],
+    ["2020", 17500, 17000, 0]
+  ];
+   chartColumnsRevenues = ["Year","Non-Sale Revenues", "Sales Revenues", "Net Revenues"];
+   optionsRevenues = {      
       hAxis: {
          title: 'Month'
       },
       vAxis:{
          title: 'Cash'
-      },
+    },
+    curveType: 'function', legend: { position: 'bottom' },
    }; 
 
    //CashBalance
