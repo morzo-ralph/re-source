@@ -42,9 +42,8 @@ router.get('/', Pagination(Pettycash), (req, res) => {
     // Pettycash.find({})
     //     .then(pettycash => res.send(pettycash))
     //     .catch(error => console.log(error));
-    res.json(res.paginatedResults).catch((error) => {
-            res.status(500).json({message: error})
-        });
+    res.json(res.paginatedResults)
+        
 });
 
 router.post('/', (req, res) => {  
