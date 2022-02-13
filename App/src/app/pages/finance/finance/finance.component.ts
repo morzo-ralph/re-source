@@ -22,10 +22,29 @@ import { EditPettyCashComponent } from './edit-petty-cash/edit-petty-cash.compon
 import { ViewRevenuesComponent } from './view-revenues/view-revenues.component';
 import { ViewExpensesComponent } from './view-expenses/view-expenses.component';
 
+
+export interface PettyCashData {
+  number: number;
+  id: string;
+  _id: string;
+
+  pet_date: any;
+  pet_desc: string;
+  pet_amount: number;
+  pet_by: string;
+
+  isArchive: number;
+  created_at: any;
+  updated_at: any;
+}
+
 export interface RevenuesData {
   number: number;
+  id: string;
   _id: string;
+
   rev_date: any;
+  rev_supplier: string;
   rev_desc: string;
   rev_by: string;
   rev_amount: number;
@@ -35,13 +54,66 @@ export interface RevenuesData {
   updated_at: any;
 }
 
+export interface ExpensesData {
+  number: number;
+  id: string;
+  _id: string;
+
+  exp_date: any;
+  exp_supplier: string;
+  exp_desc: string;
+  exp_by: string;
+  exp_amount: number;
+
+  isArchive: number;
+  created_at: any;
+  updated_at: any;
+}
+
+export interface PurchasesData {
+  number: number;
+  id: string;
+  _id: string;
+
+  purc_date: any;
+  purc_supplier: string;
+  purc_price: number;
+  purc_quantity: number;
+  purc_desc: string;
+  purc_by: string;
+
+  isArchive: number;
+  created_at: any;
+  updated_at: any;
+}
+
 export interface SalesData {
   number: number;
+  id: string;
   _id: string;
+
   sales_date: any;
+  sales_supplier: string;
+  sales_price: number;
+  sales_quantity: number;
   sales_desc: string;
   sales_by: string;
-  sales_amount: number;
+
+  isArchive: number;
+  created_at: any;
+  updated_at: any;
+}
+
+export interface PayrollData {
+  number: number;
+  id: string;
+  _id: string;
+
+  payr_date: any;
+  payr_supplier: string;
+  payr_desc: string;
+  payr_by: string;
+  payr_amount: number;
 
   isArchive: number;
   created_at: any;
@@ -54,86 +126,45 @@ export interface GraphData {
   type: any;
 }
 
-export interface PettyCashData {
-  _id: string;
-  pet_date: Date;
-  pet_amount: number;
-
-  isArchive: number;
-  created_at: Date;
-  updated_at: Date;
-}
-
-export interface ExpensesData {
-  number: number;
-  _id: string;
-  exp_date: any;
-  exp_desc: string;
-  exp_by: string;
-  exp_amount: number;
-
-  isArchive: number;
-  created_at: any;
-  updated_at: any;
-}
-
-export interface PurchasesData {
-  number: number;
-  _id: string;
-  purc_date: any;
-  purc_desc: string;
-  purc_by: string;
-  purc_amount: number;
-
-  isArchive: number;
-  created_at: any;
-  updated_at: any;
-}
-
-export interface PayrollData {
-  number: number;
-  _id: string;
-  payr_date: any;
-  payr_desc: string;
-  payr_by: string;
-  payr_amount: number;
-
-  isArchive: number;
-  created_at: any;
-  updated_at: any;
-}
-
 
 //SAMPLE
 
+//export interface PettyCashStartData {
+//  number: number;
+//  id: string;
+//  _id: string;
+
+//  pet_date: Date;
+//  pet_amount: number;
+
+//  isArchive: number;
+//  created_at: Date;
+//  updated_at: Date;
+//}
+
+const PET_DATA: PettyCashData[] = [
+  { number: 1, id: "123242512321", _id: '2021022', pet_date: "2022-01-11T16:00:00.000+00:00", pet_amount: 10000, pet_desc: "Contract Fees", pet_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" }
+];
+
+
 const REV_DATA: RevenuesData[] = [
-  { number: 1, _id: '2021022', rev_date: "2022-01-11T16:00:00.000+00:00", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 10000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', rev_date: "2022-02-11T16:00:00.000+00:00", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', rev_date: "2022-03-11T16:00:00.000+00:00", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 10000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', rev_date: "2022-01-11T16:00:00.000+00:00", rev_supplier : "Bob the Builder", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 10000, isArchive: 0, created_at: "20011201", updated_at: "20011201" }
 ];
 
 const SALES_DATA: SalesData[] = [
-  { number: 1, _id: '2021022', sales_date: "2022-01-11T16:00:00.000+00:00", sales_desc: "Sales", sales_by: "Position", sales_amount: 30000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', sales_date: "2022-02-11T16:00:00.000+00:00", sales_desc: "Sales", sales_by: "Position", sales_amount: 60000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', sales_date: "2022-03-11T16:00:00.000+00:00", sales_desc: "Sales", sales_by: "Position", sales_amount: 2000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', sales_date: "2022-01-11T16:00:00.000+00:00", sales_supplier: "Bob the Builder", sales_price: 1000, sales_quantity: 12333, sales_desc: "Sales", sales_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" }
 ];
 
 const EXPE_DATA: ExpensesData[] = [
-  { number: 1, _id: '2021022', exp_date: "2022-01-11T16:00:00.000+00:00", exp_desc: "Rent", exp_by: "Position", exp_amount: 30000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', exp_date: "2022-02-11T16:00:00.000+00:00", exp_desc: "Rent", exp_by: "Position", exp_amount: 30000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', exp_date: "2022-03-11T16:00:00.000+00:00", exp_desc: "Rent", exp_by: "Position", exp_amount: 30000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', exp_date: "2022-01-11T16:00:00.000+00:00", exp_supplier: "Bob The Builder",exp_desc: "Rent", exp_by: "Position", exp_amount: 30000, isArchive: 0, created_at: "20011201", updated_at: "20011201" }
 ];
 
 const PURC_DATA: PurchasesData[] = [
-  { number: 1, _id: '2021022', purc_date: "2022-01-11T16:00:00.000+00:00", purc_desc: "Stock", purc_by: "Position", purc_amount: 5000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', purc_date: "2022-02-11T16:00:00.000+00:00", purc_desc: "Stock", purc_by: "Position", purc_amount: 15000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', purc_date: "2022-03-11T16:00:00.000+00:00", purc_desc: "Stock", purc_by: "Position", purc_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', purc_date: "2022-01-11T16:00:00.000+00:00", purc_supplier: "any", purc_price: 1000, purc_quantity: 1201202, purc_desc: "Stock", purc_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" }
 ];
 
 const PAYR_DATA: PayrollData[] = [
-  { number: 1, _id: '2021022', payr_date: "2022-01-11T16:00:00.000+00:00", payr_desc: "Wage", payr_by: "Position", payr_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', payr_date: "2022-02-11T16:00:00.000+00:00", payr_desc: "Wage", payr_by: "Position", payr_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', payr_date: "2022-03-11T16:00:00.000+00:00", payr_desc: "Wage", payr_by: "Position", payr_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', payr_date: "2022-01-11T16:00:00.000+00:00", payr_supplier: "Wage", payr_desc: "Wage", payr_by: "Position", payr_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" }
 ];
 
 @Component({
@@ -209,7 +240,6 @@ export class FinanceComponent implements OnInit {
 
     this.getRevenuesData();
     this.getSalesData();
-
     this.getExpensesData();
     this.getPurchasesData();
     this.getPayrollData();
@@ -241,20 +271,48 @@ export class FinanceComponent implements OnInit {
 
   //FUNCTIONS
 
-  //PETTY CASH 
+  //PETTY CASH
+
+//  export interface PettyCashData {
+//  number: number;
+//  id: string;
+//  _id: string;
+
+//  pet_date: any;
+//  pet_desc: string;
+//  pet_amount: number;
+//  pet_by: string;
+
+//  isArchive: number;
+//  created_at: any;
+//  updated_at: any;
+//}
+
   pettyCashPayload: any;
   pettyCashData: PettyCashData[] = [];
   pettyCashDataSource = new MatTableDataSource(this.pettyCashData);
-  pettyCashDisplayedColumns = ['_id', 'pet_amount', 'pet_date', 'actions'];
+  pettyCashDisplayedColumns = ['number', 'id', 'pet_date', 'pet_desc' , 'pet_amount', 'pet_by', 'actions'];
   pettyCashIdArchive: any;
 
+  setPettyStartCash(amount: number) {
+    localStorage.setItem('StartPetty', amount.toString());
+  }
+
+  getPettyStartCash() {
+    return (Number(localStorage.getItem('StartPetty')));
+  }
+
   getPettyCash() {
-    this.dataService.getAllItem('pettycash').subscribe((data: any) => {
-      this.pettyCashPayload = data;
-      console.log(this.pettyCashPayload);
-      this.pettyCashData = this.pettyCashPayload;
-      this.pettyCashDataSource.data = this.pettyCashPayload;
-    });
+
+    this.pettyCashData = PET_DATA;
+    this.pettyCashDataSource.data = this.pettyCashData;
+
+    //this.dataService.getAllItem('pettycash').subscribe((data: any) => {
+    //  this.pettyCashPayload = data;
+    //  console.log(this.pettyCashPayload);
+    //  this.pettyCashData = this.pettyCashPayload;
+    //  this.pettyCashDataSource.data = this.pettyCashPayload;
+    //});
   }
 
   addPettyCash() {
@@ -311,19 +369,8 @@ export class FinanceComponent implements OnInit {
     })
   }
 
-  //number: number;
-  //_id: string;
-  //rev_date: any;
-  //rev_desc: string;
-  //rev_by: string;
-  //rev_amount: number;
+  //REVENUES and SALES///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  //isArchive: number;
-  //created_at: any;
-  //updated_at: any;
-
-
-  //REVENUES and SALES
   revenuesPayload: any;
   revenuesData: RevenuesData[] = [];
   revenuesDataSource = new MatTableDataSource(this.revenuesData);
@@ -391,7 +438,7 @@ export class FinanceComponent implements OnInit {
     let salesdata = this.salesData;
     for (var data of salesdata) {
       this.graphVar.date = data.sales_date
-      this.graphVar.amount = data.sales_amount
+      this.graphVar.amount = data.sales_quantity * data.sales_price
       this.graphVar.type = "sales"
       this.salesDataGraph.push(this.graphVar)
       this.graphVar = [];
@@ -476,8 +523,6 @@ export class FinanceComponent implements OnInit {
       
     }
 
-
-
     this.dataRevenues.push(["January", janRev, janSal, janNet]); this.balJan = janNet;
     this.dataRevenues.push(["February", febRev, febSal, febNet]); this.balFeb = febNet;
     this.dataRevenues.push(["March", marRev, marSal, marNet]); this.balMar = marNet;
@@ -547,27 +592,7 @@ export class FinanceComponent implements OnInit {
     })
   }
 
-//  export interface ExpensesData {
-//  number: number;
-//  _id: string;
-//  exp_date: any;
-//  exp_desc: string;
-//  exp_by: string;
-//  exp_amount: number;
-
-//  isArchive: number;
-//  created_at: any;
-//  updated_at: any;
-//  }
-
-  //EXPENSES PURCHASE PAYROLL
-
-  //revenuesDisplayedColumns: string[] = ['number', '_id', 'rev_date', 'rev_desc', 'rev_by', 'rev_amount', 'actions'];
-  //revenuesDataIsArchived: any;
-
-  //salesDisplayedColumns: string[] = ['number', '_id', 'sales_date', 'sales_desc', 'sales_by', 'sales_amount', 'actions'];
-  //salesDataIsArchived: any;
-
+  //EXPENSES
 
   expensesPayload: any;
   expensesData: ExpensesData[] = [];
@@ -699,7 +724,7 @@ export class FinanceComponent implements OnInit {
     let purchasesData = this.purchasesData;
     for (var data of purchasesData) {
       this.graphVar.date = data.purc_date
-      this.graphVar.amount = data.purc_amount
+      this.graphVar.amount = data.purc_price * data.purc_quantity
       this.graphVar.type = "purc"
       this.purchasesDataGraph.push(this.graphVar)
       this.graphVar = [];
@@ -952,6 +977,8 @@ export class FinanceComponent implements OnInit {
     ["2019", 8, 4],
     ["2020", 9, 3]
   ];
+
+  
 
   //table
   displayedColumns: string[] = ['Description', 'Amount', 'Date', 'Noted By', 'Actions'];

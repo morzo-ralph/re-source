@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DataService } from '../../../services/data.service';
+import { LibraryService } from 'src/app/services/library.service';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
@@ -13,7 +14,10 @@ import { Observable } from 'rxjs';
 import { catchError, filter } from 'rxjs/operators';
 
 export interface InventoriesData {
+  number: number;
+  id: string;
   _id: string;
+
   name: string;
   description: string;
   quantity: number;
@@ -24,6 +28,33 @@ export interface InventoriesData {
   created_at: Date;
   updated_at: Date;
 }
+
+export interface PurchasesData {
+  number: number;
+  id: string;
+  _id: string;
+
+  purc_date: any;  
+  purc_supplier: string;
+  purc_price: number;
+  purc_quantity: any;
+  purc_desc: string;
+  purc_by: string;
+  purc_amount: number;
+
+  isArchive: number;
+  created_at: any;
+  updated_at: any;
+}
+
+//SAMPLE
+
+const PURC_DATA: PurchasesData[] = [
+  { number: 1, id: "2021022", _id: '2021022', purc_date: "2022-01-11T16:00:00.000+00:00", purc_supplier: "any", purc_price: 200, purc_quantity: 200, purc_desc: "Stock", purc_by: "Position", purc_amount: 5000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "2021022", _id: '2021022', purc_date: "2022-01-11T16:00:00.000+00:00", purc_supplier: "any", purc_price: 200, purc_quantity: 200, purc_desc: "Stock", purc_by: "Position", purc_amount: 5000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "2021022", _id: '2021022', purc_date: "2022-01-11T16:00:00.000+00:00", purc_supplier: "any", purc_price: 200, purc_quantity: 200, purc_desc: "Stock", purc_by: "Position", purc_amount: 5000, isArchive: 0, created_at: "20011201", updated_at: "20011201" }
+];
+
 
 @Component({
   selector: 'app-inventory',
@@ -36,6 +67,7 @@ export class InventoryComponent implements OnInit {
     private dataService: DataService,
     private dialog : MatDialog,
     private httpClient: HttpClient,
+    private libraryService: LibraryService
   ) { }
 
   ngOnInit(): void { 
@@ -49,6 +81,9 @@ export class InventoryComponent implements OnInit {
     this.isLoaded = false
     await this.delay(1000)
     //Event Loop Starts Here
+
+    this.getPurchases();
+
 
     this.isLoaded = true
   }
@@ -151,5 +186,28 @@ export class InventoryComponent implements OnInit {
     // this.prodSupp = '';
     // this.prodImg = '';
   }
+
+  purchasesPayload: any;
+  purchasesData: PurchasesData[] = [];
+  purchasesDataSource = new MatTableDataSource(this.purchasesData);
+  purchasesDisplayedColumns: string[] = ['number', 'id', 'purc_date', 'purc_supplier', 'purc_price', 'purc_quantity', 'purc_desc', 'purc_by', 'actions'];
+  purchasesRecentDisplayedColumns: string[] = ['purc_date', 'purc_desc', 'purc_quantity'];
+  purchasesDataIsArchived: any;
+
+  getPurchases() {
+    this.purchasesData = PURC_DATA;
+    this.purchasesDataSource.data = this.purchasesData;
+
+    //this.dataService.getAllItem("expenses").subscribe((data: any) => {
+    //  this.expensesPayload = data;
+    //  console.log(this.expensesPayload);
+    //  this.expensesData = this.expensesPayload;
+    //  this.expensesDataSource.data = this.expensesData;
+    //});
+  }
+
+
+
+
 
 }
