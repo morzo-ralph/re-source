@@ -25,6 +25,7 @@ const galleryRouter = require('./routes/gallery');
 const usersRouter = require('./routes/users');
 const announcementRouter = require('./routes/announcement');
 const taskBoardRouter =  require('./routes/taskboard');
+const payrollRouter = require('./routes/payroll');
 
 //check localhost ip
  require('dns').lookup(require('os').hostname(), function (err, add, fam) {
@@ -64,6 +65,7 @@ app.use("/stocks", stocksRouter);
 app.use("/gallery", galleryRouter);
 app.use("/announcement", announcementRouter);
 app.use("/taskboard", taskBoardRouter);
+app.use("/payroll", payrollRouter);
 
 app.use("/users", usersRouter);
 
