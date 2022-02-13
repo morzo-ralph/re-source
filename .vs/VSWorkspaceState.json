@@ -4,12 +4,12 @@
     "\\App",
     "\\App\\src",
     "\\App\\src\\app",
-    "\\App\\src\\app\\login",
     "\\App\\src\\app\\pages",
-    "\\App\\src\\app\\pages\\finance",
-    "\\App\\src\\app\\pages\\finance\\finance",
-    "\\App\\src\\app\\pages\\taskboard",
-    "\\App\\src\\app\\services"
+    "\\App\\src\\app\\pages\\hr",
+    "\\App\\src\\app\\pages\\hr\\hr",
+    "\\App\\src\\app\\pages\\inteface",
+    "\\App\\src\\app\\pages\\inventory",
+    "\\App\\src\\app\\pages\\inventory\\inventory"
   ],
   "SelectedNode": "\\App\\src\\app\\pages\\finance\\finance\\finance.component.ts",
   "PreviewInSolutionExplorer": false
