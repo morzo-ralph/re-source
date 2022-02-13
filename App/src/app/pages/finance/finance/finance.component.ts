@@ -106,34 +106,33 @@ export interface PayrollData {
 //SAMPLE
 
 const REV_DATA: RevenuesData[] = [
-  { number: 1, _id: '2021022', rev_date: "2022-01-11T16:00:00.000+00:00", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 2031, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', rev_date: "2022-02-11T16:00:00.000+00:00", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 1235, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', rev_date: "2022-03-11T16:00:00.000+00:00", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 1234, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', rev_date: "2022-04-11T16:00:00.000+00:00", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 0, isArchive: 0, created_at: "20011201", updated_at: "20011201" }
+  { number: 1, _id: '2021022', rev_date: "2022-01-11T16:00:00.000+00:00", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 10000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', rev_date: "2022-02-11T16:00:00.000+00:00", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', rev_date: "2022-03-11T16:00:00.000+00:00", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 10000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
 ];
 
 const SALES_DATA: SalesData[] = [
-  { number: 1, _id: '2021022', sales_date: "2022-01-11T16:00:00.000+00:00", sales_desc: "Sales", sales_by: "Position", sales_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', sales_date: "2022-02-11T16:00:00.000+00:00", sales_desc: "Sales", sales_by: "Position", sales_amount: 2031, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', sales_date: "2022-03-11T16:00:00.000+00:00", sales_desc: "Sales", sales_by: "Position", sales_amount: 123242, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', sales_date: "2022-01-11T16:00:00.000+00:00", sales_desc: "Sales", sales_by: "Position", sales_amount: 30000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', sales_date: "2022-02-11T16:00:00.000+00:00", sales_desc: "Sales", sales_by: "Position", sales_amount: 60000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', sales_date: "2022-03-11T16:00:00.000+00:00", sales_desc: "Sales", sales_by: "Position", sales_amount: 2000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
 ];
 
 const EXPE_DATA: ExpensesData[] = [
-  { number: 1, _id: '2021022', exp_date: "2022-01-11T16:00:00.000+00:00", exp_desc: "Sales", exp_by: "Position", exp_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', exp_date: "2022-02-11T16:00:00.000+00:00", exp_desc: "Sales", exp_by: "Position", exp_amount: 2031, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', exp_date: "2022-03-11T16:00:00.000+00:00", exp_desc: "Sales", exp_by: "Position", exp_amount: 123242, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', exp_date: "2022-01-11T16:00:00.000+00:00", exp_desc: "Rent", exp_by: "Position", exp_amount: 30000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', exp_date: "2022-02-11T16:00:00.000+00:00", exp_desc: "Rent", exp_by: "Position", exp_amount: 30000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', exp_date: "2022-03-11T16:00:00.000+00:00", exp_desc: "Rent", exp_by: "Position", exp_amount: 30000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
 ];
 
 const PURC_DATA: PurchasesData[] = [
-  { number: 1, _id: '2021022', purc_date: "2022-01-11T16:00:00.000+00:00", purc_desc: "Sales", purc_by: "Position", purc_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', purc_date: "2022-01-11T16:00:00.000+00:00", purc_desc: "Sales", purc_by: "Position", purc_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', purc_date: "2022-01-11T16:00:00.000+00:00", purc_desc: "Sales", purc_by: "Position", purc_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', purc_date: "2022-01-11T16:00:00.000+00:00", purc_desc: "Stock", purc_by: "Position", purc_amount: 5000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', purc_date: "2022-02-11T16:00:00.000+00:00", purc_desc: "Stock", purc_by: "Position", purc_amount: 15000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', purc_date: "2022-03-11T16:00:00.000+00:00", purc_desc: "Stock", purc_by: "Position", purc_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
 ];
 
 const PAYR_DATA: PayrollData[] = [
-  { number: 1, _id: '2021022', payr_date: "2022-01-11T16:00:00.000+00:00", payr_desc: "Sales", payr_by: "Position", payr_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', payr_date: "2022-01-11T16:00:00.000+00:00", payr_desc: "Sales", payr_by: "Position", payr_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', payr_date: "2022-01-11T16:00:00.000+00:00", payr_desc: "Sales", payr_by: "Position", payr_amount: 124433, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', payr_date: "2022-01-11T16:00:00.000+00:00", payr_desc: "Wage", payr_by: "Position", payr_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', payr_date: "2022-02-11T16:00:00.000+00:00", payr_desc: "Wage", payr_by: "Position", payr_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', payr_date: "2022-03-11T16:00:00.000+00:00", payr_desc: "Wage", payr_by: "Position", payr_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
 ];
 
 @Component({
@@ -152,25 +151,74 @@ export class FinanceComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.load();
-    this.getPettyCash();
-    this.getRevenues();
-    this.getSales();
-    this.getExpenses();
+    this.resetBal();
+    this.load();   
+
     /*this.dataSource.paginator = this.paginator;*/
+  }
+
+  //TOO LAZY TO DO PROPERLY
+
+  balJan: number = 0
+  balFeb: number = 0
+  balMar: number = 0
+  balApr: number = 0
+  balMay: number = 0
+  balJun: number = 0
+  balJul: number = 0
+  balAug: number = 0
+  balSep: number = 0
+  balOct: number = 0
+  balNov: number = 0
+  balDec: number = 0
+
+  resetBal() {
+
+    this.balJan = 0
+    this.balFeb = 0
+    this.balMar = 0
+    this.balApr = 0
+    this.balMay = 0
+    this.balJun = 0
+    this.balJul = 0
+    this.balAug = 0
+    this.balSep = 0
+    this.balOct = 0
+    this.balNov = 0
+    this.balDec = 0
+
   }
 
   //OOP
 
   isLoaded: boolean = false
   async load() {
-    this.isLoaded = false
-    await this.delay(1000)
+    this.isLoaded = false;
+    await this.delay(1000);
     //Event Loop Starts Here
 
-    this.getRevenues();
+    this.resetBal();
 
-    this.isLoaded = true
+    this.getPettyCash();
+    this.getRevenues();
+    this.getSales();
+    this.getExpenses();
+    this.getPurchases();
+    this.getPayroll();
+
+    this.getRevenuesData();
+    this.getSalesData();
+
+    this.getExpensesData();
+    this.getPurchasesData();
+    this.getPayrollData();
+
+    this.mergeRevGraphData();
+    this.mergeExpGraphData();
+    this.mergeBalGraphData();
+
+
+    this.isLoaded = true;
     //Event Loop End Here
   }
 
@@ -262,15 +310,6 @@ export class FinanceComponent implements OnInit {
     })
   }
 
-  //REVENUES and SALES
-  revenuesPayload: any;
-  revenuesData: RevenuesData[] = [];
-  revenuesDataSource = new MatTableDataSource(this.revenuesData);
-
-  salesPayload: any;
-  salesData: SalesData[] = [];
-  salesDataSource = new MatTableDataSource(this.salesData);
-
   //number: number;
   //_id: string;
   //rev_date: any;
@@ -282,6 +321,16 @@ export class FinanceComponent implements OnInit {
   //created_at: any;
   //updated_at: any;
 
+
+  //REVENUES and SALES
+  revenuesPayload: any;
+  revenuesData: RevenuesData[] = [];
+  revenuesDataSource = new MatTableDataSource(this.revenuesData);
+
+  salesPayload: any;
+  salesData: SalesData[] = [];
+  salesDataSource = new MatTableDataSource(this.salesData);
+
   revenuesDisplayedColumns: string[] = ['number', '_id', 'rev_date', 'rev_desc', 'rev_by', 'rev_amount', 'actions'];
   revenuesDataIsArchived: any;
 
@@ -290,32 +339,28 @@ export class FinanceComponent implements OnInit {
 
   getRevenues() {
 
-    //this.revenuesData = REV_DATA;
-    //this.revenuesDataSource.data = this.revenuesData;
+    this.revenuesData = REV_DATA;
+    this.revenuesDataSource.data = this.revenuesData;
 
-    this.dataService.getAllItem("revenues").subscribe((data: any) => {
-      this.revenuesPayload = data
-      console.log(this.revenuesPayload);
-      this.revenuesData = this.revenuesPayload;
-      this.revenuesDataSource.data = this.revenuesData;  
-    });
-
-    this.getSales()
+    //this.dataService.getAllItem("revenues").subscribe((data: any) => {
+    //  this.revenuesPayload = data
+    //  console.log(this.revenuesPayload);
+    //  this.revenuesData = this.revenuesPayload;
+    //  this.revenuesDataSource.data = this.revenuesData;  
+    //});
   }
 
   getSales() {
 
-    //this.salesData = SALES_DATA;
-    //this.salesDataSource.data = this.salesData;
+    this.salesData = SALES_DATA;
+    this.salesDataSource.data = this.salesData;
 
-    this.dataService.getAllItem("sales").subscribe((data: any) => {
-      this.salesPayload = data
-      console.log(this.salesPayload);
-      this.salesData = this.salesPayload;
-      this.salesDataSource.data = this.salesData;
-    });
-
-    this.getRevenuesData()
+    //this.dataService.getAllItem("sales").subscribe((data: any) => {
+    //  this.salesPayload = data
+    //  console.log(this.salesPayload);
+    //  this.salesData = this.salesPayload;
+    //  this.salesDataSource.data = this.salesData;
+    //});    
   }
 
   //Make Graph
@@ -335,8 +380,7 @@ export class FinanceComponent implements OnInit {
       this.graphVar.type = "rev"
       this.revenuesDataGraph.push(this.graphVar)
       this.graphVar = [];
-    }
-    this.getSalesData()
+    }    
   }
 
   salesDataGraph: GraphData[]  = []
@@ -350,8 +394,7 @@ export class FinanceComponent implements OnInit {
       this.graphVar.type = "sales"
       this.salesDataGraph.push(this.graphVar)
       this.graphVar = [];
-    }
-    this.mergeRevGraphData()
+    }    
   }
 
   //Merge RevData
@@ -359,11 +402,8 @@ export class FinanceComponent implements OnInit {
   graphRevData: GraphData[] = []
 
   mergeRevGraphData() {
-
     this.dataRevenues = [];
-
     this.graphRevData = this.revenuesDataGraph.concat(this.salesDataGraph);
-    console.log(this.revenuesDataGraph); 
     let graphrevdata = this.graphRevData;
 
     //HARD-CODING MONTHS HERE may better solutions pero fuck it
@@ -435,41 +475,20 @@ export class FinanceComponent implements OnInit {
       
     }
 
-    this.dataRevenues.push(["January", janRev, janSal, janNet]);
-    this.dataRevenues.push(["February", febRev, febSal, febNet]);
-    this.dataRevenues.push(["March", marRev, marSal, marNet]);
-    this.dataRevenues.push(["April", aprRev, aprSal, aprNet]);
-    this.dataRevenues.push(["May", mayRev, maySal, mayNet]);
-    this.dataRevenues.push(["June", mayRev, maySal, mayNet]);
-    this.dataRevenues.push(["July", mayRev, maySal, mayNet]);
-    this.dataRevenues.push(["August", mayRev, maySal, mayNet]);
-    this.dataRevenues.push(["September", mayRev, maySal, mayNet]);
-    this.dataRevenues.push(["October", mayRev, maySal, mayNet]);
-    this.dataRevenues.push(["November", mayRev, maySal, mayNet]);
-    this.dataRevenues.push(["December", mayRev, maySal, mayNet]);
 
 
-
-
-    //this.graphData = this.revenuesDataGraph.m(this.salesDataGraph);
-
-    //let graphData = this.graphData;
-    //for (var data of graphData) {
-
-    //  console.log("XXXXXXXXX" + this.libraryService.getMonth(data.date))
-
-    //  /*if (data.rev_date)*/
-
-    //  //this.graphVar = [data.rev_date, data.rev_amount]
-    //  //this.revenuesDataGraph.push(this.graphVar)
-    //  //console.log(this.revenuesDataGraph);
-    //  //this.graphVar = [];
-    //}
-
-    /*this.graphData = this.revenuesDataGraph.concat(this.salesDataGraph);*/
-
-    //console.log("xxxxxxxxxxxxxxxxxxxxxxxxxx");
-    //console.log(this.graphData);
+    this.dataRevenues.push(["January", janRev, janSal, janNet]); this.balJan = janNet;
+    this.dataRevenues.push(["February", febRev, febSal, febNet]); this.balFeb = febNet;
+    this.dataRevenues.push(["March", marRev, marSal, marNet]); this.balMar = marNet;
+    this.dataRevenues.push(["April", aprRev, aprSal, aprNet]); this.balApr = aprNet;
+    this.dataRevenues.push(["May", mayRev, maySal, mayNet]); this.balMay = mayNet;
+    this.dataRevenues.push(["June", mayRev, maySal, mayNet]); this.balJun = mayNet;
+    this.dataRevenues.push(["July", mayRev, maySal, mayNet]); this.balJul = mayNet;
+    this.dataRevenues.push(["August", mayRev, maySal, mayNet]); this.balAug = mayNet;
+    this.dataRevenues.push(["September", mayRev, maySal, mayNet]); this.balSep = mayNet;
+    this.dataRevenues.push(["October", mayRev, maySal, mayNet]); this.balOct = mayNet;
+    this.dataRevenues.push(["November", mayRev, maySal, mayNet]); this.balNov = mayNet;
+    this.dataRevenues.push(["December", mayRev, maySal, mayNet]); this.balDec = mayNet;
   }
 
   addRevenues() {
@@ -527,32 +546,80 @@ export class FinanceComponent implements OnInit {
     })
   }
 
+//  export interface ExpensesData {
+//  number: number;
+//  _id: string;
+//  exp_date: any;
+//  exp_desc: string;
+//  exp_by: string;
+//  exp_amount: number;
+
+//  isArchive: number;
+//  created_at: any;
+//  updated_at: any;
+//  }
+
   //EXPENSES PURCHASE PAYROLL
+
+  //revenuesDisplayedColumns: string[] = ['number', '_id', 'rev_date', 'rev_desc', 'rev_by', 'rev_amount', 'actions'];
+  //revenuesDataIsArchived: any;
+
+  //salesDisplayedColumns: string[] = ['number', '_id', 'sales_date', 'sales_desc', 'sales_by', 'sales_amount', 'actions'];
+  //salesDataIsArchived: any;
+
+
   expensesPayload: any;
   expensesData: ExpensesData[] = [];
   expensesDataSource = new MatTableDataSource(this.expensesData);
-  expensesDisplayedColumns = ['number', '_id', 'exp_date', 'exp_amount', 'exp_desc', 'exp_by', 'actions'];
+  expensesDisplayedColumns: string[] = ['number', '_id', 'exp_date', 'exp_desc', 'exp_by', 'exp_amount' , 'actions'];
   expensesDataIsArchived: any;
 
   purchasesPayload: any;
-  purchasesData: ExpensesData[] = [];
+  purchasesData: PurchasesData[] = [];
   purchasesDataSource = new MatTableDataSource(this.purchasesData);
-  purchasesDisplayedColumns = ['number', '_id', 'purc_date', 'purc_amount', 'purc_desc', 'purc_by', 'actions'];
+  purchasesDisplayedColumns: string[] = ['number', '_id', 'purc_date', 'purc_desc', 'purc_by', 'purc_amount', 'actions'];
   purchasesDataIsArchived: any;
 
   payrollPayload: any;
-  payrollData: ExpensesData[] = [];
+  payrollData: PayrollData[] = [];
   payrollDataSource = new MatTableDataSource(this.payrollData);
-  payrollDisplayedColumns = ['number', '_id', 'payr_date', 'payr_amount', 'payr_desc', 'payr_by', 'actions'];
+  payrollDisplayedColumns = ['number', '_id', 'payr_date', 'payr_desc', 'payr_by', 'payr_amount', 'actions'];
   payrollDataIsArchived: any;
 
   getExpenses() {
-    this.dataService.getAllItem("expenses").subscribe((data: any) => {
-      this.expensesPayload = data;
-      console.log(this.expensesPayload);
-      this.expensesData = this.expensesPayload;
-      this.expensesDataSource.data = this.expensesData;
-    });
+    this.expensesData = EXPE_DATA;
+    this.expensesDataSource.data = this.expensesData;
+
+    //this.dataService.getAllItem("expenses").subscribe((data: any) => {
+    //  this.expensesPayload = data;
+    //  console.log(this.expensesPayload);
+    //  this.expensesData = this.expensesPayload;
+    //  this.expensesDataSource.data = this.expensesData;
+    //});
+  }
+
+  getPurchases() {
+    this.purchasesData = PURC_DATA;
+    this.purchasesDataSource.data = this.purchasesData;
+
+    //this.dataService.getAllItem("expenses").subscribe((data: any) => {
+    //  this.expensesPayload = data;
+    //  console.log(this.expensesPayload);
+    //  this.expensesData = this.expensesPayload;
+    //  this.expensesDataSource.data = this.expensesData;
+    //});
+  }
+
+  getPayroll() {
+    this.payrollData = PAYR_DATA;
+    this.payrollDataSource.data = this.payrollData;
+
+    //this.dataService.getAllItem("expenses").subscribe((data: any) => {
+    //  this.expensesPayload = data;
+    //  console.log(this.expensesPayload);
+    //  this.expensesData = this.expensesPayload;
+    //  this.expensesDataSource.data = this.expensesData;
+    //});
   }
 
   addExpenses() {
@@ -610,6 +677,177 @@ export class FinanceComponent implements OnInit {
     })
   }
 
+  expensesDataGraph: GraphData[] = []
+
+  getExpensesData() {
+    this.expensesDataGraph = []
+    let expensesData = this.expensesData;
+    for (var data of expensesData) {
+      this.graphVar.date = data.exp_date
+      this.graphVar.amount = data.exp_amount
+      this.graphVar.type = "exp"
+      this.expensesDataGraph.push(this.graphVar)
+      this.graphVar = [];
+    }
+  }
+
+  purchasesDataGraph: GraphData[] = []
+
+  getPurchasesData() {
+    this.purchasesDataGraph = []
+    let purchasesData = this.purchasesData;
+    for (var data of purchasesData) {
+      this.graphVar.date = data.purc_date
+      this.graphVar.amount = data.purc_amount
+      this.graphVar.type = "purc"
+      this.purchasesDataGraph.push(this.graphVar)
+      this.graphVar = [];
+    }
+  }
+
+  payrollDataGraph: GraphData[] = []
+
+  getPayrollData() {
+    this.payrollDataGraph = []
+    let payrollData = this.payrollData;
+    for (var data of payrollData) {
+      this.graphVar.date = data.payr_date
+      this.graphVar.amount = data.payr_amount
+      this.graphVar.type = "payr"
+      this.payrollDataGraph.push(this.graphVar)
+      this.graphVar = [];
+    }
+  }
+
+  graphExpData: GraphData[] = []
+
+  mergeExpGraphData() {
+    this.dataExpenses = [];
+    //YEAH REMOVE LATER
+    this.dataBalance = [];
+
+    this.graphExpData = this.expensesDataGraph.concat(this.purchasesDataGraph.concat(this.payrollDataGraph));
+    //this.graphExpData = this.graphExpData.concat(this.purchasesDataGraph);
+    //this.graphExpData = this.graphExpData.concat(this.payrollDataGraph)
+    console.log(this.graphExpData);    
+
+    //HARD-CODING MONTHS HERE may better solutions pero fuck it
+
+    var janExp = 0; var janPurc = 0; var janPayr = 0; var janxNet = 0;
+    var febExp = 0; var febPurc = 0; var febPayr = 0; var febxNet = 0;
+    var marExp = 0; var marPurc = 0; var marPayr = 0; var marxNet = 0;
+    var aprExp = 0; var aprPurc = 0; var aprPayr = 0; var aprxNet = 0;
+    var mayExp = 0; var mayPurc = 0; var mayPayr = 0; var mayxNet = 0;
+
+    let graphexpdata = this.graphExpData;
+    for (var data of graphexpdata) {
+      console.log("xxxxxxxxxxxxx" + this.libraryService.getMonth(data.date));
+
+      if (this.libraryService.getMonth(data.date) == "01") {
+        if (data.type === "exp") {
+          janExp = janExp + data.amount;
+        }
+        if (data.type === "purc") {
+          janPurc = janPurc + data.amount;
+        }
+        if (data.type === "payr") {
+          janPayr = janPayr + data.amount;
+        }
+        janxNet = janxNet + data.amount;
+      }
+      if (this.libraryService.getMonth(data.date) == "02") {
+        if (data.type === "exp") {
+          febExp = febExp + data.amount;
+        }
+        if (data.type === "purc") {
+          febPurc = febPurc + data.amount;
+        }
+        if (data.type === "payr") {
+          febPayr = febPayr + data.amount;
+        }
+        febxNet = febxNet + data.amount;
+      }
+      if (this.libraryService.getMonth(data.date) == "03") {
+        if (data.type === "exp") {
+          marExp = marExp + data.amount;
+        }
+        if (data.type === "purc") {
+          marPurc = marPurc + data.amount;
+        }
+        if (data.type === "payr") {
+          marPayr = marPayr + data.amount;
+        }
+        marxNet = marxNet + data.amount;
+      }
+      if (this.libraryService.getMonth(data.date) == "04") {
+        if (data.type === "exp") {
+          aprExp = aprExp + data.amount;
+        }
+        if (data.type === "purc") {
+          aprPurc = aprPurc + data.amount;
+        }
+        if (data.type === "payr") {
+          aprPayr = aprPayr + data.amount;
+        }
+        aprxNet = aprxNet+ data.amount;
+      }
+      if (this.libraryService.getMonth(data.date) == "05") {
+        if (data.type === "exp") {
+          mayExp = mayExp + data.amount;
+        }
+        if (data.type === "purc") {
+          mayPurc = mayExp + data.amount;
+        }
+        if (data.type === "payr") {
+          mayPayr = mayExp + data.amount;
+        }
+        mayxNet = mayxNet + data.amount;
+      }
+
+    }
+
+
+    this.dataExpenses.push(["January", janExp, janPurc, janPayr, janxNet]); 
+    this.dataExpenses.push(["February", febExp, febPurc, febPayr, febxNet]); this.balFeb = this.balFeb - febxNet;
+    this.dataExpenses.push(["March", marExp, marPurc, marPayr, marxNet]); this.balMar = this.balMar - marxNet;
+    this.dataExpenses.push(["April", aprExp, aprPurc, aprPayr, aprxNet]); this.balApr = this.balApr - aprxNet;
+    this.dataExpenses.push(["May", mayExp, mayPurc, mayPayr, mayxNet]); this.balMay = this.balMay - mayxNet;
+    this.dataExpenses.push(["June", mayExp, mayPurc, mayPayr, mayxNet]); this.balJun = this.balMay - mayxNet;
+    this.dataExpenses.push(["July", mayExp, mayPurc, mayPayr, mayxNet]); this.balJun = this.balMay - mayxNet;
+    this.dataExpenses.push(["August", mayExp, mayPurc, mayPayr, mayxNet]); this.balAug = this.balMay - mayxNet;
+    this.dataExpenses.push(["September", mayExp, mayPurc, mayPayr, mayxNet]); this.balSep = this.balMay - mayxNet;
+    this.dataExpenses.push(["October", mayExp, mayPurc, mayPayr, mayxNet]); this.balOct = this.balMay - mayxNet;
+    this.dataExpenses.push(["November", mayExp, mayPurc, mayPayr, mayxNet]); this.balNov = this.balMay - mayxNet;
+    this.dataExpenses.push(["December", mayExp, mayPurc, mayPayr, mayxNet]); this.balDec = this.balMay - mayxNet;
+
+    /*this.balJan = this.balJan - janxNet;*/
+
+
+    // TOO LAZY TO DO THE RIGHT WAY
+
+    var averageBal = 0
+    averageBal = this.balJan + this.balFeb + this.balMar + this.balApr + (this.balMay * 7);
+
+    this.dataBalance.push(["January", this.balJan + janxNet, janxNet * -1, this.balJan, averageBal]);
+    this.dataBalance.push(["February", this.balFeb + febxNet, febxNet * -1, this.balFeb, averageBal]);
+    this.dataBalance.push(["March", this.balMar + marxNet, marxNet * -1, this.balMar, averageBal]);
+    this.dataBalance.push(["April", this.balApr + aprxNet, aprxNet * -1, this.balApr, averageBal]);
+    this.dataBalance.push(["May", this.balMay + mayxNet, mayxNet * -1, this.balMay, averageBal]);
+    this.dataBalance.push(["June", this.balMay + mayxNet, mayxNet * -1, this.balMay, averageBal]);
+    this.dataBalance.push(["July", this.balMay + mayxNet, mayxNet * -1, this.balMay, averageBal]);
+    this.dataBalance.push(["August", this.balMay + mayxNet, mayxNet * -1, this.balMay, averageBal]);
+    this.dataBalance.push(["September", this.balMay + mayxNet, mayxNet * -1, this.balMay, averageBal]);
+    this.dataBalance.push(["October", this.balMay + mayxNet, mayxNet * -1, this.balMay, averageBal]);
+    this.dataBalance.push(["November", this.balMay + mayxNet, mayxNet * -1, this.balMay, averageBal]);
+    this.dataBalance.push(["December", this.balMay + mayxNet, mayxNet * -1, this.balMay, averageBal]);    
+
+  }
+ 
+
+  mergeBalGraphData() {
+
+  }
+
   addSales() {
     const dialogRef = this.matDialog.open(AddSalessComponent, {
       height: '75%',
@@ -619,14 +857,12 @@ export class FinanceComponent implements OnInit {
     dialogRef.afterClosed().subscribe(() => this.getSales());
   }
 
-
-
   //Graphs
   dynamicResize = true;
 
   //Revenues 
   titleRevenues = 'Revenues for the past months';
-  typeRevenues = ChartType.LineChart;
+  typeRevenues = ChartType.ComboChart;
   dataRevenues: any =[];
 
    chartColumnsRevenues = ["Year","Non-Sale Revenues", "Sales Revenues", "Net Revenues"];
@@ -636,20 +872,23 @@ export class FinanceComponent implements OnInit {
       },
       vAxis:{
          title: 'Cash'
-    },
-    curveType: 'function', legend: { position: 'bottom' },
+     },
+     seriesType: 'bars',
+     isStacked: true,
+     animation: {
+        startup: true,
+        duration: 1000,
+       easing: 'inAndOut'
+     },
+     series: { 2: { type: 'line' } },
+     curveType: 'function', legend: { position: 'bottom' },
   };
 
-  //Revenues 
-  titleExpenses = 'Revenues for the past months';
-  typeExpenses = ChartType.LineChart;
-  dataExpenses = [
-    ["2017", 15000, 15000, 0],
-    ["2018", 14000, 0, 0],
-    ["2019", 16000, 18000, 0],
-    ["2020", 17500, 17000, 0]
-  ];
-  chartColumnsExpenses = ["Year", "Non-Sale Revenues", "Sales Revenues", "Net Revenues"];
+  //Expenses
+  titleExpenses = 'Expenses for the past months';
+  typeExpenses = ChartType.ComboChart;
+  dataExpenses: any = [];
+  chartColumnsExpenses = ["Month", "General Expenses", "Stock Purchases", "Payroll Expenses", "Net Expenses"];
   optionsExpenses = {
     hAxis: {
       title: 'Month'
@@ -657,22 +896,39 @@ export class FinanceComponent implements OnInit {
     vAxis: {
       title: 'Cash'
     },
+    seriesType: 'bars',
+    isStacked: true,
+    animation: {
+      startup: true,
+      duration: 1000,
+      easing: 'inAndOut'
+    },
+    series: { 3: { type: 'line' }},
     curveType: 'function', legend: { position: 'bottom' },
   };
 
-  //CashBalance
-  titleBalance = "Cash Balance";
-  typeBalance = ChartType.Bar;
-  chartColumnsBalance = ["Months", "Revenue", "Expenses"];
-  dataBalance = [
-    ["Jan", 15000, 12000],
-    ["Feb", 14000, 12000],
-    ["March", 16000, 12000],
-    ["April", 17500, 12000],
-    ["May", 17500, 12000],
-    ["June", 17500, 12000],
-    ["Junly", 17500, 12000],
-  ];
+  //Financial Balance
+  titleBalance = 'Summary of Finances';
+  typeBalance = ChartType.ComboChart;
+  dataBalance: any = [];
+  chartColumnsBalance = ["Month", "Revenues", "Expenses", "Balance", "Average Balance"];
+  optionsBalance = {
+    hAxis: {
+      title: 'Month'
+    },
+    vAxis: {
+      title: 'Cash'
+    },
+    seriesType: 'bars',
+    isStacked: true,
+    animation: {
+      startup: true,
+      duration: 1000,
+      easing: 'inAndOut'
+    },
+    series: { 2: { type: 'line' }, 3: { type: 'line' }},
+    curveType: 'function', legend: { position: 'bottom' },
+  };
 
   //Sales
   titleSales = "Sales";
