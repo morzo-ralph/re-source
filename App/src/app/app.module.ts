@@ -85,6 +85,8 @@ import { ViewRevenuesComponent } from './pages/finance/finance/view-revenues/vie
 import { GalleryComponent } from './pages/test/test/gallery/gallery.component';
 import { TaskboardComponent } from './pages/taskboard/taskboard.component';
 import { AddSalessComponent } from './pages/finance/finance/add-saless/add-saless.component';
+import { AddPayrollFinanceComponent } from './pages/finance/finance/add-payroll-finance/add-payroll-finance.component';
+import { AddPurchaseFinanceComponent } from './pages/finance/finance/add-purchase-finance/add-purchase-finance.component';
 
 
 
@@ -117,7 +119,9 @@ import { AddSalessComponent } from './pages/finance/finance/add-saless/add-sales
     ViewRevenuesComponent,
     GalleryComponent,
     TaskboardComponent,
-    AddSalessComponent
+    AddSalessComponent,
+    AddPayrollFinanceComponent,
+    AddPurchaseFinanceComponent
   ],
   imports: [
     BrowserModule,

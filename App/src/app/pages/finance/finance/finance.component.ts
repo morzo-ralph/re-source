@@ -13,6 +13,7 @@ import { Data } from '@angular/router';
 import { AddExpensesComponent } from './add-expenses/add-expenses.component';
 import { AddRevenuesComponent } from './add-revenues/add-revenues.component';
 import { AddSalessComponent } from './add-saless/add-saless.component';
+import { AddPurchaseFinanceComponent } from './add-purchase-finance/add-purchase-finance.component';
 import { EditRevenuesComponent } from './edit-revenues/edit-revenues.component';
 import { EditExpensesComponent } from './edit-expenses/edit-expenses.component';
 import { AddPettyCashComponent } from './add-petty-cash/add-petty-cash.component';
@@ -617,6 +618,15 @@ export class FinanceComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(() => this.getSales());
+  }
+
+  addPurchase() {
+    const dialogRef = this.matDialog.open(AddPurchaseFinanceComponent, {
+      height: '75%',
+      width: '100%'
+    });
+
+    dialogRef.afterClosed().subscribe();
   }
 
 
