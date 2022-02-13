@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const PurchasesSchema = new mongoose.Schema({
+const PayrollSchema = new mongoose.Schema({
     number: Number,
     purc_date: Date,
     purc_desc: String,
@@ -15,13 +15,13 @@ const PurchasesSchema = new mongoose.Schema({
     updated_at: Date
 });
 
-PurchasesSchema.pre('save', function (next) {
+PayrollSchema.pre('save', function (next) {
     var currentDate = new Date();
     this.updated_at = currentDate;
     if (!this.created_at) this.created_at = currentDate;
     next();
 });
 
-const Purchases = mongoose.model('Purchases', PurchasesSchema);
+const Payroll = mongoose.model('Payroll', PayrollSchema);
 
-module.exports = Purchases;
+module.exports = Payroll;
