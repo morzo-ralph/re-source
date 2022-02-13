@@ -84,6 +84,8 @@ export interface PurchasesData {
   purc_desc: string;
   purc_by: string;
   purc_amount: number;
+  purc_supplier: string;
+  purc_quantity: number;
 
   isArchive: number;
   created_at: any;
@@ -125,9 +127,9 @@ const EXPE_DATA: ExpensesData[] = [
 ];
 
 const PURC_DATA: PurchasesData[] = [
-  { number: 1, _id: '2021022', purc_date: "2022-01-11T16:00:00.000+00:00", purc_desc: "Stock", purc_by: "Position", purc_amount: 5000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', purc_date: "2022-02-11T16:00:00.000+00:00", purc_desc: "Stock", purc_by: "Position", purc_amount: 15000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
-  { number: 1, _id: '2021022', purc_date: "2022-03-11T16:00:00.000+00:00", purc_desc: "Stock", purc_by: "Position", purc_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', purc_quantity: 5, purc_date: "2022-01-11T16:00:00.000+00:00", purc_supplier: "Trading Inc.", purc_desc: "Stock", purc_by: "Position", purc_amount: 5000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', purc_quantity: 5, purc_date: "2022-02-11T16:00:00.000+00:00", purc_supplier: "Trading Inc.", purc_desc: "Stock", purc_by: "Position", purc_amount: 15000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, _id: '2021022', purc_quantity: 5, purc_date: "2022-03-11T16:00:00.000+00:00", purc_supplier: "Trading Inc.", purc_desc: "Stock", purc_by: "Position", purc_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
 ];
 
 const PAYR_DATA: PayrollData[] = [
@@ -578,7 +580,7 @@ export class FinanceComponent implements OnInit {
   purchasesPayload: any;
   purchasesData: PurchasesData[] = [];
   purchasesDataSource = new MatTableDataSource(this.purchasesData);
-  purchasesDisplayedColumns: string[] = ['number', '_id', 'purc_date', 'purc_desc', 'purc_by', 'purc_amount', 'actions'];
+  purchasesDisplayedColumns: string[] = ['number', '_id', 'purc_date', 'purc_desc', 'purc_by', 'purc_amount', 'purc_supplier', 'purc_quantity', 'actions'];
   purchasesDataIsArchived: any;
 
   payrollPayload: any;

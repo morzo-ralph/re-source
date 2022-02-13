@@ -9,6 +9,7 @@ const PurchasesSchema = new mongoose.Schema({
     purc_desc: String,
     purc_by: String,
     purc_amount: Number,    
+    purc_quantity: Number,
        // _itemId: {
     //     type: mongoose.Types.ObjectId
     // },

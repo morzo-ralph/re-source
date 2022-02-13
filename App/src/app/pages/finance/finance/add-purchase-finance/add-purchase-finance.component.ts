@@ -22,6 +22,8 @@ export class AddPurchaseFinanceComponent implements OnInit {
   purchaseBy: any;
   purchaseDate: any;
   purchaseDesc: any;
+  purchaseSupplier: any;
+  purchaseQuantity: any;
 
   ngOnInit(): void {
     this.countData();
@@ -44,6 +46,8 @@ export class AddPurchaseFinanceComponent implements OnInit {
         this.purchaseData.purc_by =  this.purchaseBy;
         this.purchaseData.purc_date = this.purchaseDate;
         this.purchaseData.purc_desc = this.purchaseDesc;
+        this.purchaseData.purc_supplier = this.purchaseSupplier;
+        this.purchaseData.purc_quantity = this.purchaseQuantity;
         this.purchaseData.isArchive = 0;
         this.purchaseData.number = this.countdata + 1;
         console.log(this.purchaseData);
