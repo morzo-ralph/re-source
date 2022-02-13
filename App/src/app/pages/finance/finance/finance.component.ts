@@ -867,6 +867,17 @@ export class FinanceComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
   }
 
+  addPayroll() {
+
+  }
+
+  loading = false;
+
+
+  loadPurchasesPayload() {
+    this.loading = true;
+    this.dataService
+  }
 
 
   //Graphs

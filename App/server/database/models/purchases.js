@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 const PurchasesSchema = new mongoose.Schema({
     number: Number,
+    id: String,
+    
     purc_date: Date,
+    purc_supplier: String,
     purc_desc: String,
     purc_by: String,
     purc_amount: Number,    

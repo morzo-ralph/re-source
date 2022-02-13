@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { swalProviderToken } from '@sweetalert2/ngx-sweetalert2/lib/di';
 import { DataService } from 'src/app/services/data.service';
 import Swal from 'sweetalert2';
 
@@ -40,8 +41,24 @@ export class LoginComponent implements OnInit {
     this.loginData.password = this.password
     
     console.log(this.loginData);
+
+    //createitem is just post
     this.dataService.createItem('users/login', this.loginData).subscribe((data: any) => {
-      console.log(data);
+      console.log(data.user);
+      localStorage.setItem('_id', data.user._id);
+      localStorage.setItem('lname', data.user.lname);
+      localStorage.setItem('fname', data.user.fname);
+      localStorage.setItem('mname', data.user.mname);
+      if(data) {
+        Swal.fire(
+          'Login Successful!',
+          data.user.lname,
+          'success'
+        )
+        
+      } else {
+
+      }
     })
   }
 }
