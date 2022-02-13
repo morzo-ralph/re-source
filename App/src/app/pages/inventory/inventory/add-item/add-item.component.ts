@@ -73,6 +73,13 @@ export class AddItemComponent implements OnInit {
     this.httpClient.post<any>(url, formData).subscribe((data: any) => {
       console.log(data);
     });
+    
+    Swal.fire(
+      'Item Added!',
+      '',
+      'success'
+    )
+    this.dialogRef.close();
   }
 
 }
