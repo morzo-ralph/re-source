@@ -18,7 +18,7 @@ export class AddPurchaseFinanceComponent implements OnInit {
   countdata: any;
 
   purchaseData: any = {};
-  purchaseAmount: any;
+  purchasePrice: any;
   purchaseBy: any;
   purchaseDate: any;
   purchaseDesc: any;
@@ -42,7 +42,7 @@ export class AddPurchaseFinanceComponent implements OnInit {
   }
 
   addPurchase() {
-        this.purchaseData.purc_amount = this.purchaseAmount;
+        this.purchaseData.purc_amount = this.purchasePrice;
         this.purchaseData.purc_by =  this.purchaseBy;
         this.purchaseData.purc_date = this.purchaseDate;
         this.purchaseData.purc_desc = this.purchaseDesc;
