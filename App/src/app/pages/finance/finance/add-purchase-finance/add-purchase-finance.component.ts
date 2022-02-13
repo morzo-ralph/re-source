@@ -62,25 +62,3 @@ export class AddPurchaseFinanceComponent implements OnInit {
         });
       }
 }
-
-// import { Component, OnInit } from '@angular/core';
-// import { MatDialog, MatDialogRef} from '@angular/material/dialog';
-// import { DataService } from 'src/app/services/data.service';
-// import Swal from 'sweetalert2';
-
-// @Component({
-//   selector: 'app-add-saless',
-//   templateUrl: './add-saless.component.html',
-//   styleUrls: ['./add-saless.component.scss']
-// })
-// export class AddSalessComponent implements OnInit {
-//   constructor(
-//     private dataService: DataService,
-//     private dialogRef: MatDialogRef<AddSalessComponent>,
-//   ) { }
-
-//   
-
-//   
-
-// }
