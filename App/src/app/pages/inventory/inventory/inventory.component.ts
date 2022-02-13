@@ -72,20 +72,24 @@ export class InventoryComponent implements OnInit {
 
   ngOnInit(): void { 
     this.load();
-    this.getInventories();
+    
   }
 
   //OOP
-  isLoaded: boolean = false
+  isLoaded: boolean = false;
+
   async load() {
     this.isLoaded = false
     await this.delay(1000)
     //Event Loop Starts Here
-
+    this.getInventories();
     this.getPurchases();
+    
 
-
+    //Event Ends Here
     this.isLoaded = true
+
+
   }
 
   delay(ms: number) {

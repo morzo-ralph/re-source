@@ -142,6 +142,8 @@ export interface GraphData {
 //  updated_at: Date;
 //}
 
+const PETSTART: number = 100000;
+
 const PET_DATA: PettyCashData[] = [
   { number: 1, id: "123242512321", _id: '2021022', pet_date: "2022-01-11T16:00:00.000+00:00", pet_amount: 10000, pet_desc: "Contract Fees", pet_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" },
   { number: 1, id: "123242512321", _id: '2021022', pet_date: "2022-02-11T16:00:00.000+00:00", pet_amount: 10000, pet_desc: "Contract Fees", pet_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" },
@@ -245,6 +247,10 @@ export class FinanceComponent implements OnInit {
 
     this.resetBal();
 
+    /*this.setPettySample();*/
+
+    this.getPettyStartCash();
+
     this.getPettyCash();
     this.getRevenues();
     this.getSales();
@@ -329,14 +335,26 @@ export class FinanceComponent implements OnInit {
 
   //FUNCTIONS
 
-  //PETTY CASH  
+  //PETTY CASH
+
+ 
+  setPettySample() {
+    this.setPettyStartCash(PETSTART);
+  }
+
+  setAmountPet!: number;
 
   setPettyStartCash(amount: number) {
     localStorage.setItem('StartPetty', amount.toString());
+    this.getPettyStartCash();
+    this.computePettyCash();
   }
 
+  pettyCashStart: number = 0;
+  pettyCash: number = 0;
+
   getPettyStartCash() {
-    return (Number(localStorage.getItem('StartPetty')));
+    this.pettyCashStart = (Number(localStorage.getItem('StartPetty')));
   }
 
   getPettyCash() {
@@ -350,6 +368,23 @@ export class FinanceComponent implements OnInit {
     //  this.pettyCashData = this.pettyCashPayload;
     //  this.pettyCashDataSource.data = this.pettyCashPayload;
     //});
+
+    this.computePettyCash()
+
+  }
+
+  computePettyCash() {
+
+    let pettycashData = this.pettyCashData;
+
+    this.pettyCash = this.pettyCashStart
+
+    for (var data of pettycashData) {
+      console.log(data.pet_amount)
+      this.pettyCash = this.pettyCash + data.pet_amount
+    }
+
+
   }
 
   transData: any = {};
@@ -442,10 +477,14 @@ export class FinanceComponent implements OnInit {
     //});
   }
 
+
+
   getSales() {
 
     this.salesData = SALES_DATA;
     this.salesDataSource.data = this.salesData;
+
+
 
     //this.dataService.getAllItem("sales").subscribe((data: any) => {
     //  this.salesPayload = data
@@ -962,6 +1001,7 @@ export class FinanceComponent implements OnInit {
   dataExpenses: any = [];
   chartColumnsExpenses = ["Month", "General Expenses", "Stock Purchases", "Payroll Expenses", "Net Expenses"];
   optionsExpenses = {
+    crosshair: { trigger: 'both' },
     hAxis: {
       title: 'Month'
     },

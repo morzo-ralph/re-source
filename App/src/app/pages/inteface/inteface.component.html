@@ -5,14 +5,17 @@
       </button> &nbsp;
       <span>MSSE Engineering and Construction Services</span>
       <span style="flex: 1 1 auto;"></span>
-      <button mat-mini-fab color="primary">
+      <!--<button mat-mini-fab color="primary">
         <mat-icon>punch_clock</mat-icon>
       </button>
       <button mat-mini-fab matBadge="7" matBadgeColor="warn" matBadgeSize="small" color="primary">
         <mat-icon>storefront</mat-icon>
-      </button>               
-      <button mat-mini-fab matBadge="!" matBadgeColor="warn" matBadgeSize="small" color="primary">
+      </button>-->               
+      <button mat-mini-fab matBadge="!" matBadgeColor="warn" matBadgeSize="small" color="accent">
         <mat-icon>settings</mat-icon>
+      </button>
+       <button mat-mini-fab color="warn" [routerLink]="['/login']">
+        <mat-icon>logout</mat-icon>
       </button>
     </mat-toolbar>
   
@@ -91,11 +94,11 @@
                   <mat-icon>calculate</mat-icon> &nbsp; Finances
                 </button>
               </mat-list-item>
-              <mat-list-item>
+              <!--<mat-list-item>
                 <button mat-raised-button color="primary" class="mat-elevation-z8" style="width: 100%; text-align: left" [routerLink]="['/taskboard']">
                   <mat-icon>assignment</mat-icon> &nbsp; Taskboard
                 </button>
-              </mat-list-item>
+              </mat-list-item>-->
 
             </mat-list>
           </ng-container>
