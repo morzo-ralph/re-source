@@ -80,15 +80,13 @@
                     <mat-card-content>
                       <img src="{{item.imageUrl}}" alt="" style="height: 40%; width: 100%; border-radius: 16px; margin-right: auto">
                       <p> Item Description : {{ item.description }}</p>
-                      <p> Item Amount :</p>
-                      <p> Item Price : </p>
-                      <p> Date Created : {{ item.created_at| date: "MMM dd, yyyy | hh:mm" }}</p>
-                      <p> Date Updated : </p>
+                      <p> Item Quantity : {{item.quantity}}</p>
+                      <p> Item Price : {{ item.price }} </p>
                     </mat-card-content>
                     <mat-card-footer style="text-align: center">
                       <button mat-raised-button (click)="itemView(item)"> View </button> &nbsp;
-                      <button mat-raised-button (click)="itemUpdate(item)"> Update </button>   &nbsp;
-                      <button mat-raised-button (click)="itemArchive(item)"> Archive </button>
+                      <!-- <button mat-raised-button (click)="itemUpdate(item)"> Update </button>   &nbsp;
+                      <button mat-raised-button (click)="itemArchive(item)"> Archive </button> -->
                     </mat-card-footer>
                   </mat-card>
                 </div>

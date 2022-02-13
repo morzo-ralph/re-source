@@ -2,14 +2,13 @@ const mongoose = require('mongoose');
 
 const PayrollSchema = new mongoose.Schema({
     number: Number,
-    purc_date: Date,
+    id: String,
+    payr_date: Date,
+    payr_supplier: String,
     purc_desc: String,
     purc_by: String,
     purc_amount: Number,    
-       // _itemId: {
-    //     type: mongoose.Types.ObjectId
-    // },
-
+    
     isArchive: Number,
     created_at: Date,
     updated_at: Date

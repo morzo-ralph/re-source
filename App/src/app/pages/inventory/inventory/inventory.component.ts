@@ -13,6 +13,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, filter } from 'rxjs/operators';
 
+import { ViewItemComponent } from './view-item/view-item.component';
+
 export interface InventoriesData {
   number: number;
   id: string;
@@ -129,6 +131,7 @@ export class InventoryComponent implements OnInit {
       height: '75%',
       width: '100%'
     });
+    this.getInventories();
   }
   
   itemArchive(i:any){
@@ -160,13 +163,13 @@ export class InventoryComponent implements OnInit {
   }
 
   itemView(data: any){ 
-    console.log(data);
-      // const dialogRef = this.dialog.open(ViewComponent, {
-      //   width: '50%',
-      //   data: i
-      // });
+      const dialogRef = this.dialog.open(ViewItemComponent, {
+        width: '100%',
+        height: '75%',
+        data: data
+      });
 
-      // dialogRef.afterClosed().subscribe(() => this.itemData());
+      dialogRef.afterClosed().subscribe(() => this.getInventories());
     }
 
   itemUpdate(data: any){

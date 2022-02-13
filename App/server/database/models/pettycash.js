@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 
 const PettycashSchema = new mongoose.Schema({
+    number: Number,
+    id: String,
     pet_date: Date,
+    pet_desc: String,
     pet_amount: Number,
+    pet_by: String,
     
     isArchive: Number,
     created_at: Date,
