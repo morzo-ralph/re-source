@@ -143,28 +143,42 @@ export interface GraphData {
 //}
 
 const PET_DATA: PettyCashData[] = [
-  { number: 1, id: "123242512321", _id: '2021022', pet_date: "2022-01-11T16:00:00.000+00:00", pet_amount: 10000, pet_desc: "Contract Fees", pet_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" }
+  { number: 1, id: "123242512321", _id: '2021022', pet_date: "2022-01-11T16:00:00.000+00:00", pet_amount: 10000, pet_desc: "Contract Fees", pet_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', pet_date: "2022-02-11T16:00:00.000+00:00", pet_amount: 10000, pet_desc: "Contract Fees", pet_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', pet_date: "2022-03-11T16:00:00.000+00:00", pet_amount: 10000, pet_desc: "Contract Fees", pet_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" },
 ];
 
 
 const REV_DATA: RevenuesData[] = [
-  { number: 1, id: "123242512321", _id: '2021022', rev_date: "2022-01-11T16:00:00.000+00:00", rev_supplier : "Bob the Builder", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 10000, isArchive: 0, created_at: "20011201", updated_at: "20011201" }
+  { number: 1, id: "123242512321", _id: '2021022', rev_date: "2022-01-11T16:00:00.000+00:00", rev_supplier: "Bob the Builder", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 10000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', rev_date: "2022-02-11T16:00:00.000+00:00", rev_supplier: "Bob the Builder", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 10000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', rev_date: "2022-03-11T16:00:00.000+00:00", rev_supplier: "Bob the Builder", rev_desc: "Contract Fees", rev_by: "Position", rev_amount: 10000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
 ];
 
 const SALES_DATA: SalesData[] = [
-  { number: 1, id: "123242512321", _id: '2021022', sales_date: "2022-01-11T16:00:00.000+00:00", sales_supplier: "Bob the Builder", sales_price: 1000, sales_quantity: 12333, sales_desc: "Sales", sales_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" }
+  { number: 1, id: "123242512321", _id: '2021022', sales_date: "2022-01-11T16:00:00.000+00:00", sales_supplier: "Bob the Builder", sales_price: 10, sales_quantity: 133, sales_desc: "Sales", sales_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', sales_date: "2022-02-11T16:00:00.000+00:00", sales_supplier: "Bob the Builder", sales_price: 100, sales_quantity: 1333, sales_desc: "Sales", sales_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', sales_date: "2022-03-11T16:00:00.000+00:00", sales_supplier: "Bob the Builder", sales_price: 100, sales_quantity: 1233, sales_desc: "Sales", sales_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" },
 ];
 
 const EXPE_DATA: ExpensesData[] = [
-  { number: 1, id: "123242512321", _id: '2021022', exp_date: "2022-01-11T16:00:00.000+00:00", exp_supplier: "Bob The Builder",exp_desc: "Rent", exp_by: "Position", exp_amount: 30000, isArchive: 0, created_at: "20011201", updated_at: "20011201" }
+  { number: 1, id: "123242512321", _id: '2021022', exp_date: "2022-01-11T16:00:00.000+00:00", exp_supplier: "Bob The Builder", exp_desc: "Rent", exp_by: "Position", exp_amount: 30000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', exp_date: "2022-02-11T16:00:00.000+00:00", exp_supplier: "Bob The Builder", exp_desc: "Rent", exp_by: "Position", exp_amount: 30000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', exp_date: "2022-03-11T16:00:00.000+00:00", exp_supplier: "Bob The Builder", exp_desc: "Rent", exp_by: "Position", exp_amount: 30000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+
 ];
 
 const PURC_DATA: PurchasesData[] = [
-  { number: 1, id: "123242512321", _id: '2021022', purc_date: "2022-01-11T16:00:00.000+00:00", purc_supplier: "any", purc_price: 1000, purc_quantity: 1201202, purc_desc: "Stock", purc_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" }
+  { number: 1, id: "123242512321", _id: '2021022', purc_date: "2022-01-11T16:00:00.000+00:00", purc_supplier: "any", purc_price: 10, purc_quantity: 102, purc_desc: "Stock", purc_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', purc_date: "2022-02-11T16:00:00.000+00:00", purc_supplier: "any", purc_price: 100, purc_quantity: 102, purc_desc: "Stock", purc_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', purc_date: "2022-03-11T16:00:00.000+00:00", purc_supplier: "any", purc_price: 100, purc_quantity: 1212, purc_desc: "Stock", purc_by: "Position", isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+
 ];
 
 const PAYR_DATA: PayrollData[] = [
-  { number: 1, id: "123242512321", _id: '2021022', payr_date: "2022-01-11T16:00:00.000+00:00", payr_supplier: "Wage", payr_desc: "Wage", payr_by: "Position", payr_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" }
+  { number: 1, id: "123242512321", _id: '2021022', payr_date: "2022-01-11T16:00:00.000+00:00", payr_supplier: "Wage", payr_desc: "Wage", payr_by: "Position", payr_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', payr_date: "2022-02-11T16:00:00.000+00:00", payr_supplier: "Wage", payr_desc: "Wage", payr_by: "Position", payr_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
+  { number: 1, id: "123242512321", _id: '2021022', payr_date: "2022-03-11T16:00:00.000+00:00", payr_supplier: "Wage", payr_desc: "Wage", payr_by: "Position", payr_amount: 20000, isArchive: 0, created_at: "20011201", updated_at: "20011201" },
 ];
 
 @Component({
@@ -246,8 +260,8 @@ export class FinanceComponent implements OnInit {
 
     this.mergeRevGraphData();
     this.mergeExpGraphData();
-    this.mergeBalGraphData();
 
+    this.graphVar = [];
 
     this.isLoaded = true;
     //Event Loop End Here
@@ -269,30 +283,53 @@ export class FinanceComponent implements OnInit {
     this.revenuesDataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  //FUNCTIONS
+  //DECLARATIONS
 
   //PETTY CASH
-
-//  export interface PettyCashData {
-//  number: number;
-//  id: string;
-//  _id: string;
-
-//  pet_date: any;
-//  pet_desc: string;
-//  pet_amount: number;
-//  pet_by: string;
-
-//  isArchive: number;
-//  created_at: any;
-//  updated_at: any;
-//}
 
   pettyCashPayload: any;
   pettyCashData: PettyCashData[] = [];
   pettyCashDataSource = new MatTableDataSource(this.pettyCashData);
   pettyCashDisplayedColumns = ['number', 'id', 'pet_date', 'pet_desc' , 'pet_amount', 'pet_by', 'actions'];
   pettyCashIdArchive: any;
+
+  //REVENUES
+
+  revenuesPayload: any;
+  revenuesData: RevenuesData[] = [];
+  revenuesDataSource = new MatTableDataSource(this.revenuesData);
+  revenuesDisplayedColumns: string[] = ['number', '_id', 'rev_date', 'rev_desc', 'rev_by', 'rev_amount', 'rev_supplier', 'actions'];
+  revenuesDataIsArchived: any;
+
+  salesPayload: any;
+  salesData: SalesData[] = [];
+  salesDataSource = new MatTableDataSource(this.salesData);
+  salesDisplayedColumns: string[] = ['number', '_id', 'sales_date', 'sales_desc', 'sales_by', 'sales_amount', 'sales_supplier', 'actions'];
+  salesDataIsArchived: any;
+
+  //EXPENSES
+
+  expensesPayload: any;
+  expensesData: ExpensesData[] = [];
+  expensesDataSource = new MatTableDataSource(this.expensesData);
+  expensesDisplayedColumns: string[] = ['number', '_id', 'exp_date', 'exp_desc', 'exp_by', 'exp_amount', 'actions'];
+  expensesDataIsArchived: any;
+
+  purchasesPayload: any;
+  purchasesData: PurchasesData[] = [];
+  purchasesDataSource = new MatTableDataSource(this.purchasesData);
+  purchasesDisplayedColumns: string[] = ['number', '_id', 'purc_date', 'purc_desc', 'purc_by', 'purc_amount', 'purc_supplier', 'actions'];
+  purchasesDataIsArchived: any;
+
+  payrollPayload: any;
+  payrollData: PayrollData[] = [];
+  payrollDataSource = new MatTableDataSource(this.payrollData);
+  payrollDisplayedColumns = ['number', '_id', 'payr_date', 'payr_desc', 'payr_by', 'payr_amount', 'payr_supplier', 'actions'];
+  payrollDataIsArchived: any;
+
+  //FUNCTIONS
+
+  //PETTY CASH  
 
   setPettyStartCash(amount: number) {
     localStorage.setItem('StartPetty', amount.toString());
@@ -314,6 +351,7 @@ export class FinanceComponent implements OnInit {
     //  this.pettyCashDataSource.data = this.pettyCashPayload;
     //});
   }
+
   transData: any = {};
   transPerson: any;
   transCashFlow: any;
@@ -389,21 +427,7 @@ export class FinanceComponent implements OnInit {
     })
   }
 
-  //REVENUES and SALES///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  revenuesPayload: any;
-  revenuesData: RevenuesData[] = [];
-  revenuesDataSource = new MatTableDataSource(this.revenuesData);
-
-  salesPayload: any;
-  salesData: SalesData[] = [];
-  salesDataSource = new MatTableDataSource(this.salesData);
-
-  revenuesDisplayedColumns: string[] = ['number', '_id', 'rev_date', 'rev_desc', 'rev_by', 'rev_amount', 'actions'];
-  revenuesDataIsArchived: any;
-
-  salesDisplayedColumns: string[] = ['number', '_id', 'sales_date', 'sales_desc', 'sales_by', 'sales_amount', 'actions'];
-  salesDataIsArchived: any;
+  //REVENUES and SALES 
 
   getRevenues() {
 
@@ -429,133 +453,7 @@ export class FinanceComponent implements OnInit {
     //  this.salesData = this.salesPayload;
     //  this.salesDataSource.data = this.salesData;
     //});    
-  }
-
-  //Make Graph
-
-  //Load Data
-
-  graphVar: any = {};
-
-  revenuesDataGraph: GraphData[]  = []
-
-  getRevenuesData() {
-    this.revenuesDataGraph = []
-    let revenuesData = this.revenuesData;
-    for (var data of revenuesData) {
-      this.graphVar.date = data.rev_date 
-      this.graphVar.amount = data.rev_amount
-      this.graphVar.type = "rev"
-      this.revenuesDataGraph.push(this.graphVar)
-      this.graphVar = [];
-    }    
-  }
-
-  salesDataGraph: GraphData[]  = []
-  
-  getSalesData() {
-    this.salesDataGraph = []
-    let salesdata = this.salesData;
-    for (var data of salesdata) {
-      this.graphVar.date = data.sales_date
-      this.graphVar.amount = data.sales_quantity * data.sales_price
-      this.graphVar.type = "sales"
-      this.salesDataGraph.push(this.graphVar)
-      this.graphVar = [];
-    }    
-  }
-
-  //Merge RevData
-
-  graphRevData: GraphData[] = []
-
-  mergeRevGraphData() {
-    this.dataRevenues = [];
-    this.graphRevData = this.revenuesDataGraph.concat(this.salesDataGraph);
-    let graphrevdata = this.graphRevData;
-
-    //HARD-CODING MONTHS HERE may better solutions pero fuck it
-
-    var janRev = 0; var janSal = 0; var janNet = 0;
-    var febRev = 0; var febSal = 0; var febNet = 0;
-    var marRev = 0; var marSal = 0; var marNet = 0;
-    var aprRev = 0; var aprSal = 0; var aprNet = 0;
-    var mayRev = 0; var maySal = 0; var mayNet = 0;
-    var junRev = 0; var junSal = 0; var junNet = 0;
-    var julRev = 0; var julSal = 0; var julNet = 0;
-    var augRev = 0; var augSal = 0; var augNet = 0;
-    var sepRev = 0; var sepSal = 0; var sepNet = 0;
-    var octRev = 0; var octSal = 0; var octNet = 0;
-    var novRev = 0; var novSal = 0; var novNet = 0;
-    var decRev = 0; var decSal = 0; var decNet = 0;
-
-    var feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec = 0
-
-    for (var data of graphrevdata) {
-      console.log("xxxxxxxxxxxxx" +this.libraryService.getMonth(data.date));
-
-      if (this.libraryService.getMonth(data.date) == "01" ) {
-        if (data.type === "rev") {
-          janRev = janRev + data.amount;
-        }
-        if (data.type === "sales") {
-          janSal = janSal + data.amount;
-        }
-        janNet = janNet + data.amount;
-        console.log(janNet)
-      }
-      if (this.libraryService.getMonth(data.date) == "02") {
-        if (data.type === "rev") {
-          febRev = febRev + data.amount;
-        }
-        if (data.type === "sales") {
-          febSal = febSal + data.amount;
-        }
-        febNet = febNet + data.amount;
-      }
-      if (this.libraryService.getMonth(data.date) == "03") {
-        if (data.type === "rev") {
-          marRev = marRev + data.amount;
-        }
-        if (data.type === "sales") {
-          marSal = marSal + data.amount;
-        }
-        marNet = marNet + data.amount;
-      }
-      if (this.libraryService.getMonth(data.date) == "04") {
-        if (data.type === "rev") {
-          aprRev = aprRev + data.amount;
-        }
-        if (data.type === "sales") {
-          aprSal = aprSal + data.amount;
-        }
-        aprNet = aprNet + data.amount;
-      }
-      if (this.libraryService.getMonth(data.date) == "05") {
-        if (data.type === "rev") {
-          mayRev = mayRev + data.amount;
-        }
-        if (data.type === "sales") {
-          maySal = maySal + data.amount;
-        }
-        mayNet = mayNet + data.amount;
-      }
-      
-    }
-
-    this.dataRevenues.push(["January", janRev, janSal, janNet]); this.balJan = janNet;
-    this.dataRevenues.push(["February", febRev, febSal, febNet]); this.balFeb = febNet;
-    this.dataRevenues.push(["March", marRev, marSal, marNet]); this.balMar = marNet;
-    this.dataRevenues.push(["April", aprRev, aprSal, aprNet]); this.balApr = aprNet;
-    this.dataRevenues.push(["May", mayRev, maySal, mayNet]); this.balMay = mayNet;
-    this.dataRevenues.push(["June", mayRev, maySal, mayNet]); this.balJun = mayNet;
-    this.dataRevenues.push(["July", mayRev, maySal, mayNet]); this.balJul = mayNet;
-    this.dataRevenues.push(["August", mayRev, maySal, mayNet]); this.balAug = mayNet;
-    this.dataRevenues.push(["September", mayRev, maySal, mayNet]); this.balSep = mayNet;
-    this.dataRevenues.push(["October", mayRev, maySal, mayNet]); this.balOct = mayNet;
-    this.dataRevenues.push(["November", mayRev, maySal, mayNet]); this.balNov = mayNet;
-    this.dataRevenues.push(["December", mayRev, maySal, mayNet]); this.balDec = mayNet;
-  }
+  }  
 
   addRevenues() {
     const dialogRef = this.matDialog.open(AddRevenuesComponent, {
@@ -611,26 +509,7 @@ export class FinanceComponent implements OnInit {
       }
     })
   }
-
-  //EXPENSES
-
-  expensesPayload: any;
-  expensesData: ExpensesData[] = [];
-  expensesDataSource = new MatTableDataSource(this.expensesData);
-  expensesDisplayedColumns: string[] = ['number', '_id', 'exp_date', 'exp_desc', 'exp_by', 'exp_amount' , 'actions'];
-  expensesDataIsArchived: any;
-
-  purchasesPayload: any;
-  purchasesData: PurchasesData[] = [];
-  purchasesDataSource = new MatTableDataSource(this.purchasesData);
-  purchasesDisplayedColumns: string[] = ['number', '_id', 'purc_date', 'purc_desc', 'purc_by', 'purc_amount', 'purc_supplier', 'purc_quantity', 'actions'];
-  purchasesDataIsArchived: any;
-
-  payrollPayload: any;
-  payrollData: PayrollData[] = [];
-  payrollDataSource = new MatTableDataSource(this.payrollData);
-  payrollDisplayedColumns = ['number', '_id', 'payr_date', 'payr_desc', 'payr_by', 'payr_amount', 'actions'];
-  payrollDataIsArchived: any;
+  
 
   getExpenses() {
     this.expensesData = EXPE_DATA;
@@ -723,6 +602,42 @@ export class FinanceComponent implements OnInit {
     })
   }
 
+  //GRAPH
+
+  //PUSH DATA
+
+  graphVar: any = {};
+
+  revenuesDataGraph: GraphData[] = []
+
+  getRevenuesData() {
+    this.revenuesDataGraph = []
+    let revenuesData = this.revenuesData;
+    for (var data of revenuesData) {
+      this.graphVar.date = data.rev_date
+      this.graphVar.amount = data.rev_amount
+      this.graphVar.type = "rev"
+      this.revenuesDataGraph.push(this.graphVar)
+      console.log(this.graphVar)
+      this.graphVar = [];
+    }
+  }
+
+  salesDataGraph: GraphData[] = []
+
+  getSalesData() {
+    this.salesDataGraph = []
+    let salesdata = this.salesData;
+    for (var data of salesdata) {
+      this.graphVar.date = data.sales_date
+      this.graphVar.amount = data.sales_quantity * data.sales_price
+      this.graphVar.type = "sales"
+      this.salesDataGraph.push(this.graphVar)
+      console.log(this.graphVar)
+      this.graphVar = [];
+    }
+  }
+
   expensesDataGraph: GraphData[] = []
 
   getExpensesData() {
@@ -765,6 +680,100 @@ export class FinanceComponent implements OnInit {
     }
   }
 
+  //Merge RevData
+
+  graphRevData: GraphData[] = []
+
+  mergeRevGraphData() {
+    this.dataRevenues = [];
+    this.graphRevData = this.revenuesDataGraph.concat(this.salesDataGraph);
+    let graphrevdata = this.graphRevData;
+
+    //HARD-CODING MONTHS HERE may better solutions pero fuck it
+
+    var janRev = 0; var janSal = 0; var janNet = 0;
+    var febRev = 0; var febSal = 0; var febNet = 0;
+    var marRev = 0; var marSal = 0; var marNet = 0;
+    var aprRev = 0; var aprSal = 0; var aprNet = 0;
+    var mayRev = 0; var maySal = 0; var mayNet = 0;
+    var junRev = 0; var junSal = 0; var junNet = 0;
+    var julRev = 0; var julSal = 0; var julNet = 0;
+    var augRev = 0; var augSal = 0; var augNet = 0;
+    var sepRev = 0; var sepSal = 0; var sepNet = 0;
+    var octRev = 0; var octSal = 0; var octNet = 0;
+    var novRev = 0; var novSal = 0; var novNet = 0;
+    var decRev = 0; var decSal = 0; var decNet = 0;
+
+    var feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec = 0
+
+    for (var data of graphrevdata) {
+      console.log("xxxxxxxxxxxxx" + this.libraryService.getMonth(data.date));
+
+      if (this.libraryService.getMonth(data.date) == "01") {
+        if (data.type === "rev") {
+          janRev = janRev + data.amount;
+        }
+        if (data.type === "sales") {
+          janSal = janSal + data.amount;
+        }
+        janNet = janNet + data.amount;
+        console.log(janNet)
+      }
+      if (this.libraryService.getMonth(data.date) == "02") {
+        if (data.type === "rev") {
+          febRev = febRev + data.amount;
+        }
+        if (data.type === "sales") {
+          febSal = febSal + data.amount;
+        }
+        febNet = febNet + data.amount;
+      }
+      if (this.libraryService.getMonth(data.date) == "03") {
+        if (data.type === "rev") {
+          marRev = marRev + data.amount;
+        }
+        if (data.type === "sales") {
+          marSal = marSal + data.amount;
+        }
+        marNet = marNet + data.amount;
+      }
+      if (this.libraryService.getMonth(data.date) == "04") {
+        if (data.type === "rev") {
+          aprRev = aprRev + data.amount;
+        }
+        if (data.type === "sales") {
+          aprSal = aprSal + data.amount;
+        }
+        aprNet = aprNet + data.amount;
+      }
+      if (this.libraryService.getMonth(data.date) == "05") {
+        if (data.type === "rev") {
+          mayRev = mayRev + data.amount;
+        }
+        if (data.type === "sales") {
+          maySal = maySal + data.amount;
+        }
+        mayNet = mayNet + data.amount;
+      }
+
+    }
+
+    console.log("January", janRev, janSal, janNet)
+
+    this.dataRevenues.push(["January", janRev, janSal, janNet]); this.balJan = janNet;
+    this.dataRevenues.push(["February", febRev, febSal, febNet]); this.balFeb = febNet;
+    this.dataRevenues.push(["March", marRev, marSal, marNet]); this.balMar = marNet;
+    this.dataRevenues.push(["April", aprRev, aprSal, aprNet]); this.balApr = aprNet;
+    this.dataRevenues.push(["May", mayRev, maySal, mayNet]); this.balMay = mayNet;
+    this.dataRevenues.push(["June", mayRev, maySal, mayNet]); this.balJun = mayNet;
+    this.dataRevenues.push(["July", mayRev, maySal, mayNet]); this.balJul = mayNet;
+    this.dataRevenues.push(["August", mayRev, maySal, mayNet]); this.balAug = mayNet;
+    this.dataRevenues.push(["September", mayRev, maySal, mayNet]); this.balSep = mayNet;
+    this.dataRevenues.push(["October", mayRev, maySal, mayNet]); this.balOct = mayNet;
+    this.dataRevenues.push(["November", mayRev, maySal, mayNet]); this.balNov = mayNet;
+    this.dataRevenues.push(["December", mayRev, maySal, mayNet]); this.balDec = mayNet;
+  }  
+
   graphExpData: GraphData[] = []
 
   mergeExpGraphData() {
@@ -773,8 +782,6 @@ export class FinanceComponent implements OnInit {
     this.dataBalance = [];
 
     this.graphExpData = this.expensesDataGraph.concat(this.purchasesDataGraph.concat(this.payrollDataGraph));
-    //this.graphExpData = this.graphExpData.concat(this.purchasesDataGraph);
-    //this.graphExpData = this.graphExpData.concat(this.payrollDataGraph)
     console.log(this.graphExpData);    
 
     //HARD-CODING MONTHS HERE may better solutions pero fuck it
@@ -852,8 +859,7 @@ export class FinanceComponent implements OnInit {
 
     }
 
-
-    this.dataExpenses.push(["January", janExp, janPurc, janPayr, janxNet]); 
+    this.dataExpenses.push(["January", janExp, janPurc, janPayr, janxNet]); this.balJan = this.balJan - janxNet;
     this.dataExpenses.push(["February", febExp, febPurc, febPayr, febxNet]); this.balFeb = this.balFeb - febxNet;
     this.dataExpenses.push(["March", marExp, marPurc, marPayr, marxNet]); this.balMar = this.balMar - marxNet;
     this.dataExpenses.push(["April", aprExp, aprPurc, aprPayr, aprxNet]); this.balApr = this.balApr - aprxNet;
@@ -865,9 +871,6 @@ export class FinanceComponent implements OnInit {
     this.dataExpenses.push(["October", mayExp, mayPurc, mayPayr, mayxNet]); this.balOct = this.balMay - mayxNet;
     this.dataExpenses.push(["November", mayExp, mayPurc, mayPayr, mayxNet]); this.balNov = this.balMay - mayxNet;
     this.dataExpenses.push(["December", mayExp, mayPurc, mayPayr, mayxNet]); this.balDec = this.balMay - mayxNet;
-
-    /*this.balJan = this.balJan - janxNet;*/
-
 
     // TOO LAZY TO DO THE RIGHT WAY
 
@@ -885,12 +888,9 @@ export class FinanceComponent implements OnInit {
     this.dataBalance.push(["September", this.balMay + mayxNet, mayxNet * -1, this.balMay, averageBal]);
     this.dataBalance.push(["October", this.balMay + mayxNet, mayxNet * -1, this.balMay, averageBal]);
     this.dataBalance.push(["November", this.balMay + mayxNet, mayxNet * -1, this.balMay, averageBal]);
-    this.dataBalance.push(["December", this.balMay + mayxNet, mayxNet * -1, this.balMay, averageBal]);    
+    this.dataBalance.push(["December", this.balMay + mayxNet, mayxNet * -1, this.balMay, averageBal]);
 
-  }
- 
-
-  mergeBalGraphData() {
+    console.log(this.salesDataGraph)
 
   }
 
@@ -933,7 +933,6 @@ export class FinanceComponent implements OnInit {
   //Graphs
   dynamicResize = true;
 
-  //Revenues 
   titleRevenues = 'Revenues for the past months';
   typeRevenues = ChartType.ComboChart;
   dataRevenues: any =[];
