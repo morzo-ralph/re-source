@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const router = express.Router();
 
 const Users = require("../database/models/users");
+const Pagination = require('../middleware/paginatedResult');
 
 router.post('/signup', async (req, res) => { 
     
@@ -81,4 +82,11 @@ router.post('/try', (req, res) => {
     // .then(users => res.send(users))
     // .catch(error => console.log(error));
 });
+
+router.get('/', (req, res) => {
+    Users.find({})
+        .then(data => res.send(data))
+        .catch(error => console.log(error));
+});
+
 module.exports = router;

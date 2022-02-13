@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 
+const Pagination = require('../middleware/paginatedResult');
 const Saldeltas = require('../database/models/saldeltas');
 
 router.get('/', (req, res) => {

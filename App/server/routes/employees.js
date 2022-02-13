@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const Employees = require('../database/models/employees');
+const Pagination = require('../middleware/paginatedResult');
 
 router.get('/', (req, res) => {
     Employees.find({})

@@ -4,6 +4,7 @@ const router = express.Router();
 const path = require('path');
 
 const Inventory = require('../database/models/inventory');
+const Pagination = require('../middleware/paginatedResult');
 
 const MIME_TYPE_MAP = {
     'image/png': 'png', 
@@ -51,11 +52,16 @@ router.post("/", upload.single('file'), (req, res, next) => {
 
 
 router.get('/', (req, res) => {
-    console.log(res.body)
     Inventory.find({})
-        .then(inventory => res.send(inventory))
+        .then(data => res.send(data))
         .catch(error => console.log(error));
 });
+
+// router.get('/', Pagination(Inventory), (req, res) => {
+//     res.json(res.paginatedResults).catch((error) => {
+//         res.status(500).json({message: error})
+//     });
+// });
 
 router.get('/:inventoryId', (req, res) => {
     Inventory.find({})
