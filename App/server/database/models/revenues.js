@@ -2,25 +2,13 @@ const mongoose = require('mongoose');
 
 const RevenuesSchema = new mongoose.Schema({
     number: Number,
+    id: String,
     rev_date: Date,
+    rev_supplier: String,
     rev_desc: String,
     rev_by: String,
-    rev_amount: Number,
-    number: Number,    
-       // _itemId: {
-    //     type: mongoose.Types.ObjectId
-    // },
-    /**
-     * number
-     * _id
-     * rev_date
-     * rev_desc
-     * rev_by
-     * rev_amount
-     * is_archive
-     * created_at
-     * updated_at
-     */
+    rev_amount: Number, 
+
     isArchive: Number,
     created_at: Date,
     updated_at: Date

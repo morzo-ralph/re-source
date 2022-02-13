@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 
 const ExpensesSchema = new mongoose.Schema({
     number: Number,
+    id : String,
     exp_date: Date,
+    exp_supplier: String,
     exp_desc: String,
     exp_by: String,
     exp_amount: Number,    

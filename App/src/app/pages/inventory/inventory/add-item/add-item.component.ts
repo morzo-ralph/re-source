@@ -20,13 +20,14 @@ export class AddItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.countData();
   }
   inventoryForm!: FormGroup;
   body: any = {}; //invdata: any = {}
   name: any;
   description: any;
   quantity: any;
-  imageUrl = 'http://localhost:3000/uploads';
+  imageUrl = 'http://localhost:3000/uploads/inventory';
   image: any;
   price: any;
   isArchive = 0;
@@ -50,24 +51,23 @@ export class AddItemComponent implements OnInit {
       this.image = file;
     }
   }
+
+  counter: any
+
+  countData() {
+    this.dataService.getAllItem('inventories').subscribe((data : any) => {
+      this.counter = data.length + 1;
+    })
+  }
   
   addItem() {
-
-    // name: String,
-    // description: String, 
-    // quantity: Number,
-    // price: Number,
-    // imageUrl: String,
-    // isArchive: Number,
-    // created_at: Date,
-    // updated_at: Date
-
     const formData = new FormData();
     formData.append('name', this.name);
     formData.append('description', this.description);
     formData.append('quantity', this.quantity);
     formData.append('file', this.image);
     formData.append('price', this.price);
+    formData.append('number', this.counter);
     
     const url = 'http://localhost:3000/inventories/'
     this.httpClient.post<any>(url, formData).subscribe((data: any) => {
@@ -83,14 +83,3 @@ export class AddItemComponent implements OnInit {
   }
 
 }
-
-// export class InventoryData {
-//   _id!: string;
-//   imageUrl!: string;
-//   name!: string;
-//   price!: number;
-//   quantity!: number;
-//   description!: string;
-//   isArchive!: number;
-// }
-
