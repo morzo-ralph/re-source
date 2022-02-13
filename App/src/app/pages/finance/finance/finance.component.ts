@@ -314,15 +314,35 @@ export class FinanceComponent implements OnInit {
     //  this.pettyCashDataSource.data = this.pettyCashPayload;
     //});
   }
+  transData: any = {};
+  transPerson: any;
+  transCashFlow: any;
+  transAmount: any;
+  transDesc: any;
 
-  addPettyCash() {
-    const dialogRef = this.matDialog.open(AddPettyCashComponent, {
-      height: '75%',
-      width: '100%'
-    });
+  addTransaction() {
+    // const dialogRef = this.matDialog.open(AddPettyCashComponent, {
+    //   height: '75%',
+    //   width: '100%'
+    // });
 
-    dialogRef.afterClosed().subscribe(() => this.getPettyCash());
-  }
+    // dialogRef.afterClosed().subscribe(() => this.getPettyCash());
+    this.transData.trans_person = this.transPerson;
+    this.transData.trans_cashflow = this.transCashFlow;
+    this.transData.trans_amount = this.transAmount;
+    this.transData.trans_desc = this.transDesc;
+
+    // this.dataService.createItem('transaction', this.transData).subscribe((data: any) => {
+    //   console.log(data);
+    // })
+
+    Swal.fire(
+      'Item Added!',
+      '',
+      'success'
+    )
+    this.transDesc = this.transAmount = this.transCashFlow = this.transPerson = ''
+    }
 
   viewPettyCash(pettyCash: any) {
     const dialogRef = this.matDialog.open(ViewPettyCashComponent, {
@@ -603,7 +623,7 @@ export class FinanceComponent implements OnInit {
   purchasesPayload: any;
   purchasesData: PurchasesData[] = [];
   purchasesDataSource = new MatTableDataSource(this.purchasesData);
-  purchasesDisplayedColumns: string[] = ['number', '_id', 'purc_date', 'purc_desc', 'purc_by', 'purc_amount', 'actions'];
+  purchasesDisplayedColumns: string[] = ['number', '_id', 'purc_date', 'purc_desc', 'purc_by', 'purc_amount', 'purc_supplier', 'purc_quantity', 'actions'];
   purchasesDataIsArchived: any;
 
   payrollPayload: any;
@@ -892,6 +912,22 @@ export class FinanceComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
   }
 
+  addPayroll() {
+    const dialogRef = this.matDialog.open(AddPurchaseFinanceComponent, {
+      height: '75%',
+      width: '100%'
+    });
+
+    dialogRef.afterClosed().subscribe();
+  }
+
+  loading = false;
+
+
+  loadPurchasesPayload() {
+    this.loading = true;
+    this.dataService
+  }
 
 
   //Graphs

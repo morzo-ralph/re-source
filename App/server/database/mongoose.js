@@ -4,8 +4,8 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/application',
 {
     //promiseLibrary: require('bluebird'),
-    //useNewUrlParser: true,
-    //useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
     //useFindAndModify: false,
     //retryWrites: true,
     //w: "majority",

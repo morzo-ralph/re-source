@@ -6,7 +6,7 @@
     <h2>Add Sales Form</h2>
     <mat-form-field appearance="outline">
         <mat-label>Amount</mat-label>
-        <input matInput [(ngModel)]="purchaseAmount" placeholder="amount..." type="number"/>
+        <input matInput [(ngModel)]="purchasePrice" placeholder="price" type="number"/>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
@@ -22,8 +22,18 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+        <mat-label>Qty.</mat-label>
+        <input matInput [(ngModel)]="purchaseQuantity" placeholder="Name..." type="number"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
         <mat-label>By</mat-label>
         <input matInput [(ngModel)]="purchaseBy" placeholder="Name..." type="string"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Supplier</mat-label>
+        <input matInput [(ngModel)]="purchaseSupplier" placeholder="Name..." type="string"/>
     </mat-form-field>
     
     <br/>

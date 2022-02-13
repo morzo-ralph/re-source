@@ -4,6 +4,7 @@ const router = express.Router();
 const path = require('path');
 
 const Inventory = require('../database/models/inventory');
+const Pagination = require('../middleware/paginatedResult');
 
 const MIME_TYPE_MAP = {
     'image/png': 'png', 
@@ -32,7 +33,7 @@ router.post("/", upload.single('file'), (req, res, next) => {
     if(!req.file) {
         return res.status(500).send({ message: 'Upload Failed'});
     } else {
-        req.body.imageUrl = 'http://localhost:3000/uploads/' + req.file.filename;
+        req.body.imageUrl = 'http://localhost:3000/uploads/inventory/' + req.file.filename;
         req.body.isArchive = 0;
         (new Inventory(req.body))
         .save()
@@ -51,11 +52,16 @@ router.post("/", upload.single('file'), (req, res, next) => {
 
 
 router.get('/', (req, res) => {
-    console.log(res.body)
     Inventory.find({})
-        .then(inventory => res.send(inventory))
+        .then(data => res.send(data))
         .catch(error => console.log(error));
 });
+//pagination working in postman
+// router.get('/', Pagination(Inventory), (req, res) => {
+//     res.json(res.paginatedResults).catch((error) => {
+//         res.status(500).json({message: error})
+//     });
+// });
 
 router.get('/:inventoryId', (req, res) => {
     Inventory.find({})

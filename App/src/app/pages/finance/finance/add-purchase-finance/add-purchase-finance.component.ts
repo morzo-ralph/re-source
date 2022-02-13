@@ -18,10 +18,12 @@ export class AddPurchaseFinanceComponent implements OnInit {
   countdata: any;
 
   purchaseData: any = {};
-  purchaseAmount: any;
+  purchasePrice: any;
   purchaseBy: any;
   purchaseDate: any;
   purchaseDesc: any;
+  purchaseSupplier: any;
+  purchaseQuantity: any;
 
   ngOnInit(): void {
     this.countData();
@@ -40,10 +42,12 @@ export class AddPurchaseFinanceComponent implements OnInit {
   }
 
   addPurchase() {
-        this.purchaseData.purc_amount = this.purchaseAmount;
+        this.purchaseData.purc_amount = this.purchasePrice;
         this.purchaseData.purc_by =  this.purchaseBy;
         this.purchaseData.purc_date = this.purchaseDate;
         this.purchaseData.purc_desc = this.purchaseDesc;
+        this.purchaseData.purc_supplier = this.purchaseSupplier;
+        this.purchaseData.purc_quantity = this.purchaseQuantity;
         this.purchaseData.isArchive = 0;
         this.purchaseData.number = this.countdata + 1;
         console.log(this.purchaseData);
@@ -58,25 +62,3 @@ export class AddPurchaseFinanceComponent implements OnInit {
         });
       }
 }
-
-// import { Component, OnInit } from '@angular/core';
-// import { MatDialog, MatDialogRef} from '@angular/material/dialog';
-// import { DataService } from 'src/app/services/data.service';
-// import Swal from 'sweetalert2';
-
-// @Component({
-//   selector: 'app-add-saless',
-//   templateUrl: './add-saless.component.html',
-//   styleUrls: ['./add-saless.component.scss']
-// })
-// export class AddSalessComponent implements OnInit {
-//   constructor(
-//     private dataService: DataService,
-//     private dialogRef: MatDialogRef<AddSalessComponent>,
-//   ) { }
-
-//   
-
-//   
-
-// }

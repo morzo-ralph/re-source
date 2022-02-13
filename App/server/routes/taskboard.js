@@ -4,6 +4,7 @@ const router = express.Router();
 const path = require('path');
 
 const TaskBoard = require('../database/models/taskboard');
+const Pagination = require('../middleware/paginatedResult');
 
 const MIME_TYPE_MAP = {
     'image/png': 'png', 
@@ -32,7 +33,7 @@ router.post("/", upload.single('file'), (req, res, next) => {
     if(!req.file) {
         return res.status(500).send({ message: 'Upload Failed'});
     } else {
-        req.body.imageUrl = 'http://localhost:3000/uploads/' + req.file.filename;
+        req.body.imageUrl = 'http://localhost:3000/uploads/taskboard/' + req.file.filename;
         req.body.isArchive = 0;
         (new TaskBoard(req.body))
         .save()
