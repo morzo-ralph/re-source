@@ -169,13 +169,19 @@ export class InventoryComponent implements OnInit {
   }
 
   itemView(data: any){ 
+    try {
       const dialogRef = this.dialog.open(ViewItemComponent, {
         width: '100%',
         height: '75%',
         data: data
       });
 
-      dialogRef.afterClosed().subscribe(() => this.getInventories());
+      dialogRef.afterClosed();
+      
+    } catch (error) {
+      console.log(error);
+    }
+      
     }
 
   itemUpdate(data: any){

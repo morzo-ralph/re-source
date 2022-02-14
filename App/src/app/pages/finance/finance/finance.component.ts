@@ -392,7 +392,13 @@ export class FinanceComponent implements OnInit {
   transCashFlow: any;
   transAmount: any;
   transDesc: any;
-
+  selected: any;
+  countPetty: any;
+  countPettyCash () {
+    this.dataService.getAllItem('pettycash').subscribe((data:any) => {
+      this.countPetty = data.length + 1;
+    })
+  }
   addTransaction() {
     // const dialogRef = this.matDialog.open(AddPettyCashComponent, {
     //   height: '75%',
@@ -400,10 +406,18 @@ export class FinanceComponent implements OnInit {
     // });
 
     // dialogRef.afterClosed().subscribe(() => this.getPettyCash());
-    this.transData.trans_person = this.transPerson;
-    this.transData.trans_cashflow = this.transCashFlow;
-    this.transData.trans_amount = this.transAmount;
-    this.transData.trans_desc = this.transDesc;
+    this.countPettyCash();
+    this.transData.pet_by = this.transPerson;
+    if(this.selected == 'deduct') {
+      this.transData.pet_amount = (this.transAmount) * (-1)
+    } else {
+      this.transData.pet_amount = this.transAmount;
+    }
+    this.transData.isArchive = 0;
+    this.transData.pet_desc = this.transDesc;
+    this.transData.number = this.countPetty;
+    console.log(this.selected);
+    console.log(this.transData.pet_amount)
 
     // this.dataService.createItem('transaction', this.transData).subscribe((data: any) => {
     //   console.log(data);
@@ -414,7 +428,12 @@ export class FinanceComponent implements OnInit {
       '',
       'success'
     )
-    this.transDesc = this.transAmount = this.transCashFlow = this.transPerson = ''
+    this.dataService.createItem('pettycash', this.transData).subscribe((data: any) => {
+      console.log(data);
+      this.getPettyCash();
+      this.transDesc = this.transAmount = this.transCashFlow = this.transPerson = ''
+    })
+    
     }
 
   viewPettyCash(pettyCash: any) {

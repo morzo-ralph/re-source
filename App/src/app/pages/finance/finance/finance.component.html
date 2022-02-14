@@ -176,8 +176,10 @@
                   <input matInput placeholder="Amount" [(ngModel)]="transAmount" type="number">
                 </mat-form-field>
                 <mat-form-field appearance="standard">
-                  <mat-label>Cash Flow</mat-label>
-                  <input matInput placeholder="Cash Flow" [(ngModel)]="transCashFlow" type="number">
+                  <mat-select [(value)]="selected" >
+                    <mat-option value="add">Add</mat-option>
+                    <mat-option value="deduct">Deduct</mat-option>
+                  </mat-select>
                 </mat-form-field>
                 <mat-form-field appearance="standard">
                   <mat-label>Person in-Charge</mat-label>

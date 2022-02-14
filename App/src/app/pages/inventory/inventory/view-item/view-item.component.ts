@@ -68,7 +68,7 @@ export class ViewItemComponent implements OnInit {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes,arhive it!'
+        confirmButtonText: 'Yes,archive it!'
       }).then((result) => {
         if (result.isConfirmed) {
           Swal.fire(
@@ -86,7 +86,9 @@ export class ViewItemComponent implements OnInit {
       this.dialogRef.close();
     }
 
-  
+  kekw() {
+    Swal.fire({}).then()
+  }
 
   restoreItem() {
     Swal.fire({
@@ -96,7 +98,7 @@ export class ViewItemComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes,restore it!'
+      confirmButtonText: 'Yes, restore it!'
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire(
