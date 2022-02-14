@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login/login.component';
 import { InventoryComponent } from './pages/inventory/inventory/inventory.component';
 import { GalleryComponent } from './pages/test/test/gallery/gallery.component';
 import { TaskboardComponent } from './pages/taskboard/taskboard.component';
+import { BundyComponent } from './bundy/bundy.component';
 
 const routes: Routes = [
 
@@ -16,6 +17,10 @@ const routes: Routes = [
 
   {
     path: 'login', component: LoginComponent
+  },
+
+  {
+    path: 'bundy', component: BundyComponent
   },
 
   {

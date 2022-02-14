@@ -1,19 +1,21 @@
 <div style="height: 100%; width: 100%">
     <mat-toolbar color="primary" class="mat-elevation-z12" style="position:fixed; top: 0px; z-index: 100">
       <button mat-mini-fab color="primary" (click)="drawer.toggle()">
+
         <mat-icon>reorder</mat-icon>
       </button> &nbsp;
-      <span>MSSE Engineering and Construction Services</span>
-      <span style="flex: 1 1 auto;"></span>
-      <!--<button mat-mini-fab color="primary">
+      <button mat-mini-fab color="accent" [routerLink]="['/bundy']">
         <mat-icon>punch_clock</mat-icon>
       </button>
-      <button mat-mini-fab matBadge="7" matBadgeColor="warn" matBadgeSize="small" color="primary">
+      <!--<button mat-mini-fab matBadge="7" matBadgeColor="warn" matBadgeSize="small" color="primary">
         <mat-icon>storefront</mat-icon>
       </button>-->               
-      <button mat-mini-fab matBadge="!" matBadgeColor="warn" matBadgeSize="small" color="accent">
+      <button mat-mini-fab color="accent">
         <mat-icon>settings</mat-icon>
-      </button>
+      </button>         
+      <span style="flex: 1 1 auto;"></span> 
+      <span>MSSE Engineering and Construction Services</span>
+      <span style="flex: 1 1 auto;"></span>          
        <button mat-mini-fab color="warn" [routerLink]="['/login']">
         <mat-icon>logout</mat-icon>
       </button>

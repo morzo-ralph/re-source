@@ -88,6 +88,8 @@ import { AddSalessComponent } from './pages/finance/finance/add-saless/add-sales
 import { AddPayrollFinanceComponent } from './pages/finance/finance/add-payroll-finance/add-payroll-finance.component';
 import { AddPurchaseFinanceComponent } from './pages/finance/finance/add-purchase-finance/add-purchase-finance.component';
 import { ViewItemComponent } from './pages/inventory/inventory/view-item/view-item.component';
+import { BundyComponent } from './bundy/bundy.component';
+import { MarketComponent } from './market/market.component';
 
 
 
@@ -123,7 +125,9 @@ import { ViewItemComponent } from './pages/inventory/inventory/view-item/view-it
     AddSalessComponent,
     AddPayrollFinanceComponent,
     AddPurchaseFinanceComponent,
-    ViewItemComponent
+    ViewItemComponent,
+    BundyComponent,
+    MarketComponent
   ],
   imports: [
     BrowserModule,

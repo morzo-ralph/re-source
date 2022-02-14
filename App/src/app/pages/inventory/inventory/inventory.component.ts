@@ -104,6 +104,16 @@ export class InventoryComponent implements OnInit {
   inventoriesDisplayedColumns = ['name', 'description', 'quantity', 'price', 'imageUrl'];
   inventoriesIdArchive: any;
 
+  getInventories() {
+    this.dataService.getAllItem('inventories')
+      .subscribe((data: any) => {
+        console.log(data);
+        this.inventoriesPayload = data;
+        this.inventoriesData = this.inventoriesPayload;
+        this.inventoriesDataSource.data = this.inventoriesPayload;
+      });
+  }
+
   pushItemData: any = {};
   idArchive: any;
   handleError: any;
@@ -114,15 +124,7 @@ export class InventoryComponent implements OnInit {
       this.inventoriesDataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  getInventories() {
-    this.dataService.getAllItem('inventories')
-      .subscribe((data: any) => {
-        console.log(data);
-        this.inventoriesPayload = data;
-        this.inventoriesData = this.inventoriesPayload;
-        this.inventoriesDataSource.data = this.inventoriesPayload;
-       }); 
-  }
+
 
   addItem() {
     // const dialogRef = this.dialog.open(AddItemComponent, {

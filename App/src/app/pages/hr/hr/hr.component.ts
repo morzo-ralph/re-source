@@ -1,23 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import { LibraryService } from '../../../services/library.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { GoogleChartComponent } from 'angular-google-charts';
+import { ChartType, Row } from 'angular-google-charts';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DataService } from 'src/app/services/data.service';
+import { LibraryService } from 'src/app/services/library.service';
+import Swal from 'sweetalert2';
+import { Data } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
-export interface Emp_Data {
+export interface Employees_Data {
   number: number;
-  id: string;  
-  name: string;  
+  _id: string;
+  id: string;
+  name: string;
   position: string;
-  status: string;
 }
 
-const HR_DATA: Emp_Data[] = [
-  { number: 1, id: '2021022', name: "John Doe", position: 'admin', status: 'status_code' },
-  { number: 2, id: '2021023', name: "Jobs Steve", position: 'admin', status: 'status_code' },
-  { number: 3, id: '2021024', name: "Adeg", position: 'admin', status: 'status_code' },
-  { number: 4, id: '2021025', name: "Wisofi", position: 'admin', status: 'status_code' },
-  { number: 5, id: '2021026', name: "Disury", position: 'admin', status: 'status_code' },
-  { number: 6, id: '2021027', name: "Dies Irae", position: 'admin', status: 'status_code' },
-  { number: 7, id: '2021028', name: "Bob", position: 'admin', status: 'status_code' },
+export interface Attendance_Data {
+  number: number;
+  _id: string;
+  id: string;
+  name: string;
+  attendance_date: string;
+  attendance_hours: number;
+}
+
+const EMP_DATA: Employees_Data[] = [
+  { number: 1, _id: '1111', id: '1111', name: "John Doe", position: 'admin' },
+  { number: 2, _id: '2222', id: '2222', name: "Jobs Steve", position: 'admin' },
+  { number: 1, _id: '3333', id: '3333', name: "John Doe", position: 'admin' },
+  { number: 2, _id: '4444', id: '4444', name: "Jobs Steve", position: 'admin' },
 ];
+
+const ATT_DATA: Attendance_Data[] = [
+  { number: 1, _id: '1111', id: '1111', name: "John Doe", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8},
+  { number: 2, _id: '2222', id: '2222', name: "Jobs Steve", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8},
+  { number: 3, _id: '3333', id: '3333', name: "John Doe", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8},
+  { number: 4, _id: '4444', id: '4444', name: "Jobs Steve", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8},
+];
+
 
 @Component({
   selector: 'app-hr',
@@ -40,12 +64,10 @@ export class HrComponent implements OnInit {
     //Event Loop Starts Here
     this.getDays()
     this.getMonths()
-    this.fillAtt()
+    this.fillAttendanceTable()
 
-
-
-
-
+    this.getEmployees();
+    this.getAttendance()
 
     //Event Loop Ends Here
     this.isLoaded = true
@@ -56,11 +78,65 @@ export class HrComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  empColumns: string[] = ['number', 'id', 'name', 'department', 'position', 'status', 'actions'];
-  empDataSource = HR_DATA;
 
-  attColumns: string[] = [];
-  attDataSource = HR_DATA;
+  employeesPayload: any;
+  employeesData: Employees_Data[] = [];
+  employeesDataSource = new MatTableDataSource(this.employeesData);
+  employeesDisplayedColumns = ['number', 'id', 'name', 'position', 'status', 'actions'];
+
+  employeesIdArchive: any;
+
+  getEmployees() {
+
+    this.employeesData = EMP_DATA;
+    this.employeesDataSource.data = this.employeesData;
+    
+
+  }
+
+
+  checkStatus(id: any) {
+    var status
+    if (localStorage.getItem(id) !== null) {
+      status = 1
+    }
+    else {
+      status = 0
+    }
+    return (status)
+  }
+
+
+
+  //empDataSource = EMP_DATA;
+
+  //employeesPayload: any;
+  //employeesData: Employees_Data[] = [];
+  //employeesDataSource = new MatTableDataSource(this.employeesData);
+  //employeesDisplayedColumns = ['number', 'id', 'name', 'position', 'status', 'actions'];
+
+ 
+  /*attendanceDataSource = ATT_DATA;*/
+
+
+  attendancePayload: any;
+  attendanceData: Attendance_Data[] = [];
+  attendanceDataSource = new MatTableDataSource(this.attendanceData); 
+
+  attendanceIdArchive: any;
+  attendanceDisplayedColumns: string[] = [];
+
+  getAttendance() {
+
+    this.attendanceData = ATT_DATA;
+    this.attendanceDataSource.data = this.attendanceData;
+    
+
+  }
+
+  dateMatch(date: any) {
+
+  }
 
   getDate() {
     return this.library.getDate("EEEE, MMMM d, y")
@@ -87,12 +163,11 @@ export class HrComponent implements OnInit {
     console.log(this.monthsArray)
   }
 
-  fillAtt() {
-    this.attColumns = []
-    this.attColumns.push("name")
-    this.attColumns = this.attColumns.concat(this.daysArray)
-    console.log(this.attColumns)
-    this.attColumns.push("total")
+  fillAttendanceTable() {
+    this.attendanceDisplayedColumns = []
+    this.attendanceDisplayedColumns.push("name")
+    this.attendanceDisplayedColumns = this.attendanceDisplayedColumns.concat(this.daysArray)
+    this.attendanceDisplayedColumns.push("total")
   }
 
 
