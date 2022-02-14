@@ -127,6 +127,9 @@ export class BundyComponent implements OnInit {
         }
         else if (this.checkStatus(this.clockInID) == 1)
         {
+
+          //PUSH TO ATTENDANCE
+
           localStorage.removeItem(this.clockInID);
         }
       }    

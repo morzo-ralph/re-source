@@ -39,7 +39,11 @@ const ATT_DATA: Attendance_Data[] = [
   { number: 1, _id: '1111', id: '1111', name: "John Doe", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8},
   { number: 2, _id: '2222', id: '2222', name: "Jobs Steve", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8},
   { number: 3, _id: '3333', id: '3333', name: "John Doe", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8},
-  { number: 4, _id: '4444', id: '4444', name: "Jobs Steve", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8},
+  { number: 4, _id: '4444', id: '4444', name: "Jobs Steve", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8 },
+  { number: 1, _id: '1111', id: '1111', name: "John Doe", attendance_date: '2022-02-12T16:00:00.000+00:00', attendance_hours: 8 },
+  { number: 2, _id: '2222', id: '2222', name: "Jobs Steve", attendance_date: '2022-02-12T16:00:00.000+00:00', attendance_hours: 8 },
+  { number: 3, _id: '3333', id: '3333', name: "John Doe", attendance_date: '2022-02-12T16:00:00.000+00:00', attendance_hours: 8 },
+  { number: 4, _id: '4444', id: '4444', name: "Jobs Steve", attendance_date: '2022-02-12T16:00:00.000+00:00', attendance_hours: 8 },
 ];
 
 
@@ -50,7 +54,7 @@ const ATT_DATA: Attendance_Data[] = [
 })
 export class HrComponent implements OnInit {
 
-  constructor(private library: LibraryService) { }
+  constructor(private library: LibraryService, private datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.load()
@@ -134,7 +138,20 @@ export class HrComponent implements OnInit {
 
   }
 
-  dateMatch(date: any) {
+  dateMatch(attendanceDay: any, calendarDate: any) {
+
+    /*var date = new Date;*/
+    var date = this.datepipe.transform(attendanceDay,"YYYY-MM-dd")
+
+    console.log(attendanceDay, calendarDate, date)
+
+    if (date === calendarDate) {
+      return 1;
+
+    }
+    else {
+      return 0
+    }
 
   }
 
