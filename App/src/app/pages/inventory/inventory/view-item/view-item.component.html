@@ -52,8 +52,14 @@
                 <hr>
                 <br>
                 <button mat-dialog-close (click)="updateItem()" mat-raised-button color="primary">Update Item</button>
-                <button mat-dialog-close (click)="restoreItem()" mat-raised-button color="primary">Restore Item</button>
-                <button mat-dialog-close (click)="archiveItem()" mat-raised-button color="warn">Archive Item</button>
+                <ng-container *ngIf="itemIsArchive == 1">
+                    <button mat-dialog-close (click)="restoreItem()" mat-raised-button color="primary">Restore Item</button>
+                </ng-container>
+                <ng-container *ngIf="itemIsArchive == 0">
+                    <button mat-dialog-close (click)="archiveItem()" mat-raised-button color="warn">Archive Item</button>
+                </ng-container>
+                
+                
             
         </div>
     </mat-card>

@@ -17,7 +17,10 @@ export class ViewItemComponent implements OnInit {
     private dialogRef: MatDialogRef<ViewItemComponent>
   ) { }
 
+  itemEdit: any = {}
+
   number: any;
+  itemId: any;
   itemName: any;
   itemDesc: any;
   itemQty: any;
@@ -27,6 +30,7 @@ export class ViewItemComponent implements OnInit {
   sellQty: any;
 
   ngOnInit(): void {
+    this.itemId = this.data._id
     this.number = this.data.number
     this.itemName = this.data.name
     this.itemDesc = this.data.description
@@ -40,15 +44,74 @@ export class ViewItemComponent implements OnInit {
   }
 
   updateItem() {
+    this.itemEdit.name = this.itemName
+    this.itemEdit.description = this.itemDesc
+    this.itemEdit.quantity = this.itemQty
+    this.itemEdit.price = this.itemPrice
 
+    this.dataService.updateItem('inventories',this.itemId, this.itemEdit).subscribe((data : any) => {
+      Swal.fire(
+        'Item Updated!',
+        '',
+        'success'
+      )
+      this.onNoClick();
+      console.log(data);
+    });
   }
 
   archiveItem() {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes,arhive it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Archived!',
+            'Your file has been archived.',
+            'success'
+          )
+          //console.log(i);
+          //this.itemId = this.;
+          this.dataService.archiveItem('inventories', this.itemId, {"isArchive": 1}).subscribe((data: any) => {
+            console.log(data);
+          });
+        }
+      })
+      this.dialogRef.close();
+    }
 
-  }
+  
 
   restoreItem() {
-
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes,restore it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Item Restored!',
+          'Your file has been restored.',
+          'success'
+        )
+        //console.log(i);
+        //this.itemId = this.;
+        this.dataService.archiveItem('inventories', this.itemId, {"isArchive": 0}).subscribe((data: any) => {
+          console.log(data);
+        });
+      }
+    })
+    this.dialogRef.close();
   }
 
   sellItem() {
