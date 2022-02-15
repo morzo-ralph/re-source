@@ -92,6 +92,7 @@ import { BundyComponent } from './bundy/bundy.component';
 import { MarketComponent } from './market/market.component';
 import { AddTaskComponent } from './pages/taskboard/add-task/add-task.component';
 import { ViewTaskComponent } from './pages/taskboard/view-task/view-task.component';
+import { ViewPayrollFinanceComponent } from './pages/finance/finance/view-payroll-finance/view-payroll-finance.component';
 
 
 
@@ -131,7 +132,8 @@ import { ViewTaskComponent } from './pages/taskboard/view-task/view-task.compone
     BundyComponent,
     MarketComponent,
     AddTaskComponent,
-    ViewTaskComponent
+    ViewTaskComponent,
+    ViewPayrollFinanceComponent
   ],
   imports: [
     BrowserModule,

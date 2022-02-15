@@ -58,7 +58,10 @@ export class HrComponent implements OnInit {
 
   ngOnInit(): void {
     this.load()
+    //this.employeesDataSource.paginator = this.paginator
   }
+
+  //@ViewChild(MatPaginator) paginator!: MatPaginator
 
   isLoaded: boolean = false
 
@@ -94,6 +97,7 @@ export class HrComponent implements OnInit {
 
     this.employeesData = EMP_DATA;
     this.employeesDataSource.data = this.employeesData;
+    //this.employeesDataSource.paginator = this.paginator;
     
 
   }

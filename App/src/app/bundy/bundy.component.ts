@@ -129,6 +129,8 @@ export class BundyComponent implements OnInit {
         {
 
           //PUSH TO ATTENDANCE
+          console.log(localStorage.getItem(this.clockInID))
+         
 
           localStorage.removeItem(this.clockInID);
         }
@@ -141,6 +143,33 @@ export class BundyComponent implements OnInit {
     /*localStorage.setItem(this.clockInID, );*/
 
     /*localStorage.setItem(this.clockInID, this.clockInID.toString(this.timeinhours + this.timeinminutes));*/
+  }
+  // async clockIn2() {
+
+  //   //localStorage.getItem('_id')
+    
+  //   if(localStorage.getItem('time-in') == '') {
+  //     localStorage.setItem('time-in', Date.now().toString())
+  //     console.log(localStorage.getItem('time-in'))
+  //   } else {
+  //     localStorage.setItem('time-out', Date.now().toString())
+  //     console.log(localStorage.getItem('time-out'))
+      
+  //     this.subtractHours(localStorage.getItem('time-in'), localStorage.getItem('time-out'))
+  //     localStorage.removeItem('time-in')
+  //     localStorage.removeItem('time-out')
+  //   }
+  // }
+
+  subtractHours(old: any, now: any){
+    var diffInMS = now - old;
+    var msInHour = Math.floor(diffInMS/1000/60);
+    console.log(msInHour)
+    if (msInHour < 60) {
+      console.log('Within hour');
+    } else {
+      console.log('Not within the hour');
+    }
   }
 
   getClockIn(id: any) {
