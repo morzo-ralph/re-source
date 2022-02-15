@@ -90,6 +90,8 @@ import { AddPurchaseFinanceComponent } from './pages/finance/finance/add-purchas
 import { ViewItemComponent } from './pages/inventory/inventory/view-item/view-item.component';
 import { BundyComponent } from './bundy/bundy.component';
 import { MarketComponent } from './market/market.component';
+import { AddTaskComponent } from './pages/taskboard/add-task/add-task.component';
+import { ViewTaskComponent } from './pages/taskboard/view-task/view-task.component';
 
 
 
@@ -127,7 +129,9 @@ import { MarketComponent } from './market/market.component';
     AddPurchaseFinanceComponent,
     ViewItemComponent,
     BundyComponent,
-    MarketComponent
+    MarketComponent,
+    AddTaskComponent,
+    ViewTaskComponent
   ],
   imports: [
     BrowserModule,
