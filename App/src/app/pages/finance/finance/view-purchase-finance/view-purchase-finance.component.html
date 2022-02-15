@@ -20,17 +20,17 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Price:</mat-label>
-                <input matInput [(ngModel)]="purcPrice" type="number" />
+                <input matInput [(ngModel)]="purcPrice" type="number"  />
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Quantity:</mat-label>
-                <input matInput [(ngModel)]="purcPrice" type="number" />
+                <input matInput [(ngModel)]="purcQty" type="number" min="0"/>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Description:</mat-label>
-                <input matInput [(ngModel)]="purcDesc" type="number"/>
+                <input matInput [(ngModel)]="purcDesc" type="text"/>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
@@ -40,7 +40,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Position-in-Charge:</mat-label>
-                <input matInput [(ngModel)]="purcBy" type="number" />
+                <input matInput [(ngModel)]="purcBy" type="text" />
             </mat-form-field>
 
             <br>
