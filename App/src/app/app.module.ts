@@ -93,6 +93,8 @@ import { MarketComponent } from './market/market.component';
 import { AddTaskComponent } from './pages/taskboard/add-task/add-task.component';
 import { ViewTaskComponent } from './pages/taskboard/view-task/view-task.component';
 import { ViewPayrollFinanceComponent } from './pages/finance/finance/view-payroll-finance/view-payroll-finance.component';
+import { ViewPurchaseFinanceComponent } from './pages/finance/finance/view-purchase-finance/view-purchase-finance.component';
+import { ViewSalessComponent } from './pages/finance/finance/view-saless/view-saless.component';
 
 
 
@@ -133,7 +135,9 @@ import { ViewPayrollFinanceComponent } from './pages/finance/finance/view-payrol
     MarketComponent,
     AddTaskComponent,
     ViewTaskComponent,
-    ViewPayrollFinanceComponent
+    ViewPayrollFinanceComponent,
+    ViewPurchaseFinanceComponent,
+    ViewSalessComponent
   ],
   imports: [
     BrowserModule,

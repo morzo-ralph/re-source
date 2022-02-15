@@ -60,6 +60,7 @@ export class AddTaskComponent implements OnInit {
     formData.append('taskBoard_content', this.taskContent);
     formData.append('file', this.image);
     formData.append('number', this.counter);
+    //formData.append('isArchive', 0);
 
     const url = 'http://localhost:3000/taskboard/'
     this.httpClient.post<any>(url, formData).subscribe((data: any) => {
