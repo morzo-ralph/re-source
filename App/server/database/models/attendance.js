@@ -4,13 +4,16 @@ const AttendanceSchema = new mongoose.Schema({
     number: Number,
     id: String,
     name: String,
-    attendance_date: Date,
-    attendance_hours: Date,    
+    attendance_date_in: Date,
+    attendance_date_out: Date,
+    attendance_hours: Number,    
        // _itemId: {
     //     type: mongoose.Types.ObjectId
     // },
 
-    isArchive: Number,
+    isArchive: {
+        type: Number, default: 0
+    },
     created_at: Date,
     updated_at: Date
 });

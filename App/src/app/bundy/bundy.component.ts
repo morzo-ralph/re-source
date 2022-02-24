@@ -10,6 +10,7 @@ import { LibraryService } from 'src/app/services/library.service';
 import Swal from 'sweetalert2';
 import { Data } from '@angular/router';
 import { DatePipe } from '@angular/common';
+//import { time } from 'console';
 
 export interface Employees_Data {
   number: number;
@@ -33,7 +34,9 @@ const EMP_DATA: Employees_Data[] = [
 })
 export class BundyComponent implements OnInit {
 
-  constructor(public datepipe: DatePipe,) { }
+  constructor(
+    public datepipe: DatePipe,
+    private dataService: DataService) { }
 
   ngOnInit(): void {
 
@@ -51,6 +54,7 @@ export class BundyComponent implements OnInit {
     this.getTime();
     this.loadSample();
     this.getEmployees();
+    this.getAttendance();
 
     //Event Loop Ends Here
     this.isLoaded = true
@@ -122,8 +126,9 @@ export class BundyComponent implements OnInit {
       if (data.id == this.clockInID) {
 
         if (this.checkStatus(this.clockInID) == 0) {
-          localStorage.removeItem(this.clockInID);
-          localStorage.setItem(this.clockInID, this.date);
+          localStorage.removeItem(this.clockInID)
+          localStorage.setItem(this.clockInID, this.date)
+          console.log(localStorage.getItem(this.clockInID))
         }
         else if (this.checkStatus(this.clockInID) == 1)
         {
@@ -132,7 +137,7 @@ export class BundyComponent implements OnInit {
           console.log(localStorage.getItem(this.clockInID))
          
 
-          localStorage.removeItem(this.clockInID);
+          localStorage.removeItem(this.clockInID)
         }
       }    
     }
@@ -144,36 +149,76 @@ export class BundyComponent implements OnInit {
 
     /*localStorage.setItem(this.clockInID, this.clockInID.toString(this.timeinhours + this.timeinminutes));*/
   }
-  // async clockIn2() {
 
-  //   //localStorage.getItem('_id')
+   clockIn2() {
+    var timeIn : any
+    timeIn = localStorage.setItem('time-in', Date.now().toString())
+    if(timeIn != '') {
+      var timeOut = localStorage.setItem('time-out', Date.now().toString())
+      console.log(localStorage.getItem('time-out') + 'time out')
     
-  //   if(localStorage.getItem('time-in') == '') {
-  //     localStorage.setItem('time-in', Date.now().toString())
-  //     console.log(localStorage.getItem('time-in'))
-  //   } else {
-  //     localStorage.setItem('time-out', Date.now().toString())
-  //     console.log(localStorage.getItem('time-out'))
-      
-  //     this.subtractHours(localStorage.getItem('time-in'), localStorage.getItem('time-out'))
-  //     localStorage.removeItem('time-in')
-  //     localStorage.removeItem('time-out')
-  //   }
-  // }
+      this.subtractHours(timeOut, timeIn)
+    } else {
+      localStorage.setItem('time-in', Date.now().toString())
+    }
+    
+  }
+
+  attendance: any = {}
+  attendanceData: any = {}
+  attendanceBool: boolean = false
+  attendanceCount: any
+  attendanceId: any
+
+  getAttendance() {
+    this.dataService.getAllItem('attendance').subscribe((data: any) => {
+      this.attendance = data
+      this.attendanceCount = data.length
+    })
+  }
+
+  timeIn(){
+    this.attendanceData.number = parseInt(this.attendanceCount) + 1
+    this.attendanceData.id = localStorage.getItem('_id')
+    var name : any = localStorage.getItem('fname') + ' ' + localStorage.getItem('lname')
+    this.attendanceData.name = name
+    this.attendanceData.attendance_date_in = new Date()
+   localStorage.setItem('try-in', this.attendanceData.attendance_date_in)
+   this.dataService.createItem('attendance', this.attendanceData).subscribe((data: any) => {
+     console.log(data)
+      this.attendanceId = data._id
+      this.attendanceBool = true
+      this.getAttendance()
+    })
+  }
+
+  timeOut(){
+    this.attendanceData.id = this.attendanceId
+    //this.attendanceData.attendance_date_out = new Date()
+    localStorage.setItem('try-out', new Date().toDateString())
+    this.dataService.archiveItem('attendance', this.attendanceData.id, { 'attendance_date_out': new Date() } ).subscribe((data : any) => {
+      console.log(data)
+      this.attendanceBool = false
+      this.getAttendance()
+    })
+
+  }
 
   subtractHours(old: any, now: any){
-    var diffInMS = now - old;
-    var msInHour = Math.floor(diffInMS/1000/60);
+    var diffInMS = now - old
+    var msInHour = Math.floor(diffInMS/1000/60)
     console.log(msInHour)
+          localStorage.removeItem('time-in');
+      localStorage.removeItem('time-out');
     if (msInHour < 60) {
-      console.log('Within hour');
+      console.log('Within hour')
     } else {
-      console.log('Not within the hour');
+      console.log('Not within the hour')
     }
   }
 
   getClockIn(id: any) {
-    return (localStorage.getItem(id));
+    return (localStorage.getItem(id))
   }
 
   getTimeIn(time: any) {

@@ -62,7 +62,14 @@
                     <input matInput placeholder="ID" [(ngModel)]="clockInID">
                   </mat-form-field>
                   <br />
-                  <button mat-raised-button color="primary" (click)="clockIn()">Clock-In</button>
+                  <ng-container *ngIf="attendanceBool == false">
+                    <button mat-raised-button color="primary" (click)="timeIn()">Clock-In</button>
+                  </ng-container>
+                  <ng-container *ngIf="attendanceBool == true">
+                    <button mat-raised-button color="primary" (click)="timeOut()">Clock-Out</button>
+                  </ng-container>
+                  
+                  <!-- <button mat-raised-button color="primary" (click)="clockIn()">Clock-In</button> -->
                 </div>
               </mat-card-content>
             </mat-card>
