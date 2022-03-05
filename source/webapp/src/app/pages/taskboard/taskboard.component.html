@@ -1,0 +1,14 @@
+<mat-toolbar color="primary" class="mat-elevation-z22" style="z-index: 100;">
+  <span style="flex: 1 1 auto;"></span>
+  <span>Taskboard</span>
+  <span style="flex: 1 1 auto;"></span>
+  
+</mat-toolbar>
+<button (click)="addTask()" mat-raised-button color="primary">Add Task</button>
+<hr>
+ <div *ngFor="let t of task; let i = index">
+      <p> {{ t.taskBoard_name }} </p>
+      <p> {{ t.taskBoard_content}}</p>
+      <img src="{{ t.imageUrl}}" alt="">
+      <button (click)="viewTask(t)" mat-raised-button color="primary">View Task</button>
+  </div>

@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-
 import { DataService } from './services/data/dataservice.service';
-
 import { Get } from './services/data/data.model';
 
-
-/*import { LibraryService } from './services/library.service';*/
-
-
+//import { Component } from '@angular/core';
+//import { DataService } from './services/data.service';
+import { LibraryService } from './services/library.service';
 
 @Component({
   selector: 'app-root',
@@ -15,52 +12,95 @@ import { Get } from './services/data/data.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'webapp';
+  title = 'Re:Source';
 
-  constructor(public dataService: DataService) {}
+  constructor(public dataService: DataService, public libraryService: LibraryService) {}
 
   ngOnInit(): void {
-    this.checkIfMobile()
-    this.checkIfServerActive()
+
+    this.load();
+
+  }
+  async load() {
+    /*this.isLooped= false;*/
+    //Event Loop Starts Here
+
+    this.checkIfMobile();
+    this.checkIfServerActive();
+
+    await this.delay(1000);
+    this.reload();
+    /*this.isLooped = true;*/
+    //Event Loop End Here
+  }
+
+  reload() {
+    this.load();
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   isMobile: boolean = false;
 
   checkIfMobile() {
-    console.log(window.screen.width)
+    /*console.log(window.screen.width)*/
     if (window.screen.width <= 480) {
       this.isMobile = true;
     }
-    console.log(this.isMobile)
-    /*this.libraryService.setIsMobile(this.isMobile)*/
+    else {
+      this.isMobile = false
+    }
+    /*console.log(this.isMobile)*/
+    this.libraryService.setIsMobile(this.isMobile)
   }
 
   isConn: boolean = false;
   isConnMsg!: Get;
   isConnStatus: any;
 
-  //salesPayload: any;
-  //salesData: SalesData[] = [];
-  //salesDataSource = new MatTableDataSource(this.salesData);
-  //salesDisplayedColumns: string[] = ['number', '_id', 'sales_date', 'sales_desc', 'sales_by', 'sales_amount', 'sales_supplier', 'actions'];
-  //salesDataIsArchived: any;
-
-   //this.dataService.getAllItem('pettycash').subscribe((data: any) => {
-    //  this.pettyCashPayload = data;
-    //  console.log(this.pettyCashPayload);
-    //  this.pettyCashData = this.pettyCashPayload;
-    //  this.pettyCashDataSource.data = this.pettyCashPayload;
-    //});
-
 
   checkIfServerActive() {
-    var conMsg = this.dataService.checkConn().subscribe((data: any) => {
-      
+    var conMsg = this.dataService.checkConn().subscribe((data: any) => {      
       this.isConnMsg = data;
-      console.log(this.isConnMsg);
+      /*console.log(this.isConnMsg);*/
       this.isConnStatus = this.isConnMsg.status;
     })
   }
 
 
+
+
 }
+
+//import { Component } from '@angular/core';
+//import { DataService } from './services/data.service';
+//import { LibraryService } from './services/library.service';
+
+//@Component({
+//  selector: 'app-root',
+//  templateUrl: './app.component.html',
+//  styleUrls: ['./app.component.scss']
+//})
+//export class AppComponent {
+//  title = 'frontend';
+
+//  constructor(public dataService: DataService, public libraryService: LibraryService) { }
+
+//  ngOnInit(): void {
+//    this.checkIfMobile()
+//    //this.checkIfServerActive()
+//  }
+
+//  isMobile: boolean = false;
+
+//  checkIfMobile() {
+//    console.log(window.screen.width)
+//    if (window.screen.width <= 480) {
+//      this.isMobile = true;
+//    }
+//    console.log(this.isMobile)
+//    this.libraryService.setIsMobile(this.isMobile)
+//  }
+//}

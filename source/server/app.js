@@ -7,9 +7,10 @@ const path = require('path');
 
 const user = "HeadDev";
 const password = "Aa1234567";
-const database = "MSSE" + "_db";
+const database = "source";
 
-const uri ="mongodb+srv://" + user + ":" + password + "@resourcecluster.7j9mt.mongodb.net/" + database + "?retryWrites=true&w=majority";
+const uri ="mongodb+srv://" + user + ":" + password + "@resourcecluster.7j9mt.mongodb.net/" + database + "_db?retryWrites=true&w=majority";
+
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -103,7 +104,6 @@ app.use("/api/payroll", payrollRouter);
 app.use("/api/attendance", attendanceRouter);
 
 app.use("/api/users", usersRouter);
-
 
 app.all((req, res, next) => {
     res.send("Nothing Here, Ignore Me");

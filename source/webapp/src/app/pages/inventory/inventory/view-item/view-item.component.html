@@ -1,0 +1,66 @@
+<div>
+    <div mat-dialog-actions style="padding: 0; margin: 0; display:flex; flex-direction: row-reverse;">
+        <button mat-button (click)="onNoClick()" style="flex-direction: row-reverse;">X</button>
+    </div>
+    <mat-card-title>View Item</mat-card-title>
+    <mat-card>
+        <div>
+            
+                <mat-form-field appearance="outline">
+                    <mat-label>Item Id:</mat-label>
+                    <input matInput [(ngModel)]="number" type="text" disabled/>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Item Name:</mat-label>
+                    <input matInput [(ngModel)]="itemName" type="text"/>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Item Description:</mat-label>
+                    <input matInput [(ngModel)]="itemDesc" type="text"/>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Qty:</mat-label>
+                    <input matInput [(ngModel)]="itemQty" type="number" min="0" max="99"/>
+                </mat-form-field>
+
+                <!-- <mat-form-field appearance="outline">
+                    <mat-label>Price:</mat-label>
+                    <input matInput [matDatepicker]="picker" [(ngModel)]="expDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field> -->
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Price:</mat-label>
+                    <input matInput [(ngModel)]="itemPrice" type="number"/>
+                </mat-form-field>
+
+                <br>
+                <hr>
+                <mat-form-field appearance="outline">
+                    <mat-label>Quantity to Sell</mat-label>
+                    <input matInput [(ngModel)]="sellQty" type="number" min="0" max="99">
+                </mat-form-field>
+               <br>
+               
+                <br>
+                <button mat-dialog-close (click)="sellItem()" mat-raised-button color="primary">Sell Item</button>
+                <br>
+                <hr>
+                <br>
+                <button mat-dialog-close (click)="updateItem()" mat-raised-button color="primary">Update Item</button>
+                <ng-container *ngIf="itemIsArchive == 1">
+                    <button mat-dialog-close (click)="restoreItem()" mat-raised-button color="primary">Restore Item</button>
+                </ng-container>
+                <ng-container *ngIf="itemIsArchive == 0">
+                    <button mat-dialog-close (click)="archiveItem()" mat-raised-button color="warn">Archive Item</button>
+                </ng-container>
+                
+                
+            
+        </div>
+    </mat-card>
+    </div>
