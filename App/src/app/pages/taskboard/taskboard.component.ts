@@ -33,7 +33,7 @@ export class TaskboardComponent implements OnInit {
   }
 
   getAllTaskBoard() {
-    this.dataService.getAllItem('taskboard').subscribe((data : any) => {
+    this.dataService.getAllItem('taskboards').subscribe((data : any) => {
       console.log(data);
       this.task = data;
     });

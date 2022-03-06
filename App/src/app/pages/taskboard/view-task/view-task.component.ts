@@ -42,7 +42,7 @@ export class ViewTaskComponent implements OnInit {
     this.taskBoardEdit.taskBoard_name = this.taskName
     this.taskBoardEdit.taskBoard_content = this.taskContent
 
-    this.dataService.updateItem('taskboard', this._id, this.taskBoardEdit).subscribe((data : any) => {
+    this.dataService.updateItem('taskboards', this._id, this.taskBoardEdit).subscribe((data : any) => {
       Swal.fire(
         'Task Updated!',
         '',
@@ -54,7 +54,7 @@ export class ViewTaskComponent implements OnInit {
   }
 
   archiveTask() {
-    this.dataService.archiveItem('taskboard', this._id, {"isArchive": 1}).subscribe((data : any) => {
+    this.dataService.archiveItem('taskboards', this._id, {"isArchive": 1}).subscribe((data : any) => {
       Swal.fire(
         'Task Archived',
         '',
@@ -66,7 +66,7 @@ export class ViewTaskComponent implements OnInit {
   }
 
   restoreTask() {
-    this.dataService.archiveItem('taskboard', this._id, {"isArchive": 0}).subscribe((data : any) => {
+    this.dataService.archiveItem('taskboards', this._id, {"isArchive": 0}).subscribe((data : any) => {
       Swal.fire(
         'Task Restored',
         '',

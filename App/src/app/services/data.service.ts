@@ -26,6 +26,11 @@ export class DataService {
   //}
 
   //General Methods
+  getPost(uri: string ,pageSize: number, currentPage: number) {
+    const queryParams = `?pageSize=${pageSize}&currentPage=${currentPage}`
+    
+    return this.http.get(`${this.baseURL}/${uri}` + queryParams)
+  }
 
   get(uri: string) {
     return this.http.get(`${this.baseURL}/${uri}`);

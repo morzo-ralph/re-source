@@ -62,7 +62,7 @@ export class AddTaskComponent implements OnInit {
     formData.append('number', this.counter);
     //formData.append('isArchive', 0);
 
-    const url = 'http://localhost:3000/taskboard/'
+    const url = 'http://localhost:3000/taskboards/'
     this.httpClient.post<any>(url, formData).subscribe((data: any) => {
       console.log(data);
     });

@@ -63,11 +63,11 @@ app.use("/salarytotals", salarytotalsRouter);
 app.use("/saldeltas", saldeltasRouter);
 app.use("/sales", salesRouter);
 app.use("/stocks", stocksRouter);
-app.use("/gallery", galleryRouter);
-app.use("/announcement", announcementRouter);
-app.use("/taskboard", taskBoardRouter);
-app.use("/payroll", payrollRouter);
-app.use("/attendance", attendanceRouter);
+app.use("/galleries", galleryRouter);
+app.use("/announcements", announcementRouter);
+app.use("/taskboards", taskBoardRouter);
+app.use("/payrolls", payrollRouter);
+app.use("/attendances", attendanceRouter);
 
 app.use("/users", usersRouter);
 

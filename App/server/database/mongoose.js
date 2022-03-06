@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
+const uri = "mongodb+srv://Dev1:Dev1@resourcecluster.7j9mt.mongodb.net/MSSE_db"
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/application',
+// mongoose.connect('mongodb://localhost/application',
+mongoose.connect(uri,
 {
     //promiseLibrary: require('bluebird'),
     useNewUrlParser: true,
