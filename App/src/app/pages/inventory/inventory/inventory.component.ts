@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { DataService } from '../../../services/data.service';
 import { LibraryService } from 'src/app/services/library.service';
 import { DatePipe } from '@angular/common';
@@ -7,13 +7,14 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource, _MatTableDataSource } from '@angular/material/table';
 import { AddItemComponent } from './add-item/add-item.component';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, filter } from 'rxjs/operators';
 
 import { ViewItemComponent } from './view-item/view-item.component';
+import { MatPaginator } from '@angular/material/paginator';
 
 export interface InventoriesData {
   number: number;
@@ -65,6 +66,10 @@ const PURC_DATA: PurchasesData[] = [
 })
 export class InventoryComponent implements OnInit {
 
+  @Input() tableHeaderTitles!: string[]
+  @Input() tableModelRows!: Object[]
+  @ViewChild(MatPaginator) paginator !: MatPaginator
+
   constructor(
     private dataService: DataService,
     private dialog : MatDialog,
@@ -73,7 +78,9 @@ export class InventoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void { 
-    this.load();
+    this.load()
+    this.inventoriesDataSource.paginator = this.paginator
+
     
   }
 
@@ -86,6 +93,8 @@ export class InventoryComponent implements OnInit {
     //Event Loop Starts Here
     this.getInventories();
     this.getPurchases();
+    console.log('limit')    
+    this.getInventoriess();
     
 
     //Event Ends Here
@@ -98,15 +107,40 @@ export class InventoryComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+  
+  //obs: Observable<any>;
+  pageSize = 10
+  lenght : any
+
+
   inventoriesPayload: any;
   inventoriesData: InventoriesData[] = [];
   inventoriesDataSource = new MatTableDataSource(this.inventoriesData);
   inventoriesDisplayedColumns = ['name', 'description', 'quantity', 'price', 'imageUrl'];
   inventoriesIdArchive: any;
+  itemLength: any;
 
   getInventories() {
     this.dataService.getAllItem('inventories')
       .subscribe((data: any) => {
+        console.log(data);
+        this.inventoriesPayload = data;
+        this.inventoriesData = this.inventoriesPayload;
+        this.inventoriesDataSource.data = this.inventoriesPayload;
+        this.itemLength = data.length + 1;
+        this.inventoriesDataSource.paginator = this.paginator
+        this.lenght = data.lenght
+        //dataSource: MatTableDataSource<Card> = new MatTableDataSource<Card>(data);
+      });
+  }
+
+  
+  //page limit
+  page: any
+  limit: any
+  getInventoriess() {
+    
+    this.dataService.getPost('inventories', this.limit, this.page).subscribe((data: any) => {
         console.log(data);
         this.inventoriesPayload = data;
         this.inventoriesData = this.inventoriesPayload;
@@ -137,7 +171,9 @@ export class InventoryComponent implements OnInit {
       height: '75%',
       width: '100%'
     });
-    this.getInventories();
+
+    dialogRef.afterClosed().subscribe(() => this.getInventories())
+    
   }
   
   itemArchive(i:any){

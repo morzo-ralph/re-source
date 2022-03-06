@@ -45,7 +45,24 @@
         <br />
 
         <div style=" width:100%; height: 80%">
-          <mat-grid-list cols="6" rowHeight="1:2" gutterSize="8px;">
+           <mat-grid-list cols="6" rowHeight="1:2" gutterSize="8px;">
+           <!-- <mat-grid-tile>
+              <mat-card>
+                <mat-card-title [headerTitles]="tableHeaderTitles">
+  
+                </mat-card-title>
+                <mat-card-content *ngFor="let row of tableModelRows" [rowTitles]="row">
+  
+                </mat-card-content>
+              </mat-card>
+              <mat-paginator
+                [pageIndex]="pageIndex"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="[5, 10, 15, 20]"
+                page="changePage($event)"
+              ></mat-paginator>
+            </mat-grid-tile>
+             -->
 
             <mat-grid-tile>
               <div style="background-image: url(../assets/images/sampleObject.jpg); border-radius: 16px; background-size: cover; background-position: center; background-blend-mode: lighten; background-color: #c2c894; height: 100%; width: 100%">
@@ -83,17 +100,21 @@
                       <p> Item Quantity : {{item.quantity}}</p>
                       <p> Item Price : {{ item.price }} </p>
                     </mat-card-content>
-                    <mat-card-footer style="text-align: center">
+                    <mat-card-actions>
                       <button mat-raised-button (click)="itemView(item)"> View </button> &nbsp;
                       <!-- <button mat-raised-button (click)="itemUpdate(item)"> Update </button>   &nbsp;
                       <button mat-raised-button (click)="itemArchive(item)"> Archive </button> -->
-                    </mat-card-footer>
+                    </mat-card-actions>
                   </mat-card>
+                  <mat-paginator
+                    [pageSizeOptions]="[5, 10, 25, 100]"
+                    >
+                  </mat-paginator>
                 </div>
               </mat-grid-tile>
 
             </ng-container>
-
+ 
 
           </mat-grid-list>
         </div>
@@ -150,6 +171,10 @@
   </mat-tab>
 
   <mat-tab label="Inventory Table">
+
+    <!-- <mat-table>
+
+    </mat-table> -->
 
   </mat-tab>
 

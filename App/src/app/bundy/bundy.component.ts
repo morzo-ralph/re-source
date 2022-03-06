@@ -171,20 +171,21 @@ export class BundyComponent implements OnInit {
   attendanceId: any
 
   getAttendance() {
-    this.dataService.getAllItem('attendance').subscribe((data: any) => {
+    this.dataService.getAllItem('attendances').subscribe((data: any) => {
       this.attendance = data
       this.attendanceCount = data.length
     })
   }
 
   timeIn(){
+   // localStorage.setItem('attendance', this.attendanceBool)
     this.attendanceData.number = parseInt(this.attendanceCount) + 1
     this.attendanceData.id = localStorage.getItem('_id')
     var name : any = localStorage.getItem('fname') + ' ' + localStorage.getItem('lname')
     this.attendanceData.name = name
     this.attendanceData.attendance_date_in = new Date()
    localStorage.setItem('try-in', this.attendanceData.attendance_date_in)
-   this.dataService.createItem('attendance', this.attendanceData).subscribe((data: any) => {
+   this.dataService.createItem('attendances', this.attendanceData).subscribe((data: any) => {
      console.log(data)
       this.attendanceId = data._id
       this.attendanceBool = true
@@ -196,7 +197,7 @@ export class BundyComponent implements OnInit {
     this.attendanceData.id = this.attendanceId
     //this.attendanceData.attendance_date_out = new Date()
     localStorage.setItem('try-out', new Date().toDateString())
-    this.dataService.archiveItem('attendance', this.attendanceData.id, { 'attendance_date_out': new Date() } ).subscribe((data : any) => {
+    this.dataService.archiveItem('attendances', this.attendanceData.id, { 'attendance_date_out': new Date() } ).subscribe((data : any) => {
       console.log(data)
       this.attendanceBool = false
       this.getAttendance()

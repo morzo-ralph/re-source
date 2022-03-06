@@ -44,11 +44,12 @@ export class LoginComponent implements OnInit {
 
     //createitem is just post
     this.dataService.createItem('users/login', this.loginData).subscribe((data: any) => {
-      console.log(data.user);
+      console.log(data.user)
       localStorage.setItem('_id', data.user._id);
-      localStorage.setItem('lname', data.user.lname);
-      localStorage.setItem('fname', data.user.fname);
-      localStorage.setItem('mname', data.user.mname);
+      localStorage.setItem('lname', data.user.lname)
+      localStorage.setItem('fname', data.user.fname)
+      localStorage.setItem('mname', data.user.mname)
+      localStorage.setItem('number', data.user.number)
       if(data) {
         Swal.fire(
           'Login Successful!',
