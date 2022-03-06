@@ -56,7 +56,7 @@ app.use("/draws", drawsRouter);
 app.use("/employees", employeesRouter);
 app.use("/expenses", expensesRouter);
 app.use("/inventories", inventoriesRouter);
-app.use("/pettycash", pettycashRouter);
+app.use("/pettycashes", pettycashRouter);
 app.use("/purchases", purchasesRouter);
 app.use("/revenues", revenuesRouter);
 app.use("/salarytotals", salarytotalsRouter);
