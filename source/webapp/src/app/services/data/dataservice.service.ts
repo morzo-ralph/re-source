@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Get } from './data.model';
+import { ConnStatus } from './data.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +10,9 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  private get: Get[] = [];
+ ConnStatus: any[] = [];
 
   //SERVICES FOR DATA  
-
-  /*apiURL = "http://192.168.1.7/SIA-GIT/API/";*/
 
   baseURL = "http://localhost:3000";
 

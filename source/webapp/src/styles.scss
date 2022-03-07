@@ -39,27 +39,35 @@ body {
 }
 
 p {
-  font-size: calc(12px + .4vw);
+  font-size: clamp(12px, .8vw, 20px);
+}
+
+button {
+  font-size: clamp(12px, .8vw, 20px);
+}
+
+span {
+  font-size: clamp(14px, .8vw, 20px);
 }
 
 h1 {
-  font-size: calc(18px + .4vw);
+  font-size: clamp(18px, .8vw, 26px);
   letter-spacing: 2px;
   color: dimgrey;
 }
 
 h2 {
-  font-size: calc(16px + .4vw);
+  font-size: clamp(16px, .8vw, 24px);
   font-color: dimgrey;
 }
 
 h3 {
-  font-size: calc(14px + .4vw);
+  font-size: clamp(14px, .8vw, 22px);
   font-color: dimgrey;
 }
 
 h4 {
-  font-size: calc(12px + .4vw);
+  font-size: clamp(12px, .8vw, 20px);
   font-color: dimgrey;
 }
 

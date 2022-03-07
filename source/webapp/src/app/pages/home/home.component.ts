@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { ChartType, Row } from 'angular-google-charts';
 import { LibraryService } from 'src/app/services/library.service';
-import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
+import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation, rubberBandAnimation } from 'angular-animations';
+
+import { ConnStatus, Announcement } from 'src/app/services/data/data.model';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +14,7 @@ import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animati
   animations: [
     fadeInOnEnterAnimation(),
     fadeOutOnLeaveAnimation(),
+    rubberBandAnimation(),
   ]
   
 })
@@ -23,13 +26,16 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getAnnouncements();
+    
     this.load();
   }
 
-  async load() {
+  async load() {    
     //Event Loop Starts Here
     this.checkIfMobile();
+    this.getAnnouncements();
+
+
     await this.delay(1000);
     this.reload();
     //Event Loop End Here
@@ -49,20 +55,50 @@ export class HomeComponent implements OnInit {
     this.isMobile = this.libraryService.getIsMobile()
   }
 
-  activeDiv: any
+  announcementData: Announcement[] = []
 
-  onclickDiv(divId: any) {
-    if (this.activeDiv == divId) {
-      this.activeDiv = null
-    }
-    else {
-      this.activeDiv = divId;
-    }   
-  }
+  announcementTitle: string = ""
+  announcementContent: string = ""
 
   getAnnouncements() {
-    this.dataService.getAllItem('announcement').subscribe((data : any) => {
+    this.dataService.getAllItem('announcements').subscribe((data: any) => {
       console.log(data);
+      this.announcementData = data;
+
+      //for (var data of revenuesData) {
+      //  this.graphVar.date = data.rev_date
+      //  this.graphVar.amount = data.rev_amount
+      //  this.graphVar.type = "rev"
+      //  this.revenuesDataGraph.push(this.graphVar)
+      //  console.log(this.graphVar)
+      //  this.graphVar = [];
+      //}
+
+      var currentDate = new Date();
+      console.log (currentDate);
+
+      for (var announcement of this.announcementData) {
+        var announcementDate = new Date(announcement.announcement_end_date)
+        console.log(announcementDate);
+
+        if (currentDate <= announcementDate) {
+
+          this.announcementTitle = announcement.announcement_title;
+          this.announcementContent = announcement.announcement_content;
+
+          console.log("OK")
+
+        }
+
+        else {
+
+          this.announcementTitle = "";
+          this.announcementContent = "";
+
+        }
+      }
+
+
     })
   }
 
@@ -75,18 +111,31 @@ export class HomeComponent implements OnInit {
   }
 
   archiveAnnouncement() {
-    
+
   }
 
-  //dummy data
-   //CashBalance
-   title = "Cash Balance";
-   type = ChartType.BarChart;
-   chartColumns = ["Months", "Revenue", "Expenses"];
-   data = [
-     ["Jan",  15000, 12000],
-     ["Feb", 14000, 12000],
-     ["March", 16000, 12000]
-   ];
-   dynamicResize = true;
+
+
+
+
+
+
+
+
+
+  activeDiv: any
+
+  onclickDiv(divId: any) {
+    if (this.activeDiv == divId) {
+      this.activeDiv = null
+    }
+    else {
+      this.activeDiv = divId;
+    }   
+  }
+
+
+
+  
+
 }

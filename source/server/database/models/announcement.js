@@ -4,6 +4,8 @@ const AnnouncementSchema = new mongoose.Schema({
     announcement_title: String,
     announcement_content: String,
 
+    announcement_end_date: Date,
+
     isArchive: Number,
     created_at: Date,
     updated_at: Date

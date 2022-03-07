@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DataService } from './services/data/dataservice.service';
-import { Get } from './services/data/data.model';
+import { ConnStatus } from 'src/app/services/data/data.model';
 
 //import { Component } from '@angular/core';
 //import { DataService } from './services/data.service';
@@ -57,14 +57,14 @@ export class AppComponent {
   }
 
   isConn: boolean = false;
-  isConnMsg!: Get;
+  isConnMsg!: ConnStatus;
   isConnStatus: any;
 
 
   checkIfServerActive() {
     var conMsg = this.dataService.checkConn().subscribe((data: any) => {      
       this.isConnMsg = data;
-      /*console.log(this.isConnMsg);*/
+      /console.log(this.isConnMsg);*/
       this.isConnStatus = this.isConnMsg.status;
     })
   }

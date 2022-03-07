@@ -2,8 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\source",
-    "\\source\\server"
+    "\\source\\server",
+    "\\source\\webapp",
+    "\\source\\webapp\\src",
+    "\\source\\webapp\\src\\app",
+    "\\source\\webapp\\src\\app\\pages",
+    "\\source\\webapp\\src\\app\\pages\\home",
+    "\\source\\webapp\\src\\app\\pages\\inteface",
+    "\\source\\webapp\\src\\app\\services"
   ],
-  "SelectedNode": "\\source\\server\\app.js",
+  "SelectedNode": "\\source\\webapp\\src\\app\\pages\\inteface\\inteface.component.ts",
   "PreviewInSolutionExplorer": false
 }

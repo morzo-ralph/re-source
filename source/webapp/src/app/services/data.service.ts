@@ -28,19 +28,19 @@ export class DataService {
   //General Methods
 
   get(uri: string) {
-    return this.http.get(`${this.baseURL}/${uri}`);
+    return this.http.get(`${this.baseURL}/api/${uri}`);
   }
 
   post(uri: string, payload: object) {
-    return this.http.post(`${this.baseURL}/${uri}`, payload);
+    return this.http.post(`${this.baseURL}/api/${uri}`, payload);
   }
 
   put(uri: string, payload: object) {
-    return this.http.put(`${this.baseURL}/${uri}`, payload);
+    return this.http.put(`${this.baseURL}/api/${uri}`, payload);
   }
 
   patch(uri: string, payload: object) {
-    return this.http.patch(`${this.baseURL}/${uri}`, payload);
+    return this.http.patch(`${this.baseURL}/api/${uri}`, payload);
   }
 
   //Data Methods
