@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const dotenv = require('dotenv')
+dotenv.config()
 
-const uri = "mongodb+srv://Dev1:Dev1@resourcecluster.7j9mt.mongodb.net/MSSE_db"
 mongoose.Promise = global.Promise;
 // mongoose.connect('mongodb://localhost/application',
-mongoose.connect(uri,
+mongoose.connect( `${process.env.MONGO_URI}` ,
 {
     //promiseLibrary: require('bluebird'),
     useNewUrlParser: true,

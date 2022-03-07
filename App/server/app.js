@@ -1,3 +1,4 @@
+const dotenv = require('dotenv')
 const express = require('express');
 const multer = require('multer');
 const bodyParser = require('body-parser');
@@ -6,7 +7,7 @@ const app = express();
 //const ejs = require('ejs');
 const path = require('path');
 const mongoose = require('./database/mongoose');
-
+dotenv.config()
 
 
 //router import
@@ -80,4 +81,4 @@ app.delete('/inventories/:inventoryId', (req, res) => {
 });
  */
 
-app.listen(3000, () => console.log("Connected port 3000"));
+app.listen(`${process.env.PORT}`, () => console.log("Connected"));
