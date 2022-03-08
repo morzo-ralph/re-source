@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
 
 const EmployeesSchema = new mongoose.Schema({
+
     number: Number,
     id: String,
     name: String,
+    age: String,
+    address: String,
     position: String,
-       // _itemId: {
-    //     type: mongoose.Types.ObjectId
-    // },
+    department: String,
+    start_Date: Date,
+
+    role: Number,    
 
     isArchive: Number,
     created_at: Date,

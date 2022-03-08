@@ -4,7 +4,7 @@ import { ChartType, Row } from 'angular-google-charts';
 import { LibraryService } from 'src/app/services/library.service';
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation, rubberBandAnimation } from 'angular-animations';
 
-import { ConnStatus, Announcement } from 'src/app/services/data/data.model';
+import { ConnStatus, Announcement, Employee, TaskBoard } from 'src/app/services/data/data.model';
 
 @Component({
   selector: 'app-home',
@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
     //Event Loop Starts Here
     this.checkIfMobile();
     this.getAnnouncements();
+    this.getTasks();
 
 
     await this.delay(1000);
@@ -62,7 +63,7 @@ export class HomeComponent implements OnInit {
 
   getAnnouncements() {
     this.dataService.getAllItem('announcements').subscribe((data: any) => {
-      console.log(data);
+      /*console.log(data);*/
       this.announcementData = data;
 
       //for (var data of revenuesData) {
@@ -75,26 +76,20 @@ export class HomeComponent implements OnInit {
       //}
 
       var currentDate = new Date();
-      console.log (currentDate);
+      /*console.log (currentDate);*/
 
       for (var announcement of this.announcementData) {
         var announcementDate = new Date(announcement.announcement_end_date)
-        console.log(announcementDate);
+        /*console.log(announcementDate);*/
 
         if (currentDate <= announcementDate) {
-
           this.announcementTitle = announcement.announcement_title;
           this.announcementContent = announcement.announcement_content;
-
-          console.log("OK")
-
+          /*console.log("OK")*/
         }
-
         else {
-
           this.announcementTitle = "";
           this.announcementContent = "";
-
         }
       }
 
@@ -114,6 +109,59 @@ export class HomeComponent implements OnInit {
 
   }
 
+  taskBoardData: TaskBoard[] = [];
+
+
+
+  getTasks() {
+    this.dataService.getAllItem('taskboard').subscribe((data: any) => {
+      /*console.log(data);*/
+      /*this.taskBoardData = data;*/
+
+      //console.log(this.taskBoardData)
+      if (this.taskBoardData.length == 0) {
+        this.taskBoardData = data;
+        console.log("isnull")
+      }
+
+      if (this.taskBoardData.length != data.length) {
+        this.taskBoardData = data;
+      }
+
+      //if (this.arraysEqual(this.taskBoardData, data) == false) {
+      //  /*console.log("NOT MATCH")*/
+      //}
+
+      //if (this.arraysEqual(this.taskBoardData, data) == true) {
+      //  console.log("MATCH")
+      //}
+      //else {
+      // /* this.taskBoardData = this.taskBoardData;*/
+      //}
+
+      /*console.log(data)*/
+    })
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -132,6 +180,22 @@ export class HomeComponent implements OnInit {
     else {
       this.activeDiv = divId;
     }   
+  }
+
+  arraysEqual(a : any, b: any) {
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    if (a.length !== b.length) return false;
+
+    // If you don't care about the order of the elements inside
+    // the array, you should sort both arrays here.
+    // Please note that calling sort on an array will modify that array.
+    // you might want to clone your array first.
+
+    for (var i = 0; i < a.length; ++i) {
+      if (a[i] !== b[i]) return false;
+    }
+    return true;
   }
 
 
