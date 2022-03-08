@@ -3,6 +3,7 @@ const multer = require('multer');
 const router = express.Router();
 const path = require('path');
 
+
 const Inventory = require('../database/models/inventory');
 const Pagination = require('../middleware/paginatedResult');
 
@@ -52,10 +53,30 @@ router.post("/", upload.single('file'), (req, res, next) => {
 
 
 router.get('/', (req, res) => {
-    Inventory.find({})
+    console.log(req.query)
+    const query = req.query
+    Inventory.find({query})
         .then(data => res.send(data))
         .catch(error => console.log(error));
 });
+
+router.get('/search/:params', async (req, res) => {
+    const query = await req.query.name
+    console.log('query')
+    console.log(req.query.name)
+    const query2 = await req.params
+    console.log('params')
+    console.log(req.params)
+    /// $or: [{name: query}, {_id: query}, {description: query}]
+    Inventory.find({ $or : [
+        {name: { $regex: query + '.*'}},
+        {description: { $regex: query + '.*'}},
+        {quantity: { $regex: query + '.*'}},
+    ]})
+        .then(data => res.send(data))
+        .catch((error) => console.log(error))
+});
+//router.get('/')
 //pagination working in postman
 // router.get('/', Pagination(Inventory), (req, res) => {
 //     res.json(res.paginatedResults).catch((error) => {
@@ -63,7 +84,7 @@ router.get('/', (req, res) => {
 //     });
 // });
 
-router.get('/:inventoryId', (req, res) => {
+router.get('/:id', (req, res) => {
     Inventory.find({})
         .then(lists => res.send(lists))
         .catch(error => console.log(error));

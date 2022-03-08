@@ -24,6 +24,7 @@
     "angular-google-charts": "^2.2.2",
     "chart.js": "^3.6.0",
     "dotenv": "^16.0.0",
+    "express-mongodb-filters": "^1.1.1",
     "rxjs": "~6.6.0",
     "sweetalert2": "^11.1.9",
     "tslib": "^2.2.0",
