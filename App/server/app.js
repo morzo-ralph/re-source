@@ -3,6 +3,7 @@ const express = require('express');
 const multer = require('multer');
 const bodyParser = require('body-parser');
 const app = express();
+const filter = require('express-mongodb-filters')
 
 //const ejs = require('ejs');
 const path = require('path');
@@ -50,6 +51,8 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
+app.use(filter())
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
