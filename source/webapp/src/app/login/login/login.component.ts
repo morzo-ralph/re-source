@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { swalProviderToken } from '@sweetalert2/ngx-sweetalert2/lib/di';
-import { DataService } from 'src/app/services/data.service';
+
+import { DataService } from 'src/app/services/data/dataservice.service';
+import { LibraryService } from 'src/app/services/library.service';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,10 +14,8 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
 
   constructor(
-    private dataService: DataService,
-  ) { 
-    
-  }
+    private dataService: DataService, private libraryService: LibraryService,
+  ) {}
   
   account_id: any
   password: any
@@ -22,6 +23,32 @@ export class LoginComponent implements OnInit {
   loginData: any = {}
 
   ngOnInit(): void {
+
+    this.loadOnLoop()
+  }
+
+  async loadOnLoop() {
+    //Event Loop Starts Here
+    this.checkIfMobile();
+
+
+    await this.delay(1000);
+    this.reloadLoop();
+    //Event Loop End Here
+  }
+
+  reloadLoop() {
+    this.loadOnLoop()
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  isMobile!: boolean
+
+  checkIfMobile() {
+    this.isMobile = this.libraryService.getIsMobile()
   }
 
   // login = async () : Promise <void> => {
@@ -42,7 +69,7 @@ export class LoginComponent implements OnInit {
     
     console.log(this.loginData);
 
-    //createitem is just post
+    //createitem is just post -- auth sa future
     this.dataService.createItem('users/login', this.loginData).subscribe((data: any) => {
       console.log(data.user);
       localStorage.setItem('_id', data.user._id);

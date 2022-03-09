@@ -4,6 +4,28 @@ export interface ConnStatus{
   status: any;
 }
 
+export interface User{
+
+  /*id: string*/
+  username: string,
+  password: string,
+  userRole: number,
+
+  lname: string,
+  fname: string,
+  mname: string,
+  extname: string,
+
+  userposition: string,
+  userdepartment: string,
+
+  isArchive: number,
+  created_at: Date,
+  updated_at: Date
+}
+
+
+
 export interface Announcement{
   announcement_title: string,
   announcement_content: string,

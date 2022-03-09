@@ -10,6 +10,9 @@ const UsersSchema = new mongoose.Schema({
     mname: String,
     extname: String,
 
+    userposition: String,
+    userdepartment: String,
+
     isArchive: Number,
     created_at: Date,
     updated_at: Date
