@@ -42,6 +42,8 @@ export class ViewItemComponent implements OnInit {
     this.itemQty = this.data.quantity
     this.itemPrice= this.data.price
     this.itemIsArchive = this.data.isArchive
+
+    this.getSalesCounter()
   }
 
   onNoClick(): void {
@@ -160,6 +162,7 @@ export class ViewItemComponent implements OnInit {
   getSalesCounter () {
     this.dataService.getAllItem('sales').subscribe((data: any) => {
       this.salesCounter = data.length + 1
+      console.log(data.length)
     })
   }
 
@@ -177,7 +180,7 @@ export class ViewItemComponent implements OnInit {
 
     let newQty = this.itemQty - this.sellQty
 
-    this.dataService.patch('inventories', {"quantity": newQty}).subscribe((data: any) => {
+    this.dataService.archiveItem('inventories', this.itemId, {'quantity': newQty}).subscribe((data: any) => {
       console.log(data)
     })
   }

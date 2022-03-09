@@ -115,21 +115,12 @@ router.get('/:id', (req, res) => {
 //         .catch((error) => (error));
 //     }
 
-router.put('/:_id', upload.single('file'), (req, res) => {
-    console.log(req.params);
-    console.log(req)
-    if(!req.file) {
-        Inventory.findOneAndUpdate({"_id": req.params}, {$set: req.body})
-        .then(inventory => res.send(inventory))
+router.put('/:_id', (req, res) => {
+    // console.log(req.params);
+    // console.log(req.body);
+    Inventory.findOneAndUpdate({"_id": req.params}, {$set: req.body.data})
+        .then(result => res.send(result))
         .catch(error => console.log(error));
-    } else {
-        console.log(req.file.filename)
-        req.body.data.imageUrl = 'http://localhost:3000/uploads/inventory/' + req.file.filename;
-        Inventory.findOneAndUpdate({"_id": req.params}, {$set: req.body})
-        .then(inventory => res.send(inventory))
-        .catch(error => console.log(error));
-    }
-    
 });
 
 
