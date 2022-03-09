@@ -4,7 +4,7 @@ const AnnouncementSchema = new mongoose.Schema({
     announcement_title: String,
     announcement_content: String,
 
-    isArchive: Number,
+    isArchive: {type: Number, default: 0},
     created_at: Date,
     updated_at: Date
 });

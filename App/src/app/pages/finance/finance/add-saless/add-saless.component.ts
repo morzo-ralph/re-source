@@ -43,7 +43,6 @@ export class AddSalessComponent implements OnInit {
     this.salesData.sales_by =  this.salesBy;
     this.salesData.sales_date = this.salesDate;
     this.salesData.sales_desc = this.salesDesc;
-    this.salesData.isArchive = 0;
     this.salesData.number = this.countdata + 1;
     console.log(this.salesData);
     this.dataService.createItem('sales', this.salesData).subscribe(( data: any) => {

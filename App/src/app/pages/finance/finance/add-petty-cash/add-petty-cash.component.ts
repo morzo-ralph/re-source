@@ -32,7 +32,6 @@ export class AddPettyCashComponent implements OnInit {
   addPettyCash(){ 
     this.petCashData.pet_amount = this.petCashAmount;
     this.petCashData.pet_date = this.petCashDate;
-    this.petCashData.isArchive = 0;
     this.dataService.createItem('pettycash', this.petCashData).subscribe(( data: any) => {
       Swal.fire(
         'Item Added!',

@@ -11,7 +11,7 @@ const SalesSchema = new mongoose.Schema({
     sales_by: String,
     sales_amount: Number,
     
-    isArchive: Number,
+    isArchive: {type: Number, default: 0},
     created_at: Date,
     updated_at: Date
 });

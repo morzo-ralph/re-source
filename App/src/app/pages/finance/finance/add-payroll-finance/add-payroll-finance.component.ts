@@ -44,7 +44,6 @@ export class AddPayrollFinanceComponent implements OnInit {
       this.payrollData.purc_date = this.payrollDate;
       this.payrollData.purc_desc = this.payrollDesc;
       this.payrollData.number = this.countdata + 1;
-      this.payrollData.isArchive = 0;
       
       await this.dataService.createItemss('expenses', this.payrollData);
         Swal.fire(

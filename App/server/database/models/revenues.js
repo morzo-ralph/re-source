@@ -9,7 +9,7 @@ const RevenuesSchema = new mongoose.Schema({
     rev_by: String,
     rev_amount: Number, 
 
-    isArchive: Number,
+    isArchive: {type: Number, default: 0},
     created_at: Date,
     updated_at: Date
 });

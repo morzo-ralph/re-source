@@ -27,7 +27,7 @@
           <br>
           <mat-form-field appearance="standard" style="margin-left: 16px; width: 40%">
             <mat-label>Filter</mat-label>
-            <input matInput (keyup)="applyFilterInventories($any($event.target).value)" placeholder="Filter">
+            <input matInput (keyup)="searchItem($any($event.target).value)" placeholder="Filter">
           </mat-form-field>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <span style="flex:auto">&nbsp;</span>
