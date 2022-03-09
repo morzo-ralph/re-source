@@ -4,6 +4,7 @@ import { DataService } from 'src/app/services/data.service';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-item',
@@ -27,7 +28,6 @@ export class AddItemComponent implements OnInit {
   name: any;
   description: any;
   quantity: any;
-  imageUrl = 'http://localhost:3000/uploads/inventory';
   image: any;
   price: any;
   isArchive = 0;
@@ -46,9 +46,11 @@ export class AddItemComponent implements OnInit {
   }
 
   selectImage(event: any) {
+    
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.image = file;
+      console.log(this.image)
     }
   }
 
@@ -68,9 +70,8 @@ export class AddItemComponent implements OnInit {
     formData.append('file', this.image);
     formData.append('price', this.price);
     formData.append('number', this.counter);
-    
-    const url = 'http://localhost:3000/inventories/'
-    this.httpClient.post<any>(url, formData).subscribe((data: any) => {
+
+    this.httpClient.post<any>(environment.BASE_URL + 'inventories', formData).subscribe((data: any) => {
       console.log(data);
     });
     
