@@ -27,9 +27,9 @@ export class DataService {
   //  );
   //}
 
-  getIPAddress() {
-    return this.http.get("http://192.168.1.7/SIA-GIT/appAPI/checkAPI");
-  }
+  //getIPAddress() {
+  //  return this.http.get("http://192.168.1.7/SIA-GIT/appAPI/checkAPI");
+  //}
 
   //General Methods
 

@@ -5,27 +5,38 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DataService } from 'src/app/services/data.service';
+
+import { DataService } from 'src/app/services/data/dataservice.service';
 import { LibraryService } from 'src/app/services/library.service';
 import Swal from 'sweetalert2';
 import { Data } from '@angular/router';
 import { DatePipe } from '@angular/common';
+
+import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation, rubberBandAnimation } from 'angular-animations';
+
+import { ConnStatus, Announcement, Employee, TaskBoard } from 'src/app/services/data/data.model';
+
 //import { time } from 'console';
 
-export interface Employees_Data {
-  number: number;
-  _id: string;
-  id: string;
-  name: string;
-  position: string;
-}
 
-const EMP_DATA: Employees_Data[] = [
-  { number: 1, _id: '1111', id: '1111', name: "John Doe", position: 'admin' },
-  { number: 2, _id: '2222', id: '2222', name: "Jobs Steve", position: 'admin' },
-  { number: 1, _id: '3333', id: '3333', name: "John Doe", position: 'admin' },
-  { number: 2, _id: '4444', id: '4444', name: "Jobs Steve", position: 'admin' },
-];
+//export interface Employee {
+//  number: number,
+//  id: string,
+//  name: string,
+//  age: number,
+//  address: string,
+//  position: string,
+//  department: string,
+//  start_Date: Date,
+
+//  role: number,
+
+//  isArchive: number,
+//  created_at: Date,
+//  updated_at: Date
+
+//}
+
 
 @Component({
   selector: 'app-bundy',
@@ -36,74 +47,136 @@ export class BundyComponent implements OnInit {
 
   constructor(
     public datepipe: DatePipe,
-    private dataService: DataService) { }
+    private dataService: DataService,
+    private libraryService: LibraryService,
+  )
+  { }
 
   ngOnInit(): void {
 
-    this.load();  
+    this.loadOnStart()
+    this.loadOnLoop();
     
   }
 
-  isLoaded: boolean = false
+  //OOP
+  isLoaded: boolean = false;
 
-  async load() {
+  async loadOnStart() {
+
     this.isLoaded = false
-    await this.delay(1000)
-    //Event Loop Starts Here
 
+    
+    await this.delay(1000);
+
+    //Event Loop Starts Here
     this.getTime();
-    this.loadSample();
     this.getEmployees();
     this.getAttendance();
 
-    //Event Loop Ends Here
+
+    //Event Loop End Here
     this.isLoaded = true
-    console.log(this.isLoaded)
-    /*this.activeReload()*/
+
   }
 
-  //async activeReload() {
+  async loadOnLoop() {
 
-  //  await this.delay(1000);
-
-  //  this.getEmployees();
-
-  //  this.activeReload();
-
-  //}
+    //Event Loop Starts Here
+    this.checkIfMobile();
+    this.getAnnouncements();
 
 
+    await this.delay(1000);
+    this.reloadLoop();
+    //Event Loop End Here
+  }
 
-//  export interface Employees_Data {
-//  number: number;
-//  id: string;
-//  name: string;
-//  position: string;
-//  status: string;
+  reloadLoop() {
+    this.loadOnLoop()
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  //check if mobile
+
+  isMobile!: boolean
+
+  checkIfMobile() {
+    this.isMobile = this.libraryService.getIsMobile()
+  }
+
+  announcementData: Announcement[] = []
+
+  announcementTitle: string = ""
+  announcementContent: string = ""
+
+  getAnnouncements() {
+    this.dataService.getAllItem('announcements').subscribe((data: any) => {
+      /*console.log(data);*/
+      this.announcementData = data;
+
+      var currentDate = new Date();
+      /*console.log (currentDate);*/
+
+      for (var announcement of this.announcementData) {
+        var announcementDate = new Date(announcement.announcement_end_date)
+        /*console.log(announcementDate);*/
+
+        if (currentDate <= announcementDate) {
+          this.announcementTitle = announcement.announcement_title;
+          this.announcementContent = announcement.announcement_content;
+          /*console.log("OK")*/
+        }
+        else {
+          this.announcementTitle = "";
+          this.announcementContent = "";
+        }
+      }
+
+
+    })
+  }
+
+
+  //export interface Employee {
+//  number: number,
+//  id: string,
+//  name: string,
+//  age: number,
+//  address: string,
+//  position: string,
+//  department: string,
+//  start_Date: Date,
+
+//  role: number,
+
+//  isArchive: number,
+//  created_at: Date,
+//  updated_at: Date
+
 //}
 
   employeesPayload: any;
-  employeesData: Employees_Data[] = [];
+  employeesData: Employee[] = [];
   employeesDataSource = new MatTableDataSource(this.employeesData);
-  employeesDisplayedColumns = ['number','name', 'position', 'status', 'time'];
+  employeesDisplayedColumns = ['number', 'name', 'position', 'department', 'status', 'time'];
 
   employeesIdArchive: any;
 
-  loadSample() {
-    this.employeesData = EMP_DATA;
-  }
-
   getEmployees() {
 
-    this.employeesDataSource.data = this.employeesData;
+    //this.employeesDataSource.data = this.employeesData;
 
-    //this.dataService.getAllItem('inventories')
-    //  .subscribe((data: any) => {
-    //    console.log(data);
-    //    this.inventoriesPayload = data;
-    //    this.inventoriesData = this.inventoriesPayload;
-    //    this.inventoriesDataSource.data = this.inventoriesPayload;
-    //  });
+    this.dataService.getAllItem('employees')
+      .subscribe((data: any) => {
+        console.log(data);
+        this.employeesPayload = data;
+        this.employeesData = this.employeesPayload;
+        this.employeesDataSource.data = this.employeesPayload;
+      });
   }
 
   clockInID: any;
@@ -207,13 +280,14 @@ export class BundyComponent implements OnInit {
   subtractHours(old: any, now: any){
     var diffInMS = now - old
     var msInHour = Math.floor(diffInMS/1000/60)
-    console.log(msInHour)
-          localStorage.removeItem('time-in');
-      localStorage.removeItem('time-out');
+    /*console.log(msInHour)*/
+
+    localStorage.removeItem('time-in');
+    localStorage.removeItem('time-out');
     if (msInHour < 60) {
-      console.log('Within hour')
+      /*console.log('Within hour')*/
     } else {
-      console.log('Not within the hour')
+      /*console.log('Not within the hour')*/
     }
   }
 
@@ -232,12 +306,8 @@ export class BundyComponent implements OnInit {
     var newTimeinMinutes = newTimeinSeconds / 60;
     var newTimeinHours = newTimeinMinutes / 60;
 
-    //var timeInMinutes = this.datepipe.transform(time, "hh");
-    //var timeInSeconds= this.datepipe.transform(time, "ss")
     return (Math.floor(newTimeinHours) + ":" + Math.floor(newTimeinMinutes % 60) + ":" + Math.floor(newTimeinSeconds % 60)) ;
   }
-
-
 
   timeinhours!: any
   timeinminutes!: any
@@ -258,9 +328,6 @@ export class BundyComponent implements OnInit {
     }
   }
 
-  delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
 
 
 }
