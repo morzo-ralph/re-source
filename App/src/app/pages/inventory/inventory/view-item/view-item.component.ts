@@ -146,8 +146,40 @@ export class ViewItemComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  // number: Number,
+  // id: String,
+  // sales_date: Date,
+  // sales_supplier: String,
+  // sales_price: Number,
+  // sales_quantity: Number,
+  // sales_desc: String,
+  // sales_by: String,
+  // sales_amount: Number,
+  salesPayload: any = {}
+  salesCounter: any
+  getSalesCounter () {
+    this.dataService.getAllItem('sales').subscribe((data: any) => {
+      this.salesCounter = data.length + 1
+    })
+  }
+
   sellItem() {
-    this.sellQty
+    this.salesPayload.sales_quantity = this.sellQty
+    this.salesPayload.sales_price = this.itemPrice
+    this.salesPayload.sales_by = ''
+    this.salesPayload.sales_supplier = ''
+    this.salesPayload.sales_date = Date.now()
+    this.salesPayload.number = this.salesCounter
+
+    this.dataService.createItem('sales', this.salesPayload).subscribe((data : any) => {
+      console.log(data)
+    })
+
+    let newQty = this.itemQty - this.sellQty
+
+    this.dataService.patch('inventories', {"quantity": newQty}).subscribe((data: any) => {
+      console.log(data)
+    })
   }
   
 }
