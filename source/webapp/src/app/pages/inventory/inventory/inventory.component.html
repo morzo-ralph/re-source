@@ -168,7 +168,6 @@
                 </h2>
 
 
-
                 <mat-form-field appearance="fill" style="margin-left: 16px; width: calc(100% - 32px)">
                   <mat-label>Filter</mat-label>
                   <input matInput (keyup)="applyFilterInventories($any($event.target).value)" placeholder="Filter">
@@ -194,7 +193,7 @@
 
                   <ng-container *ngFor="let item of this.inventoriesDataSource.filteredData">
 
-                    <div class="mat-elevation-z4" style="flex: auto; background-blend-mode: soft-light; background-color: #c2c894; background-image: url('{{item.imageUrl}}'); background-size: cover; min-width: calc(12%); max-width: calc(32%); height: calc(100% - 32px); min-height: 200px; border-radius: 16px; padding: 8px; transition-duration: 1s " [@fadeInOnEnter] [@fadeOutOnLeave]>
+                    <div class="mat-elevation-z4" style="flex: auto; background-blend-mode: soft-light; background-color: #c2c894; background-image: url('{{item.imageUrl}}'); background-size: cover; min-width: calc(12%); max-width: calc(32%); min-height: 200px; border-radius: 16px; padding: 8px; transition-duration: 1s " [@fadeInOnEnter] [@fadeOutOnLeave]>
 
                       <div style="text-align: center">
                         <img src="{{item.imageUrl}}" alt="" style="background-color: white; max-height: 200px; max-width: 200px; border-radius: 16px;">

@@ -260,9 +260,12 @@ export class InventoryComponent implements OnInit {
         data: data
       });
 
-      dialogRef.afterClosed();
-      
-    } catch (error) {
+      dialogRef.afterClosed().subscribe(result => {
+        this.getInventories();
+        console.log(result)
+      })
+    }
+    catch (error) {
       console.log(error);
     }
       

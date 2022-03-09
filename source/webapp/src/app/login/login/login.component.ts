@@ -45,10 +45,10 @@ export class LoginComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  isMobile!: boolean
+  isMobile: boolean = false
 
   checkIfMobile() {
-    this.isMobile = this.libraryService.getIsMobile()
+    this.isMobile = this.libraryService.getIsMobile();
   }
 
   // login = async () : Promise <void> => {

@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="mat-elevation-z22" style="z-index: 100">
+<!--<mat-toolbar color="primary" class="mat-elevation-z22" style="z-index: 100">
   <span style="flex: 1 1 auto;"></span>
   <span>Human Resource Page</span>
   <span style="flex: 1 1 auto;"></span>
@@ -47,12 +47,12 @@
                   <mat-chip color="primary" selected>
                     <mat-icon>person</mat-icon>
                     Available
-                  </mat-chip>
+                  </mat-chip>-->
                   <!--<mat-chip color="warn" selected>
                   <mat-icon>person</mat-icon>
                      Unavailable
                   </mat-chip>-->
-                </mat-chip-list>
+                <!--</mat-chip-list>
               </ng-container>
 
               <ng-container *ngIf="checkStatus(element.id) == 0">
@@ -82,9 +82,9 @@
           </ng-container>
           <mat-header-row *matHeaderRowDef="employeesDisplayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: employeesDisplayedColumns;"></mat-row>
-        </mat-table>
+        </mat-table>-->
         <!-- <mat-paginator [pageSizeOptions] = "[1, 2, 3]" showFirstLastButton></mat-paginator> -->
-        <br />
+        <!--<br />
         <mat-divider></mat-divider>
         <br />
         <div style="width: 100%; text-align: right">
@@ -138,9 +138,9 @@
                 <mat-cell *matCellDef="let element" class="att-cell">
                   <ng-container *ngIf="dateMatch(element.attendance_date, day) == 1">
                     {{element.attendance_hours}}
-                  </ng-container>
+                  </ng-container>-->
                 <!--{{element.attendance_date | date:'d'}}-->
-                </mat-cell>
+                <!--</mat-cell>
               </ng-container>
             </ng-container>
 
@@ -243,4 +243,4 @@
     </div>
   </mat-tab>
 
-</mat-tab-group>
+</mat-tab-group>-->
