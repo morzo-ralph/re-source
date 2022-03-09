@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { DataService } from '../../../services/data.service';
+import { DataService } from 'src/app/services/data/dataservice.service';
 import { LibraryService } from 'src/app/services/library.service';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -92,7 +92,7 @@ export class InventoryComponent implements OnInit {
   async loadOnLoop() {
 
     //Event Loop Starts Here
-
+    this.checkIfMobile();
     this.getAnnouncements();
 
 
@@ -164,10 +164,28 @@ export class InventoryComponent implements OnInit {
 
   }
 
+//  export interface Inventories {
+
+//  _id: string;
+
+//  number: number;
+//  id: string;
+//  name: string;
+//  description: string;
+//  quantity: number;
+//  price: number;
+//  imageUrl: string
+
+//  isArchive: number;
+//  created_at: Date;
+//  updated_at: Date;
+
+//}
+
   inventoriesPayload: any;
   inventoriesData: Inventories[] = [];
   inventoriesDataSource = new MatTableDataSource(this.inventoriesData);
-  inventoriesDisplayedColumns = ['name', 'description', 'quantity', 'price', 'imageUrl'];
+  inventoriesDisplayedColumns = ['number', 'name', 'id', 'description', 'quantity', 'price', 'actions'];
   inventoriesIdArchive: any;
 
   getInventories() {
