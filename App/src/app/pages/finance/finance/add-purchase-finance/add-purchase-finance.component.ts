@@ -48,7 +48,6 @@ export class AddPurchaseFinanceComponent implements OnInit {
         this.purchaseData.purc_desc = this.purchaseDesc;
         this.purchaseData.purc_supplier = this.purchaseSupplier;
         this.purchaseData.purc_quantity = this.purchaseQuantity;
-        this.purchaseData.isArchive = 0;
         this.purchaseData.number = this.countdata + 1;
         console.log(this.purchaseData);
         this.dataService.createItem('purchases', this.purchaseData).subscribe(( data: any) => {

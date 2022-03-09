@@ -9,12 +9,14 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import Swal from 'sweetalert2';
 import { MatTable, MatTableDataSource, _MatTableDataSource } from '@angular/material/table';
 import { AddItemComponent } from './add-item/add-item.component';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, filter } from 'rxjs/operators';
 
 import { ViewItemComponent } from './view-item/view-item.component';
 import { MatPaginator } from '@angular/material/paginator';
+
+import { environment } from 'src/environments/environment';
 
 export interface InventoriesData {
   number: number;
@@ -78,6 +80,7 @@ export class InventoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void { 
+    //this.searchItem()
     this.load()
     this.inventoriesDataSource.paginator = this.paginator
 
@@ -174,6 +177,32 @@ export class InventoryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(() => this.getInventories())
     
+  }
+
+  searchItem(filterValue: string) {
+    if (filterValue != '') {
+      console.log(filterValue)
+      let filter = {"name":filterValue}
+      // const params : HttpParams = new HttpParams().set('filter', JSON.stringify(filter))
+  
+      // console.log(params.toString());
+  
+      this.httpClient.get( environment.BASE_URL + 'inventories/search?filter=' + JSON.stringify(filter))
+      .subscribe((data :any) => {
+        //do something here to preview the result
+        console.log('filter')
+        console.log(data)
+        this.inventoriesDataSource = data
+      })
+    } else (
+      this.getInventories()
+    )
+   
+    // let filter : any = "{'name': 'card'}"
+    // this.dataService.search('inventories/search', filter).subscribe((data: any) => {
+    //   console.log('search')
+    //   console.log(data)
+    // })
   }
   
   itemArchive(i:any){

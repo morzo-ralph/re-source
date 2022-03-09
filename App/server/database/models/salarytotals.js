@@ -10,7 +10,7 @@ const SalarytotalsSchema = new mongoose.Schema({
     //     type: mongoose.Types.ObjectId
     // },
 
-    isArchive: Number,
+    isArchive: {type: Number, default: 0},
     created_at: Date,
     updated_at: Date
 });

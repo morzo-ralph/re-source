@@ -4,14 +4,14 @@ const UsersSchema = new mongoose.Schema({
     username: String,
     password: String,
     userRole: Number,
-    numnber: Number,
+    number: Number,
 
     lname: String,
     fname: String,
     mname: String,
     extname: String,
 
-    isArchive: Number,
+    isArchive: {type: Number, default: 0},
     created_at: Date,
     updated_at: Date
 });

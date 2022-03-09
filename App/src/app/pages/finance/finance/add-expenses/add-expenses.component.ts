@@ -56,7 +56,6 @@ export class AddExpensesComponent implements OnInit {
       this.expensesData.exp_date = this.expDate;
       this.expensesData.exp_desc = this.expDesc;
       this.expensesData.number = this.countdata + 1;
-      this.expensesData.isArchive = 0;
       
       await this.dataService.createItemss('expenses', this.expensesData);
         Swal.fire(

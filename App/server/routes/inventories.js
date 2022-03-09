@@ -53,9 +53,10 @@ router.post("/", upload.single('file'), (req, res, next) => {
 
 
 router.get('/', (req, res) => {
-    console.log(req.query)
-    const query = req.query
-    Inventory.find({query})
+    // console.log(req.query)
+    // const query = req.query
+    // Inventory.find({query})
+    Inventory.find({})
         .then(data => res.send(data))
         .catch(error => console.log(error));
 });
@@ -63,8 +64,10 @@ router.get('/', (req, res) => {
 router.get('/search', async (req, res) => {
     console.log(req.query)
     const query = await req.query.name
-    console.log('query')
-    console.log(req.query.name)
+    // console.log('query')
+    // console.log(req.query.name)
+    // console.log('query')
+    // console.log(req.params)
     // const query2 = await req.params
     // console.log('params')
     // console.log(req.params)

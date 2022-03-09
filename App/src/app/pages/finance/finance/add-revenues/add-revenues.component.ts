@@ -36,7 +36,6 @@ export class AddRevenuesComponent implements OnInit {
     this.revenuesData.rev_by =  this.revBy;
     this.revenuesData.rev_date = this.revDate;
     this.revenuesData.rev_desc = this.revDesc;
-    this.revenuesData.isArchive = 0;
     this.revenuesData.number = this.countdata++;
     console.log(this.revenuesData);
     this.dataService.createItem('revenues', this.revenuesData).subscribe(( data: any) => {

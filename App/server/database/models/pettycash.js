@@ -8,7 +8,7 @@ const PettycashSchema = new mongoose.Schema({
     pet_amount: Number,
     pet_by: String,
     
-    isArchive: Number,
+    isArchive: {type: Number, default: 0},
     created_at: Date,
     updated_at: Date
 });
