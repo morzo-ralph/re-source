@@ -29,26 +29,35 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage: storage});
 
-router.post("/", upload.single('file'), (req, res, next) => {
+router.post("/", upload.single('file'), (req, res) => {
     console.log(req.body);
     if(!req.file) {
         return res.status(500).send({ message: 'Upload Failed'});
     } else {
         req.body.imageUrl = 'http://localhost:3000/uploads/inventory/' + req.file.filename;
-        req.body.isArchive = 0;
+        //req.body.isArchive = 0;
         (new Inventory(req.body))
         .save()
         .then((inventory) => res.send(inventory))
         .catch((error) => (error));
     }
-// router.post('/', multer({storage: storage}).single("image"), (req, res) => {  
-//     (new Inventory(req.body.data))
-//     .save()
-//     .then((inventory) => res.send(inventory))
-//     .catch((error) => console.log(error));
     
-// });
+});
 
+router.post("/update", upload.single('file'), (req, res) => {
+    console.log(req.body);
+    if(!req.file) {
+        Inventory.findOneAndUpdate({"_id": req.body.id}, {$set: req.body})
+        .then(inventory => res.send(inventory))
+        .catch(error => console.log(error));
+    } else {
+        req.body.imageUrl = 'http://localhost:3000/uploads/inventory/' + req.file.filename;
+        //req.body.isArchive = 0;
+        Inventory.findOneAndUpdate({"_id": req.body.id}, {$set: req.body})
+        .then(inventory => res.send(inventory))
+        .catch(error => console.log(error));
+    }
+    
 });
 
 
@@ -92,15 +101,37 @@ router.get('/:id', (req, res) => {
     Inventory.find({})
         .then(lists => res.send(lists))
         .catch(error => console.log(error));
-});
+ });
+// router.post("/", upload.single('file'), (req, res, next) => {
+//     console.log(req.body);
+//     if(!req.file) {
+//         return res.status(500).send({ message: 'Upload Failed'});
+//     } else {
+//         req.body.imageUrl = 'http://localhost:3000/uploads/inventory/' + req.file.filename;
+//         req.body.isArchive = 0;
+//         (new Inventory(req.body))
+//         .save()
+//         .then((inventory) => res.send(inventory))
+//         .catch((error) => (error));
+//     }
 
-router.put('/:_id', (req, res) => {
+router.put('/:_id', upload.single('file'), (req, res) => {
     console.log(req.params);
-    console.log(req.body);
-    Inventory.findOneAndUpdate({"_id": req.params}, {$set: req.body.data})
+    console.log(req)
+    if(!req.file) {
+        Inventory.findOneAndUpdate({"_id": req.params}, {$set: req.body})
         .then(inventory => res.send(inventory))
         .catch(error => console.log(error));
+    } else {
+        console.log(req.file.filename)
+        req.body.data.imageUrl = 'http://localhost:3000/uploads/inventory/' + req.file.filename;
+        Inventory.findOneAndUpdate({"_id": req.params}, {$set: req.body})
+        .then(inventory => res.send(inventory))
+        .catch(error => console.log(error));
+    }
+    
 });
+
 
 router.patch('/:_id', (req, res) => {
     Inventory.findOneAndUpdate({"_id": req.params}, {$set: req.body.data})
