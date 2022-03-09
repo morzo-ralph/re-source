@@ -35,6 +35,8 @@ export interface Employee{
 }
 
 export interface TaskBoard {
+
+
   taskBoard_number: number,
   taskBoard_project: string,
   taskBoard_name: string,
@@ -49,6 +51,24 @@ export interface TaskBoard {
   isArchive: number,
   created_at: Date,
   updated_at: Date
+
+}
+
+export interface Inventories {
+  
+  _id: string;
+
+  number: number;
+  id: string;
+  name: string;
+  description: string;
+  quantity: number;
+  price: number;
+  imageUrl: string
+
+  isArchive: number;
+  created_at: Date;
+  updated_at: Date;
 
 }
 

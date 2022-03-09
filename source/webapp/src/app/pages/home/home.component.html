@@ -1,259 +1,100 @@
 <div style="height: 100%; width: 100%">
 
-  <!-- If Mobile-->
-  <ng-container *ngIf="isMobile == true">
-    <mat-toolbar color="primary" class="mat-elevation-z22" style="z-index: 100;">
-      <span style="flex: 1 1 auto;"></span>
-      <span>Home</span>
-      <span style="flex: 1 1 auto;"></span>
-    </mat-toolbar>
-    <div class="mat-elevation-z2" style="background-color: lightgrey; width: 100%; min-height: 100%; padding: 8px;">
-      <ng-container *ngIf="announcementTitle !==''">
-        <div class="mat-elevation-z4" style="background-color: #639d1a; width: calc(100%); height: calc(10% - 32px); min-height: 40px; border-radius: 50px 0px 0px 50px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(999)" [ngStyle]="{'min-height': activeDiv === 999 ? '400px' : '40px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
-          <h4 style="text-align: right; color: white; margin-left: 60px; margin-right: 40px;">
-            <mat-icon style="vertical-align: middle">info</mat-icon>
-            {{announcementTitle}}
-          </h4>
-
-          <mat-divider style="color:white"></mat-divider>
-          <br />
-
-          <ng-container *ngIf="activeDiv != 999">
-            <p style="text-align:right; color: white; margin-left: 60px; margin-right: 40px;">
-              {{(announcementContent.length>48)? (announcementContent | slice:0:48)+'..':(announcementContent) }}
-            </p>
-          </ng-container>
-
-          <ng-container *ngIf="activeDiv == 999">
-            <p style="text-align: justify; color: white; margin-left: 60px; margin-right: 40px;">
-              {{announcementContent}}
-            </p>
-          </ng-container>
-        </div>
-      </ng-container>
-
-
-      <br />
-      <mat-divider></mat-divider>
-      <br />
-
-      <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(100% - 32px); height: calc(10% - 32px); min-height: 40px; border-radius: 16px; padding: 8px; margin-top: 8px" [@fadeInOnEnter] [@fadeOutOnLeave]>
-        <h2 style="text-align: center">
-          Dashboard
-        </h2>
-      </div>
-
-      <br />
-      <mat-divider></mat-divider>
-      <br />
-
-
-      <div style="width: calc(100% - 16px); height: calc(25% - 32px); display:inline-flex">
-        <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(50%); height: calc(100% - 32px); min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(0)" [ngStyle]="{'min-height': activeDiv === 0 ? '150px' : '100px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
-          <p style="text-align: center">
-            Active Employees
-          </p>
-          <mat-divider></mat-divider>
-        </div>
-
-        <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(50%); height: calc(100% - 32px); margin-left: 8px ; min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(1)" [ngStyle]="{'min-height': activeDiv === 1 ? '150px' : '100px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
-          <p style="text-align: center">
-            Hours Active
-          </p>
-          <mat-divider></mat-divider>
-        </div>
-
-      </div>
-
-      <div style="width: calc(100% - 16px); height: calc(25% - 32px); display:inline-flex">
-        <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(50%); height: calc(100% - 32px); min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(2)" [ngStyle]="{'min-height': activeDiv === 2 ? '150px' : '100px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
-          <p style="text-align: center">
-            Tasks Pending
-          </p>
-          <mat-divider></mat-divider>
-          <br />
-          <h1 style="text-align: center">{{taskBoardData.length}}</h1>
-        </div>
-
-        <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(50%); height: calc(100% - 32px); margin-left: 8px ; min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(3)" [ngStyle]="{'min-height': activeDiv === 3 ? '150px' : '100px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
-            <p style="text-align: center">
-            Warnings
-          </p>
-           <mat-divider></mat-divider>
-          <br />
-           <h1 style="text-align: center">{{taskBoardData.length}}</h1>
-        </div>
-
-      </div>
-
-      <br />
-      <br />
-      <h1 style="text-align: center">...</h1>
-      <mat-divider></mat-divider>
-      <br />
-
-      <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(100% - 32px); height: calc(10% - 32px); min-height: 40px; border-radius: 16px; padding: 8px; margin-top: 8px" [@fadeInOnEnter] [@fadeOutOnLeave]>
-        <h2 style="text-align: center">
-          Tasks
-        </h2>
-      </div>
-
-
-      <br />
-      <mat-divider></mat-divider>
-      <br />
-
-      <ng-container *ngFor="let data of taskBoardData; let i = index">
-
-        <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(100% - 32px); height: calc(40% - 32px); min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(i+4)" [ngStyle]="{'min-height': activeDiv === i+4 ? '200px' : '100px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
-          <h4 style="text-align: center">
-            {{data.taskBoard_name}}
-
-          </h4>
-          <mat-divider></mat-divider>
-          <p style="text-align: center">
-            {{data.taskBoard_content}}
-            {{data.taskBoard_content}}
-          </p>
-        </div>
-
-
-      </ng-container>
-
-      <!--<div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(100% - 32px); height: calc(40% - 32px); min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(2)" [ngStyle]="{'min-height': activeDiv === 2 ? '200px' : '100px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
-        <p style="text-align: center">
-          Task
-        </p>
-        <mat-divider></mat-divider>
-      </div>
-
-      <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(100% - 32px); height: calc(20% - 32px); min-height: 100px; border-radius: 16px; padding: 8px; margin-top: 8px;" (click)="onclickDiv(3)" [ngStyle]="{'min-height': activeDiv === 3 ? '200px' : '100px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
-        <p style="text-align: center">
-          Task
-        </p>
-        <mat-divider></mat-divider>
-      </div>-->
-
-      <br />
-      <br />
-      <h1 style="text-align: center">...</h1>
-      <mat-divider></mat-divider>
-      <br />
-
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
-    </div>
-
+  <ng-container *ngIf="isLoaded == false">
+    <mat-spinner style="margin: auto"></mat-spinner>
   </ng-container>
 
-  <!-- If Not Mobile-->
-  <ng-container *ngIf="isMobile != true">
-    <mat-toolbar color="primary" class="mat-elevation-z22" style="z-index: 100;">
+  <ng-container *ngIf="isLoaded != false">
 
-      <span style="flex: 1 1 auto;"></span>
-      <span>Home</span>
-      <span style="flex: 1 1 auto;"></span>
-    </mat-toolbar>
-    <div class="mat-elevation-z2" style="background-color: lightgrey; width: 100%; min-height: 100%; padding: 8px;">
+    <!-- If Mobile-->
+    <ng-container *ngIf="isMobile == true">
+      <mat-toolbar color="primary" class="mat-elevation-z22" style="z-index: 100;">
+        <span style="flex: 1 1 auto;"></span>
+        <span>Home</span>
+        <span style="flex: 1 1 auto;"></span>
+      </mat-toolbar>
 
-      <ng-container *ngIf="announcementTitle !==''">
-        <div class="mat-elevation-z4" style="background-color: #639d1a; width: calc(100%); height: calc(10% - 32px); min-height: 40px; border-radius: 50px 0px 0px 50px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(999)" [ngStyle]="{'min-height': activeDiv === 999 ? '400px' : '40px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
-          <h4 style="text-align: right; color: white; margin-left: 60px; margin-right: 40px;">
-            <mat-icon style="vertical-align: middle">info</mat-icon>
-            {{announcementTitle}}
-          </h4>
+     
+      <div class="mat-elevation-z2" style="background-color: lightgrey; width: 100%; min-height: 100%; padding: 8px;">
 
-          <mat-divider style="color:white"></mat-divider>
-          <br />
+      <app-announcement>
 
-          <ng-container *ngIf="activeDiv != 999">
-            <p style="text-align:right; color: white; margin-left: 60px; margin-right: 40px;">
-              {{(announcementContent.length>48)? (announcementContent | slice:0:48)+'..':(announcementContent) }}
+      </app-announcement>
+
+
+        <br />
+        <mat-divider></mat-divider>
+        <br />
+
+        <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(100% - 32px); height: calc(10% - 32px); min-height: 40px; border-radius: 16px; padding: 8px; margin-top: 8px" [@fadeInOnEnter] [@fadeOutOnLeave]>
+          <h2 style="text-align: center">
+            Dashboard
+          </h2>
+        </div>
+
+        <br />
+        <mat-divider></mat-divider>
+        <br />
+
+
+        <div style="width: calc(100% - 16px); height: calc(25% - 32px); display:inline-flex">
+          <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(50%); height: calc(100% - 32px); min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(0)" [ngStyle]="{'min-height': activeDiv === 0 ? '150px' : '100px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
+            <p style="text-align: center">
+              Active Employees
             </p>
-          </ng-container>
+            <mat-divider></mat-divider>
+          </div>
 
-          <ng-container *ngIf="activeDiv == 999">
-            <p style="text-align: justify; color: white; margin-left: 60px; margin-right: 40px;">
-              {{announcementContent}}
+          <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(50%); height: calc(100% - 32px); margin-left: 8px ; min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(1)" [ngStyle]="{'min-height': activeDiv === 1 ? '150px' : '100px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
+            <p style="text-align: center">
+              Hours Active
             </p>
-          </ng-container>
-        </div>
-      </ng-container>
+            <mat-divider></mat-divider>
+          </div>
 
-      <br />
-      <mat-divider></mat-divider>
-      <br />
-
-      <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(100% - 32px); height: calc(10% - 32px); min-height: 40px; border-radius: 16px; padding: 8px; margin-top: 8px" [@fadeInOnEnter] [@fadeOutOnLeave]>
-        <h2 style="text-align: center">
-          Dashboard
-        </h2>
-      </div>
-
-      <br />
-      <mat-divider></mat-divider>
-      <br />
-
-      <div style="width: calc(100% - 16px); height: calc(25% - 32px); display:inline-flex">
-        <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(25%); height: calc(100% - 32px); min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(0)" [@fadeInOnEnter] [@fadeOutOnLeave]>
-          <p style="text-align: center">
-            Active Employees
-          </p>
-          <mat-divider></mat-divider>
         </div>
 
-        <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(25%); height: calc(100% - 32px); margin-left: 8px ; min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" [@fadeInOnEnter] [@fadeOutOnLeave]>
-          <p style="text-align: center">
-            Hours Active
-          </p>
-          <mat-divider></mat-divider>
+        <div style="width: calc(100% - 16px); height: calc(25% - 32px); display:inline-flex">
+          <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(50%); height: calc(100% - 32px); min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(2)" [ngStyle]="{'min-height': activeDiv === 2 ? '150px' : '100px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
+            <p style="text-align: center">
+              Tasks Pending
+            </p>
+            <mat-divider></mat-divider>
+            <br />
+            <h1 style="text-align: center">{{taskBoardData.length}}</h1>
+          </div>
+
+          <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(50%); height: calc(100% - 32px); margin-left: 8px ; min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(3)" [ngStyle]="{'min-height': activeDiv === 3 ? '150px' : '100px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
+            <p style="text-align: center">
+              Warnings
+            </p>
+            <mat-divider></mat-divider>
+            <br />
+            <h1 style="text-align: center">{{taskBoardData.length}}</h1>
+          </div>
+
         </div>
 
-        <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(25%); height: calc(100% - 32px); margin-left: 8px ; min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" [@fadeInOnEnter] [@fadeOutOnLeave]>
-          <p style="text-align: center">
-            Tasks Pending
-          </p>
-          <mat-divider></mat-divider>
-          <br />
+        <br />
+        <br />
+        <h1 style="text-align: center">...</h1>
+        <mat-divider></mat-divider>
+        <br />
 
-          <h1 style="text-align: center">{{taskBoardData.length}}</h1>
+        <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(100% - 32px); height: calc(10% - 32px); min-height: 40px; border-radius: 16px; padding: 8px; margin-top: 8px" [@fadeInOnEnter] [@fadeOutOnLeave]>
+          <h2 style="text-align: center">
+            Tasks
+          </h2>
         </div>
 
-        <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(25%); height: calc(100% - 32px); margin-left: 8px ; min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" [@fadeInOnEnter] [@fadeOutOnLeave]>
-          <p style="text-align: center">
-            Warnings
-          </p>
-          <mat-divider></mat-divider>
-        </div>
 
-      </div>
-
-      <br />
-      <br />
-      <h1 style="text-align: center">...</h1>
-      <mat-divider></mat-divider>
-      <br />
-
-      <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(100% - 32px); height: calc(10% - 32px); min-height: 40px; border-radius: 16px; padding: 8px; margin-top: 8px" [@fadeInOnEnter] [@fadeOutOnLeave]>
-        <h2 style="text-align: center">
-          Tasks
-        </h2>
-      </div>
-
-      <br />
-      <mat-divider></mat-divider>
-      <br />
-
-      <div style="width: calc(100% - 16px); height: calc(25% - 32px); display: inline-flex; flex-wrap: wrap;gap: 8px;">
+        <br />
+        <mat-divider></mat-divider>
+        <br />
 
         <ng-container *ngFor="let data of taskBoardData; let i = index">
 
-          <div class="mat-elevation-z4" style="flex: auto; background-color: whitesmoke; min-width: calc(12%); max-width: calc(32%); height: calc(100% - 32px); min-height: 200px; border-radius: 16px; padding: 8px; transition-duration: 1s " [@fadeInOnEnter] [@fadeOutOnLeave]>
-
+          <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(100% - 32px); height: calc(40% - 32px); min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(i+4)" [ngStyle]="{'min-height': activeDiv === i+4 ? '200px' : '100px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
             <h4 style="text-align: center">
               {{data.taskBoard_name}}
 
@@ -267,20 +108,159 @@
 
 
         </ng-container>
+
+        <!--<div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(100% - 32px); height: calc(40% - 32px); min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(2)" [ngStyle]="{'min-height': activeDiv === 2 ? '200px' : '100px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
+          <p style="text-align: center">
+            Task
+          </p>
+          <mat-divider></mat-divider>
+        </div>
+
+        <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(100% - 32px); height: calc(20% - 32px); min-height: 100px; border-radius: 16px; padding: 8px; margin-top: 8px;" (click)="onclickDiv(3)" [ngStyle]="{'min-height': activeDiv === 3 ? '200px' : '100px' }" [@fadeInOnEnter] [@fadeOutOnLeave]>
+          <p style="text-align: center">
+            Task
+          </p>
+          <mat-divider></mat-divider>
+        </div>-->
+
+        <br />
+        <br />
+        <h1 style="text-align: center">...</h1>
+        <mat-divider></mat-divider>
+        <br />
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
       </div>
 
-      <br />
-      <br />
-      <h1 style="text-align: center">...</h1>
-      <mat-divider></mat-divider>
-      <br />
+    </ng-container>
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-    </div>
+    <!-- If Not Mobile-->
+    <ng-container *ngIf="isMobile != true">
+      <mat-toolbar color="primary" class="mat-elevation-z22" style="z-index: 100;">
+
+        <span style="flex: 1 1 auto;"></span>
+        <span>Home</span>
+        <span style="flex: 1 1 auto;"></span>
+      </mat-toolbar>
+      <div class="mat-elevation-z2" style="background-color: lightgrey; width: 100%; min-height: 100%; padding: 8px;">
+
+      <app-announcement>
+
+      </app-announcement>
+
+        <br />
+        <mat-divider></mat-divider>
+        <br />
+
+        <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(100% - 32px); height: calc(10% - 32px); min-height: 40px; border-radius: 16px; padding: 8px; margin-top: 8px" [@fadeInOnEnter] [@fadeOutOnLeave]>
+          <h2 style="text-align: center">
+            Dashboard
+          </h2>
+        </div>
+
+        <br />
+        <mat-divider></mat-divider>
+        <br />
+
+        <div style="width: calc(100% - 16px); height: calc(25% - 32px); display:inline-flex">
+          <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(25%); height: calc(100% - 32px); min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" (click)="onclickDiv(0)" [@fadeInOnEnter] [@fadeOutOnLeave]>
+            <p style="text-align: center">
+              Active Employees
+            </p>
+            <mat-divider></mat-divider>
+          </div>
+
+          <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(25%); height: calc(100% - 32px); margin-left: 8px ; min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" [@fadeInOnEnter] [@fadeOutOnLeave]>
+            <p style="text-align: center">
+              Hours Active
+            </p>
+            <mat-divider></mat-divider>
+          </div>
+
+          <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(25%); height: calc(100% - 32px); margin-left: 8px ; min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" [@fadeInOnEnter] [@fadeOutOnLeave]>
+            <p style="text-align: center">
+              Tasks Pending
+            </p>
+            <mat-divider></mat-divider>
+            <br />
+
+            <h1 style="text-align: center">{{taskBoardData.length}}</h1>
+          </div>
+
+          <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(25%); height: calc(100% - 32px); margin-left: 8px ; min-height: 200px; border-radius: 16px; padding: 8px; margin-top: 8px; transition-duration: 1s" [@fadeInOnEnter] [@fadeOutOnLeave]>
+            <p style="text-align: center">
+              Warnings
+            </p>
+            <mat-divider></mat-divider>
+          </div>
+
+        </div>
+
+        <br />
+        <br />
+        <h1 style="text-align: center">...</h1>
+        <mat-divider></mat-divider>
+        <br />
+
+        <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(100% - 32px); height: calc(10% - 32px); min-height: 40px; border-radius: 16px; padding: 8px; margin-top: 8px" [@fadeInOnEnter] [@fadeOutOnLeave]>
+          <h2 style="text-align: center">
+            Tasks
+          </h2>
+        </div>
+
+        <br />
+        <mat-divider></mat-divider>
+        <br />
+
+        <div style="width: calc(100% - 16px); height: calc(25% - 32px); display: inline-flex; flex-wrap: wrap;gap: 8px;">
+
+          <ng-container *ngFor="let data of taskBoardData; let i = index">
+
+            <div class="mat-elevation-z4" style="flex: auto; background-color: whitesmoke; min-width: calc(12%); max-width: calc(32%); height: calc(100% - 32px); min-height: 200px; border-radius: 16px; padding: 8px; transition-duration: 1s " [@fadeInOnEnter] [@fadeOutOnLeave]>
+
+              <h4 style="text-align: center">
+                {{data.taskBoard_name}}
+
+              </h4>
+              <mat-divider></mat-divider>
+              <p style="text-align: center">
+                {{data.taskBoard_content}}
+                {{data.taskBoard_content}}
+              </p>
+            </div>
+
+
+          </ng-container>
+        </div>
+
+        <br />
+        <br />
+        <h1 style="text-align: center">...</h1>
+        <mat-divider></mat-divider>
+        <br />
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+      </div>
+    </ng-container>
+
+
+
   </ng-container>
+
+
+
+
+
+
+
 </div>
 

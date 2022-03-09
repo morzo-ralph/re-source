@@ -1,5 +1,25 @@
 const mongoose = require('mongoose');
 
+
+
+
+//export interface Inventories {
+//    number: number;
+//    id: string;
+//    _id: string;
+
+//    name: string;
+//    description: string;
+//    quantity: number;
+//    price: number;
+//    imageUrl: string
+
+//    isArchive: number;
+//    created_at: Date;
+//    updated_at: Date;
+//}
+
+
 const InventorySchema = new mongoose.Schema({
     number: Number,
     id: String,

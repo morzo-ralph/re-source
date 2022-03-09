@@ -21,8 +21,11 @@ export class ViewItemComponent implements OnInit {
 
   number: any;
   itemId: any;
+  item_Id: any;
+  imageUrl: any;
   itemName: any;
   itemDesc: any;
+  
   itemQty: any;
   itemPrice: any;
   itemIsArchive: any;
@@ -31,6 +34,8 @@ export class ViewItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.itemId = this.data._id
+
+    this.imageUrl= this.data.imageUrl;
     this.number = this.data.number
     this.itemName = this.data.name
     this.itemDesc = this.data.description

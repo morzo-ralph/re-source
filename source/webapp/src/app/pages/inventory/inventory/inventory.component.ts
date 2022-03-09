@@ -15,21 +15,10 @@ import { catchError, filter } from 'rxjs/operators';
 
 import { ViewItemComponent } from './view-item/view-item.component';
 
-export interface InventoriesData {
-  number: number;
-  id: string;
-  _id: string;
+import { ConnStatus, Announcement, Employee, TaskBoard, Inventories } from 'src/app/services/data/data.model';
 
-  name: string;
-  description: string;
-  quantity: number;
-  price: number;
-  imageUrl: string
 
-  isArchive: number;
-  created_at: Date;
-  updated_at: Date;
-}
+import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation, rubberBandAnimation } from 'angular-animations';
 
 export interface PurchasesData {
   number: number;
@@ -61,7 +50,12 @@ const PURC_DATA: PurchasesData[] = [
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
-  styleUrls: ['./inventory.component.scss']
+  styleUrls: ['./inventory.component.scss'],
+  animations: [
+    fadeInOnEnterAnimation(),
+    fadeOutOnLeaveAnimation(),
+    rubberBandAnimation(),
+  ]
 })
 export class InventoryComponent implements OnInit {
 
@@ -73,14 +67,15 @@ export class InventoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void { 
-    this.load();
-    
+    this.loadOnstart();
+    this.loadOnLoop();
   }
 
   //OOP
   isLoaded: boolean = false;
 
-  async load() {
+  async loadOnstart() {
+
     this.isLoaded = false
     await this.delay(1000)
     //Event Loop Starts Here
@@ -94,12 +89,83 @@ export class InventoryComponent implements OnInit {
 
   }
 
+  async loadOnLoop() {
+
+    //Event Loop Starts Here
+
+    this.getAnnouncements();
+
+
+
+    //Event Ends Here
+    this.reloadLoop()
+  }
+
+  reloadLoop() {
+    this.loadOnLoop()
+  }
+
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+  //check if mobile
+
+  isMobile!: boolean
+
+  checkIfMobile() {
+    this.isMobile = this.libraryService.getIsMobile()
+  }
+
+  announcementData: Announcement[] = []
+
+  announcementTitle: string = ""
+  announcementContent: string = ""
+
+  //Announcements
+
+
+  getAnnouncements() {
+    this.dataService.getAllItem('announcements').subscribe((data: any) => {
+      /*console.log(data);*/
+      this.announcementData = data;
+
+      var currentDate = new Date();
+      /*console.log (currentDate);*/
+
+      for (var announcement of this.announcementData) {
+        var announcementDate = new Date(announcement.announcement_end_date)
+        /*console.log(announcementDate);*/
+
+        if (currentDate <= announcementDate) {
+          this.announcementTitle = announcement.announcement_title;
+          this.announcementContent = announcement.announcement_content;
+          /*console.log("OK")*/
+        }
+        else {
+          this.announcementTitle = "";
+          this.announcementContent = "";
+        }
+      }
+
+
+    })
+  }
+
+  addAnnouncement() {
+
+  }
+
+  editAnnouncement() {
+
+  }
+
+  archiveAnnouncement() {
+
+  }
+
   inventoriesPayload: any;
-  inventoriesData: InventoriesData[] = [];
+  inventoriesData: Inventories[] = [];
   inventoriesDataSource = new MatTableDataSource(this.inventoriesData);
   inventoriesDisplayedColumns = ['name', 'description', 'quantity', 'price', 'imageUrl'];
   inventoriesIdArchive: any;
@@ -219,6 +285,29 @@ export class InventoryComponent implements OnInit {
     //  this.expensesData = this.expensesPayload;
     //  this.expensesDataSource.data = this.expensesData;
     //});
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  activeDiv: any
+
+  onclickDiv(divId: any) {
+    if (this.activeDiv == divId) {
+      this.activeDiv = null
+    }
+    else {
+      this.activeDiv = divId;
+    }
   }
 
 
