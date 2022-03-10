@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,7 +16,8 @@ export class ViewItemComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
     private dataService: DataService,
-    private dialogRef: MatDialogRef<ViewItemComponent>
+    private dialogRef: MatDialogRef<ViewItemComponent>,
+    private httpClient: HttpClient
   ) { }
 
   itemEdit: any = {}
@@ -29,6 +32,7 @@ export class ViewItemComponent implements OnInit {
   itemQty: any;
   itemPrice: any;
   itemIsArchive: any;
+  image: any
   
   sellQty: any;
 
@@ -48,22 +52,27 @@ export class ViewItemComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  updateItem() {
-    this.itemEdit.name = this.itemName
-    this.itemEdit.description = this.itemDesc
-    this.itemEdit.quantity = this.itemQty
-    this.itemEdit.price = this.itemPrice
-
-    this.dataService.updateItem('inventories',this.itemId, this.itemEdit).subscribe((data : any) => {
-      Swal.fire(
-        'Item Updated!',
-        '',
-        'success'
-      )
-      this.onNoClick();
-      console.log(data);
-    });
+  selectImage(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.image = file;
+    }
   }
+
+  updateItem() {
+    const formData = new FormData();
+    formData.append('id', this.itemId);
+    formData.append('name', this.itemName);
+    formData.append('description', this.itemDesc);
+    formData.append('quantity', this.itemQty);
+    formData.append('file', this.image);
+    formData.append('price', this.itemPrice);
+    
+    //const url = environment.BASE_URL +'inventories/update'
+    this.httpClient.post<any>(environment.BASE_URL + 'inventories/update', formData).subscribe((data: any) => {
+        console.log(data);
+      })
+    }
 
   archiveItem() {
       Swal.fire({
@@ -91,10 +100,6 @@ export class ViewItemComponent implements OnInit {
       this.dialogRef.close();
     }
 
-  kekw() {
-    Swal.fire({}).then()
-  }
-
   restoreItem() {
     Swal.fire({
       title: 'Are you sure?',
@@ -121,8 +126,34 @@ export class ViewItemComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  //sell item
+
+  salesPayload: any = {}
+  salesCounter: any
+  getSalesCounter () {
+    this.dataService.getAllItem('sales').subscribe((data: any) => {
+      this.salesCounter = data.length + 1
+      console.log(data.length)
+    })
+  }
+
   sellItem() {
-    this.sellQty
+    this.salesPayload.sales_quantity = this.sellQty
+    this.salesPayload.sales_price = this.itemPrice
+    this.salesPayload.sales_by = ''
+    this.salesPayload.sales_supplier = ''
+    this.salesPayload.sales_date = Date.now()
+    this.salesPayload.number = this.salesCounter
+
+    this.dataService.createItem('sales', this.salesPayload).subscribe((data : any) => {
+      console.log(data)
+    })
+
+    let newQty = this.itemQty - this.sellQty
+
+    this.dataService.archiveItem('inventories', this.itemId, {'quantity': newQty}).subscribe((data: any) => {
+      console.log(data)
+    })
   }
   
 }

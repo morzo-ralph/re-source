@@ -92,12 +92,11 @@ export class InventoryComponent implements OnInit {
 
   async load() {
     this.isLoaded = false
-    await this.delay(1000)
+    //await this.delay(1000)
     //Event Loop Starts Here
     this.getInventories();
     this.getPurchases();
-    console.log('limit')    
-    this.getInventoriess();
+    // this.getInventoriess();
     
 
     //Event Ends Here
@@ -111,8 +110,8 @@ export class InventoryComponent implements OnInit {
   }
 
   
-  //obs: Observable<any>;
-  pageSize = 10
+  // //obs: Observable<any>;
+  // pageSize = 10
   lenght : any
 
 
@@ -139,43 +138,37 @@ export class InventoryComponent implements OnInit {
 
   
   //page limit
-  page: any
-  limit: any
-  getInventoriess() {
+  // page: any
+  // limit: any
+  // getInventoriess() {
     
-    this.dataService.getPost('inventories', this.limit, this.page).subscribe((data: any) => {
-        console.log(data);
-        this.inventoriesPayload = data;
-        this.inventoriesData = this.inventoriesPayload;
-        this.inventoriesDataSource.data = this.inventoriesPayload;
-      });
-  }
+  //   this.dataService.getPost('inventories', this.limit, this.page).subscribe((data: any) => {
+  //       console.log(data);
+  //       this.inventoriesPayload = data;
+  //       this.inventoriesData = this.inventoriesPayload;
+  //       this.inventoriesDataSource.data = this.inventoriesPayload;
+  //     });
+  // }
 
   pushItemData: any = {};
   idArchive: any;
   handleError: any;
   filterValue: any;
 
-  applyFilterInventories(filterValue: string){ 
-    // this.filterValue = (event.target as HTMLInputElement).value;     
-      this.inventoriesDataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-
+  // applyFilterInventories(filterValue: string){ 
+  //   // this.filterValue = (event.target as HTMLInputElement).value;     
+  //     this.inventoriesDataSource.filter = filterValue.trim().toLowerCase();
+  // }
 
   addItem() {
-    // const dialogRef = this.dialog.open(AddItemComponent, {
-    //   height: '75%',
-    //   width: '100%'
-    // });
-
-    // dialogRef.afterClosed().subscribe(() => this.getInventories());
     const dialogRef = this.dialog.open(AddItemComponent, {
       height: '75%',
       width: '100%'
     });
 
-    dialogRef.afterClosed().subscribe(() => this.getInventories())
+    dialogRef.afterClosed().subscribe(result => {
+      this.getInventories()
+    })
     
   }
 
@@ -205,33 +198,33 @@ export class InventoryComponent implements OnInit {
     // })
   }
   
-  itemArchive(i:any){
+  // itemArchive(i:any){
 
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
-        //console.log(i);
-        this.idArchive = i;
-        this.dataService.archiveItem('inventories', this.idArchive, {"isArchive": 1}).subscribe((data: any) => {
+  //   Swal.fire({
+  //     title: 'Are you sure?',
+  //     text: "You won't be able to revert this!",
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#3085d6',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Yes, delete it!'
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       Swal.fire(
+  //         'Deleted!',
+  //         'Your file has been deleted.',
+  //         'success'
+  //       )
+  //       //console.log(i);
+  //       this.idArchive = i;
+  //       this.dataService.archiveItem('inventories', this.idArchive, {"isArchive": 1}).subscribe((data: any) => {
           
-        });
-        this.getInventories();
-      }
-    })
-    //this.itemData();
-  }
+  //       });
+  //       this.getInventories();
+  //     }
+  //   })
+  //   //this.itemData();
+  // }
 
   itemView(data: any){ 
     try {
@@ -241,31 +234,15 @@ export class InventoryComponent implements OnInit {
         data: data
       });
 
-      dialogRef.afterClosed();
+      dialogRef.afterClosed().subscribe(result => {
+        this.getInventories()
+      });
       
     } catch (error) {
       console.log(error);
     }
       
     }
-
-  itemUpdate(data: any){
-  // const dialogRef2 = this.dialog.open(EditComponent, {
-  //   width: '50%',
-  //   data: i
-  //  });
-
-  //  dialogRef2.afterClosed().subscribe(() => this.pullInventories());
-  }
-
-  clearForm(){
-    // this.prodName = '';
-    // this.prodDesc = '';
-    // this.prodQty = '';
-    // this.prodPrice = '';
-    // this.prodSupp = '';
-    // this.prodImg = '';
-  }
 
   purchasesPayload: any;
   purchasesData: PurchasesData[] = [];

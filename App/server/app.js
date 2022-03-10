@@ -56,24 +56,40 @@ app.use(filter())
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-app.use("/draws", drawsRouter);
-app.use("/employees", employeesRouter);
-app.use("/expenses", expensesRouter);
-app.use("/inventories", inventoriesRouter);
-app.use("/pettycashes", pettycashRouter);
-app.use("/purchases", purchasesRouter);
-app.use("/revenues", revenuesRouter);
-app.use("/salarytotals", salarytotalsRouter);
-app.use("/saldeltas", saldeltasRouter);
-app.use("/sales", salesRouter);
-app.use("/stocks", stocksRouter);
-app.use("/galleries", galleryRouter);
-app.use("/announcements", announcementRouter);
-app.use("/taskboards", taskBoardRouter);
-app.use("/payrolls", payrollRouter);
-app.use("/attendances", attendanceRouter);
+app.use("/api/draws", drawsRouter);
+app.use("/api/employees", employeesRouter);
+app.use("/api/expenses", expensesRouter);
+app.use("/api/inventories", inventoriesRouter);
+app.use("/api/pettycashes", pettycashRouter);
+app.use("/api/purchases", purchasesRouter);
+app.use("/api/revenues", revenuesRouter);
+app.use("/api/salarytotals", salarytotalsRouter);
+app.use("/api/saldeltas", saldeltasRouter);
+app.use("/api/sales", salesRouter);
+app.use("/api/stocks", stocksRouter);
+app.use("/api/galleries", galleryRouter);
+app.use("/api/announcements", announcementRouter);
+app.use("/api/taskboards", taskBoardRouter);
+app.use("/api/payrolls", payrollRouter);
+app.use("/api/attendances", attendanceRouter);
 
 app.use("/users", usersRouter);
+
+app.get('/api/check/', (req, res, next) => {
+    const content = [
+        {
+            message: "Successfully Connected"
+        }
+    ]
+    res.status(200).json({
+        content: content,
+        message: "Connected Succesfully",
+        status: 200,
+    })
+
+    /*console.log("Request Received");*/
+    next();
+});
 
 /**
  * truncate collection

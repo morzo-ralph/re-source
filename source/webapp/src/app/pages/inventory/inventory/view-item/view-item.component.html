@@ -57,12 +57,11 @@
         <mat-label>Price:</mat-label>
         <input matInput [(ngModel)]="itemPrice" type="number" />
       </mat-form-field>     &nbsp;
-      <!-- <mat-form-field appearance="outline">
-          <mat-label>Price:</mat-label>
-          <input matInput [matDatepicker]="picker" [(ngModel)]="expDate">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field> -->
+
+        <mat-label>Image:</mat-label>
+        <input type="file"  name="image" (change)="selectImage($event)" />
+
+      
 
        <br />
       <button mat-dialog-close (click)="updateItem()" mat-raised-button color="primary">Update Item</button>  &nbsp;
