@@ -10,6 +10,7 @@ import { InventoryComponent } from './pages/inventory/inventory/inventory.compon
 /*import { GalleryComponent } from './pages/test/test/gallery/gallery.component';*/
 import { TaskboardComponent } from './pages/taskboard/taskboard.component';
 import { BundyComponent } from './bundy/bundy.component';
+import { AuthGuard } from './services/auth/auth.guard';
 
 const routes: Routes = [
 
@@ -20,7 +21,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'bundy', component: BundyComponent
+    path: 'bundy', component: BundyComponent, canActivate:[AuthGuard]
   },
 
   //{
@@ -33,35 +34,35 @@ const routes: Routes = [
   {
     path: 'home', component: IntefaceComponent, children:
       [
-        { path: '', component: HomeComponent },
+        { path: '', component: HomeComponent, canActivate:[AuthGuard] },
       ]
   },
 
   {
     path: 'hr', component: IntefaceComponent, children:
       [
-        { path: '', component: HrComponent },
+        { path: '', component: HrComponent, canActivate:[AuthGuard] },
       ]
   },
 
   {
     path: 'finance', component: IntefaceComponent, children:
       [
-        { path: '', component: FinanceComponent },
+        { path: '', component: FinanceComponent, canActivate:[AuthGuard]},
       ]
   },
 
   {
     path: 'inventory', component: IntefaceComponent, children:
       [
-        { path: '', component: InventoryComponent },
+        { path: '', component: InventoryComponent, canActivate:[AuthGuard] },
       ]
   },
 
   {
     path: 'taskboard', component: IntefaceComponent, children:
       [
-        { path: '', component: TaskboardComponent },
+        { path: '', component: TaskboardComponent, canActivate:[AuthGuard] },
       ]
   },
   //{
