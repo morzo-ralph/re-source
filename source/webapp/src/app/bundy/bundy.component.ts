@@ -41,7 +41,11 @@ import { ConnStatus, Announcement, Employee, TaskBoard } from 'src/app/services/
 @Component({
   selector: 'app-bundy',
   templateUrl: './bundy.component.html',
-  styleUrls: ['./bundy.component.scss']
+  styleUrls: ['./bundy.component.scss'],
+  animations: [
+    fadeInOnEnterAnimation(),
+    fadeOutOnLeaveAnimation(),
+  ]
 })
 export class BundyComponent implements OnInit {
 

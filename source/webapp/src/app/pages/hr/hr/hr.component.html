@@ -1,15 +1,47 @@
+
+
+
+
+
+
+
 <div style="height: 100%; width: 100%">
+
+  
   <ng-container *ngIf="isLoaded == false">
     <mat-spinner style="margin: auto"></mat-spinner>
   </ng-container>
-  <!--<ng-container *ngIf="isMobile != true">
+
+  
 
 
-
-
-  </ng-container>-->
   <ng-container *ngIf="isLoaded != false">
+
+    <ng-container *ngIf="isMobile == true">
+
+
+
+
+    </ng-container>
+
+    <ng-container *ngIf="isMobile != true">
+
+      <mat-toolbar color="primary" class="mat-elevation-z22" style="z-index: 100;">
+        <span style="flex: 1 1 auto;"></span>
+        <span>Human Resources</span>
+        <span style="flex: 1 1 auto;"></span>
+      </mat-toolbar>
+
+
+
+
+    </ng-container>
+
   </ng-container>
+
+
+
+
 </div>
 
 

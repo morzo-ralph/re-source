@@ -6,10 +6,17 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
-import { LibraryService } from 'src/app/services/library.service';
+
 import Swal from 'sweetalert2';
 import { Data } from '@angular/router';
 import { DatePipe } from '@angular/common';
+
+import { ConnStatus, Announcement, Employee, TaskBoard, Inventories } from 'src/app/services/data/data.model';
+
+
+import { LibraryService } from 'src/app/services/library.service';
+
+
 
 export interface Employees_Data {
   number: number;
@@ -54,16 +61,62 @@ const ATT_DATA: Attendance_Data[] = [
 })
 export class HrComponent implements OnInit {
 
-  constructor(private library: LibraryService, private datepipe: DatePipe) { }
+  constructor(
+    private libraryService: LibraryService,
+    private dataService: DataService,
+    private datepipe: DatePipe
+  ) { }
 
   ngOnInit(): void {
-    this.load()
-    //this.employeesDataSource.paginator = this.paginator
+    this.loadOnstart()
+    this.loadOnLoop()
+
   }
 
   //@ViewChild(MatPaginator) paginator!: MatPaginator
 
-  isLoaded: boolean = false
+  //OOP
+  isLoaded: boolean = false;
+
+  async loadOnstart() {
+
+    this.isLoaded = false
+    await this.delay(1000)
+    //Event Loop Starts Here
+    this.getDays()
+    this.getMonths()
+    this.fillAttendanceTable()
+
+    this.getEmployees();
+    this.getAttendance()
+
+    //Event Loop Ends Here
+    this.isLoaded = true
+    console.log(this.isLoaded)
+
+
+  }
+
+  async loadOnLoop() {
+
+    //Event Loop Starts Here
+    this.checkIfMobile();
+    this.getAnnouncements();
+
+
+
+    //Event Ends Here
+    this.reloadLoop()
+  }
+
+  reloadLoop() {
+    this.loadOnLoop()
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
 
   async load() {
     this.isLoaded = false
@@ -81,8 +134,12 @@ export class HrComponent implements OnInit {
     console.log(this.isLoaded)
   }
 
-  delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  //check if mobile
+
+  isMobile!: boolean
+
+  checkIfMobile() {
+    this.isMobile = this.libraryService.getIsMobile()
   }
 
 
@@ -99,6 +156,53 @@ export class HrComponent implements OnInit {
     this.employeesDataSource.data = this.employeesData;
     //this.employeesDataSource.paginator = this.paginator;
     
+
+  }
+
+  announcementData: Announcement[] = []
+
+  announcementTitle: string = ""
+  announcementContent: string = ""
+
+  //Announcements
+
+
+  getAnnouncements() {
+    this.dataService.getAllItem('announcements').subscribe((data: any) => {
+      /*console.log(data);*/
+      this.announcementData = data;
+
+      var currentDate = new Date();
+      /*console.log (currentDate);*/
+
+      for (var announcement of this.announcementData) {
+        var announcementDate = new Date(announcement.announcement_end_date)
+        /*console.log(announcementDate);*/
+
+        if (currentDate <= announcementDate) {
+          this.announcementTitle = announcement.announcement_title;
+          this.announcementContent = announcement.announcement_content;
+          /*console.log("OK")*/
+        }
+        else {
+          this.announcementTitle = "";
+          this.announcementContent = "";
+        }
+      }
+
+
+    })
+  }
+
+  addAnnouncement() {
+
+  }
+
+  editAnnouncement() {
+
+  }
+
+  archiveAnnouncement() {
 
   }
 
@@ -160,27 +264,27 @@ export class HrComponent implements OnInit {
   }
 
   getDate() {
-    return this.library.getDate("EEEE, MMMM d, y")
+    return this.libraryService.getDate("EEEE, MMMM d, y")
   }
 
   getMonth() {
-    return Number(this.library.getDate("M")) - 1
+    return Number(this.libraryService.getDate("M")) - 1
   }
 
   getLastDate() {
-    return this.library.getLastDayofMonth(this.getMonth())
+    return this.libraryService.getLastDayofMonth(this.getMonth())
   }
 
   daysArray: string[] = []
 
   getDays() {
-    this.daysArray = this.library.generateDaysArray(this.getMonth())
+    this.daysArray = this.libraryService.generateDaysArray(this.getMonth())
   }
 
   monthsArray: string[] = []
 
   getMonths() {
-    this.monthsArray = this.library.generateMonthsArray()
+    this.monthsArray = this.libraryService.generateMonthsArray()
     console.log(this.monthsArray)
   }
 

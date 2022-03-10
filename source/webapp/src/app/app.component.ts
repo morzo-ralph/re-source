@@ -26,7 +26,7 @@ export class AppComponent {
     //Event Loop Starts Here
 
     this.checkIfMobile();
-    this.checkIfServerActive();
+    /*this.checkIfServerActive();*/
 
     await this.delay(1000);
     this.reload();
@@ -61,13 +61,13 @@ export class AppComponent {
   isConnStatus: any;
 
 
-  checkIfServerActive() {
-    var conMsg = this.dataService.checkConn().subscribe((data: any) => {      
-      this.isConnMsg = data;
-      /console.log(this.isConnMsg);*/
-      this.isConnStatus = this.isConnMsg.status;
-    })
-  }
+  //checkIfServerActive() {
+  //  var conMsg = this.dataService.checkConn().subscribe((data: any) => {      
+  //    this.isConnMsg = data;
+  //    /console.log(this.isConnMsg);*/
+  //    this.isConnStatus = this.isConnMsg.status;
+  //  })
+  //}
 
 
 

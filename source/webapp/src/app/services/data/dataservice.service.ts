@@ -16,9 +16,9 @@ export class DataService {
 
   baseURL = "http://localhost:3000";
 
-  checkConn() {
-    return this.http.get(`${this.baseURL}/api/check`);
-  }
+  //checkConn() {
+  //  return this.http.get(`${this.baseURL}/api/check`);
+  //}
 
   //sendApiRequest(method: any, data: any) {
   //  return <any>(
