@@ -33,6 +33,7 @@ router.post("/", upload.single('file'), (req, res, next) => {
     if(!req.file) {
         return res.status(500).send({ message: 'Upload Failed'});
     } else {
+        
         req.body.imageUrl = 'http://localhost:3000/uploads/inventory/' + req.file.filename;
         req.body.isArchive = 0;
         (new Inventory(req.body))
@@ -49,6 +50,23 @@ router.post("/", upload.single('file'), (req, res, next) => {
 // });
 
 });
+
+router.post("/update", upload.single('file'), (req, res) => {
+    console.log(req.body);
+    if(!req.file) {
+        Inventory.findOneAndUpdate({"_id": req.body.id}, {$set: req.body})
+        .then(inventory => res.send(inventory))
+        .catch(error => console.log(error));
+    } else {
+        req.body.imageUrl = 'http://localhost:3000/uploads/inventory/' + req.file.filename;
+        //req.body.isArchive = 0;
+        Inventory.findOneAndUpdate({"_id": req.body.id}, {$set: req.body})
+        .then(inventory => res.send(inventory))
+        .catch(error => console.log(error));
+    }
+    
+});
+
 
 
 router.get('/', (req, res) => {
