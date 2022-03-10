@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { swalProviderToken } from '@sweetalert2/ngx-sweetalert2/lib/di';
-
+import { RouterLink, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data/dataservice.service';
 import { LibraryService } from 'src/app/services/library.service';
 
@@ -14,7 +14,9 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
 
   constructor(
-    private dataService: DataService, private libraryService: LibraryService,
+    private dataService: DataService,
+    private libraryService: LibraryService,
+    private router: Router
   ) {}
   
   account_id: any
@@ -71,21 +73,34 @@ export class LoginComponent implements OnInit {
 
     //createitem is just post -- auth sa future
     this.dataService.createItem('users/login', this.loginData).subscribe((data: any) => {
-      console.log(data.user);
+      console.log(data.status);
       localStorage.setItem('_id', data.user._id);
       localStorage.setItem('lname', data.user.lname);
       localStorage.setItem('fname', data.user.fname);
       localStorage.setItem('mname', data.user.mname);
-      if(data) {
+      var id = localStorage.getItem('_id')
+      if (id != ''){
+        var name = localStorage.getItem('lname') + ', ' + localStorage.getItem('fname')
         Swal.fire(
-          'Login Successful!',
-          data.user.lname,
+          'Logged in Successfully!',
+          'Welcome '+ name,
           'success'
         )
-        
+        this.router.navigate(['home'])
       } else {
-
+        Swal.fire(
+          'Credentials does not matched!',
+          '',
+          'error'
+        )
       }
+
+    }, (error : any) => {
+      Swal.fire(
+        'Credentials does not matched!',
+        '',
+        'error'
+      )
     })
   }
 }
