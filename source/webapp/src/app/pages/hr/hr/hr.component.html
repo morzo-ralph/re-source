@@ -7,37 +7,187 @@
 
 <div style="height: 100%; width: 100%">
 
-  
-  <ng-container *ngIf="isLoaded == false">
-    <mat-spinner style="margin: auto"></mat-spinner>
+
+
+
+  <ng-container *ngIf="isMobile != true">
+
+    <mat-toolbar color="primary" class="mat-elevation-z22" style="z-index: 100;">
+      <span style="flex: 1 1 auto;"></span>
+      <span>Human Resources</span>
+      <span style="flex: 1 1 auto;"></span>
+    </mat-toolbar>
+
+    <div class="mat-elevation-z2" style=" width: calc(100% - 8px); min-height: 100%; padding: 8px;">
+
+      <mat-tab-group (selectedTabChange)="loadOnstart()">
+
+        <mat-tab label="Employees">
+
+          <div class="mat-elevation-z2" style="background-color: lightgrey; width: 100%; min-height: 100vh; padding: 8px;">
+
+            <app-announcement>
+
+            </app-announcement>
+
+            <br />
+            <mat-divider></mat-divider>
+            <br />
+
+            <ng-container *ngIf="isLoaded == false">
+
+              <mat-spinner style="margin: auto"></mat-spinner>
+
+            </ng-container>
+            <ng-container *ngIf="isLoaded != false">
+              <div class="mat-elevation-z4" style="background-color: whitesmoke; width: calc(100% - 32px); height: calc(10% - 32px); min-height: 40px; border-radius: 16px; padding: 8px; margin-top: 8px" [@fadeInOnEnter] [@fadeOutOnLeave]>
+                <h2 style="text-align: center">
+                  Employees
+                </h2>
+
+
+                <mat-form-field appearance="fill" style="margin-left: 16px; width: calc(100% - 32px)">
+                  <mat-label>Filter</mat-label>
+                  <input matInput placeholder="Filter">
+                </mat-form-field>
+                <br />
+                <!--<div style="text-align: right">
+            <button mat-raised-button color="primary" (click)="addItem()">Add Item</button> &nbsp;
+            <button mat-raised-button color="primary" (click)="addItem()">Sort</button> &nbsp;
+            <button mat-raised-button color="primary" (click)="addItem()">Sort</button> &nbsp; &nbsp; &nbsp;
+          </div>-->
+
+                <mat-paginator></mat-paginator>
+
+
+                <!--['number', 'id', 'name', 'age', 'address','position','department','role', 'status', 'actions'];-->
+
+                <mat-table [dataSource]="employeesDataSource" class="mat-elevation-z12">
+
+                  <ng-container matColumnDef="number">
+                    <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.number}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="age">
+                    <mat-header-cell *matHeaderCellDef> Age </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.age}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="address">
+                    <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="position">
+                    <mat-header-cell *matHeaderCellDef> Position </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="department">
+                    <mat-header-cell *matHeaderCellDef> Department </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.department}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="role">
+                    <mat-header-cell *matHeaderCellDef> Role</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.role}} </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="status">
+                    <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+
+                      <ng-container *ngIf="checkStatus(element.id) == 1">
+                        <mat-chip-list>
+                          <mat-chip color="primary" selected>
+                            <mat-icon>person</mat-icon>
+                            Available
+                          </mat-chip>
+                        </mat-chip-list>
+                      </ng-container>
+
+                      <ng-container *ngIf="checkStatus(element.id) == 0">
+                        <mat-chip-list>
+                          <mat-chip color="warn" selected>
+                            <mat-icon>person</mat-icon>
+                            Unavailable
+                          </mat-chip>
+                        </mat-chip-list>
+                      </ng-container>
+
+                    </mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+
+
+
+                      <button mat-button color="accent"> <mat-icon>visibility</mat-icon> </button>
+                      <!--<button mat-button color="primary">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-button color="accent">
+        <mat-icon>archive</mat-icon>
+      </button>
+      <button mat-button color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>-->
+                    </mat-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="employeesDisplayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: employeesDisplayedColumns;"></mat-row>
+                </mat-table>
+
+
+
+
+
+
+              </div>
+
+
+
+            </ng-container>
+
+
+
+
+
+          </div>
+
+
+
+
+        </mat-tab>
+        <mat-tab label="Empldwdoyees">
+
+
+        </mat-tab>
+
+        <mat-tab label="Emplodwdyees">
+
+
+        </mat-tab>
+
+      </mat-tab-group>
+    </div>
+
+
+
   </ng-container>
 
-  
 
-
-  <ng-container *ngIf="isLoaded != false">
-
-    <ng-container *ngIf="isMobile == true">
-
-
-
-
-    </ng-container>
-
-    <ng-container *ngIf="isMobile != true">
-
-      <mat-toolbar color="primary" class="mat-elevation-z22" style="z-index: 100;">
-        <span style="flex: 1 1 auto;"></span>
-        <span>Human Resources</span>
-        <span style="flex: 1 1 auto;"></span>
-      </mat-toolbar>
-
-
-
-
-    </ng-container>
-
-  </ng-container>
 
 
 
@@ -95,99 +245,99 @@
                     <mat-icon>person</mat-icon>
                     Available
                   </mat-chip>-->
-                  <!--<mat-chip color="warn" selected>
-                  <mat-icon>person</mat-icon>
-                     Unavailable
-                  </mat-chip>-->
-                <!--</mat-chip-list>
-              </ng-container>
-
-              <ng-container *ngIf="checkStatus(element.id) == 0">
-                <mat-chip-list>
-                  <mat-chip color="warn" selected>
-                    <mat-icon>person</mat-icon>
-                    Unavailable
-                  </mat-chip>
-                </mat-chip-list>
-              </ng-container>
-            </mat-cell>
-          </ng-container>
-
-          <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-              <button mat-button color="primary">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-button color="accent">
-                <mat-icon>archive</mat-icon>
-              </button>
-              <button mat-button color="warn">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </mat-cell>
-          </ng-container>
-          <mat-header-row *matHeaderRowDef="employeesDisplayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: employeesDisplayedColumns;"></mat-row>
-        </mat-table>-->
-        <!-- <mat-paginator [pageSizeOptions] = "[1, 2, 3]" showFirstLastButton></mat-paginator> -->
-        <!--<br />
-        <mat-divider></mat-divider>
-        <br />
-        <div style="width: 100%; text-align: right">
-          <button mat-raised-button color="primary">
-            <mat-icon>add</mat-icon>
-            Add Employee
-          </button>
-        </div>
-
+<!--<mat-chip color="warn" selected>
+<mat-icon>person</mat-icon>
+   Unavailable
+</mat-chip>-->
+<!--</mat-chip-list>
       </ng-container>
 
-    </div>
-
-  </mat-tab>
-
-  <mat-tab label="Attendance">
-    <div style="padding: 18px; text-align: center; width: calc(100%-36px); height: calc(100%-36px) ">
-
-      <ng-container *ngIf="isLoaded == false">
-        <mat-spinner style="margin: auto"></mat-spinner>
+      <ng-container *ngIf="checkStatus(element.id) == 0">
+        <mat-chip-list>
+          <mat-chip color="warn" selected>
+            <mat-icon>person</mat-icon>
+            Unavailable
+          </mat-chip>
+        </mat-chip-list>
       </ng-container>
+    </mat-cell>
+  </ng-container>
 
-      <ng-container *ngIf="isLoaded != false">
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button mat-button color="primary">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-button color="accent">
+        <mat-icon>archive</mat-icon>
+      </button>
+      <button mat-button color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="employeesDisplayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: employeesDisplayedColumns;"></mat-row>
+</mat-table>-->
+<!-- <mat-paginator [pageSizeOptions] = "[1, 2, 3]" showFirstLastButton></mat-paginator> -->
+<!--<br />
+      <mat-divider></mat-divider>
+      <br />
+      <div style="width: 100%; text-align: right">
+        <button mat-raised-button color="primary">
+          <mat-icon>add</mat-icon>
+          Add Employee
+        </button>
+      </div>
+
+    </ng-container>
+
+  </div>
+
+</mat-tab>
+
+<mat-tab label="Attendance">
+  <div style="padding: 18px; text-align: center; width: calc(100%-36px); height: calc(100%-36px) ">
+
+    <ng-container *ngIf="isLoaded == false">
+      <mat-spinner style="margin: auto"></mat-spinner>
+    </ng-container>
+
+    <ng-container *ngIf="isLoaded != false">
 
 
-        <div style="text-align:left">
-          <mat-form-field appearance="fill" style="margin-left: 10px">
-            <mat-label>{{getDate() | date : 'MMMM'}}</mat-label>
-            <mat-select>
-              <ng-container *ngFor="let month of monthsArray">
-                <mat-option>
-                  {{month}}
-                </mat-option>
-              </ng-container>
-            </mat-select>
-          </mat-form-field>
-        </div>
-
-
-        <div class="table-container mat-elevation-z12">
-          <mat-table [dataSource]="attendanceDataSource" class="att-table">
-
-            <ng-container matColumnDef="name" sticky>
-              <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      <div style="text-align:left">
+        <mat-form-field appearance="fill" style="margin-left: 10px">
+          <mat-label>{{getDate() | date : 'MMMM'}}</mat-label>
+          <mat-select>
+            <ng-container *ngFor="let month of monthsArray">
+              <mat-option>
+                {{month}}
+              </mat-option>
             </ng-container>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-            <ng-container *ngFor="let day of daysArray">
-              <ng-container matColumnDef="{{day}}">
-                <mat-header-cell *matHeaderCellDef class="att-cell"> {{day | date:'E'}} <br /> {{day | date:'d'}} </mat-header-cell>
-                <mat-cell *matCellDef="let element" class="att-cell">
-                  <ng-container *ngIf="dateMatch(element.attendance_date, day) == 1">
-                    {{element.attendance_hours}}
-                  </ng-container>-->
-                <!--{{element.attendance_date | date:'d'}}-->
-                <!--</mat-cell>
+
+      <div class="table-container mat-elevation-z12">
+        <mat-table [dataSource]="attendanceDataSource" class="att-table">
+
+          <ng-container matColumnDef="name" sticky>
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+
+          <ng-container *ngFor="let day of daysArray">
+            <ng-container matColumnDef="{{day}}">
+              <mat-header-cell *matHeaderCellDef class="att-cell"> {{day | date:'E'}} <br /> {{day | date:'d'}} </mat-header-cell>
+              <mat-cell *matCellDef="let element" class="att-cell">
+                <ng-container *ngIf="dateMatch(element.attendance_date, day) == 1">
+                  {{element.attendance_hours}}
+                </ng-container>-->
+<!--{{element.attendance_date | date:'d'}}-->
+<!--</mat-cell>
               </ng-container>
             </ng-container>
 

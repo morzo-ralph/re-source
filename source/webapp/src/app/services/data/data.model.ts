@@ -56,6 +56,15 @@ export interface Employee{
 
 }
 
+export interface Attendance{
+  number: number;
+  _id: string;
+  id: string;
+  name: string;
+  attendance_date: string;
+  attendance_hours: number;
+}
+
 export interface TaskBoard {
 
 

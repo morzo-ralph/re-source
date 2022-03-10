@@ -1,6 +1,17 @@
 const mongoose = require('mongoose');
 
 const AttendanceSchema = new mongoose.Schema({
+
+//    export interface Attendance_Data {
+//    number: number;
+//    _id: string;
+//    id: string;
+//    name: string;
+//    attendance_date: string;
+//    attendance_hours: number;
+//}
+
+
     number: Number,
     id: String,
     name: String,

@@ -93,7 +93,6 @@ export class InventoryComponent implements OnInit {
 
     //Event Loop Starts Here
     this.checkIfMobile();
-    this.getAnnouncements();
 
 
 
@@ -117,52 +116,7 @@ export class InventoryComponent implements OnInit {
     this.isMobile = this.libraryService.getIsMobile()
   }
 
-  announcementData: Announcement[] = []
-
-  announcementTitle: string = ""
-  announcementContent: string = ""
-
-  //Announcements
-
-
-  getAnnouncements() {
-    this.dataService.getAllItem('announcements').subscribe((data: any) => {
-      /*console.log(data);*/
-      this.announcementData = data;
-
-      var currentDate = new Date();
-      /*console.log (currentDate);*/
-
-      for (var announcement of this.announcementData) {
-        var announcementDate = new Date(announcement.announcement_end_date)
-        /*console.log(announcementDate);*/
-
-        if (currentDate <= announcementDate) {
-          this.announcementTitle = announcement.announcement_title;
-          this.announcementContent = announcement.announcement_content;
-          /*console.log("OK")*/
-        }
-        else {
-          this.announcementTitle = "";
-          this.announcementContent = "";
-        }
-      }
-
-
-    })
-  }
-
-  addAnnouncement() {
-
-  }
-
-  editAnnouncement() {
-
-  }
-
-  archiveAnnouncement() {
-
-  }
+  
 
 //  export interface Inventories {
 

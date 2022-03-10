@@ -11,38 +11,19 @@ import Swal from 'sweetalert2';
 import { Data } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
-import { ConnStatus, Announcement, Employee, TaskBoard, Inventories } from 'src/app/services/data/data.model';
+import { ConnStatus, Announcement, Employee, TaskBoard, Inventories, Attendance } from 'src/app/services/data/data.model';
 
 
 import { LibraryService } from 'src/app/services/library.service';
 
 
+import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
 
-export interface Employees_Data {
-  number: number;
-  _id: string;
-  id: string;
-  name: string;
-  position: string;
-}
 
-export interface Attendance_Data {
-  number: number;
-  _id: string;
-  id: string;
-  name: string;
-  attendance_date: string;
-  attendance_hours: number;
-}
 
-const EMP_DATA: Employees_Data[] = [
-  { number: 1, _id: '1111', id: '1111', name: "John Doe", position: 'admin' },
-  { number: 2, _id: '2222', id: '2222', name: "Jobs Steve", position: 'admin' },
-  { number: 1, _id: '3333', id: '3333', name: "John Doe", position: 'admin' },
-  { number: 2, _id: '4444', id: '4444', name: "Jobs Steve", position: 'admin' },
-];
 
-const ATT_DATA: Attendance_Data[] = [
+
+const ATT_DATA: Attendance[] = [
   { number: 1, _id: '1111', id: '1111', name: "John Doe", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8},
   { number: 2, _id: '2222', id: '2222', name: "Jobs Steve", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8},
   { number: 3, _id: '3333', id: '3333', name: "John Doe", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8},
@@ -57,7 +38,13 @@ const ATT_DATA: Attendance_Data[] = [
 @Component({
   selector: 'app-hr',
   templateUrl: './hr.component.html',
-  styleUrls: ['./hr.component.scss']
+  styleUrls: ['./hr.component.scss'],
+
+
+  animations: [
+    fadeInOnEnterAnimation(),
+    fadeOutOnLeaveAnimation(),
+  ]
 })
 export class HrComponent implements OnInit {
 
@@ -101,7 +88,6 @@ export class HrComponent implements OnInit {
 
     //Event Loop Starts Here
     this.checkIfMobile();
-    this.getAnnouncements();
 
 
 
@@ -143,69 +129,41 @@ export class HrComponent implements OnInit {
   }
 
 
+  //number: number,
+  //id: string,
+  //name: string,
+  //age: number,
+  //address: string,
+  //position: string,
+  //department: string,
+  //start_Date: Date,
+
+  //role: number,
+
+  //isArchive: number,
+  //created_at: Date,
+  //updated_at: Date
+
+
   employeesPayload: any;
-  employeesData: Employees_Data[] = [];
+  employeesData: Employee[] = [];
   employeesDataSource = new MatTableDataSource(this.employeesData);
-  employeesDisplayedColumns = ['number', 'id', 'name', 'position', 'status', 'actions'];
+  employeesDisplayedColumns = ['number', 'id', 'name', 'age', 'address','position','department','role', 'status', 'actions'];
 
   employeesIdArchive: any;
 
   getEmployees() {
 
-    this.employeesData = EMP_DATA;
-    this.employeesDataSource.data = this.employeesData;
-    //this.employeesDataSource.paginator = this.paginator;
-    
+    //this.employeesDataSource.data = this.employeesData;
 
+    this.dataService.getAllItem('employees')
+      .subscribe((data: any) => {
+        console.log(data);
+        this.employeesPayload = data;
+        this.employeesData = this.employeesPayload;
+        this.employeesDataSource.data = this.employeesPayload;
+      });
   }
-
-  announcementData: Announcement[] = []
-
-  announcementTitle: string = ""
-  announcementContent: string = ""
-
-  //Announcements
-
-
-  getAnnouncements() {
-    this.dataService.getAllItem('announcements').subscribe((data: any) => {
-      /*console.log(data);*/
-      this.announcementData = data;
-
-      var currentDate = new Date();
-      /*console.log (currentDate);*/
-
-      for (var announcement of this.announcementData) {
-        var announcementDate = new Date(announcement.announcement_end_date)
-        /*console.log(announcementDate);*/
-
-        if (currentDate <= announcementDate) {
-          this.announcementTitle = announcement.announcement_title;
-          this.announcementContent = announcement.announcement_content;
-          /*console.log("OK")*/
-        }
-        else {
-          this.announcementTitle = "";
-          this.announcementContent = "";
-        }
-      }
-
-
-    })
-  }
-
-  addAnnouncement() {
-
-  }
-
-  editAnnouncement() {
-
-  }
-
-  archiveAnnouncement() {
-
-  }
-
 
   checkStatus(id: any) {
     var status
@@ -232,7 +190,7 @@ export class HrComponent implements OnInit {
 
 
   attendancePayload: any;
-  attendanceData: Attendance_Data[] = [];
+  attendanceData: Attendance[] = [];
   attendanceDataSource = new MatTableDataSource(this.attendanceData); 
 
   attendanceIdArchive: any;
