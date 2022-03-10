@@ -2,14 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\source",
+    "\\source\\server",
     "\\source\\webapp",
     "\\source\\webapp\\src",
     "\\source\\webapp\\src\\app",
+    "\\source\\webapp\\src\\app\\bundy",
     "\\source\\webapp\\src\\app\\pages",
-    "\\source\\webapp\\src\\app\\pages\\finance",
-    "\\source\\webapp\\src\\app\\pages\\finance\\finance",
     "\\source\\webapp\\src\\app\\pages\\hr",
-    "\\source\\webapp\\src\\app\\pages\\taskboard"
+    "\\source\\webapp\\src\\app\\pages\\hr\\hr"
   ],
+  "SelectedNode": "\\source\\webapp\\src\\app\\services\\data\\dataservice.service.ts",
   "PreviewInSolutionExplorer": false
 }
