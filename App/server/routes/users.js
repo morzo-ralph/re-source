@@ -6,7 +6,7 @@ const Users = require("../database/models/users");
 const Pagination = require('../middleware/paginatedResult');
 
 router.post('/signup', async (req, res) => { 
-    
+    console.log(req.body)
     let users = new Users(req.body);
     const encryptedpword =  await bcrypt.hash(req.body.password, 10);
     //console.log(encryptedpword);

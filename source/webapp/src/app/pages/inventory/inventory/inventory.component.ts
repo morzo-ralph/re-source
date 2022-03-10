@@ -221,35 +221,12 @@ export class InventoryComponent implements OnInit {
       height: '75%',
       width: '100%'
     });
-    this.getInventories();
-  }
-  
-  itemArchive(i:any){
 
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
-        //console.log(i);
-        this.idArchive = i;
-        this.dataService.archiveItem('inventories', this.idArchive, {"isArchive": 1}).subscribe((data: any) => {
-          
-        });
-        this.getInventories();
-      }
-    })
-    //this.itemData();
+    dialogRef.afterClosed().subscribe(result =>
+      {
+        this.getInventories()
+        console.log(result)
+      })
   }
 
   itemView(data: any){ 

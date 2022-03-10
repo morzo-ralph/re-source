@@ -4,6 +4,7 @@ import { DataService } from 'src/app/services/data.service';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-item',
@@ -69,8 +70,7 @@ export class AddItemComponent implements OnInit {
     formData.append('price', this.price);
     formData.append('number', this.counter);
     
-    const url = 'http://localhost:3000/inventories/'
-    this.httpClient.post<any>(url, formData).subscribe((data: any) => {
+    this.httpClient.post<any>(environment.BASE_URL+ 'inventories', formData).subscribe((data: any) => {
       console.log(data);
     });
     
