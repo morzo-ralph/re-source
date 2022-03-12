@@ -4,7 +4,7 @@ import { ChartType, Row } from 'angular-google-charts';
 import { LibraryService } from 'src/app/services/library.service';
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation, rubberBandAnimation } from 'angular-animations';
 
-import { ConnStatus, Announcement, Employee, TaskBoard } from 'src/app/services/data/data.model';
+import { Announcement } from 'src/app/services/data/data.model';
 
 @Component({
   selector: 'app-announcement',

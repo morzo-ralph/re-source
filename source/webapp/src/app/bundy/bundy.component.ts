@@ -14,7 +14,7 @@ import { DatePipe } from '@angular/common';
 
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation, rubberBandAnimation } from 'angular-animations';
 
-import { ConnStatus, Announcement, Employee, TaskBoard } from 'src/app/services/data/data.model';
+import { ConnStatus, Announcement, Employees, TaskBoard } from 'src/app/services/data/data.model';
 
 //import { time } from 'console';
 
@@ -77,6 +77,7 @@ export class BundyComponent implements OnInit {
     this.getTime();
     this.getEmployees();
     this.getAttendance();
+    this.checkIfAvailable();
 
 
     //Event Loop End Here
@@ -89,6 +90,8 @@ export class BundyComponent implements OnInit {
     //Event Loop Starts Here
     this.checkIfMobile();
     this.getAnnouncements();
+
+    
 
 
     await this.delay(1000);
@@ -144,27 +147,10 @@ export class BundyComponent implements OnInit {
     })
   }
 
-
-  //export interface Employee {
-//  number: number,
-//  id: string,
-//  name: string,
-//  age: number,
-//  address: string,
-//  position: string,
-//  department: string,
-//  start_Date: Date,
-
-//  role: number,
-
-//  isArchive: number,
-//  created_at: Date,
-//  updated_at: Date
-
 //}
 
   employeesPayload: any;
-  employeesData: Employee[] = [];
+  employeesData: Employees[] = [];
   employeesDataSource = new MatTableDataSource(this.employeesData);
   employeesDisplayedColumns = ['number', 'name', 'position', 'department', 'status', 'time'];
 
@@ -180,14 +166,18 @@ export class BundyComponent implements OnInit {
         this.employeesPayload = data;
         this.employeesData = this.employeesPayload;
         this.employeesDataSource.data = this.employeesPayload;
+
+
       });
   }
 
-  clockInID: any;
+  
+  
 
   checkStatus(id: any) {
     var status
-    if (localStorage.getItem(id) !== null) {
+    /*console.log(localStorage.getItem("clockInId:" + id))*/
+    if (localStorage.getItem("clockinId:" + id) !== null) {
       status = 1
     }
     else {
@@ -196,50 +186,35 @@ export class BundyComponent implements OnInit {
     return (status)
   }
 
-  clockIn() {
+  isclockedIn: boolean = false;
 
-    let employeesdata = this.employeesData;
-    for (var data of employeesdata) {
-      if (data.id == this.clockInID) {
+  clockinId: any;
 
-        if (this.checkStatus(this.clockInID) == 0) {
-          localStorage.removeItem(this.clockInID)
-          localStorage.setItem(this.clockInID, this.date)
-          console.log(localStorage.getItem(this.clockInID))
-        }
-        else if (this.checkStatus(this.clockInID) == 1)
-        {
+  checkIfAvailable() {
+    this.clockinId = localStorage.getItem("id")
 
-          //PUSH TO ATTENDANCE
-          console.log(localStorage.getItem(this.clockInID))
-         
-
-          localStorage.removeItem(this.clockInID)
-        }
-      }    
+    if (localStorage.getItem("clockinId:" + this.clockinId) !== null) {
+      this.isclockedIn = true
+    }
+    else {
+      this.isclockedIn = false
     }
 
-    
-    this.clockInID = null;
-
-    /*localStorage.setItem(this.clockInID, );*/
-
-    /*localStorage.setItem(this.clockInID, this.clockInID.toString(this.timeinhours + this.timeinminutes));*/
   }
 
-   clockIn2() {
-    var timeIn : any
-    timeIn = localStorage.setItem('time-in', Date.now().toString())
-    if(timeIn != '') {
-      var timeOut = localStorage.setItem('time-out', Date.now().toString())
-      console.log(localStorage.getItem('time-out') + 'time out')
+  // clockIn2() {
+  //  var timeIn : any
+  //  timeIn = localStorage.setItem('time-in', Date.now().toString())
+  //  if(timeIn != '') {
+  //    var timeOut = localStorage.setItem('time-out', Date.now().toString())
+  //    console.log(localStorage.getItem('time-out') + 'time out')
     
-      this.subtractHours(timeOut, timeIn)
-    } else {
-      localStorage.setItem('time-in', Date.now().toString())
-    }
+  //    this.subtractHours(timeOut, timeIn)
+  //  } else {
+  //    localStorage.setItem('time-in', Date.now().toString())
+  //  }
     
-  }
+  //}
 
   attendance: any = {}
   attendanceData: any = {}
@@ -254,30 +229,49 @@ export class BundyComponent implements OnInit {
     })
   }
 
-  timeIn(){
-    this.attendanceData.number = parseInt(this.attendanceCount) + 1
-    this.attendanceData.id = localStorage.getItem('_id')
-    var name : any = localStorage.getItem('fname') + ' ' + localStorage.getItem('lname')
-    this.attendanceData.name = name
-    this.attendanceData.attendance_date_in = new Date()
-   localStorage.setItem('try-in', this.attendanceData.attendance_date_in)
-   this.dataService.createItem('attendance', this.attendanceData).subscribe((data: any) => {
-     console.log(data)
-      this.attendanceId = data._id
-      this.attendanceBool = true
-      this.getAttendance()
-    })
+
+  timeIn() {
+
+    this.isclockedIn = true
+
+    this.clockinId = localStorage.getItem("id")
+
+    localStorage.removeItem("clockinId:" + this.clockinId)
+    localStorage.setItem("clockinId:" + this.clockinId, this.date)
+    console.log((localStorage.getItem("clockinId:" + this.clockinId)))
+
+
+   // this.attendanceData.number = parseInt(this.attendanceCount) + 1
+   // this.attendanceData.id = localStorage.getItem('_id')
+   // var name : any = localStorage.getItem('fname') + ' ' + localStorage.getItem('lname')
+   // this.attendanceData.name = name
+   // this.attendanceData.attendance_date_in = new Date()
+   //localStorage.setItem('try-in', this.attendanceData.attendance_date_in)
+   //this.dataService.createItem('attendance', this.attendanceData).subscribe((data: any) => {
+   //  console.log(data)
+   //   this.attendanceId = data._id
+   //   this.attendanceBool = true
+   //   this.getAttendance()
+   // })
   }
 
-  timeOut(){
-    this.attendanceData.id = this.attendanceId
-    //this.attendanceData.attendance_date_out = new Date()
-    localStorage.setItem('try-out', new Date().toDateString())
-    this.dataService.archiveItem('attendance', this.attendanceData.id, { 'attendance_date_out': new Date() } ).subscribe((data : any) => {
-      console.log(data)
-      this.attendanceBool = false
-      this.getAttendance()
-    })
+  timeOut() {
+
+    this.isclockedIn = false
+    
+    console.log(localStorage.getItem("clockinId:" + this.clockinId));
+
+    localStorage.removeItem("clockinId:" + this.clockinId)
+
+
+    //this.attendanceData.id = this.attendanceId
+    ////this.attendanceData.attendance_date_out = new Date()
+    //localStorage.setItem('try-out', new Date().toDateString())
+    //this.dataService.archiveItem('attendance', this.attendanceData.id, { 'attendance_date_out': new Date() } ).subscribe((data : any) => {
+    //  console.log(data)
+    //  this.attendanceBool = false
+    //  this.getAttendance()
+    //})
 
   }
 
@@ -296,7 +290,9 @@ export class BundyComponent implements OnInit {
   }
 
   getClockIn(id: any) {
-    return (localStorage.getItem(id))
+    return (localStorage.getItem("clockinId:" + id))
+
+
   }
 
   getTimeIn(time: any) {

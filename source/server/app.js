@@ -78,7 +78,7 @@ const saldeltasRouter = require('./routes/saldeltas');
 const salesRouter = require('./routes/sales');
 const stocksRouter = require('./routes/stocks');
 const galleryRouter = require('./routes/gallery');
-const usersRouter = require('./routes/users');
+/*const usersRouter = require('./routes/users');*/
 const announcementRouter = require('./routes/announcements');
 const taskBoardRouter = require('./routes/taskboard');
 const payrollRouter = require('./routes/payroll');
@@ -103,7 +103,7 @@ app.use("/api/taskboard", taskBoardRouter);
 app.use("/api/payroll", payrollRouter);
 app.use("/api/attendance", attendanceRouter);
 
-app.use("/api/users", usersRouter);
+/*app.use("/api/users", usersRouter);*/
 
 app.all((req, res, next) => {
     /*res.send("Nothing Here, Ignore Me");*/

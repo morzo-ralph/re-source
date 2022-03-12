@@ -25,21 +25,40 @@
           <br />
 
           <mat-list>
+            
+            <mat-list-item>
+              <button mat-mini-fab color="primary" style="background-image: url('{{imgUrl}}'); background-size:cover">
+              </button>
+            </mat-list-item>
+            <br />
+            <mat-divider></mat-divider>
+            <br />
+
             <mat-list-item>
               <button mat-mini-fab color="primary" class="mat-elevation-z8" [routerLink]="['/home']">
                 <mat-icon>home</mat-icon>
               </button>
             </mat-list-item>
+
+            <br />
+            <mat-divider></mat-divider>
+            <br />
+
             <mat-list-item>
-              <button mat-mini-fab color="primary" class="mat-elevation-z8" [routerLink]="['/bundy']">
+              <button mat-mini-fab color="accent" class="mat-elevation-z8" [routerLink]="['/bundy']">
                 <mat-icon>punch_clock</mat-icon>
               </button>
             </mat-list-item>
             <mat-list-item>
-              <button mat-mini-fab color="primary" class="mat-elevation-z8">
+              <button mat-mini-fab color="accent" class="mat-elevation-z8">
                 <mat-icon>settings</mat-icon>
               </button>
             </mat-list-item>
+
+            <br />
+            <mat-divider></mat-divider>
+            <br />
+
             <mat-list-item>
               <button mat-mini-fab color="primary" class="mat-elevation-z8" [routerLink]="['/hr']">
                 <mat-icon>hail</mat-icon>
@@ -74,20 +93,32 @@
     <mat-toolbar color="primary" class="mat-elevation-z12" style="position:fixed; top: 0px; z-index: 100" >
       <button mat-mini-fab color="primary" (click)="drawer.toggle()">
         <mat-icon>reorder</mat-icon>
-      </button> &nbsp;
-      <button mat-mini-fab color="accent" [routerLink]="['/bundy']">
+      </button>
+      &nbsp;
+      <button mat-mini-fab color="primary" [routerLink]="['/bundy']">
         <mat-icon>punch_clock</mat-icon>
       </button>
+      &nbsp;
       <!--<button mat-mini-fab matBadge="7" matBadgeColor="warn" matBadgeSize="small" color="primary">
         <mat-icon>storefront</mat-icon>
       </button>-->
-      <button mat-mini-fab color="accent">
+      <button mat-mini-fab color="primary">
         <mat-icon>settings</mat-icon>
       </button>
       <span style="flex: 1 1 auto;"></span>
       <span>MSSE Engineering and Construction Services</span>
       <span style="flex: 1 1 auto;"></span>
-      <button mat-mini-fab color="warn" [routerLink]="['/login']">
+      <span>Hello! {{username}}</span>
+
+      &nbsp;
+      &nbsp;
+
+      <button mat-mini-fab color="primary" style="background-image: url('{{imgUrl}}'); background-size:cover">
+
+      </button>
+       &nbsp;
+
+      <button mat-mini-fab color="primary" [routerLink]="['/login']">
         <mat-icon>logout</mat-icon>
       </button>
     </mat-toolbar>

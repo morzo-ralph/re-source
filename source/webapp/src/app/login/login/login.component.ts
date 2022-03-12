@@ -19,10 +19,7 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
   
-  account_id: any
-  password: any
-
-  loginData: any = {}
+ 
 
   ngOnInit(): void {
 
@@ -65,22 +62,37 @@ export class LoginComponent implements OnInit {
   //   }    
   // }
 
+  id: any
+  password: any
+
+  loginData: any = {}
+
   login() {
-    this.loginData.username = this.account_id
+    this.loginData.id = this.id
     this.loginData.password = this.password
     
     console.log(this.loginData);
 
     //createitem is just post -- auth sa future
-    this.dataService.createItem('users/login', this.loginData).subscribe((data: any) => {
+    this.dataService.createItem('employees/login', this.loginData).subscribe((data: any) => {
+
       console.log(data.status);
-      localStorage.setItem('_id', data.user._id);
-      localStorage.setItem('lname', data.user.lname);
-      localStorage.setItem('fname', data.user.fname);
-      localStorage.setItem('mname', data.user.mname);
-      var id = localStorage.getItem('_id')
+      /*localStorage.clear;*/
+
+      //masyado ka na ata nawiwili sa localstorage ah, ciniclear to dapat
+      localStorage.setItem('id', data.employee.id);
+      localStorage.setItem('imgUrl', data.employee.imgUrl);
+      localStorage.setItem('lname', data.employee.lname);
+      localStorage.setItem('fname', data.employee.fname);
+      localStorage.setItem('mname', data.employee.mname);
+
+      console.log(localStorage.getItem('id'))
+      console.log(localStorage.getItem('fname'))
+
+      var id = localStorage.getItem('id');
+
       if (id != ''){
-        var name = localStorage.getItem('lname') + ', ' + localStorage.getItem('fname')
+        var name = localStorage.getItem('fname') + ' ' + localStorage.getItem('lname')
         Swal.fire(
           'Logged in Successfully!',
           'Welcome '+ name,
@@ -88,11 +100,12 @@ export class LoginComponent implements OnInit {
         )
         this.router.navigate(['home'])
       } else {
-        Swal.fire(
-          'Credentials does not matched!',
-          '',
-          'error'
-        )
+
+        //Swal.fire(
+        //  'Credentials does not matched!',
+        //  '',
+        //  'error'
+        //)
       }
 
     }, (error : any) => {

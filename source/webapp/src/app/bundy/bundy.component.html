@@ -72,11 +72,11 @@
               <input matInput placeholder="ID" [(ngModel)]="clockInID">
             </mat-form-field>-->
 
-                    <br />
-                    <ng-container *ngIf="attendanceBool == false">
+                     <br />
+                    <ng-container *ngIf="isclockedIn == false">
                       <button mat-raised-button color="primary" (click)="timeIn()">Clock-In</button>
                     </ng-container>
-                    <ng-container *ngIf="attendanceBool == true">
+                    <ng-container *ngIf="isclockedIn == true">
                       <button mat-raised-button color="primary" (click)="timeOut()">Clock-Out</button>
                     </ng-container>
 
@@ -128,7 +128,9 @@
 
                 <mat-card>
                   <mat-card-title>
-                    <p>{{emp.name}}</p>
+                    <p>{{emp.fname}}&nbsp;{{emp.fname}}</p>
+
+                    <br />
 
                     <ng-container *ngIf="checkStatus(emp.id) == 1">
                       <mat-chip-list>
@@ -147,9 +149,27 @@
                         </mat-chip>
                       </mat-chip-list>
                     </ng-container>
+                    <br />
+                    <mat-divider></mat-divider>
+                    <br />
 
                   </mat-card-title>
                   <mat-card-content>
+
+                    
+
+
+                    <p>Hours Active: &nbsp;
+
+                    <ng-container *ngIf="checkStatus(emp.id) == 0">
+                      Not Clocked In
+                    </ng-container>
+                    <ng-container *ngIf="checkStatus(emp.id) == 1">
+                      {{getTimeIn(getClockIn(emp.id))}}
+                    </ng-container>
+
+                    </p>
+
                     <p>Position: &nbsp; {{emp.position}}</p>
                     <p>Department:  &nbsp;  {{emp.position}}</p>
                   </mat-card-content>
@@ -323,9 +343,7 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="isMobile != true">
-
-    
+  <ng-container *ngIf="isMobile != true">        
 
     <mat-toolbar color="primary" class="mat-elevation-z12" style="position:fixed; top: 0px; z-index: 100" [@fadeInOnEnter] [@fadeOutOnLeave]>
       <!--<button mat-mini-fab color="primary" (click)="drawer.toggle()">
@@ -378,10 +396,10 @@
                     </mat-form-field>-->
 
                     <br />
-                    <ng-container *ngIf="attendanceBool == false">
+                    <ng-container *ngIf="isclockedIn == false">
                       <button mat-raised-button color="primary" (click)="timeIn()">Clock-In</button>
                     </ng-container>
-                    <ng-container *ngIf="attendanceBool == true">
+                    <ng-container *ngIf="isclockedIn == true">
                       <button mat-raised-button color="primary" (click)="timeOut()">Clock-Out</button>
                     </ng-container>
 
@@ -426,12 +444,12 @@
                 <!--employeesDisplayedColumns = ['name', 'position', 'status'];-->
 
                 <ng-container matColumnDef="number">
-                  <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.number}} </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> No </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.number}}</mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="name">
                   <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                  <mat-cell *matCellDef="let element"> {{element.fname}}&nbsp;{{element.lname}} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="position">
                   <mat-header-cell *matHeaderCellDef> Position </mat-header-cell>

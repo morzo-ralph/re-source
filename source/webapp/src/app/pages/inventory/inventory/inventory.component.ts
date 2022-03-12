@@ -15,7 +15,7 @@ import { catchError, filter } from 'rxjs/operators';
 
 import { ViewItemComponent } from './view-item/view-item.component';
 
-import { ConnStatus, Announcement, Employee, TaskBoard, Inventories } from 'src/app/services/data/data.model';
+import { ConnStatus, Announcement, TaskBoard, Inventories } from 'src/app/services/data/data.model';
 
 
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation, rubberBandAnimation } from 'angular-animations';

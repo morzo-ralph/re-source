@@ -47,7 +47,8 @@ button {
 }
 
 span {
-  font-size: clamp(14px, .8vw, 20px);
+  font-size: clamp(16px, .8vw, 18px);
+  font-stretch: extra-condensed;
 }
 
 h1 {
@@ -84,9 +85,19 @@ h4 {
   flex: 0 0 10%;
 }
 
+.mat-column-age {
+  flex: 0 0 5%;
+}
+
+.mat-column-role {
+  flex: 0 0 5%;
+}
+
 .mat-column-actions {
-  min-width: 200px;
-  flex: 0 0 10%;
+  flex: 0 0 5%;
+  max-width: 70px
+  /* min-width: 200px;
+  flex: 0 0 10%;*/
 }
 
 .mat-column-total {
@@ -114,6 +125,15 @@ h4 {
 .table-container {
   width: 100%;
 }
+
+/*@font-face {
+  font-family: "tk-architect";
+  src: local("tk-architect"), url(./assets/fonts/tekton/tk-architect/tk-architect.ttf) format("truetype");
+}
+
+* {
+  font-family: "tk-architect" ;
+}*/
 
 /*div {
   background-image: url('../assets/bg1.PNG');

@@ -27,6 +27,7 @@ export class IntefaceComponent implements OnInit {
     //Event Loop Starts Here
 
     this.checkIfMobile();
+    this.getName()
     await this.delay(1000);
     this.reload();
     /*this.isLooped = true;*/
@@ -36,16 +37,30 @@ export class IntefaceComponent implements OnInit {
   reload() {
     this.load();
   }
+  
 
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
 
   isMobile!: boolean
 
   checkIfMobile() {
     this.isMobile = this.libraryService.getIsMobile()
     /*console.log(this.isMobile)*/
+  }
+
+  username: any
+  imgUrl:any
+  getName() {
+    var fname = localStorage.getItem('fname')
+    var lname = localStorage.getItem('lname')
+
+    this.imgUrl = localStorage.getItem('imgUrl')
+
+    this.username = fname +" "+ lname
+
   }
 
 }

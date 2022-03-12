@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 import { Data } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
-import { ConnStatus, Announcement, Employee, TaskBoard, Inventories, Attendance } from 'src/app/services/data/data.model';
+import { ConnStatus, Announcement, Employees, TaskBoard, Inventories, Attendance } from 'src/app/services/data/data.model';
 
 
 import { LibraryService } from 'src/app/services/library.service';
@@ -146,7 +146,7 @@ export class HrComponent implements OnInit {
 
 
   employeesPayload: any;
-  employeesData: Employee[] = [];
+  employeesData: Employees[] = [];
   employeesDataSource = new MatTableDataSource(this.employeesData);
   employeesDisplayedColumns = ['number', 'id', 'name', 'age', 'address','position','department','role', 'status', 'actions'];
 

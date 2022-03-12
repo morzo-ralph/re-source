@@ -2,15 +2,16 @@
   "ExpandedNodes": [
     "",
     "\\source",
-    "\\source\\server",
     "\\source\\webapp",
     "\\source\\webapp\\src",
     "\\source\\webapp\\src\\app",
-    "\\source\\webapp\\src\\app\\bundy",
-    "\\source\\webapp\\src\\app\\pages",
-    "\\source\\webapp\\src\\app\\pages\\hr",
-    "\\source\\webapp\\src\\app\\pages\\hr\\hr"
+    "\\source\\webapp\\src\\app\\global",
+    "\\source\\webapp\\src\\app\\global\\announcement",
+    "\\source\\webapp\\src\\assets",
+    "\\source\\webapp\\src\\assets\\fonts",
+    "\\source\\webapp\\src\\assets\\fonts\\tekton",
+    "\\source\\webapp\\src\\assets\\fonts\\tekton\\tk-architect"
   ],
-  "SelectedNode": "\\source\\webapp\\src\\app\\pages\\hr\\hr\\hr.component.html",
+  "SelectedNode": "\\source\\webapp\\src\\app\\pages\\inteface\\inteface.component.html",
   "PreviewInSolutionExplorer": false
 }

@@ -4,7 +4,7 @@ import { ChartType, Row } from 'angular-google-charts';
 import { LibraryService } from 'src/app/services/library.service';
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation, rubberBandAnimation } from 'angular-animations';
 
-import { ConnStatus, Announcement, Employee, TaskBoard } from 'src/app/services/data/data.model';
+import { ConnStatus, Announcement, Employees, TaskBoard } from 'src/app/services/data/data.model';
 
 @Component({
   selector: 'app-home',
@@ -51,7 +51,6 @@ export class HomeComponent implements OnInit {
   async loadOnLoop() {
     //Event Loop Starts Here
     this.checkIfMobile();
-    this.getAnnouncements();
     this.getTasks();
 
 
@@ -76,48 +75,24 @@ export class HomeComponent implements OnInit {
     this.isMobile = this.libraryService.getIsMobile()
   }
 
-  announcementData: Announcement[] = []
+  getClockIn(id: any) {
+    return (localStorage.getItem("clockinId:" + id))
 
-  announcementTitle: string = ""
-  announcementContent: string = ""
-
-  getAnnouncements() {
-    this.dataService.getAllItem('announcements').subscribe((data: any) => {
-      /*console.log(data);*/
-      this.announcementData = data;
-
-      var currentDate = new Date();
-      /*console.log (currentDate);*/
-
-      for (var announcement of this.announcementData) {
-        var announcementDate = new Date(announcement.announcement_end_date)
-        /*console.log(announcementDate);*/
-
-        if (currentDate <= announcementDate) {
-          this.announcementTitle = announcement.announcement_title;
-          this.announcementContent = announcement.announcement_content;
-          /*console.log("OK")*/
-        }
-        else {
-          this.announcementTitle = "";
-          this.announcementContent = "";
-        }
-      }
-
-
-    })
-  }
-
-  addAnnouncement() {
 
   }
 
-  editAnnouncement() {
+  getTimeIn(time: any) {
 
-  }
+    var oldTime = new Date(time);
+    var timeNow = new Date();
 
-  archiveAnnouncement() {
+    var newTime = Math.abs(oldTime.getTime() - timeNow.getTime());
 
+    var newTimeinSeconds = newTime / 1000;
+    var newTimeinMinutes = newTimeinSeconds / 60;
+    var newTimeinHours = newTimeinMinutes / 60;
+
+    return (Math.floor(newTimeinHours) + ":" + Math.floor(newTimeinMinutes % 60) + ":" + Math.floor(newTimeinSeconds % 60));
   }
 
   taskBoardData: TaskBoard[] = [];
