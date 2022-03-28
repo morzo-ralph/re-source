@@ -77,7 +77,7 @@ const salarytotalsRouter = require('./routes/salarytotals');
 const saldeltasRouter = require('./routes/saldeltas');
 const salesRouter = require('./routes/sales');
 const stocksRouter = require('./routes/stocks');
-const galleryRouter = require('./routes/gallery');
+//const galleryRouter = require('./routes/gallery');
 /*const usersRouter = require('./routes/users');*/
 const announcementRouter = require('./routes/announcements');
 const taskBoardRouter = require('./routes/taskboard');
@@ -97,7 +97,7 @@ app.use("/api/salarytotals", salarytotalsRouter);
 app.use("/api/saldeltas", saldeltasRouter);
 app.use("/api/sales", salesRouter);
 app.use("/api/stocks", stocksRouter);
-app.use("/api/gallery", galleryRouter);
+//app.use("/api/gallery", galleryRouter);
 app.use("/api/announcements", announcementRouter);
 app.use("/api/taskboard", taskBoardRouter);
 app.use("/api/payroll", payrollRouter);

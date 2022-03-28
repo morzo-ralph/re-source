@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:_id', (req, res) => {
-    Saldeltas.find({})
+    Saldeltas.findOne({})
         .then(saldelta => res.send(saldelta))
         .catch(error => console.log(error));
 });

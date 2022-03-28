@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:_id', (req, res) => {
-    Salarytotals.find({})
+    Salarytotals.findOne({})
         .then(salarytotal => res.send(salarytotal))
         .catch(error => console.log(error));
 });

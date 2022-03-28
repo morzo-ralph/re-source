@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:_id', (req, res) => {
-    Revenues.find({})
+    Revenues.findOne({})
         .then(revenues => res.send(revenues))
         .catch(error => console.log(error));
 });

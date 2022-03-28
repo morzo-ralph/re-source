@@ -79,7 +79,7 @@ router.post('/try', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    Employees.find({})
+    Employees.findOne({})
         .then(employees => res.send(employees))
         .catch(error => console.log(error));
 });

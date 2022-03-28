@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:_id', (req, res) => {
-    Payroll.find({})
+    Payroll.findOne({})
         .then(data => res.send(data))
         .catch(error => console.log(error));
 });

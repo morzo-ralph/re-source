@@ -56,7 +56,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:_id', (req, res) => {
-    Pettycash.find({})
+    Pettycash.findOne({})
         .then(pettycash => res.send(pettycash))
         .catch(error => console.log(error));
 });
