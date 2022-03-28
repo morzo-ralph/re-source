@@ -89,6 +89,7 @@ router.get('/search', async (req, res) => {
         .then(data => res.send(data))
         .catch((error) => console.log(error))
 });
+
 //router.get('/')
 //pagination working in postman
 // router.get('/', Pagination(Inventory), (req, res) => {

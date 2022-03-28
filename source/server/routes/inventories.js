@@ -41,13 +41,26 @@ router.post("/", upload.single('file'), (req, res, next) => {
         .then((inventory) => res.send(inventory))
         .catch((error) => (error));
     }
-// router.post('/', multer({storage: storage}).single("image"), (req, res) => {  
-//     (new Inventory(req.body.data))
-//     .save()
-//     .then((inventory) => res.send(inventory))
-//     .catch((error) => console.log(error));
-    
-// });
+
+    router.get('/search', async (req, res) => {
+        console.log(req.query)
+        const query = await req.query.name
+        // console.log('query')
+        // console.log(req.query.name)
+        // console.log('query')
+        // console.log(req.params)
+        // const query2 = await req.params
+        // console.log('params')
+        // console.log(req.params)
+        /// $or: [{name: query}, {_id: query}, {description: query}]
+        Inventory.find({ $or : [
+            {name: { $regex: query + '.*', '$options' : 'i'}},
+            {description: {$regex: query + '.*', '$options' : 'i'}},
+           // {description: { $regex: query + '.*'}},
+        ]})
+            .then(data => res.send(data))
+            .catch((error) => console.log(error))
+    });
 
 });
 
