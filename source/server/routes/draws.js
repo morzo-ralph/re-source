@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:_id', (req, res) => {
-    Draws.find({})
+    Draws.findOne({})
         .then(draws => res.send(draws))
         .catch(error => console.log(error));
 });

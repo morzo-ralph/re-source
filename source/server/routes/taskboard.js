@@ -58,8 +58,8 @@ router.get('/', (req, res) => {
         .catch(error => console.log(error));
 });
 
-router.get('/:inventoryId', (req, res) => {
-    TaskBoard.find({})
+router.get('/:_id', (req, res) => {
+    TaskBoard.findOne({})
         .then(taskboard => res.send(taskboard))
         .catch(error => console.log(error));
 });

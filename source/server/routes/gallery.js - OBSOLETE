@@ -53,7 +53,7 @@ router.post("/", upload.single('file'), (req, res, next) => {
     // }
 });
 
-router.get('/:id', function (req, res, next) {
+router.get('/:_id', function (req, res, next) {
      Gallery.findById(req.params.id, function (err, gallery) {
          if (err) return next(err);
          res.json(gallery);

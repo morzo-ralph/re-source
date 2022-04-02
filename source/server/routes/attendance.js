@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:_id', (req, res) => {
-    Attendance.find({})
+    Attendance.findOne({})
         .then(data => res.send(data))
         .catch(error => console.log(error));
 });

@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:_id', (req, res) => {
-    Purchases.find({})
+    Purchases.findOne({})
         .then(purchases => res.send(purchases))
         .catch(error => console.log(error));
 });

@@ -95,7 +95,7 @@ router.get('/', (req, res) => {
 // });
 
 router.get('/:inventoryId', (req, res) => {
-    Inventory.find({})
+    Inventory.findOne({})
         .then(lists => res.send(lists))
         .catch(error => console.log(error));
 });

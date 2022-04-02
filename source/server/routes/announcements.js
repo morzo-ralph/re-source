@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:_id', (req, res) => {
-    Announcement.find({})
+    Announcement.findOne({})
         .then(announcement => res.send(announcement))
         .catch(error => console.log(error));
 });
