@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DataService } from 'src/app/services/data.service';
+import { DataService } from 'src/app/services/data/dataservice.service';
 import Swal from 'sweetalert2';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef} from '@angular/material/dialog';
-import { DataService } from 'src/app/services/data.service';
+import { DataService } from 'src/app/services/data/dataservice.service';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup } from '@angular/forms';

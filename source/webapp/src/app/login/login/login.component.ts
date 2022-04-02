@@ -85,6 +85,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('lname', data.employee.lname);
       localStorage.setItem('fname', data.employee.fname);
       localStorage.setItem('mname', data.employee.mname);
+      localStorage.setItem('contact_list', data.employee.list);
 
       console.log(localStorage.getItem('id'))
       console.log(localStorage.getItem('fname'))

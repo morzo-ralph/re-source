@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DataService } from 'src/app/services/data.service';
+import { DataService } from 'src/app/services/data/dataservice.service';
 
 @Component({
   selector: 'app-edit',

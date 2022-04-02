@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Inject } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
+import { DataService } from 'src/app/services/data/dataservice.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -113,4 +113,3 @@ export class ViewPurchaseFinanceComponent implements OnInit {
   }
 }
 
-  

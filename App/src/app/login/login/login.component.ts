@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { swalProviderToken } from '@sweetalert2/ngx-sweetalert2/lib/di';
-import { DataService } from 'src/app/services/data.service';
+import { DataService } from 'src/app/services/data/dataservice.service';
 import Swal from 'sweetalert2';
 
 @Component({
