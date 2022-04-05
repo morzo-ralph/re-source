@@ -7,12 +7,17 @@
       <span>Inventories</span>
       <span style="flex: 1 1 auto;"></span>
     </mat-toolbar>
-    <div class="mat-elevation-z2" style=" width: calc(100% - 8px); min-height: 100%; padding: 8px;">
 
+    <div class="mat-elevation-z22 tab-container" [@fadeInOnEnter] [@fadeOutOnLeave]>
 
       <mat-tab-group (selectedTabChange)="loadOnstart()">
 
-        <mat-tab label="Inventory Gallery">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>auto_awesome_mosaic</mat-icon>
+
+          </ng-template>
+
           <div class="mat-elevation-z2" style="background-color: lightgrey; width: 100%; min-height: 100vh; padding: 8px;">
 
             <app-announcement>
@@ -112,23 +117,23 @@
 
         </mat-tab>
 
-        <mat-tab label="Inventory Table">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>table_chart</mat-icon>
+
+          </ng-template>
         </mat-tab>
 
-        <mat-tab label="Acquisitions">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>local_shipping</mat-icon>
 
+          </ng-template>
         </mat-tab>
 
       </mat-tab-group>
 
-
     </div>
-
-
-
-
-
-
 
   </ng-container>
 
