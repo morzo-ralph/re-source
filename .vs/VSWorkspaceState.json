@@ -2,15 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\source",
-    "\\source\\server",
     "\\source\\webapp",
     "\\source\\webapp\\src",
     "\\source\\webapp\\src\\app",
-    "\\source\\webapp\\src\\app\\pages",
-    "\\source\\webapp\\src\\app\\pages\\inteface",
-    "\\source\\webapp\\src\\app\\pages\\inventory",
-    "\\source\\webapp\\src\\app\\pages\\inventory\\inventory"
+    "\\source\\webapp\\src\\app\\login",
+    "\\source\\webapp\\src\\app\\login\\login"
   ],
-  "SelectedNode": "\\source\\webapp\\src\\app\\pages\\inventory\\inventory\\inventory.component.ts",
   "PreviewInSolutionExplorer": false
 }

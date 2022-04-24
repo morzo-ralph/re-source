@@ -4,21 +4,16 @@
 
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+
 /* You can add global styles to this file, and also import other style files */
-
 /*Color Variable*/
-
 /*$primary-color: #639d1a;*/
-
-
 /*:root {
   --primary-color: #639d1a;
 }*/
-
 /*Overides*/
-
 /*Body*/
-
 html, body {
   height: 100%;
 }
@@ -26,7 +21,6 @@ html, body {
 body {
   margin: 0px;
   padding: 0px;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 /*Scroll Bar*/
