@@ -1,7 +1,7 @@
 /**
 * Generated theme by Material Theme Generator
 * https://materialtheme.arcsine.dev
-* Fork at: https://materialtheme.arcsine.dev/?c=YHBhbGV0dGU$YHByaW1hcnk$YF48IzYzOWQxYSIsIj9lcjwjZDBlMmJhIiwiO2VyPCM0NzgxMGZ$LCIlPmBePCNjNGNhOTYiLCI~ZXI8I2VkZWZlMCIsIjtlcjwjYWZiNzc5fiwid2Fybj5gXjwjYWYwMDAwIiwiP2VyPCNlN2IzYjMiLCI7ZXI8Izk2MDAwMH4sIj9UZXh0PCMwMDAwMDAiLCI~PTwjZWRlZmUwIiwiO1RleHQ8I2ZmZmZmZiIsIjs9PCMwMDAwMDB$LCJmb250cz5bYEA8KC00fixgQDwoLTN$LGBAPCgtMn4sYEA8KC0xfixgQDxoZWFkbGluZX4sYEA8dGl0bGV$LGBAPHN1YiktMn4sYEA8c3ViKS0xfixgQDxib2R5LTJ$LGBAPGJvZHktMX4sYEA8YnV0dG9ufixgQDxjYXB0aW9ufixgQDxpbnB1dCIsInNpemU$bnVsbH1dLCJpY29uczxGaWxsZWQiLCI~bmVzcz50cnVlLCJ2ZXJzaW9uPjExfQ==
+* Fork at: https://materialtheme.arcsine.dev/?c=YHBhbGV0dGU$YHByaW1hcnk$YF48IzEzNTY5YiIsIj9lcjwjYjhjY2UxIiwiO2VyPCMwYjNjN2Z$LCIlPmBePCMwMGI2NzQiLCI~ZXI8I2IzZTlkNSIsIjtlcjwjMDA5ZTU3fiwid2Fybj5gXjwjZmZiNDAwIiwiP2VyPCNmZmU5YjMiLCI7ZXI8I2ZmOWMwMH4sIj9UZXh0PCMwMDAwMDAiLCI~PTwjZmFmYWZhIiwiO1RleHQ8I2ZmZmZmZiIsIjs9PCMyYzJjMmN$LCJmb250cz5bYEA8KC00IiwiZmFtaWx5PFBvcHBpbnMiLCJ2YXJpYW50PHJlZ3VsYXJ$LGBAPCgtMyIsImZhbWlseTxQb3BwaW5zIiwidmFyaWFudDxtZWRpdW1$LGBAPCgtMiIsImZhbWlseTxQb3BwaW5zfixgQDwoLTEiLCJmYW1pbHk8UG9wcGluc34sYEA8aGVhZGxpbmUiLCJmYW1pbHk8UG9wcGluc34sYEA8dGl0bGUiLCJmYW1pbHk8UG9wcGluc34sYEA8c3ViKS0yIiwiZmFtaWx5PFBvcHBpbnN$LGBAPHN1YiktMSIsImZhbWlseTxQb3BwaW5zfixgQDxib2R5LTIiLCJmYW1pbHk8UG9wcGluc34sYEA8Ym9keS0xIiwiZmFtaWx5PFBvcHBpbnN$LGBAPGJ1dHRvbiIsImZhbWlseTxQb3BwaW5zfixgQDxjYXB0aW9uIiwiZmFtaWx5PFBvcHBpbnN$LGBAPGlucHV0IiwiZmFtaWx5PFBvcHBpbnMiLCJzaXplPm51bGx9XSwiaWNvbnM8RmlsbGVkIiwiP25lc3M$dHJ1ZSwidmVyc2lvbj4xMX0=
 */
 
 @import '~@angular/material/theming';
@@ -10,11 +10,10 @@
 // have to load a single css file for Angular Material in your app.
 
 // Fonts
-@import 'https://fonts.googleapis.com/css?family=Material+Icons';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
-
-$fontConfig: ( display-4: mat-typography-level(112px, 112px, 300, 'Poppins', -0.0134em), display-3: mat-typography-level(56px, 56px, 400, 'Poppins', -0.0089em), display-2: mat-typography-level(45px, 48px, 400, 'Poppins', 0.0000em), display-1: mat-typography-level(34px, 40px, 400, 'Poppins', 0.0074em), headline: mat-typography-level(24px, 32px, 400, 'Poppins', 0.0000em), title: mat-typography-level(20px, 32px, 500, 'Poppins', 0.0075em), subheading-2: mat-typography-level(16px, 28px, 400, 'Poppins', 0.0094em), subheading-1: mat-typography-level(15px, 24px, 500, 'Poppins', 0.0067em), body-2: mat-typography-level(14px, 24px, 500, 'Poppins', 0.0179em), body-1: mat-typography-level(14px, 20px, 400, 'Poppins', 0.0179em), button: mat-typography-level(14px, 14px, 500, 'Poppins', 0.0893em), caption: mat-typography-level(12px, 20px, 400, 'Poppins', 0.0333em), input: mat-typography-level(inherit, 1.125, 400, 'Poppins', 1.5px) );
+$fontConfig: ( display-4: mat-typography-level(112px, 112px, 400, 'Poppins', -0.0134em), display-3: mat-typography-level(56px, 56px, 500, 'Poppins', -0.0089em), display-2: mat-typography-level(45px, 48px, 400, 'Poppins', 0.0000em), display-1: mat-typography-level(34px, 40px, 400, 'Poppins', 0.0074em), headline: mat-typography-level(24px, 32px, 400, 'Poppins', 0.0000em), title: mat-typography-level(20px, 32px, 500, 'Poppins', 0.0075em), subheading-2: mat-typography-level(16px, 28px, 400, 'Poppins', 0.0094em), subheading-1: mat-typography-level(15px, 24px, 500, 'Poppins', 0.0067em), body-2: mat-typography-level(14px, 24px, 500, 'Poppins', 0.0179em), body-1: mat-typography-level(14px, 20px, 400, 'Poppins', 0.0179em), button: mat-typography-level(14px, 14px, 500, 'Poppins', 0.0893em), caption: mat-typography-level(12px, 20px, 400, 'Poppins', 0.0333em), input: mat-typography-level(inherit, 1.125, 400, 'Poppins', 1.5px) );
 
 // Foreground Elements
 
@@ -40,26 +39,26 @@ $mat-dark-theme-foreground: ( base: $light-text, divider: $light-dividers, divid
 
 // Background config
 // Light bg
-$light-background: #edefe0;
+$light-background: #fafafa;
 $light-bg-darker-5: darken($light-background, 5%);
 $light-bg-darker-10: darken($light-background, 10%);
 $light-bg-darker-20: darken($light-background, 20%);
 $light-bg-darker-30: darken($light-background, 30%);
 $light-bg-lighter-5: lighten($light-background, 5%);
-$dark-bg-tooltip: lighten(#000000, 20%);
-$dark-bg-alpha-4: rgba(#000000, 0.04);
-$dark-bg-alpha-12: rgba(#000000, 0.12);
+$dark-bg-tooltip: lighten(#2c2c2c, 20%);
+$dark-bg-alpha-4: rgba(#2c2c2c, 0.04);
+$dark-bg-alpha-12: rgba(#2c2c2c, 0.12);
 
 $mat-light-theme-background: ( background: $light-background, status-bar: $light-bg-darker-20, app-bar: $light-bg-darker-5, hover: $dark-bg-alpha-4, card: $light-bg-lighter-5, dialog: $light-bg-lighter-5, tooltip: $dark-bg-tooltip, disabled-button: $dark-bg-alpha-12, raised-button: $light-bg-lighter-5, focused-button: $dark-focused, selected-button: $light-bg-darker-20, selected-disabled-button: $light-bg-darker-30, disabled-button-toggle: $light-bg-darker-10, unselected-chip: $light-bg-darker-10, disabled-list-option: $light-bg-darker-10, );
 
 // Dark bg
-$dark-background: #000000;
+$dark-background: #2c2c2c;
 $dark-bg-lighter-5: lighten($dark-background, 5%);
 $dark-bg-lighter-10: lighten($dark-background, 10%);
 $dark-bg-lighter-20: lighten($dark-background, 20%);
 $dark-bg-lighter-30: lighten($dark-background, 30%);
-$light-bg-alpha-4: rgba(#edefe0, 0.04);
-$light-bg-alpha-12: rgba(#edefe0, 0.12);
+$light-bg-alpha-4: rgba(#fafafa, 0.04);
+$light-bg-alpha-12: rgba(#fafafa, 0.12);
 
 // Background palette for dark themes.
 $mat-dark-theme-background: ( background: $dark-background, status-bar: $dark-bg-lighter-20, app-bar: $dark-bg-lighter-5, hover: $light-bg-alpha-4, card: $dark-bg-lighter-5, dialog: $dark-bg-lighter-5, tooltip: $dark-bg-lighter-20, disabled-button: $light-bg-alpha-12, raised-button: $dark-bg-lighter-5, focused-button: $light-focused, selected-button: $dark-bg-lighter-20, selected-disabled-button: $dark-bg-lighter-30, disabled-button-toggle: $dark-bg-lighter-10, unselected-chip: $dark-bg-lighter-20, disabled-list-option: $dark-bg-lighter-10, );
@@ -70,46 +69,46 @@ $mat-dark-theme-background: ( background: $dark-background, status-bar: $dark-bg
 // Theme Config
 
 body {
-  --primary-color: #639d1a;
-  --primary-lighter-color: #d0e2ba;
-  --primary-darker-color: #47810f;
+  --primary-color: #13569b;
+  --primary-lighter-color: #b8cce1;
+  --primary-darker-color: #0b3c7f;
   --text-primary-color: #{$light-primary-text};
   --text-primary-lighter-color: #{$dark-primary-text};
   --text-primary-darker-color: #{$light-primary-text};
 }
 
-$mat-primary: ( main: #639d1a, lighter: #d0e2ba, darker: #47810f, 200: #639d1a, // For slide toggle,
+$mat-primary: ( main: #13569b, lighter: #b8cce1, darker: #0b3c7f, 200: #13569b, // For slide toggle,
 contrast : ( main: $light-primary-text, lighter: $dark-primary-text, darker: $light-primary-text, ) );
 $theme-primary: mat-palette($mat-primary, main, lighter, darker);
 
 
 body {
-  --accent-color: #c4ca96;
-  --accent-lighter-color: #edefe0;
-  --accent-darker-color: #afb779;
-  --text-accent-color: #{$dark-primary-text};
+  --accent-color: #00b674;
+  --accent-lighter-color: #b3e9d5;
+  --accent-darker-color: #009e57;
+  --text-accent-color: #{$light-primary-text};
   --text-accent-lighter-color: #{$dark-primary-text};
-  --text-accent-darker-color: #{$dark-primary-text};
+  --text-accent-darker-color: #{$light-primary-text};
 }
 
-$mat-accent: ( main: #c4ca96, lighter: #edefe0, darker: #afb779, 200: #c4ca96, // For slide toggle,
-contrast : ( main: $dark-primary-text, lighter: $dark-primary-text, darker: $dark-primary-text, ) );
+$mat-accent: ( main: #00b674, lighter: #b3e9d5, darker: #009e57, 200: #00b674, // For slide toggle,
+contrast : ( main: $light-primary-text, lighter: $dark-primary-text, darker: $light-primary-text, ) );
 $theme-accent: mat-palette($mat-accent, main, lighter, darker);
 
 
 body {
-  --warn-color: #af0000;
-  --warn-lighter-color: #e7b3b3;
-  --warn-darker-color: #960000;
-  --text-warn-color: #{$light-primary-text};
+  --warn-color: #ffb400;
+  --warn-lighter-color: #ffe9b3;
+  --warn-darker-color: #ff9c00;
+  --text-warn-color: #{$dark-primary-text};
   --text-warn-lighter-color: #{$dark-primary-text};
-  --text-warn-darker-color: #{$light-primary-text};
+  --text-warn-darker-color: #{$dark-primary-text};
 }
 
-$mat-warn: ( main: #af0000, lighter: #e7b3b3, darker: #960000, 200: #af0000, // For slide toggle,
-contrast : ( main: $light-primary-text, lighter: $dark-primary-text, darker: $light-primary-text, ) );
+$mat-warn: ( main: #ffb400, lighter: #ffe9b3, darker: #ff9c00, 200: #ffb400, // For slide toggle,
+contrast : ( main: $dark-primary-text, lighter: $dark-primary-text, darker: $dark-primary-text, ) );
 $theme-warn: mat-palette($mat-warn, main, lighter, darker);
-;
+
 
 $theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
@@ -144,3 +143,5 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
     font-family: 'Poppins';
   }
 }
+
+

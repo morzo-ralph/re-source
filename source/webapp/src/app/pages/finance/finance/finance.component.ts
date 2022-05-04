@@ -199,11 +199,19 @@ export class FinanceComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.resetBal();
-    this.load();   
+    //this.resetBal();
+    //this.load();   
 
     /*this.dataSource.paginator = this.paginator;*/
   }
+
+
+
+
+
+
+
+
 
   //TOO LAZY TO DO PROPERLY
 
@@ -237,37 +245,41 @@ export class FinanceComponent implements OnInit {
 
   }
 
-  //OOP
+  /*OOP*/
 
   isLoaded: boolean = false
   async load() {
     this.isLoaded = false;
     await this.delay(1000);
+
+
     //Event Loop Starts Here
 
-    this.resetBal();
+    this.checkIfMobile();
 
-    /*this.setPettySample();*/
+    //this.resetBal();
 
-    this.getPettyStartCash();
+    ///*this.setPettySample();*/
 
-    this.getPettyCash();
-    this.getRevenues();
-    this.getSales();
-    this.getExpenses();
-    this.getPurchases();
-    this.getPayroll();
+    //this.getPettyStartCash();
 
-    this.getRevenuesData();
-    this.getSalesData();
-    this.getExpensesData();
-    this.getPurchasesData();
-    this.getPayrollData();
+    //this.getPettyCash();
+    //this.getRevenues();
+    //this.getSales();
+    //this.getExpenses();
+    //this.getPurchases();
+    //this.getPayroll();
 
-    this.mergeRevGraphData();
-    this.mergeExpGraphData();
+    //this.getRevenuesData();
+    //this.getSalesData();
+    //this.getExpensesData();
+    //this.getPurchasesData();
+    //this.getPayrollData();
 
-    this.graphVar = [];
+    //this.mergeRevGraphData();
+    //this.mergeExpGraphData();
+
+    //this.graphVar = [];
 
     this.isLoaded = true;
     //Event Loop End Here
@@ -334,6 +346,13 @@ export class FinanceComponent implements OnInit {
   payrollDataIsArchived: any;
 
   //FUNCTIONS
+
+  isMobile!: boolean
+
+  checkIfMobile() {
+    this.isMobile = this.libraryService.getIsMobile()
+    /*console.log(this.isMobile)*/
+  }
 
   //PETTY CASH
 

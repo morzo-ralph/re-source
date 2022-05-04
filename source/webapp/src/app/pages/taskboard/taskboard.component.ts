@@ -32,6 +32,34 @@ export class TaskboardComponent implements OnInit {
     this.getAllTaskBoard();
   }
 
+  async loadOnLoop() {
+    //Event Loop Starts Here
+    this.checkIfMobile();
+
+
+    await this.delay(1000);
+    this.reloadLoop();
+    //Event Loop End Here
+  }
+
+  reloadLoop() {
+    this.loadOnLoop()
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  //check if mobile
+
+  isMobile!: boolean
+
+  checkIfMobile() {
+    this.isMobile = this.libraryService.getIsMobile()
+  }
+
+  isLoaded: boolean = false;
+
   getAllTaskBoard() {
     this.dataService.getAllItem('taskboard').subscribe((data : any) => {
       console.log(data);

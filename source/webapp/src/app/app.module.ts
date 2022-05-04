@@ -92,6 +92,8 @@ import { MatTableModule } from '@angular/material/table';
 // SweetAlert
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AnnouncementComponent } from './global/announcement/announcement.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -130,7 +132,9 @@ import { AnnouncementComponent } from './global/announcement/announcement.compon
     ViewPayrollFinanceComponent,
     ViewPurchaseFinanceComponent,
     ViewSalessComponent,
-    AnnouncementComponent
+    AnnouncementComponent,
+    ProfileComponent,
+    SettingsComponent
   ],
   imports: [
 

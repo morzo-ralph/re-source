@@ -45,20 +45,18 @@ export class AppComponent {
   isMobile: boolean = false;
 
   checkIfMobile() {
-    /*console.log(window.screen.width)*/
     if (window.screen.width <= 480) {
       this.isMobile = true;
     }
     else {
       this.isMobile = false
     }
-    /*console.log(this.isMobile)*/
     this.libraryService.setIsMobile(this.isMobile)
   }
 
-  isConn: boolean = false;
-  isConnMsg!: ConnStatus;
-  isConnStatus: any;
+  //isConn: boolean = false;
+  //isConnMsg!: ConnStatus;
+  //isConnStatus: any;
 
 
   //checkIfServerActive() {

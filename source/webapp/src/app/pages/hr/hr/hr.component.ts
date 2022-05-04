@@ -55,7 +55,7 @@ export class HrComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadOnstart()
+    /*this.loadOnstart()*/
     this.loadOnLoop()
 
   }
@@ -65,34 +65,19 @@ export class HrComponent implements OnInit {
   //OOP
   isLoaded: boolean = false;
 
-  async loadOnstart() {
-
-    this.isLoaded = false
-    await this.delay(1000)
-    //Event Loop Starts Here
-    this.getDays()
-    this.getMonths()
-    this.fillAttendanceTable()
-
-    this.getEmployees();
-    this.getAttendance()
-
-    //Event Loop Ends Here
-    this.isLoaded = true
-    console.log(this.isLoaded)
-
-
-  }
-
   async loadOnLoop() {
 
     //Event Loop Starts Here
+
+    await this.delay(1000);
     this.checkIfMobile();
 
 
 
-    //Event Ends Here
-    this.reloadLoop()
+    this.reloadLoop();
+    this.isLoaded = true
+
+    //Event Loop End Here
   }
 
   reloadLoop() {
@@ -102,6 +87,32 @@ export class HrComponent implements OnInit {
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+  //Check if Mobile
+
+  isMobile!: boolean
+
+  checkIfMobile() {
+    this.isMobile = this.libraryService.getIsMobile()
+  }
+
+  //async loadOnstart() {
+
+  //  this.isLoaded = false
+  //  await this.delay(1000)
+  //  //Event Loop Starts Here
+  //  this.getDays()
+  //  this.getMonths()
+  //  this.fillAttendanceTable()
+
+  //  this.getEmployees();
+  //  this.getAttendance();
+
+  //  //Event Loop Ends Here
+  //  this.isLoaded = true
+
+
+  //}
 
 
   async load() {
@@ -120,13 +131,6 @@ export class HrComponent implements OnInit {
     console.log(this.isLoaded)
   }
 
-  //check if mobile
-
-  isMobile!: boolean
-
-  checkIfMobile() {
-    this.isMobile = this.libraryService.getIsMobile()
-  }
 
 
   //number: number,

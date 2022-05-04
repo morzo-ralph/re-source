@@ -22,40 +22,30 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    public libraryService: LibraryService
+    private libraryService: LibraryService
   ) { }
 
   ngOnInit(): void {
-
-    this.loadOnStart()
     this.loadOnLoop();
   }
 
 
-  //OOP
+  
   isLoaded: boolean = false;
 
-  async loadOnStart() {
-
-    this.isLoaded = false
-
-    //Event Loop Starts Here
-    await this.delay(1000);
-
-
-    //Event Loop End Here
-    this.isLoaded = true
-
-  }
-
   async loadOnLoop() {
+
     //Event Loop Starts Here
+
+    await this.delay(1000);
     this.checkIfMobile();
     this.getTasks();
 
 
-    await this.delay(1000);
+    
     this.reloadLoop();
+    this.isLoaded = true
+
     //Event Loop End Here
   }
 
@@ -67,7 +57,7 @@ export class HomeComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  //check if mobile
+  //Check if Mobile
 
   isMobile!: boolean
 
@@ -75,10 +65,10 @@ export class HomeComponent implements OnInit {
     this.isMobile = this.libraryService.getIsMobile()
   }
 
+  /*Functions*/
+
   getClockIn(id: any) {
     return (localStorage.getItem("clockinId:" + id))
-
-
   }
 
   getTimeIn(time: any) {
@@ -97,35 +87,15 @@ export class HomeComponent implements OnInit {
 
   taskBoardData: TaskBoard[] = [];
 
-
-
   getTasks() {
     this.dataService.getAllItem('taskboard').subscribe((data: any) => {
-      /*console.log(data);*/
-      /*this.taskBoardData = data;*/
-
-      //console.log(this.taskBoardData)
       if (this.taskBoardData.length == 0) {
         this.taskBoardData = data;
-        /*console.log("isnull")*/
       }
 
       if (this.taskBoardData.length != data.length) {
         this.taskBoardData = data;
       }
-
-      //if (this.arraysEqual(this.taskBoardData, data) == false) {
-      //  /*console.log("NOT MATCH")*/
-      //}
-
-      //if (this.arraysEqual(this.taskBoardData, data) == true) {
-      //  console.log("MATCH")
-      //}
-      //else {
-      // /* this.taskBoardData = this.taskBoardData;*/
-      //}
-
-      /*console.log(data)*/
     })
   }
 

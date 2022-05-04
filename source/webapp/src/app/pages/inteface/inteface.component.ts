@@ -56,9 +56,7 @@ export class IntefaceComponent implements OnInit {
   getName() {
     var fname = localStorage.getItem('fname')
     var lname = localStorage.getItem('lname')
-
     this.imgUrl = localStorage.getItem('imgUrl')
-
     this.username = fname +" "+ lname
 
   }
