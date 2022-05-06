@@ -1,30 +1,25 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+var ObjectIdSchema = Schema.ObjectId;
+var ObjectId = mongoose.Types.ObjectId;
 
 const AttendanceSchema = new mongoose.Schema({
 
-//    export interface Attendance_Data {
-//    number: number;
-//    _id: string;
-//    id: string;
-//    name: string;
-//    attendance_date: string;
-//    attendance_hours: number;
-//}
-
+    
+    _id: { type: ObjectIdSchema, default: new ObjectId() },
 
     number: Number,
-    id: String,
-    name: String,
-    attendance_date_in: Date,
-    attendance_date_out: Date,
-    attendance_hours: Number,    
-       // _itemId: {
-    //     type: mongoose.Types.ObjectId
-    // },
 
+    emp_id: String,
+
+    attendance_date: Date,    
+    attendance_seconds: Number,
+    
+    status: String,
     isArchive: {
         type: Number, default: 0
     },
+
     created_at: Date,
     updated_at: Date
 });

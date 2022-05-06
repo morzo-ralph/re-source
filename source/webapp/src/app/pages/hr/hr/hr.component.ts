@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef,  } from '@angular/core';
 import { GoogleChartComponent } from 'angular-google-charts';
 import { ChartType, Row } from 'angular-google-charts';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 import { Data } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
-import { ConnStatus, Announcement, Employees, TaskBoard, Inventories, Attendance } from 'src/app/services/data/data.model';
+import { ConnStatus, Announcement, Employees, TaskBoard, Inventories, Attendance, Time } from 'src/app/services/data/data.model';
 
 
 import { LibraryService } from 'src/app/services/library.service';
@@ -19,20 +19,6 @@ import { LibraryService } from 'src/app/services/library.service';
 
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
 
-
-
-
-
-const ATT_DATA: Attendance[] = [
-  { number: 1, _id: '1111', id: '1111', name: "John Doe", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8},
-  { number: 2, _id: '2222', id: '2222', name: "Jobs Steve", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8},
-  { number: 3, _id: '3333', id: '3333', name: "John Doe", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8},
-  { number: 4, _id: '4444', id: '4444', name: "Jobs Steve", attendance_date: '2022-02-11T16:00:00.000+00:00', attendance_hours: 8 },
-  { number: 1, _id: '1111', id: '1111', name: "John Doe", attendance_date: '2022-02-12T16:00:00.000+00:00', attendance_hours: 8 },
-  { number: 2, _id: '2222', id: '2222', name: "Jobs Steve", attendance_date: '2022-02-12T16:00:00.000+00:00', attendance_hours: 8 },
-  { number: 3, _id: '3333', id: '3333', name: "John Doe", attendance_date: '2022-02-12T16:00:00.000+00:00', attendance_hours: 8 },
-  { number: 4, _id: '4444', id: '4444', name: "Jobs Steve", attendance_date: '2022-02-12T16:00:00.000+00:00', attendance_hours: 8 },
-];
 
 
 @Component({
@@ -46,12 +32,17 @@ const ATT_DATA: Attendance[] = [
     fadeOutOnLeaveAnimation(),
   ]
 })
+
+
+
+
 export class HrComponent implements OnInit {
 
   constructor(
     private libraryService: LibraryService,
     private dataService: DataService,
-    private datepipe: DatePipe
+    private datepipe: DatePipe,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -60,24 +51,86 @@ export class HrComponent implements OnInit {
 
   }
 
-  //@ViewChild(MatPaginator) paginator!: MatPaginator
+  @ViewChild(MatPaginator) empPaginator!: MatPaginator;
+  @ViewChild('empDialog', { static: true }) empDialog!: TemplateRef<any>;
+
+  openDialogWithoutRef(input: any) {
+    console.log(input)
+    this.dialog.open(this.empDialog, { data: input });
+  }
+
+
+
 
   //OOP
   isLoaded: boolean = false;
 
   async loadOnLoop() {
 
-    //Event Loop Starts Here
-
-    await this.delay(1000);
+    //Event Loop Starts Here    
     this.checkIfMobile();
 
+    this.loadTab(null);
+    this.getStatus();
+    
 
 
+
+
+    this.isLoaded = true;
+    this.isLoadedTab = true;
+
+    await this.delay(10000);
     this.reloadLoop();
-    this.isLoaded = true
+    
 
     //Event Loop End Here
+  }
+
+  //LoadTabData
+
+  isLoadedTab = false;
+  activeTab = 0
+
+  async loadTab(event: any) {
+
+    if (event) {
+      this.activeTab = event.index
+    }
+    else {
+      this.activeTab = 0
+    }
+    
+
+    switch (this.activeTab) {
+      case 0:
+
+        this.isLoadedTab = false;
+
+        this.getEmployees();
+        
+
+        await this.delay(1000);
+        this.isLoadedTab = true;
+
+        break;
+
+      case 1:
+
+        this.isLoadedTab = false;
+
+        this.getDays()
+        this.getMonths()
+        this.fillAttendanceTable()
+        this.getAttendance()
+
+        await this.delay(1000);
+        this.isLoadedTab = true;
+
+        break;
+
+      default:
+    }
   }
 
   reloadLoop() {
@@ -115,21 +168,21 @@ export class HrComponent implements OnInit {
   //}
 
 
-  async load() {
-    this.isLoaded = false
-    await this.delay(1000)
-    //Event Loop Starts Here
-    this.getDays()
-    this.getMonths()
-    this.fillAttendanceTable()
+  //async load() {
+  //  this.isLoaded = false
+  //  await this.delay(1000)
+  //  //Event Loop Starts Here
+  //  this.getDays()
+  //  this.getMonths()
+  //  this.fillAttendanceTable()
 
-    this.getEmployees();
-    this.getAttendance()
+  //  this.getEmployees();
+  //  this.getAttendance()
 
-    //Event Loop Ends Here
-    this.isLoaded = true
-    console.log(this.isLoaded)
-  }
+  //  //Event Loop Ends Here
+  //  this.isLoaded = true
+  //  console.log(this.isLoaded)
+  //}
 
 
 
@@ -162,23 +215,57 @@ export class HrComponent implements OnInit {
 
     this.dataService.getAllItem('employees')
       .subscribe((data: any) => {
-        console.log(data);
+        /*console.log(data);*/
         this.employeesPayload = data;
         this.employeesData = this.employeesPayload;
         this.employeesDataSource.data = this.employeesPayload;
+        this.employeesDataSource.paginator = this.empPaginator
       });
   }
 
-  checkStatus(id: any) {
-    var status
-    if (localStorage.getItem(id) !== null) {
-      status = 1
-    }
-    else {
-      status = 0
-    }
-    return (status)
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.employeesDataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  timePayload: any;
+  timeData: Time[] = []
+
+  getStatus() {
+
+    this.dataService.getTime('times/gettime')
+      .subscribe((data) => {
+
+
+        this.timePayload = data
+        this.timeData = this.timePayload
+
+        /*console.log(this.timeData)*/
+
+      })
+
+  }
+
+  checkStatus(id: any) {
+
+    let status = false
+
+    if (this.timeData.length == 0) {
+      status = false
+    }
+
+    let array = this.timeData
+      .map((time) => {
+        if (time.emp_id == id) {
+          status = true
+        }
+      })
+
+
+    return status
+
+  }
+
 
 
 
@@ -200,30 +287,101 @@ export class HrComponent implements OnInit {
   attendanceIdArchive: any;
   attendanceDisplayedColumns: string[] = [];
 
+  timeArray: any[] = []
+
+  calendarData: any[] = []
+  calendarDataSource = new MatTableDataSource(this.calendarData);
+
   getAttendance() {
 
-    this.attendanceData = ATT_DATA;
-    this.attendanceDataSource.data = this.attendanceData;
+    this.calendarData = []
+
+    /*let req: any*/
+
+    /*req.data= "dsf"*/
+
     
 
+
+    this.dataService.getAttendance('attendance/getattendance').subscribe((data) => {
+      this.attendancePayload = data;
+      this.attendanceData = this.attendancePayload;
+
+      this.calendarData = []
+
+      let container : any[] = []
+
+      this.employeesData.map((data) => {
+        if (data.fname == undefined) {
+          data.fname = ""
+        }
+        if (data.lname == undefined) {
+          data.lname = ""
+        }
+        var name = data.fname + ' ' + data.lname
+        let varObj: any = []
+        this.attendanceData.map((content) => {        
+          
+          if (data.emp_id == content.emp_id)
+          {
+            let smolObj: any[] = []
+            this.daysArray.map((days) => {
+              let date = this.datepipe.transform(new Date(content.attendance_date), 'YYYY-MM-dd')
+              var total = 0
+              var hours = 0
+              if (date == days) {
+                total = total + content.attendance_seconds
+                hours = (total/10000)
+                smolObj.push(JSON.parse(JSON.stringify({ hours: hours })))
+              }
+              else
+              {
+                smolObj.push(JSON.parse(JSON.stringify({ hours: "0" })))
+              }
+              varObj = smolObj
+            })         
+
+          }
+          else
+          {
+            let smolObj: any[] = []
+            this.daysArray.map((days) => {
+              smolObj.push(JSON.parse(JSON.stringify({ hours: "0" })))
+              varObj = smolObj
+            })
+          }
+          /*bigJSON.attendance = { attendance: varObj }  */        
+        })        
+        container.push({ emp_id: data.emp_id, emp_name: name, attendance: varObj  })
+        /*console.log(this.calendarData)*/
+      })
+
+      this.calendarData = container
+      this.calendarDataSource.data = this.calendarData
+      console.log(this.calendarDataSource.data)
+    })   
   }
 
-  dateMatch(attendanceDay: any, calendarDate: any) {
-
-    /*var date = new Date;*/
-    var date = this.datepipe.transform(attendanceDay,"YYYY-MM-dd")
-
-    console.log(attendanceDay, calendarDate, date)
-
-    if (date === calendarDate) {
-      return 1;
-
-    }
-    else {
-      return 0
-    }
+  getTotalTime() {
 
   }
+
+  //dateMatch(attendanceDay: any, calendarDate: any) {
+
+  //  /*var date = new Date;*/
+  //  var date = this.datepipe.transform(attendanceDay,"YYYY-MM-dd")
+
+  //  console.log(attendanceDay, calendarDate, date)
+
+  //  if (date === calendarDate) {
+  //    return 1;
+
+  //  }
+  //  else {
+  //    return 0
+  //  }
+
+  //}
 
   getDate() {
     return this.libraryService.getDate("EEEE, MMMM d, y")
@@ -247,7 +405,7 @@ export class HrComponent implements OnInit {
 
   getMonths() {
     this.monthsArray = this.libraryService.generateMonthsArray()
-    console.log(this.monthsArray)
+    /*console.log(this.monthsArray)*/
   }
 
   fillAttendanceTable() {

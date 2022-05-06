@@ -4,7 +4,7 @@ import { ChartType, Row } from 'angular-google-charts';
 import { LibraryService } from 'src/app/services/library.service';
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation, rubberBandAnimation } from 'angular-animations';
 
-import { ConnStatus, Announcement, Employees, TaskBoard } from 'src/app/services/data/data.model';
+import { ConnStatus, Announcement, Employees, TaskBoard, Time } from 'src/app/services/data/data.model';
 
 @Component({
   selector: 'app-home',
@@ -36,15 +36,18 @@ export class HomeComponent implements OnInit {
   async loadOnLoop() {
 
     //Event Loop Starts Here
-
-    await this.delay(1000);
+    
     this.checkIfMobile();
+
     this.getTasks();
+    this.getActive();
 
 
     
+    this.isLoaded = true;
+    await this.delay(10000);
     this.reloadLoop();
-    this.isLoaded = true
+    
 
     //Event Loop End Here
   }
@@ -67,9 +70,62 @@ export class HomeComponent implements OnInit {
 
   /*Functions*/
 
-  getClockIn(id: any) {
-    return (localStorage.getItem("clockinId:" + id))
+  taskBoardData: TaskBoard[] = [];
+
+  getTasks() {
+    //this.dataService.getAllItem('taskboard').subscribe((data: any) => {
+    //  if (this.taskBoardData.length == 0) {
+    //    this.taskBoardData = data;
+    //  }
+
+    //  if (this.taskBoardData.length != data.length) {
+    //    this.taskBoardData = data;
+    //  }
+    //})
   }
+
+  timePayload: any;
+  timeData: Time[] = []
+
+  getActive() {
+
+    this.dataService.getTime('times/gettime')
+      .subscribe((data) => {
+
+        this.timePayload = data
+        this.timeData = this.timePayload
+        
+      })
+
+    //console.log(this.timeData)
+    //console.log(this.timeData.length)
+
+  }
+
+  getTimeActive() {
+
+    let id = localStorage.getItem("id")
+
+    let timeIn = '0'
+    let timeObject = new Date()
+
+
+    if (this.timeData.length == 0) {
+      timeIn = '0'
+    }
+
+    let array = this.timeData
+      .map((time) => {
+        if (time.emp_id == id) {
+          timeObject = time.createdAt
+          timeIn = this.getTimeIn(timeObject)
+        }
+      })
+
+    return timeIn
+
+  }
+
 
   getTimeIn(time: any) {
 
@@ -82,21 +138,7 @@ export class HomeComponent implements OnInit {
     var newTimeinMinutes = newTimeinSeconds / 60;
     var newTimeinHours = newTimeinMinutes / 60;
 
-    return (Math.floor(newTimeinHours) + ":" + Math.floor(newTimeinMinutes % 60) + ":" + Math.floor(newTimeinSeconds % 60));
-  }
-
-  taskBoardData: TaskBoard[] = [];
-
-  getTasks() {
-    this.dataService.getAllItem('taskboard').subscribe((data: any) => {
-      if (this.taskBoardData.length == 0) {
-        this.taskBoardData = data;
-      }
-
-      if (this.taskBoardData.length != data.length) {
-        this.taskBoardData = data;
-      }
-    })
+    return (Math.floor(newTimeinHours) + "h : " + Math.floor(newTimeinMinutes % 60) + "m : " + Math.floor(newTimeinSeconds % 60) + "s ");
   }
 
 

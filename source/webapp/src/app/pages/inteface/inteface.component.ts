@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data/dataservice.service';
 import { LibraryService } from 'src/app/services/library.service';
+
+import { RouterLink, Router } from '@angular/router';
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
 
 @Component({
@@ -15,40 +17,47 @@ import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animati
 })
 export class IntefaceComponent implements OnInit {
 
-  constructor(public dataService: DataService, public libraryService: LibraryService) { }
+  constructor(
+    public dataService: DataService,
+    public libraryService: LibraryService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.load();
+    this.loadOnLoop();
   }
 
+  isLoaded: boolean = false;
 
-  async load() {
-    /*this.isLooped= false;*/
+  async loadOnLoop() {
+
     //Event Loop Starts Here
-
+    
     this.checkIfMobile();
+
     this.getName()
+
     await this.delay(1000);
-    this.reload();
-    /*this.isLooped = true;*/
+    this.reloadLoop();
+    this.isLoaded = true
+
     //Event Loop End Here
   }
 
-  reload() {
-    this.load();
+  reloadLoop() {
+    this.loadOnLoop()
   }
-  
 
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+  //Check if Mobile
 
   isMobile!: boolean
 
   checkIfMobile() {
     this.isMobile = this.libraryService.getIsMobile()
-    /*console.log(this.isMobile)*/
   }
 
   username: any
@@ -58,6 +67,14 @@ export class IntefaceComponent implements OnInit {
     var lname = localStorage.getItem('lname')
     this.imgUrl = localStorage.getItem('imgUrl')
     this.username = fname +" "+ lname
+
+  }
+
+  logout() {
+
+
+    localStorage.clear
+    this.router.navigate(['login'])
 
   }
 

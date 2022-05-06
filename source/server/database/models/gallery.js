@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var ObjectIdSchema = Schema.ObjectId;
+var ObjectId = mongoose.Types.ObjectId;
 
 const GallerySchema = new mongoose.Schema({
     imageUrl: String,

@@ -1,3 +1,5 @@
+
+
 const http = require("http");
 const app = require('./server/app');
 const debug = require("debug")("node-angular");
@@ -42,6 +44,7 @@ const onListening = () => {
 };
 
 const port = normalizePort(process.env.PORT || "3000");
+
 app.set("port", port);
 
 const server = http.createServer(app);
@@ -49,4 +52,4 @@ server.on("error", onError);
 server.on("listening", onListening);
 server.listen(port);
 
-console.log("Listening to Port : " + port)
+console.log("Listening to Port : " + port);

@@ -14,7 +14,7 @@ import { DatePipe } from '@angular/common';
 
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation, rubberBandAnimation } from 'angular-animations';
 
-import { ConnStatus, Announcement, Employees, TaskBoard } from 'src/app/services/data/data.model';
+import { ConnStatus, Announcement, Employees, TaskBoard , Time} from 'src/app/services/data/data.model';
 
 //import { time } from 'console';
 
@@ -58,7 +58,6 @@ export class BundyComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.loadOnStart()
     this.loadOnLoop();
     
   }
@@ -66,36 +65,23 @@ export class BundyComponent implements OnInit {
   //OOP
   isLoaded: boolean = false;
 
-  async loadOnStart() {
-
-    this.isLoaded = false
-
-    
-    await this.delay(1000);
-
-    //Event Loop Starts Here
-    this.getTime();
-    this.getEmployees();
-    this.getAttendance();
-    this.checkIfAvailable();
-
-
-    //Event Loop End Here
-    this.isLoaded = true
-
-  }
-
   async loadOnLoop() {
 
     //Event Loop Starts Here
     this.checkIfMobile();
+    this.getTime();
+    this.getEmployees();
     this.getAnnouncements();
+    this.checkIfAvailable();
+    this.getStatus();
 
     
 
+    this.isLoaded = true;
 
-    await this.delay(1000);
+    await this.delay(10000);
     this.reloadLoop();
+    
     //Event Loop End Here
   }
 
@@ -121,192 +107,30 @@ export class BundyComponent implements OnInit {
   announcementContent: string = ""
 
   getAnnouncements() {
-    this.dataService.getAllItem('announcements').subscribe((data: any) => {
-      /*console.log(data);*/
-      this.announcementData = data;
+    //this.dataService.getAllItem('announcements').subscribe((data: any) => {
+    //  /*console.log(data);*/
+    //  this.announcementData = data;
 
-      var currentDate = new Date();
-      /*console.log (currentDate);*/
+    //  var currentDate = new Date();
+    //  /*console.log (currentDate);*/
 
-      for (var announcement of this.announcementData) {
-        var announcementDate = new Date(announcement.announcement_end_date)
-        /*console.log(announcementDate);*/
+    //  for (var announcement of this.announcementData) {
+    //    var announcementDate = new Date(announcement.announcement_end_date)
+    //    /*console.log(announcementDate);*/
 
-        if (currentDate <= announcementDate) {
-          this.announcementTitle = announcement.announcement_title;
-          this.announcementContent = announcement.announcement_content;
-          /*console.log("OK")*/
-        }
-        else {
-          this.announcementTitle = "";
-          this.announcementContent = "";
-        }
-      }
-
-
-    })
-  }
-
-//}
-
-  employeesPayload: any;
-  employeesData: Employees[] = [];
-  employeesDataSource = new MatTableDataSource(this.employeesData);
-  employeesDisplayedColumns = ['number', 'name', 'position', 'department', 'status', 'time'];
-
-  employeesIdArchive: any;
-
-  getEmployees() {
-
-    //this.employeesDataSource.data = this.employeesData;
-
-    this.dataService.getAllItem('employees')
-      .subscribe((data: any) => {
-        console.log(data);
-        this.employeesPayload = data;
-        this.employeesData = this.employeesPayload;
-        this.employeesDataSource.data = this.employeesPayload;
+    //    if (currentDate <= announcementDate) {
+    //      this.announcementTitle = announcement.announcement_title;
+    //      this.announcementContent = announcement.announcement_content;
+    //      /*console.log("OK")*/
+    //    }
+    //    else {
+    //      this.announcementTitle = "";
+    //      this.announcementContent = "";
+    //    }
+    //  }
 
 
-      });
-  }
-
-  
-  
-
-  checkStatus(id: any) {
-    var status
-    /*console.log(localStorage.getItem("clockInId:" + id))*/
-    if (localStorage.getItem("clockinId:" + id) !== null) {
-      status = 1
-    }
-    else {
-      status = 0
-    }
-    return (status)
-  }
-
-  isclockedIn: boolean = false;
-
-  clockinId: any;
-
-  checkIfAvailable() {
-    this.clockinId = localStorage.getItem("id")
-
-    if (localStorage.getItem("clockinId:" + this.clockinId) !== null) {
-      this.isclockedIn = true
-    }
-    else {
-      this.isclockedIn = false
-    }
-
-  }
-
-  // clockIn2() {
-  //  var timeIn : any
-  //  timeIn = localStorage.setItem('time-in', Date.now().toString())
-  //  if(timeIn != '') {
-  //    var timeOut = localStorage.setItem('time-out', Date.now().toString())
-  //    console.log(localStorage.getItem('time-out') + 'time out')
-    
-  //    this.subtractHours(timeOut, timeIn)
-  //  } else {
-  //    localStorage.setItem('time-in', Date.now().toString())
-  //  }
-    
-  //}
-
-  attendance: any = {}
-  attendanceData: any = {}
-  attendanceBool: boolean = false
-  attendanceCount: any
-  attendanceId: any
-
-  getAttendance() {
-    this.dataService.getAllItem('attendance').subscribe((data: any) => {
-      this.attendance = data
-      this.attendanceCount = data.length
-    })
-  }
-
-
-  timeIn() {
-
-    this.isclockedIn = true
-
-    this.clockinId = localStorage.getItem("id")
-
-    localStorage.removeItem("clockinId:" + this.clockinId)
-    localStorage.setItem("clockinId:" + this.clockinId, this.date)
-    console.log((localStorage.getItem("clockinId:" + this.clockinId)))
-
-
-   // this.attendanceData.number = parseInt(this.attendanceCount) + 1
-   // this.attendanceData.id = localStorage.getItem('_id')
-   // var name : any = localStorage.getItem('fname') + ' ' + localStorage.getItem('lname')
-   // this.attendanceData.name = name
-   // this.attendanceData.attendance_date_in = new Date()
-   //localStorage.setItem('try-in', this.attendanceData.attendance_date_in)
-   //this.dataService.createItem('attendance', this.attendanceData).subscribe((data: any) => {
-   //  console.log(data)
-   //   this.attendanceId = data._id
-   //   this.attendanceBool = true
-   //   this.getAttendance()
-   // })
-  }
-
-  timeOut() {
-
-    this.isclockedIn = false
-    
-    console.log(localStorage.getItem("clockinId:" + this.clockinId));
-
-    localStorage.removeItem("clockinId:" + this.clockinId)
-
-
-    //this.attendanceData.id = this.attendanceId
-    ////this.attendanceData.attendance_date_out = new Date()
-    //localStorage.setItem('try-out', new Date().toDateString())
-    //this.dataService.archiveItem('attendance', this.attendanceData.id, { 'attendance_date_out': new Date() } ).subscribe((data : any) => {
-    //  console.log(data)
-    //  this.attendanceBool = false
-    //  this.getAttendance()
     //})
-
-  }
-
-  subtractHours(old: any, now: any){
-    var diffInMS = now - old
-    var msInHour = Math.floor(diffInMS/1000/60)
-    /*console.log(msInHour)*/
-
-    localStorage.removeItem('time-in');
-    localStorage.removeItem('time-out');
-    if (msInHour < 60) {
-      /*console.log('Within hour')*/
-    } else {
-      /*console.log('Not within the hour')*/
-    }
-  }
-
-  getClockIn(id: any) {
-    return (localStorage.getItem("clockinId:" + id))
-
-
-  }
-
-  getTimeIn(time: any) {
-
-    var oldTime = new Date(time);
-    var timeNow = new Date();
-
-    var newTime = Math.abs(oldTime.getTime() - timeNow.getTime());
-
-    var newTimeinSeconds = newTime / 1000;
-    var newTimeinMinutes = newTimeinSeconds / 60;
-    var newTimeinHours = newTimeinMinutes / 60;
-
-    return (Math.floor(newTimeinHours) + ":" + Math.floor(newTimeinMinutes % 60) + ":" + Math.floor(newTimeinSeconds % 60)) ;
   }
 
   timeinhours!: any
@@ -327,6 +151,175 @@ export class BundyComponent implements OnInit {
       await this.delay(1000)
     }
   }
+
+
+  employeesPayload: any;
+  employeesData: Employees[] = [];
+  employeesDataSource = new MatTableDataSource(this.employeesData);
+  employeesDisplayedColumns = ['number', 'name', 'position', 'department', 'status', 'time'];
+
+  employeesIdArchive: any;
+
+  getEmployees() {
+
+    this.dataService.getAllItem('employees')
+      .subscribe((data: any) => {
+        this.employeesPayload = data;
+        this.employeesData = this.employeesPayload;
+        this.employeesDataSource.data = this.employeesPayload;
+      });
+  }
+
+  timePayload: any;
+  timeData: Time[] = []
+  
+  getStatus() {
+
+    this.dataService.getTime('times/gettime')
+      .subscribe((data) => {
+
+
+        this.timePayload = data
+        this.timeData = this.timePayload
+
+        //console.log(this.timeData)
+        ///*console.log(this.clockinId)*/
+
+      })
+
+  }
+
+  checkStatus(id: any) {
+
+    let status = false
+
+    if (this.timeData.length == 0) {
+      status = false
+    }
+
+    let array = this.timeData 
+      .map((time) => {
+        if (time.emp_id == id) {
+          status = true
+        }
+      })    
+
+
+    return status
+
+  }
+
+  isclockedIn: boolean = false;
+
+  clockinId = localStorage.getItem("id")  
+
+  checkIfAvailable() {
+
+    this.dataService.checkTime('times/checktime', this.clockinId)
+      .subscribe((data: any) => {
+        /*console.log(data)*/
+
+        if (data.code == 200) {
+          this.isclockedIn = true
+        }
+        else {
+          this.isclockedIn = false
+        }
+
+      })
+
+  }
+
+  timeIn() {
+
+    this.isclockedIn = true
+    this.clockinId = localStorage.getItem("id")
+    console.log(this.clockinId)
+
+    let req = { "emp_id" : this.clockinId }
+
+    /*console.log(this.clockinId)*/
+
+    this.dataService.timeIn('times/timein', req).
+      subscribe((data: any) => {
+        /*console.log(data)*/
+
+      })
+  }
+
+  timeOut() {
+
+    this.isclockedIn = false
+    this.clockinId = localStorage.getItem("id")
+
+    let req = { "emp_id" : this.clockinId }
+
+    this.dataService.timeOut('times/timeout', req).
+      subscribe((data: any) => {
+
+        /*console.log(data)*/
+
+        let date = this.datepipe.transform(new Date(data.time.createdAt), 'YYYY-MM-dd')
+        console.log(data)
+        let req = { "emp_id": data.time.emp_id, "attendance_seconds": data.seconds, "attendance_date": this.datepipe.transform(date, 'YYYY-MM-dd') }
+        
+        this.dataService.addTime('attendance/newattendance', req).subscribe((data) => {
+          //console.log(req)
+          console.log(data)
+        })
+
+      })
+
+
+  }
+
+  getTimeTable(id: any) {
+
+    let timeIn = null
+    let timeObject = new Date()
+
+
+    if (this.timeData.length == 0) {
+      timeIn = null
+    }
+
+    let array = this.timeData
+      .map((time) => {
+
+        if (time.emp_id == id) {
+          timeIn = "Has Time"
+          timeObject = time.createdAt
+          timeIn = this.getTimeIn(timeObject)
+        }
+      })
+
+    return timeIn
+
+  }
+
+
+  getTimeIn(time: any) {
+
+    var oldTime = new Date(time);
+    var timeNow = new Date();
+
+    var newTime = Math.abs(oldTime.getTime() - timeNow.getTime());
+
+    var newTimeinSeconds = newTime / 1000;
+    var newTimeinMinutes = newTimeinSeconds / 60;
+    var newTimeinHours = newTimeinMinutes / 60;
+
+    return (Math.floor(newTimeinHours) + "h : " + Math.floor(newTimeinMinutes % 60) + "m : " + Math.floor(newTimeinSeconds % 60) + "s");
+  }
+
+
+
+
+  
+
+  
+
+ 
 
 
 

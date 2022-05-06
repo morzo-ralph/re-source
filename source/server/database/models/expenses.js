@@ -1,16 +1,21 @@
 const mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var ObjectIdSchema = Schema.ObjectId;
+var ObjectId = mongoose.Types.ObjectId;
+
 
 const ExpensesSchema = new mongoose.Schema({
     number: Number,
-    id : String,
+
+    _id: { type: ObjectIdSchema, default: new ObjectId() },
+    id: String,
+
     exp_date: Date,
     exp_supplier: String,
     exp_desc: String,
     exp_by: String,
-    exp_amount: Number,    
-       // _itemId: {
-    //     type: mongoose.Types.ObjectId
-    // },
+
+    exp_amount: Number,   
 
     isArchive: Number,
     created_at: Date,

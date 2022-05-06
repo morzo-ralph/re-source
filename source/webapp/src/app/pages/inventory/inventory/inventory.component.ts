@@ -67,27 +67,27 @@ export class InventoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void { 
-    this.loadOnstart();
+    /*this.loadOnstart();*/
     this.loadOnLoop();
   }
 
   //OOP
   isLoaded: boolean = false;
 
-  async loadOnstart() {
+  //async loadOnstart() {
 
-    this.isLoaded = false
-    await this.delay(1000)
-    //Event Loop Starts Here
-    this.getInventories();
-    this.getPurchases();
+  //  this.isLoaded = false
+  //  await this.delay(1000)
+  //  //Event Loop Starts Here
+  //  this.getInventories();
+  //  this.getPurchases();
     
 
-    //Event Ends Here
-    this.isLoaded = true
+  //  //Event Ends Here
+  //  this.isLoaded = true
 
 
-  }
+  //}
 
   async loadOnLoop() {
 
@@ -97,7 +97,10 @@ export class InventoryComponent implements OnInit {
 
 
     //Event Ends Here
+
+    await this.delay(1000);
     this.reloadLoop()
+    this.isLoaded = true
   }
 
   reloadLoop() {

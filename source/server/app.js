@@ -49,65 +49,56 @@ app.use((req, res, next) => {
 //    next();
 //});
 
-app.get('/api/check/', (req, res, next) => {
-    const content = [
-        {
-            message: "Successfully Connected"
-        }
-    ]
-    res.status(200).json({
-        content: content,
-        message: "Connected Succesfully",
-        status: 200,
-    })
-
-    /*console.log("Request Received");*/
-    next();
-});
-
 //Routers
-const drawsRouter = require('./routes/draws');
+
 const employeesRouter = require('./routes/employees');
-const expensesRouter = require('./routes/expenses');
-const inventoriesRouter = require('./routes/inventories');
-const pettycashRouter = require('./routes/pettycash');
-const purchasesRouter = require('./routes/purchases');
-const revenuesRouter = require('./routes/revenues');
-const salarytotalsRouter = require('./routes/salarytotals');
-const saldeltasRouter = require('./routes/saldeltas');
-const salesRouter = require('./routes/sales');
-const stocksRouter = require('./routes/stocks');
-//const galleryRouter = require('./routes/gallery');
-/*const usersRouter = require('./routes/users');*/
-const announcementRouter = require('./routes/announcements');
-const taskBoardRouter = require('./routes/taskboard');
-const payrollRouter = require('./routes/payroll');
+const timesRouter = require('./routes/times');
 const attendanceRouter = require('./routes/attendance');
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+//const drawsRouter = require('./routes/draws');
 
-app.use("/api/draws", drawsRouter);
+//const expensesRouter = require('./routes/expenses');
+//const inventoriesRouter = require('./routes/inventories');
+//const pettycashRouter = require('./routes/pettycash');
+//const purchasesRouter = require('./routes/purchases');
+//const revenuesRouter = require('./routes/revenues');
+//const salarytotalsRouter = require('./routes/salarytotals');
+//const saldeltasRouter = require('./routes/saldeltas');
+//const salesRouter = require('./routes/sales');
+//const stocksRouter = require('./routes/stocks');
+//const announcementRouter = require('./routes/announcements');
+//const taskBoardRouter = require('./routes/taskboard');
+//const payrollRouter = require('./routes/payroll');
+
+
+//app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 app.use("/api/employees", employeesRouter);
-app.use("/api/expenses", expensesRouter);
-app.use("/api/inventories", inventoriesRouter);
-app.use("/api/pettycash", pettycashRouter);
-app.use("/api/purchases", purchasesRouter);
-app.use("/api/revenues", revenuesRouter);
-app.use("/api/salarytotals", salarytotalsRouter);
-app.use("/api/saldeltas", saldeltasRouter);
-app.use("/api/sales", salesRouter);
-app.use("/api/stocks", stocksRouter);
-//app.use("/api/gallery", galleryRouter);
-app.use("/api/announcements", announcementRouter);
-app.use("/api/taskboard", taskBoardRouter);
-app.use("/api/payroll", payrollRouter);
+app.use("/api/times", timesRouter);
 app.use("/api/attendance", attendanceRouter);
+
+
+//app.use("/api/draws", drawsRouter);
+//app.use("/api/expenses", expensesRouter);
+//app.use("/api/inventories", inventoriesRouter);
+//app.use("/api/pettycash", pettycashRouter);
+//app.use("/api/purchases", purchasesRouter);
+//app.use("/api/revenues", revenuesRouter);
+//app.use("/api/salarytotals", salarytotalsRouter);
+//app.use("/api/saldeltas", saldeltasRouter);
+//app.use("/api/sales", salesRouter);
+//app.use("/api/stocks", stocksRouter);
+//app.use("/api/announcements", announcementRouter);
+//app.use("/api/taskboard", taskBoardRouter);
+//app.use("/api/payroll", payrollRouter);
+//
 
 /*app.use("/api/users", usersRouter);*/
 
-app.all((req, res, next) => {
-    /*res.send("Nothing Here, Ignore Me");*/
-    console.log("Log From: server/app.js");
-});
+//app.all((req, res, next) => {
+//    /*res.send("Nothing Here, Ignore Me");*/
+//    console.log("Log From: server/app.js");
+//});
+
 
 module.exports = app;

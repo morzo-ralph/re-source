@@ -51,9 +51,43 @@ export class DataService {
 
   //Data Methods
 
+  checkLogin(uri: any, data: any) {  
+    return this.post(uri, { data });
+  }
+
+  getTime(uri: any) {
+    return this.get(uri);
+  }
+
+  timeIn(uri: any, data: any) {
+    return this.post(uri, { data });
+  }
+
+  timeOut(uri: any, data: any) {
+    return this.post(uri, { data });
+  }
+
+  checkTime(uri: any, id: any) {
+    return this.get(`${uri}/${id}`);
+  }
+
+  addTime(uri: any, data: any) {
+    return this.post(uri, { data });
+  }  
+
+  getAttendance(uri: any) {
+    return this.get(uri);
+  }
+
+
+
+
+
   getAllItem(uri: any) {
     return this.get(uri);
   }
+
+  
 
   createItem(uri: any, data: any) {
     return this.post(uri, { data });

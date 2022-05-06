@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { swalProviderToken } from '@sweetalert2/ngx-sweetalert2/lib/di';
 import { RouterLink, Router } from '@angular/router';
 import { DataService } from 'src/app/services/data/dataservice.service';
 import { LibraryService } from 'src/app/services/library.service';
@@ -26,13 +25,18 @@ export class LoginComponent implements OnInit {
     this.loadOnLoop()
   }
 
+  isLoaded: boolean = false;
   async loadOnLoop() {
+
     //Event Loop Starts Here
+
     this.checkIfMobile();
 
 
     await this.delay(1000);
+    this.isLoaded = true
     this.reloadLoop();
+
     //Event Loop End Here
   }
 
@@ -45,73 +49,68 @@ export class LoginComponent implements OnInit {
   }
 
   isMobile: boolean = false
-
   checkIfMobile() {
     this.isMobile = this.libraryService.getIsMobile();
   }
 
-  // login = async () : Promise <void> => {
-  //   try {
-  //     this.loginData.accountId = this.account_id
-  //     this.loginData.password = this.password
 
-  //     await this.dataService.createItemss('users/login', this.loginData)
-
-  //   } catch(error) {
-  //     console.log(error);
-  //   }    
-  // }
+  /*Functions*/
 
   id: any
   password: any
-
   loginData: any = {}
-
   login() {
-    this.loginData.id = this.id
+    this.loginData.emp_id = this.id
     this.loginData.password = this.password
-    
-    console.log(this.loginData);
+    this.dataService.checkLogin('employees/login', this.loginData).subscribe((data: any) => {
 
-    //createitem is just post -- auth sa future
-    this.dataService.createItem('employees/login', this.loginData).subscribe((data: any) => {
+      if (data.status == 200) {
+        localStorage.clear;
+        localStorage.setItem('id', data.employee.emp_id);
+        localStorage.setItem('imgUrl', data.employee.imgUrl);
+        localStorage.setItem('lname', data.employee.lname);
+        localStorage.setItem('fname', data.employee.fname);
+        localStorage.setItem('mname', data.employee.mname);
+        localStorage.setItem('contact_list', data.employee.list);
 
-      console.log(data.status);
-      /*localStorage.clear;*/
-
-      //masyado ka na ata nawiwili sa localstorage ah, ciniclear to dapat
-      localStorage.setItem('id', data.employee.id);
-      localStorage.setItem('imgUrl', data.employee.imgUrl);
-      localStorage.setItem('lname', data.employee.lname);
-      localStorage.setItem('fname', data.employee.fname);
-      localStorage.setItem('mname', data.employee.mname);
-      localStorage.setItem('contact_list', data.employee.list);
-
-      console.log(localStorage.getItem('id'))
-      console.log(localStorage.getItem('fname'))
-
-      var id = localStorage.getItem('id');
-
-      if (id != ''){
         var name = localStorage.getItem('fname') + ' ' + localStorage.getItem('lname')
         Swal.fire(
           'Logged in Successfully!',
           'Welcome '+ name,
           'success'
-        )
-        this.router.navigate(['home'])
-      } else {
-
-        //Swal.fire(
-        //  'Credentials does not matched!',
-        //  '',
-        //  'error'
-        //)
+        ).then(()=>this.router.navigate(['home']))     
       }
-
+      else if (data.status == 401) {
+        Swal.fire(
+          'Invalid Credentials!',
+          '',
+          'error'
+        )
+      }
+      else if (data.status == 404) {
+        Swal.fire(
+          'Account Does Not Exist',
+          '',
+          'error'
+        )
+      }
+      else if (data.status == 500) {
+        Swal.fire(
+          'Server Error!',
+          '',
+          'error'
+        )
+      }
+      else {
+        Swal.fire(
+          'Unknown Error',
+          '',
+          'error'
+        )
+      }
     }, (error : any) => {
       Swal.fire(
-        'Credentials does not matched!',
+        'Client Side Error!',
         '',
         'error'
       )

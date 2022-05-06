@@ -2,9 +2,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router();
-
 const Employees = require('../database/models/employees');
-const Pagination = require('../middleware/paginatedResult');
 
 router.get('/', (req, res) => {
     Employees.find({})
@@ -23,64 +21,69 @@ router.post('/', (req, res) => {
 router.post('/signup', async (req, res) => {
 
     let employees = new Employees(req.body);
-    const encryptedpword = await bcrypt.hash(req.body.password, 10);
-    //console.log(encryptedpword);
+    let encryptedpword = await bcrypt.hash(req.body.password, 10);
+
     req.body.password = encryptedpword;
+    console.log();
     console.log(req.body);
-    Employees.findOne({ id: employees.id }, (err, employee) => {
+
+    Employees.findOne({ emp_id}, (err, employee) => {
         if (employee) {
-            res.status(200).json({ message: "employee already exist" })
+            res.json({ message: "Employee already exist" })
         } else {
             (new Employees(req.body))
                 .save()
                 .then((employees) => res.send(employees))
-                .catch((error) => console.log(error));
+                .then(() => {
+                    console.log("Created New Employee")
+                    console.log(employees)
+                })
+                .catch((error) => console.log(error))                
         }
     })
-        .catch((error) => console.log(error));
 });
 
 router.post('/login', async (req, res) => {
-    // let newUser = new Employees(req.body);
-    id = req.body.data.id;
+
+    console.log(req.body)
+    console.log(req.body.emp_id)
+
+    let emp_id = req.body.data.emp_id;
     let password = req.body.data.password;
-    console.log(req.body.data);
-    console.log(id, password);
-    Employees.findOne({ id })
+
+    Employees.findOne({ emp_id })
         .then((employee) => {
             if (employee && bcrypt.compareSync(password, employee.password)) {
-                res.status(200)
-                    .json({ employee, message: "Account logged in successful" })
+                res.json({ employee, message: "Account logged in successfully", status: "200" });
+                console.log("Employee " + employee.emp_id + " Logged In");
             } else if (employee && !bcrypt.compareSync(password, employee.password)) {
-                res.status(401).json({ message: "Invalid Credentials" });
+                res.json({ message: "Invalid Credentials", status: "401"});
             } else {
-                res.status(500).json({ message: "Account doesn't Exist" })
+                res.json({ message: "Account doesn't Exist", status: "404" });
             }
         })
         .catch((error) => {
-            res.status(500).json({ message: "Account doesn't exist! " + error });
-        }
-        );
-});
-
-
-router.post('/try', (req, res) => {
-    console.log(req.body);
-    if (Employees.find({ "id": req.body.id })) {
-        console.log("exist");
-    } else {
-        console.log("does not exist");
-    }
-    if (Employees.find({ "password": bcrypt.compare(req.body.password) })) {
-        console.log("same pword");
-    } else { console.log("password doesn't match"); }
-    // .then(employees => res.send(employees))
-    // .catch(error => console.log(error));
+            res.json({ message: "Something Went Wrong : ", error : error, status: "404" });
+        });
 });
 
 router.get('/:id', (req, res) => {
     Employees.findOne({})
         .then(employees => res.send(employees))
+        .then(() => {
+            console.log("Get Successful");
+            console.log(employees);
+        })
+        .catch(error => console.log(error));
+});
+
+router.delete('/:id', (req, res) => {
+    Employees.findOneAndDelete({"_id": req.params})        
+        .then(employees => res.send(employees))
+        .then(() => {
+            console.log("Delete Successful");
+            console.log(employees);
+        })
         .catch(error => console.log(error));
 });
 

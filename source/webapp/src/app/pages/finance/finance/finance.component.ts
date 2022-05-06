@@ -199,6 +199,7 @@ export class FinanceComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
+    this.loadOnLoop()
     //this.resetBal();
     //this.load();   
 
@@ -247,47 +248,77 @@ export class FinanceComponent implements OnInit {
 
   /*OOP*/
 
-  isLoaded: boolean = false
-  async load() {
-    this.isLoaded = false;
-    await this.delay(1000);
+  isLoaded: boolean = false;
 
+  async loadOnLoop() {
 
     //Event Loop Starts Here
 
+    await this.delay(1000);
     this.checkIfMobile();
 
-    //this.resetBal();
 
-    ///*this.setPettySample();*/
 
-    //this.getPettyStartCash();
+    await this.delay(1000);
+    this.reloadLoop();
+    this.isLoaded = true
 
-    //this.getPettyCash();
-    //this.getRevenues();
-    //this.getSales();
-    //this.getExpenses();
-    //this.getPurchases();
-    //this.getPayroll();
-
-    //this.getRevenuesData();
-    //this.getSalesData();
-    //this.getExpensesData();
-    //this.getPurchasesData();
-    //this.getPayrollData();
-
-    //this.mergeRevGraphData();
-    //this.mergeExpGraphData();
-
-    //this.graphVar = [];
-
-    this.isLoaded = true;
     //Event Loop End Here
+  }
+
+  reloadLoop() {
+    this.loadOnLoop()
   }
 
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+  //Check if Mobile
+
+  isMobile!: boolean
+
+  checkIfMobile() {
+    this.isMobile = this.libraryService.getIsMobile()
+  }
+
+  //async load() {
+  //  this.isLoaded = false;
+  //  await this.delay(1000);
+
+
+  //  //Event Loop Starts Here
+
+  //  this.checkIfMobile();
+
+  //  //this.resetBal();
+
+  //  ///*this.setPettySample();*/
+
+  //  //this.getPettyStartCash();
+
+  //  //this.getPettyCash();
+  //  //this.getRevenues();
+  //  //this.getSales();
+  //  //this.getExpenses();
+  //  //this.getPurchases();
+  //  //this.getPayroll();
+
+  //  //this.getRevenuesData();
+  //  //this.getSalesData();
+  //  //this.getExpensesData();
+  //  //this.getPurchasesData();
+  //  //this.getPayrollData();
+
+  //  //this.mergeRevGraphData();
+  //  //this.mergeExpGraphData();
+
+  //  //this.graphVar = [];
+
+  //  this.isLoaded = true;
+  //  //Event Loop End Here
+  //}
+
 
   applyFilterExpenses(filterValue: string) {
     this.expensesDataSource.filter = filterValue.trim().toLowerCase();
@@ -346,13 +377,6 @@ export class FinanceComponent implements OnInit {
   payrollDataIsArchived: any;
 
   //FUNCTIONS
-
-  isMobile!: boolean
-
-  checkIfMobile() {
-    this.isMobile = this.libraryService.getIsMobile()
-    /*console.log(this.isMobile)*/
-  }
 
   //PETTY CASH
 
@@ -674,7 +698,7 @@ export class FinanceComponent implements OnInit {
           console.log(data);
         });
         this.getExpenses();
-        this.load();
+        /*this.load();*/
       }
     })
   }

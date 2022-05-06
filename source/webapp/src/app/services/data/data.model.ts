@@ -21,7 +21,7 @@ export interface Employees{
   number: number,
 
   _id: string,
-  id: string,
+  emp_id: string,
 
   lname: string,
   fname: string,
@@ -47,13 +47,20 @@ export interface Employees{
   updated_at: Date
 }
 
+export interface Time {
+  _id: string,
+  emp_id: string,
+  createdAt: Date,
+}
+
+
 export interface Attendance{
   number: number;
   _id: string;
-  id: string;
+  emp_id: string;
   name: string;
   attendance_date: string;
-  attendance_hours: number;
+  attendance_seconds: number;
 }
 
 export interface TaskBoard {

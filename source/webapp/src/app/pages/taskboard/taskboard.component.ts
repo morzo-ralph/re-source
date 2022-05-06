@@ -29,16 +29,24 @@ export class TaskboardComponent implements OnInit {
   ) { }
     task : any = {}
   ngOnInit(): void {
-    this.getAllTaskBoard();
+    this.loadOnLoop();
   }
 
+  //OOP
+  isLoaded: boolean = false;
+
   async loadOnLoop() {
+
     //Event Loop Starts Here
+
+    await this.delay(1000);
     this.checkIfMobile();
 
 
-    await this.delay(1000);
+
     this.reloadLoop();
+    this.isLoaded = true
+
     //Event Loop End Here
   }
 
@@ -50,15 +58,13 @@ export class TaskboardComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  //check if mobile
+  //Check if Mobile
 
   isMobile!: boolean
 
   checkIfMobile() {
     this.isMobile = this.libraryService.getIsMobile()
   }
-
-  isLoaded: boolean = false;
 
   getAllTaskBoard() {
     this.dataService.getAllItem('taskboard').subscribe((data : any) => {
