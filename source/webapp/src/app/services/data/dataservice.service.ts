@@ -55,6 +55,14 @@ export class DataService {
     return this.post(uri, { data });
   }
 
+  signUp(uri: any, data: any) {
+    return this.post(uri, { data });
+  }
+
+  editEmp(uri: any, data: any) {
+    return this.post(uri, { data });
+  }
+
   getTime(uri: any) {
     return this.get(uri);
   }

@@ -6,40 +6,44 @@ const Time = require('../database/models/time');
 
 router.get('/gettime', (req, res) => {
     Time.find({})
-        .then(data => res.send(data))
+        .then(data => { res.send(data) })
+        .then()
         .catch(error => console.log(error));
 });
 
 router.post('/timein', (req, res) => {
-    /*console.log(req.body.data)*/
+
     new Time(req.body.data)
         .save()
-        .then((time) => {
-
-            console.log( time.emp_id + ' Has Timed In')
+        .then(time => {
+            console.log(time.emp_id + ' Has Timed In')
+            console.log(time)
             res.json({ time, message: "Succesfully Timed In", code: "200" })
         })
-        .catch((error) => console.log(error));
+        .catch(error => {
+            /*console.log(time.emp_id + ' Has Failed to Time In')*/
+            console.log(error)
+            /*res.json({ time, message: "Failed to Time In", code: "500" })*/
+        });
 
 });
 
 router.post('/timeout', (req, res) => {
 
-    let emp_id = req.body.data.emp_id;   
-
-    Time.findOneAndDelete({ "emp_id": emp_id })
+    Time.findOneAndDelete({ "emp_id": req.body.data.emp_id })
         .then(time => {
-
             let dateNow = new Date();
             let dateOld = new Date(time.createdAt);
-
-            console.log(time.emp_id + " Has Timed Out");
-
             seconds = dateNow.getTime() - dateOld.getTime();
-
+            console.log(time.emp_id + " Has Timed Out");
+            console.log(time)
             res.json({ time, seconds : seconds, message: "Succesfully Timed Out", code : "200" } )
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+            /*console.log(time.emp_id + ' Has Failed to Time OuT')*/
+            console.log(error)
+            /*res.json({ time, message: "Failed to Time Out", code: "200" })*/
+        });
 
 
 });

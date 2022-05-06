@@ -197,7 +197,7 @@ export class BundyComponent implements OnInit {
       status = false
     }
 
-    let array = this.timeData 
+    this.timeData 
       .map((time) => {
         if (time.emp_id == id) {
           status = true
@@ -230,9 +230,9 @@ export class BundyComponent implements OnInit {
 
   }
 
-  timeIn() {
+  async timeIn() {
 
-    this.isclockedIn = true
+    
     this.clockinId = localStorage.getItem("id")
     console.log(this.clockinId)
 
@@ -240,35 +240,41 @@ export class BundyComponent implements OnInit {
 
     /*console.log(this.clockinId)*/
 
-    this.dataService.timeIn('times/timein', req).
+    await this.dataService.timeIn('times/timein', req).
       subscribe((data: any) => {
-        /*console.log(data)*/
+        console.log(data)
 
       })
+
+    this.isclockedIn = true
   }
 
-  timeOut() {
+  async timeOut() {
 
-    this.isclockedIn = false
+    
     this.clockinId = localStorage.getItem("id")
 
-    let req = { "emp_id" : this.clockinId }
+    let req = { "emp_id": this.clockinId }
+    let req2 = {}
 
-    this.dataService.timeOut('times/timeout', req).
-      subscribe((data: any) => {
-
-        /*console.log(data)*/
+    await this.dataService.timeOut('times/timeout', req).
+      subscribe((data: any) => {     
+        console.log(data)
 
         let date = this.datepipe.transform(new Date(data.time.createdAt), 'YYYY-MM-dd')
-        console.log(data)
-        let req = { "emp_id": data.time.emp_id, "attendance_seconds": data.seconds, "attendance_date": this.datepipe.transform(date, 'YYYY-MM-dd') }
-        
-        this.dataService.addTime('attendance/newattendance', req).subscribe((data) => {
-          //console.log(req)
-          console.log(data)
-        })
+        req2 = { "emp_id": data.time.emp_id, "attendance_seconds": data.seconds, "attendance_date": this.datepipe.transform(date, 'YYYY-MM-dd') }    
 
       })
+
+    await this.delay(1000)
+
+    await this.dataService.addTime('attendance/newattendance', req2)
+      .subscribe((data) => {
+        console.log(data)
+
+      })
+
+    this.isclockedIn = false
 
 
   }
@@ -283,7 +289,7 @@ export class BundyComponent implements OnInit {
       timeIn = null
     }
 
-    let array = this.timeData
+    this.timeData
       .map((time) => {
 
         if (time.emp_id == id) {

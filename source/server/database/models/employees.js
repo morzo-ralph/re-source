@@ -1,21 +1,15 @@
 const mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var ObjectIdSchema = Schema.ObjectId;
-var ObjectId = mongoose.Types.ObjectId;
 
 const EmployeesSchema = new mongoose.Schema({
 
     number: Number,
 
-    _id: { type: ObjectIdSchema, default: new ObjectId() },
     emp_id: String,
 
     lname: String,
     fname: String,
     mname: String,
-    extname: String,
-
-    imgUrl: String,
+    extname: String,    
 
     start_Date: Date,
 
@@ -25,11 +19,15 @@ const EmployeesSchema = new mongoose.Schema({
     position: String,
     department: String,
 
+    rate: String,
+
     role: { type: String, default: 'developer' },
 
     password: String,
 
     isArchive: Number,
+
+    imgUrl: String,
 
     created_at: Date,
     updated_at: Date

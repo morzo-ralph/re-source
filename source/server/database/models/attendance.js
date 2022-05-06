@@ -1,15 +1,11 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-var ObjectIdSchema = Schema.ObjectId;
-var ObjectId = mongoose.Types.ObjectId;
 
 const AttendanceSchema = new mongoose.Schema({
-
     
-    _id: { type: ObjectIdSchema, default: new ObjectId() },
+    /*_id: id,*/
 
     number: Number,
-
+    
     emp_id: String,
 
     attendance_date: Date,    

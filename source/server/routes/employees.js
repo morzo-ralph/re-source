@@ -10,33 +10,27 @@ router.get('/', (req, res) => {
         .catch(error => console.log(error));
 });
 
-router.post('/', (req, res) => {  
-    (new Employees(req.body.data))
-    .save()
-    .then((employees) => res.send(employees))
-    .catch((error) => console.log(error));
-    
-});
-
 router.post('/signup', async (req, res) => {
 
-    let employees = new Employees(req.body);
-    let encryptedpword = await bcrypt.hash(req.body.password, 10);
+    let employeeNew = new Employees(req.body.data);
+    console.log(employeeNew)
+    let encryptedpword = await bcrypt.hash(employeeNew.password, 10);
+    employeeNew.password = encryptedpword;
 
-    req.body.password = encryptedpword;
     console.log();
     console.log(req.body);
 
-    Employees.findOne({ emp_id}, (err, employee) => {
-        if (employee) {
-            res.json({ message: "Employee already exist" })
-        } else {
-            (new Employees(req.body))
+    Employees.findOne({ "emp_id": employeeNew.emp_id }, (err, emp) => {
+        if (emp) {
+            res.json({ message: "Employee already exists" })
+        }
+        else {
+            new Employees(employeeNew)
                 .save()
-                .then((employees) => res.send(employees))
-                .then(() => {
+                .then((employee) => {
                     console.log("Created New Employee")
-                    console.log(employees)
+                    console.log(employee)
+                    res.send(employee)
                 })
                 .catch((error) => console.log(error))                
         }
@@ -51,7 +45,7 @@ router.post('/login', async (req, res) => {
     let emp_id = req.body.data.emp_id;
     let password = req.body.data.password;
 
-    Employees.findOne({ emp_id })
+    Employees.findOne({ "emp_id" : emp_id })
         .then((employee) => {
             if (employee && bcrypt.compareSync(password, employee.password)) {
                 res.json({ employee, message: "Account logged in successfully", status: "200" });
@@ -67,36 +61,52 @@ router.post('/login', async (req, res) => {
         });
 });
 
-router.get('/:id', (req, res) => {
-    Employees.findOne({})
-        .then(employees => res.send(employees))
-        .then(() => {
-            console.log("Get Successful");
-            console.log(employees);
+router.post('/edit', (req, res) => {
+
+    console.log(req.body.data)
+
+    Employees.findOneAndUpdate({ "emp_id": req.body.data.emp_id }, { $set: req.body.data })
+        .then((employee) => {
+            console.log(employee)
+
+
+         })
+        .catch((error) => {
+            console.log(error)
         })
-        .catch(error => console.log(error));
+
 });
 
-router.delete('/:id', (req, res) => {
-    Employees.findOneAndDelete({"_id": req.params})        
-        .then(employees => res.send(employees))
-        .then(() => {
-            console.log("Delete Successful");
-            console.log(employees);
-        })
-        .catch(error => console.log(error));
-});
+//router.get('/:id', (req, res) => {
+//    Employees.findOne({})
+//        .then(employees => res.send(employees))
+//        .then(() => {
+//            console.log("Get Successful");
+//            console.log(employees);
+//        })
+//        .catch(error => console.log(error));
+//});
 
-router.put('/:id', (req, res) => {
-    Employees.findOneAndUpdate({"id": req.params}, {$set: req.body.data})
-        .then(employees => res.send(employees))
-        .catch(error => console.log(error));
-});
+//router.delete('/:id', (req, res) => {
+//    Employees.findOneAndDelete({"_id": req.params})        
+//        .then(employees => res.send(employees))
+//        .then(() => {
+//            console.log("Delete Successful");
+//            console.log(employees);
+//        })
+//        .catch(error => console.log(error));
+//});
 
-router.patch('/:id', (req, res) => {
-    Employees.findOneAndUpdate({"id": req.params}, {$set: req.body.data})
-        .then(employees => res.send(employees))
-        .catch(error => console.log(error));
-});
+//router.put('/:id', (req, res) => {
+//    Employees.findOneAndUpdate({"id": req.params}, {$set: req.body.data})
+//        .then(employees => res.send(employees))
+//        .catch(error => console.log(error));
+//});
+
+//router.patch('/:id', (req, res) => {
+//    Employees.findOneAndUpdate({"id": req.params}, {$set: req.body.data})
+//        .then(employees => res.send(employees))
+//        .catch(error => console.log(error));
+//});
 
 module.exports = router;

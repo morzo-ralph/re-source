@@ -95,6 +95,10 @@ app.use("/api/attendance", attendanceRouter);
 
 /*app.use("/api/users", usersRouter);*/
 
+
+
+
+
 //app.all((req, res, next) => {
 //    /*res.send("Nothing Here, Ignore Me");*/
 //    console.log("Log From: server/app.js");

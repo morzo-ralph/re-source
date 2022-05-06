@@ -1,4 +1,4 @@
-//inventory
+
 const express = require("express");
 const router = express.Router();
 
@@ -15,10 +15,32 @@ router.post('/newattendance', (req, res) => {
     console.log(req.body.data)
     new Attendance(req.body.data)
         .save()
-        .then((data) => res.send(data))
-        .catch((error) => console.log(error));
+        .then((attendance) => {
+            console.log(attendance.emp_id + " Has Time Logged")
+            console.log(attendance)
+            res.json({ attendance, message: "Succesfully Time Logged", code: "200" })
+
+        })
+        .catch((error) => {
+            /*console.log(attendance.emp_id + "Has Failed to Time Log")*/
+            console.log(error)
+            /*res.json({attendance, message: "Failed to Time Log", code: "500" })*/
+        });
     
 });
+
+//new Time(req.body.data)
+//    .save()
+//    .then(time => {
+//        console.log(time.emp_id + ' Has Timed In')
+//        console.log(time)
+//        
+//    })
+//    .catch(error => {
+//        console.log(time.emp_id + ' Has Failed to Time In')
+//        console.log(error)
+//        res.json({ time, message: "Failed to Time In", code: "500" })
+//    });
 
 //router.get('/:_id', (req, res) => {
 //    Attendance.findOne({})

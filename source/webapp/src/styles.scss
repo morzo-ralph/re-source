@@ -390,7 +390,8 @@ h4 {
 
 .mat-column-number {
   flex: 1 1 5%;
-  max-width: 50px;
+  max-width: 80px;
+  justify-content: center;
 }
 
 .mat-column-name {
@@ -399,7 +400,7 @@ h4 {
 
 .mat-column-age {
   flex: 1 1 5%;
-  max-width: 50px;
+  max-width: 80px;
 }
 
 .mat-column-address {
@@ -408,22 +409,27 @@ h4 {
 
 .mat-column-department {
   flex: 1 1 15%;
+  max-width: 200px;
 }
 
 .mat-column-position {
   flex: 1 1 15%;
+  max-width: 200px;
 }
 
 .mat-column-id {
   flex: 1 1 5%;
-  max-width: 50px;
+  justify-content: center;
+  max-width: 80px;
 }
 
-.mat-column-age {
-  flex: 1 1 5%;
-}
 
 .mat-column-role {
+  flex: 1 1 10%;
+  max-width: 150px;
+}
+
+.mat-column-rate {
   flex: 1 1 5%;
   max-width: 100px;
 }
