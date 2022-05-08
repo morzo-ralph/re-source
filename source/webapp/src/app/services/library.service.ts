@@ -22,65 +22,86 @@ export class LibraryService {
     var date
     date = new Date()
     date = this.datepipe.transform(date, format)
-    /*console.log(date + ': From Library Service: Method getDate')*/
     return <string>(date)
   }
 
-  getLastDayofMonth(month: number) {
-    var date
-    date = new Date()
-    date.setMonth(month + 1)
-    date.setDate(0)
-    date = date.getDate()
-    /*console.log(date + ' From Library Service: Method getLastDayofMonth');*/
-    return <number>(date)
+  getFirstDayMonth() {
+
+    var date = new Date();
+    var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+
+    return firstDay
+
   }
 
-  generateDaysArray(month: number) {
+  getLastDayMonth() {
+
+    var date = new Date();
+    var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    return lastDay
+
+  }
+
+  //getLastDayofMonth(month: number) {
+  //  var date
+  //  date = new Date()
+  //  date.setMonth(month + 1)
+  //  date.setDate(0)
+  //  date = date.getDate()
+  //  return date
+  //}
+
+  generateDaysArray(startdate: any, enddate: any) {
+
+    console.log(startdate, enddate)
 
     var daysArray: any[] = [];
-    var day;
-    var daysinMonth;
-    daysinMonth = this.getLastDayofMonth(month);
-    for (let i = 1, j = daysinMonth; i <= j; i++) {
-      day = new Date()
-      day.setMonth(month)
-      day.setDate(i)
-      day = this.datepipe.transform(day, 'yyyy-MM-dd');
-      daysArray.push(day)
-      /*console.log(daysArray + ' From Data Service: Method generateDaysArray');*/
+
+    let firstday = new Date(startdate).getDate()
+
+    let lastday = new Date(enddate).getDate()
+
+    console.log(firstday, lastday)
+
+    let day = new Date(startdate);
+
+    while (day <= enddate) {
+
+      daysArray.push(this.datepipe.transform(day,'yyyy-MM-dd'))
+      let newDate = day.setDate(day.getDate() + 1);
+      day = new Date(newDate);
     }
-    /*console.log(daysArray + ' From Library: Method generateDaysArray');*/
+
+    /*console.log(daysArray)*/
+
     return (daysArray)
   }
 
-  generateMonthsArray() {
+  //generateMonthsArray() {
 
-    var monthsArray: any[] = [];
-    var month;
-    for (let i = 0, j = 11; i <= j; i++) {
-      month = new Date()
-      month.setDate(1)
-      month.setMonth(i)
-      month = this.datepipe.transform(month, 'MMMM');
-      monthsArray.push(month)
-      /*console.log(daysArray + ' From Data Service: Method generateDaysArray');*/
-    }
-    /*console.log(daysArray + ' From Library: Method generateDaysArray');*/
-    return (monthsArray)
-  }
+  //  var monthsArray: any[] = [];
+  //  var month;
+  //  for (let i = 0, j = 11; i <= j; i++) {
+  //    month = new Date()
+  //    month.setDate(1)
+  //    month.setMonth(i)
+  //    month = this.datepipe.transform(month, 'MMMM');
+  //    monthsArray.push(month)
+  //  }
+  //  return (monthsArray)
+  //}
 
-  getMonth(date: any) {
-    var month;
-    month = this.datepipe.transform(date, 'MM');
-    return (month);
-  }
+  //getMonth(date: any) {
+  //  var month;
+  //  month = this.datepipe.transform(date, 'MM');
+  //  return (month);
+  //}
 
-  decodeDate(date: any) {
-    var decode;
-    decode = this.datepipe.transform(date, 'mm-dd-yyyy');
-    return (decode);
-  }
+  //decodeDate(date: any) {
+  //  var decode;
+  //  decode = this.datepipe.transform(date, 'mm-dd-yyyy');
+  //  return (decode);
+  //}
 
 
 }

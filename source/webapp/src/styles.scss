@@ -352,15 +352,24 @@ h4 {
 
 
 /*Tables*/
-/*.att-cell {
-}*/
+
+.att-table {
+  width: fit-content;
+  min-width: 100%;
+}
+
+.att-cell {
+  max-width: 80px;
+  min-width: 40px;
+  justify-content: center
+}
+
 .table-container {
   width: 100%;
 
 }
 
 .mat-header-cell {
-
   justify-content: center
   
 }
@@ -369,9 +378,7 @@ h4 {
   background-color: var(--primary-lighter-color);
 }
 
-.mat-cell {
-
-  
+.mat-cell {  
   border-left: 1px solid #e0e0e0;
   padding-left: 10px;
 }
@@ -395,11 +402,24 @@ h4 {
 }
 
 .mat-column-name {
+  flex: 1 1 20%;
+  max-width: 300px;
+}
+
+.biggername {
+  flex: 1 1 30%;
+  min-width: 30%;
+  max-width: 480px;
+}
+
+.mat-column-date {
   flex: 1 1 15%;
+  max-width: 400px;
 }
 
 .mat-column-age {
   flex: 1 1 5%;
+
   max-width: 80px;
 }
 
@@ -432,6 +452,17 @@ h4 {
 .mat-column-rate {
   flex: 1 1 5%;
   max-width: 100px;
+  
+}
+
+.mat-column-additions {
+  margin-right: 16px;
+  justify-content: right;
+}
+
+.mat-column-deductions {
+  margin-right: 16px;
+  justify-content: right;
 }
 
 .mat-column-actions {
@@ -441,8 +472,19 @@ h4 {
 }
 
 .mat-column-total {
-  padding-left: 10px;
-  border-left: 1px solid #e0e0e0;
+  flex: 1 1 10%;
+  justify-content: center;
+  width: fit-content;
+  max-width: 120px;
+  min-width: 100px;
+}
+
+.mat-column-computed {
+  flex: 1 1 10%;
+  justify-content: center;
+  width: fit-content;
+  max-width: 120px;
+  min-width: 100px;
 }
 
 

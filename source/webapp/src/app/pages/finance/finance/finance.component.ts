@@ -807,57 +807,57 @@ export class FinanceComponent implements OnInit {
 
     var feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec = 0
 
-    for (var data of graphrevdata) {
-      console.log("xxxxxxxxxxxxx" + this.libraryService.getMonth(data.date));
+    //for (var data of graphrevdata) {
+    //  console.log("xxxxxxxxxxxxx" + this.libraryService.getMonth(data.date));
 
-      if (this.libraryService.getMonth(data.date) == "01") {
-        if (data.type === "rev") {
-          janRev = janRev + data.amount;
-        }
-        if (data.type === "sales") {
-          janSal = janSal + data.amount;
-        }
-        janNet = janNet + data.amount;
-        console.log(janNet)
-      }
-      if (this.libraryService.getMonth(data.date) == "02") {
-        if (data.type === "rev") {
-          febRev = febRev + data.amount;
-        }
-        if (data.type === "sales") {
-          febSal = febSal + data.amount;
-        }
-        febNet = febNet + data.amount;
-      }
-      if (this.libraryService.getMonth(data.date) == "03") {
-        if (data.type === "rev") {
-          marRev = marRev + data.amount;
-        }
-        if (data.type === "sales") {
-          marSal = marSal + data.amount;
-        }
-        marNet = marNet + data.amount;
-      }
-      if (this.libraryService.getMonth(data.date) == "04") {
-        if (data.type === "rev") {
-          aprRev = aprRev + data.amount;
-        }
-        if (data.type === "sales") {
-          aprSal = aprSal + data.amount;
-        }
-        aprNet = aprNet + data.amount;
-      }
-      if (this.libraryService.getMonth(data.date) == "05") {
-        if (data.type === "rev") {
-          mayRev = mayRev + data.amount;
-        }
-        if (data.type === "sales") {
-          maySal = maySal + data.amount;
-        }
-        mayNet = mayNet + data.amount;
-      }
+    //  if (this.libraryService.getMonth(data.date) == "01") {
+    //    if (data.type === "rev") {
+    //      janRev = janRev + data.amount;
+    //    }
+    //    if (data.type === "sales") {
+    //      janSal = janSal + data.amount;
+    //    }
+    //    janNet = janNet + data.amount;
+    //    console.log(janNet)
+    //  }
+    //  if (this.libraryService.getMonth(data.date) == "02") {
+    //    if (data.type === "rev") {
+    //      febRev = febRev + data.amount;
+    //    }
+    //    if (data.type === "sales") {
+    //      febSal = febSal + data.amount;
+    //    }
+    //    febNet = febNet + data.amount;
+    //  }
+    //  if (this.libraryService.getMonth(data.date) == "03") {
+    //    if (data.type === "rev") {
+    //      marRev = marRev + data.amount;
+    //    }
+    //    if (data.type === "sales") {
+    //      marSal = marSal + data.amount;
+    //    }
+    //    marNet = marNet + data.amount;
+    //  }
+    //  if (this.libraryService.getMonth(data.date) == "04") {
+    //    if (data.type === "rev") {
+    //      aprRev = aprRev + data.amount;
+    //    }
+    //    if (data.type === "sales") {
+    //      aprSal = aprSal + data.amount;
+    //    }
+    //    aprNet = aprNet + data.amount;
+    //  }
+    //  if (this.libraryService.getMonth(data.date) == "05") {
+    //    if (data.type === "rev") {
+    //      mayRev = mayRev + data.amount;
+    //    }
+    //    if (data.type === "sales") {
+    //      maySal = maySal + data.amount;
+    //    }
+    //    mayNet = mayNet + data.amount;
+    //  }
 
-    }
+    //}
 
     console.log("January", janRev, janSal, janNet)
 
@@ -894,71 +894,71 @@ export class FinanceComponent implements OnInit {
     var mayExp = 0; var mayPurc = 0; var mayPayr = 0; var mayxNet = 0;
 
     let graphexpdata = this.graphExpData;
-    for (var data of graphexpdata) {
-      console.log("xxxxxxxxxxxxx" + this.libraryService.getMonth(data.date));
+    //for (var data of graphexpdata) {
+    //  console.log("xxxxxxxxxxxxx" + this.libraryService.getMonth(data.date));
 
-      if (this.libraryService.getMonth(data.date) == "01") {
-        if (data.type === "exp") {
-          janExp = janExp + data.amount;
-        }
-        if (data.type === "purc") {
-          janPurc = janPurc + data.amount;
-        }
-        if (data.type === "payr") {
-          janPayr = janPayr + data.amount;
-        }
-        janxNet = janxNet + data.amount;
-      }
-      if (this.libraryService.getMonth(data.date) == "02") {
-        if (data.type === "exp") {
-          febExp = febExp + data.amount;
-        }
-        if (data.type === "purc") {
-          febPurc = febPurc + data.amount;
-        }
-        if (data.type === "payr") {
-          febPayr = febPayr + data.amount;
-        }
-        febxNet = febxNet + data.amount;
-      }
-      if (this.libraryService.getMonth(data.date) == "03") {
-        if (data.type === "exp") {
-          marExp = marExp + data.amount;
-        }
-        if (data.type === "purc") {
-          marPurc = marPurc + data.amount;
-        }
-        if (data.type === "payr") {
-          marPayr = marPayr + data.amount;
-        }
-        marxNet = marxNet + data.amount;
-      }
-      if (this.libraryService.getMonth(data.date) == "04") {
-        if (data.type === "exp") {
-          aprExp = aprExp + data.amount;
-        }
-        if (data.type === "purc") {
-          aprPurc = aprPurc + data.amount;
-        }
-        if (data.type === "payr") {
-          aprPayr = aprPayr + data.amount;
-        }
-        aprxNet = aprxNet+ data.amount;
-      }
-      if (this.libraryService.getMonth(data.date) == "05") {
-        if (data.type === "exp") {
-          mayExp = mayExp + data.amount;
-        }
-        if (data.type === "purc") {
-          mayPurc = mayExp + data.amount;
-        }
-        if (data.type === "payr") {
-          mayPayr = mayExp + data.amount;
-        }
-        mayxNet = mayxNet + data.amount;
-      }
+    //  if (this.libraryService.getMonth(data.date) == "01") {
+    //    if (data.type === "exp") {
+    //      janExp = janExp + data.amount;
+    //    }
+    //    if (data.type === "purc") {
+    //      janPurc = janPurc + data.amount;
+    //    }
+    //    if (data.type === "payr") {
+    //      janPayr = janPayr + data.amount;
+    //    }
+    //    janxNet = janxNet + data.amount;
+    //  }
+    //  if (this.libraryService.getMonth(data.date) == "02") {
+    //    if (data.type === "exp") {
+    //      febExp = febExp + data.amount;
+    //    }
+    //    if (data.type === "purc") {
+    //      febPurc = febPurc + data.amount;
+    //    }
+    //    if (data.type === "payr") {
+    //      febPayr = febPayr + data.amount;
+    //    }
+    //    febxNet = febxNet + data.amount;
+    //  }
+    //  if (this.libraryService.getMonth(data.date) == "03") {
+    //    if (data.type === "exp") {
+    //      marExp = marExp + data.amount;
+    //    }
+    //    if (data.type === "purc") {
+    //      marPurc = marPurc + data.amount;
+    //    }
+    //    if (data.type === "payr") {
+    //      marPayr = marPayr + data.amount;
+    //    }
+    //    marxNet = marxNet + data.amount;
+    //  }
+    //  if (this.libraryService.getMonth(data.date) == "04") {
+    //    if (data.type === "exp") {
+    //      aprExp = aprExp + data.amount;
+    //    }
+    //    if (data.type === "purc") {
+    //      aprPurc = aprPurc + data.amount;
+    //    }
+    //    if (data.type === "payr") {
+    //      aprPayr = aprPayr + data.amount;
+    //    }
+    //    aprxNet = aprxNet+ data.amount;
+    //  }
+    //  if (this.libraryService.getMonth(data.date) == "05") {
+    //    if (data.type === "exp") {
+    //      mayExp = mayExp + data.amount;
+    //    }
+    //    if (data.type === "purc") {
+    //      mayPurc = mayExp + data.amount;
+    //    }
+    //    if (data.type === "payr") {
+    //      mayPayr = mayExp + data.amount;
+    //    }
+    //    mayxNet = mayxNet + data.amount;
+    //  }
 
-    }
+    //}
 
     this.dataExpenses.push(["January", janExp, janPurc, janPayr, janxNet]); this.balJan = this.balJan - janxNet;
     this.dataExpenses.push(["February", febExp, febPurc, febPayr, febxNet]); this.balFeb = this.balFeb - febxNet;

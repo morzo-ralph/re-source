@@ -1,15 +1,16 @@
 const mongoose = require('mongoose');
 
 const PayrollSchema = new mongoose.Schema({
+
     number: Number,
-    id: String,
     payr_date: Date,
-    payr_supplier: String,
-    purc_desc: String,
-    purc_by: String,
-    purc_amount: Number,    
-    
+    payr_suplier: { type: String, default: 'Company' },
+
+    isValid: Number,
     isArchive: Number,
+
+    content: JSON,
+
     created_at: Date,
     updated_at: Date
 });

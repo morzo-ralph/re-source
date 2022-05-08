@@ -194,7 +194,9 @@ import { SettingsComponent } from './settings/settings.component';
     SweetAlert2Module.forRoot(),
 
   ],
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -87,6 +87,25 @@ export class DataService {
     return this.get(uri);
   }
 
+  editAttendance(uri: any, data: any) {
+    return this.post(uri, { data });
+  }
+
+  addPayroll(uri: any, data: any) {
+    return this.post(uri, { data });
+  }
+
+  getPayroll(uri: any) {
+    return this.get(uri);
+  }
+
+  //addPayroll(uri: any, data: any) {
+  //  return this.post(uri, { data });
+  //}
+
+
+
+
 
 
 

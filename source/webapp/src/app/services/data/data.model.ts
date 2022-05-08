@@ -18,33 +18,27 @@ export interface Announcement{
 }
 
 export interface Employees{
+
   number: number,
-
-  _id: string,
   emp_id: string,
-
   lname: string,
   fname: string,
   mname: string,
   extname: string,
-
-  imgUrl: string,
-
   start_Date: Date,
-
   birth_Date: Date,
-
   address: string,
   position: string,
-  department: string, 
-
-  role: number,
-
+  department: string,
+  rate: string,
+  rate_Type: string,
+  role: string,
   password: string,
-
   isArchive: number,
+  imgUrl: string,
   created_at: Date,
   updated_at: Date
+
 }
 
 export interface Time {
@@ -100,6 +94,22 @@ export interface Inventories {
   updated_at: Date;
 
 }
+
+export interface Payroll {
+
+  number: Number,
+  payr_date: Date,
+  payr_suplier: { type: String, default: 'Company' },
+
+  isValid: Number,
+  isArchive: Number,
+
+  created_at: Date,
+  updated_at: Date
+
+}
+
+
 
 
 
