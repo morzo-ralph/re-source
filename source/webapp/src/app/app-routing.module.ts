@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-/*import { TestComponent } from './pages/test/test/test.component';*/
-import { HrComponent } from './pages/hr/hr/hr.component';
-import { IntefaceComponent } from './pages/inteface/inteface.component';
+import { HrComponent } from './pages/hr/hr.component';
+import { InterfaceComponent } from './interface/interface.component';
 import { HomeComponent } from './pages/home/home.component';
-import { FinanceComponent } from './pages/finance/finance/finance.component';
+import { FinanceComponent } from './pages/finance/finance.component';
 import { LoginComponent } from './login/login/login.component';
-import { InventoryComponent } from './pages/inventory/inventory/inventory.component';
+import { InventoryComponent } from './pages/inventory/inventory.component';
 /*import { GalleryComponent } from './pages/test/test/gallery/gallery.component';*/
 import { TaskboardComponent } from './pages/taskboard/taskboard.component';
 import { BundyComponent } from './bundy/bundy.component';
@@ -32,35 +31,35 @@ const routes: Routes = [
   //},
 
   {
-    path: 'home', component: IntefaceComponent, children:
+    path: 'home', component: InterfaceComponent, children:
       [
         { path: '', component: HomeComponent, canActivate:[AuthGuard] },
       ]
   },
 
   {
-    path: 'hr', component: IntefaceComponent, children:
+    path: 'hr', component: InterfaceComponent, children:
       [
         { path: '', component: HrComponent, canActivate:[AuthGuard] },
       ]
   },
 
   {
-    path: 'finance', component: IntefaceComponent, children:
+    path: 'finance', component: InterfaceComponent, children:
       [
         { path: '', component: FinanceComponent, canActivate:[AuthGuard]},
       ]
   },
 
   {
-    path: 'inventory', component: IntefaceComponent, children:
+    path: 'inventory', component: InterfaceComponent, children:
       [
         { path: '', component: InventoryComponent, canActivate:[AuthGuard] },
       ]
   },
 
   {
-    path: 'taskboard', component: IntefaceComponent, children:
+    path: 'taskboard', component: InterfaceComponent, children:
       [
         { path: '', component: TaskboardComponent, canActivate:[AuthGuard] },
       ]

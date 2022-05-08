@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data/dataservice.service';
+import { DataService } from 'src/app/services/data/data.service';
 import { ChartType, Row } from 'angular-google-charts';
-import { LibraryService } from 'src/app/services/library.service';
+import { LibraryService } from 'src/app/services/library/library.service';
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation, rubberBandAnimation } from 'angular-animations';
 
 import { ConnStatus, Announcement, Employees, TaskBoard, Time } from 'src/app/services/data/data.model';
@@ -87,18 +87,15 @@ export class HomeComponent implements OnInit {
   timePayload: any;
   timeData: Time[] = []
 
-  getActive() {
+  async getActive() {
 
-    this.dataService.getTime('times/gettime')
-      .subscribe((data) => {
-
-        this.timePayload = data
+    this.dataService.get('times/get')
+      .subscribe((data : any) => {        
+        console.log(data)
+        this.timePayload = data.time
         this.timeData = this.timePayload
         
       })
-
-    //console.log(this.timeData)
-    //console.log(this.timeData.length)
 
   }
 
@@ -114,8 +111,7 @@ export class HomeComponent implements OnInit {
       timeIn = '0'
     }
 
-    let array = this.timeData
-      .map((time) => {
+    this.timeData.map((time) => {
         if (time.emp_id == id) {
           timeObject = time.createdAt
           timeIn = this.getTimeIn(timeObject)

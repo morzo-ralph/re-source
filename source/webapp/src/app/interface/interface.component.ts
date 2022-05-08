@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data/dataservice.service';
-import { LibraryService } from 'src/app/services/library.service';
+import { DataService } from 'src/app/services/data/data.service';
+import { LibraryService } from 'src/app/services/library/library.service';
 
 import { RouterLink, Router } from '@angular/router';
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
 
 @Component({
-  selector: 'app-inteface',
-  templateUrl: './inteface.component.html',
-  styleUrls: ['./inteface.component.scss'],
+  selector: 'app-interface',
+  templateUrl: './interface.component.html',
+  styleUrls: ['./interface.component.scss'],
 
   animations: [
     fadeInOnEnterAnimation(),
     fadeOutOnLeaveAnimation(),
   ]
 })
-export class IntefaceComponent implements OnInit {
+export class InterfaceComponent implements OnInit {
 
   constructor(
     public dataService: DataService,

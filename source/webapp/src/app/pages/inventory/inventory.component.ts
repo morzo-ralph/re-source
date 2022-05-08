@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { DataService } from 'src/app/services/data/dataservice.service';
-import { LibraryService } from 'src/app/services/library.service';
+import { DataService } from 'src/app/services/data/data.service';
+import { LibraryService } from 'src/app/services/library/library.service';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
@@ -8,12 +8,9 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { AddItemComponent } from './add-item/add-item.component';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, filter } from 'rxjs/operators';
-
-import { ViewItemComponent } from './view-item/view-item.component';
 
 import { ConnStatus, Announcement, TaskBoard, Inventories } from 'src/app/services/data/data.model';
 
@@ -74,33 +71,72 @@ export class InventoryComponent implements OnInit {
   //OOP
   isLoaded: boolean = false;
 
-  //async loadOnstart() {
-
-  //  this.isLoaded = false
-  //  await this.delay(1000)
-  //  //Event Loop Starts Here
-  //  this.getInventories();
-  //  this.getPurchases();
-    
-
-  //  //Event Ends Here
-  //  this.isLoaded = true
-
-
-  //}
-
   async loadOnLoop() {
 
-    //Event Loop Starts Here
+    //Event Loop Starts Here    
     this.checkIfMobile();
 
+    this.loadTab(this.activeTab);
+
+    this.isLoaded = true;
+    this.isLoadedTab = true;
+
+    await this.delay(5000);
+    this.reloadLoop();
 
 
-    //Event Ends Here
+    //Event Loop End Here
+  }
 
-    await this.delay(1000);
-    this.reloadLoop()
-    this.isLoaded = true
+  isLoadedTab = false;
+  activeTab = 0
+
+  async loadTab(event: any) {
+
+
+    let tab = 0
+    /*this.activeTab = event.index*/
+
+    if (typeof event == 'object') {
+      tab = event.index
+      this.activeTab = tab
+    }
+    else {
+      tab = this.activeTab
+    }
+
+
+    switch (tab) {
+      case 0:
+
+        this.isLoadedTab = false;
+
+        await this.delay(1000);
+        this.isLoadedTab = true;
+
+
+        break;
+
+      case 1:
+
+        this.isLoadedTab = false;
+
+        await this.delay(1000);
+        this.isLoadedTab = true;
+
+        break;
+
+      case 2:
+
+        this.isLoadedTab = false;
+
+        await this.delay(1000);
+        this.isLoadedTab = true;
+
+        break;
+
+      default:
+    }
   }
 
   reloadLoop() {
@@ -146,7 +182,7 @@ export class InventoryComponent implements OnInit {
   inventoriesIdArchive: any;
 
   getInventories() {
-    this.dataService.getAllItem('inventories')
+    this.dataService.get('inventories/')
       .subscribe((data: any) => {
         console.log(data);
         this.inventoriesPayload = data;
@@ -167,43 +203,43 @@ export class InventoryComponent implements OnInit {
 
 
 
-  addItem() {
-    // const dialogRef = this.dialog.open(AddItemComponent, {
-    //   height: '75%',
-    //   width: '100%'
-    // });
+  //addItem() {
+  //  // const dialogRef = this.dialog.open(AddItemComponent, {
+  //  //   height: '75%',
+  //  //   width: '100%'
+  //  // });
 
-    // dialogRef.afterClosed().subscribe(() => this.getInventories());
-    const dialogRef = this.dialog.open(AddItemComponent, {
-      height: '75%',
-      width: '100%'
-    });
+  //  // dialogRef.afterClosed().subscribe(() => this.getInventories());
+  //  const dialogRef = this.dialog.open(AddItemComponent, {
+  //    height: '75%',
+  //    width: '100%'
+  //  });
 
-    dialogRef.afterClosed().subscribe(result =>
-      {
-        this.getInventories()
-        console.log(result)
-      })
-  }
+  //  dialogRef.afterClosed().subscribe(result =>
+  //    {
+  //      this.getInventories()
+  //      console.log(result)
+  //    })
+  //}
 
-  itemView(data: any){ 
-    try {
-      const dialogRef = this.dialog.open(ViewItemComponent, {
-        width: '100%',
-        height: '75%',
-        data: data
-      });
+  //itemView(data: any){ 
+  //  try {
+  //    const dialogRef = this.dialog.open(ViewItemComponent, {
+  //      width: '100%',
+  //      height: '75%',
+  //      data: data
+  //    });
 
-      dialogRef.afterClosed().subscribe(result => {
-        this.getInventories();
-        console.log(result)
-      })
-    }
-    catch (error) {
-      console.log(error);
-    }
+  //    dialogRef.afterClosed().subscribe(result => {
+  //      this.getInventories();
+  //      console.log(result)
+  //    })
+  //  }
+  //  catch (error) {
+  //    console.log(error);
+  //  }
       
-    }
+  //  }
 
   itemUpdate(data: any){
   // const dialogRef2 = this.dialog.open(EditComponent, {

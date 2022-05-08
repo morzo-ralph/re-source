@@ -5,22 +5,22 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DataService } from 'src/app/services/data/dataservice.service';
-import { LibraryService } from 'src/app/services/library.service';
+import { DataService } from 'src/app/services/data/data.service';
+import { LibraryService } from 'src/app/services/library/library.service';
 import Swal from 'sweetalert2';
 import { Data } from '@angular/router';
 
-import { AddExpensesComponent } from './add-expenses/add-expenses.component';
-import { AddRevenuesComponent } from './add-revenues/add-revenues.component';
-import { AddSalessComponent } from './add-saless/add-saless.component';
-import { AddPurchaseFinanceComponent } from './add-purchase-finance/add-purchase-finance.component';
-import { EditRevenuesComponent } from './edit-revenues/edit-revenues.component';
-import { EditExpensesComponent } from './edit-expenses/edit-expenses.component';
-import { AddPettyCashComponent } from './add-petty-cash/add-petty-cash.component';
-import { ViewPettyCashComponent } from './view-petty-cash/view-petty-cash.component';
-import { EditPettyCashComponent } from './edit-petty-cash/edit-petty-cash.component';
-import { ViewRevenuesComponent } from './view-revenues/view-revenues.component';
-import { ViewExpensesComponent } from './view-expenses/view-expenses.component';
+//import { AddExpensesComponent } from './add-expenses/add-expenses.component';
+//import { AddRevenuesComponent } from './add-revenues/add-revenues.component';
+//import { AddSalessComponent } from './add-saless/add-saless.component';
+//import { AddPurchaseFinanceComponent } from './add-purchase-finance/add-purchase-finance.component';
+//import { EditRevenuesComponent } from './edit-revenues/edit-revenues.component';
+//import { EditExpensesComponent } from './edit-expenses/edit-expenses.component';
+//import { AddPettyCashComponent } from './add-petty-cash/add-petty-cash.component';
+//import { ViewPettyCashComponent } from './view-petty-cash/view-petty-cash.component';
+//import { EditPettyCashComponent } from './edit-petty-cash/edit-petty-cash.component';
+//import { ViewRevenuesComponent } from './view-revenues/view-revenues.component';
+//import { ViewExpensesComponent } from './view-expenses/view-expenses.component';
 
 
 export interface PettyCashData {
@@ -438,7 +438,7 @@ export class FinanceComponent implements OnInit {
   selected: any;
   countPetty: any;
   countPettyCash () {
-    this.dataService.getAllItem('pettycash').subscribe((data:any) => {
+    this.dataService.get('finance/pettycash/get').subscribe((data:any) => {
       this.countPetty = data.length + 1;
     })
   }
@@ -471,7 +471,7 @@ export class FinanceComponent implements OnInit {
       '',
       'success'
     )
-    this.dataService.createItem('pettycash', this.transData).subscribe((data: any) => {
+    this.dataService.post('finance/pettycash/new', this.transData).subscribe((data: any) => {
       console.log(data);
       this.getPettyCash();
       this.transDesc = this.transAmount = this.transCashFlow = this.transPerson = ''
@@ -479,50 +479,50 @@ export class FinanceComponent implements OnInit {
     
     }
 
-  viewPettyCash(pettyCash: any) {
-    const dialogRef = this.matDialog.open(ViewPettyCashComponent, {
-      height: '75%',
-      width: '100%',
-      data: pettyCash
-    });
+  //viewPettyCash(pettyCash: any) {
+  //  const dialogRef = this.matDialog.open(ViewPettyCashComponent, {
+  //    height: '75%',
+  //    width: '100%',
+  //    data: pettyCash
+  //  });
 
-    dialogRef.afterClosed().subscribe(() => this.getPettyCash());
-  }
+  //  dialogRef.afterClosed().subscribe(() => this.getPettyCash());
+  //}
 
-  editPettyCash(pettyCash: any) {
-    const dialogRef = this.matDialog.open(EditPettyCashComponent, {
-      height: '75%',
-      width: '100%',
-      data: pettyCash
-    });
+  //editPettyCash(pettyCash: any) {
+  //  const dialogRef = this.matDialog.open(EditPettyCashComponent, {
+  //    height: '75%',
+  //    width: '100%',
+  //    data: pettyCash
+  //  });
 
-    dialogRef.afterClosed().subscribe(() => this.getPettyCash());
-  }
+  //  dialogRef.afterClosed().subscribe(() => this.getPettyCash());
+  //}
 
-  archivePettyCash(_id: any) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
-        this.pettyCashIdArchive = _id;
-        this.dataService.archiveItem('pettycash', this.pettyCashIdArchive, { "isArchive": 1 }).subscribe((data: any) => {
-          console.log(data);
-        });
-        this.getPettyCash();
-      }
-    })
-  }
+  //archivePettyCash(_id: any) {
+  //  Swal.fire({
+  //    title: 'Are you sure?',
+  //    text: "You won't be able to revert this!",
+  //    icon: 'warning',
+  //    showCancelButton: true,
+  //    confirmButtonColor: '#3085d6',
+  //    cancelButtonColor: '#d33',
+  //    confirmButtonText: 'Yes, delete it!'
+  //  }).then((result) => {
+  //    if (result.isConfirmed) {
+  //      Swal.fire(
+  //        'Deleted!',
+  //        'Your file has been deleted.',
+  //        'success'
+  //      )
+  //      this.pettyCashIdArchive = _id;
+  //      this.dataService.patch('pettycash', this.pettyCashIdArchive, { "isArchive": 1 }).subscribe((data: any) => {
+  //        console.log(data);
+  //      });
+  //      this.getPettyCash();
+  //    }
+  //  })
+  //}
 
   //REVENUES and SALES 
 
@@ -556,60 +556,60 @@ export class FinanceComponent implements OnInit {
     //});    
   }  
 
-  addRevenues() {
-    const dialogRef = this.matDialog.open(AddRevenuesComponent, {
-      height: '75%',
-      width: '100%'
-    });
+  //addRevenues() {
+  //  const dialogRef = this.matDialog.open(AddRevenuesComponent, {
+  //    height: '75%',
+  //    width: '100%'
+  //  });
 
-    dialogRef.afterClosed().subscribe(() => this.getRevenues());
-  }
+  //  dialogRef.afterClosed().subscribe(() => this.getRevenues());
+  //}
 
-  viewRevenues(revenues: any) {
-    const dialogRef = this.matDialog.open(ViewRevenuesComponent, {
-      height: '75%',
-      width: '100%',
-      data: revenues
-    });
+  //viewRevenues(revenues: any) {
+  //  const dialogRef = this.matDialog.open(ViewRevenuesComponent, {
+  //    height: '75%',
+  //    width: '100%',
+  //    data: revenues
+  //  });
 
-    dialogRef.afterClosed().subscribe(() => this.getRevenues());
-  }
+  //  dialogRef.afterClosed().subscribe(() => this.getRevenues());
+  //}
 
-  editRevenues(revenues: any) {
-    const dialogRef = this.matDialog.open(EditRevenuesComponent, {
-      height: '75%',
-      width: '100%',
-      data: revenues
-    });
+  //editRevenues(revenues: any) {
+  //  const dialogRef = this.matDialog.open(EditRevenuesComponent, {
+  //    height: '75%',
+  //    width: '100%',
+  //    data: revenues
+  //  });
 
-    dialogRef.afterClosed().subscribe(() => { this.getRevenues() });
-    //this.getRevenues(), this.load()
-  }
+  //  dialogRef.afterClosed().subscribe(() => { this.getRevenues() });
+  //  //this.getRevenues(), this.load()
+  //}
 
-  archiveRevenues(_id: any) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          'Archived!',
-          'Your file has been archived.',
-          'success'
-        )
-        this.revenuesDataIsArchived = _id;
-        this.dataService.archiveItem('revenues', this.revenuesDataIsArchived, { "isArchive": 1 }).subscribe((data: any) => {
-          console.log(data);
-        });
-        this.getRevenues();
-      }
-    })
-  }
+  //archiveRevenues(_id: any) {
+  //  Swal.fire({
+  //    title: 'Are you sure?',
+  //    text: "You won't be able to revert this!",
+  //    icon: 'warning',
+  //    showCancelButton: true,
+  //    confirmButtonColor: '#3085d6',
+  //    cancelButtonColor: '#d33',
+  //    confirmButtonText: 'Yes, delete it!'
+  //  }).then((result) => {
+  //    if (result.isConfirmed) {
+  //      Swal.fire(
+  //        'Archived!',
+  //        'Your file has been archived.',
+  //        'success'
+  //      )
+  //      this.revenuesDataIsArchived = _id;
+  //      this.dataService.archiveItem('revenues', this.revenuesDataIsArchived, { "isArchive": 1 }).subscribe((data: any) => {
+  //        console.log(data);
+  //      });
+  //      this.getRevenues();
+  //    }
+  //  })
+  //}
   
 
   getExpenses() {
@@ -648,60 +648,60 @@ export class FinanceComponent implements OnInit {
     //});
   }
 
-  addExpenses() {
-    const dialogRef = this.matDialog.open(AddExpensesComponent, {
-      height: '75%',
-      width: '100%'
-    });
+  //addExpenses() {
+  //  const dialogRef = this.matDialog.open(AddExpensesComponent, {
+  //    height: '75%',
+  //    width: '100%'
+  //  });
 
-    dialogRef.afterClosed().subscribe(() => this.getExpenses());
-  }
+  //  dialogRef.afterClosed().subscribe(() => this.getExpenses());
+  //}
 
-  viewExpenses(expenses: any) {
-    const dialogRef = this.matDialog.open(ViewExpensesComponent, {
-      height: '75%',
-      width: '100%',
-      data: expenses
-    });
+  //viewExpenses(expenses: any) {
+  //  const dialogRef = this.matDialog.open(ViewExpensesComponent, {
+  //    height: '75%',
+  //    width: '100%',
+  //    data: expenses
+  //  });
 
-    dialogRef.afterClosed().subscribe(() => this.getExpenses());
-  }
+  //  dialogRef.afterClosed().subscribe(() => this.getExpenses());
+  //}
 
-  editExpenses(expenses: any) {
-    const dialogRef = this.matDialog.open(EditExpensesComponent, {
-      height: '75%',
-      width: '100%',
-      data: expenses
-    });
+  //editExpenses(expenses: any) {
+  //  const dialogRef = this.matDialog.open(EditExpensesComponent, {
+  //    height: '75%',
+  //    width: '100%',
+  //    data: expenses
+  //  });
 
-    dialogRef.afterClosed().subscribe(() => this.getExpenses());
-  }
+  //  dialogRef.afterClosed().subscribe(() => this.getExpenses());
+  //}
 
-  archiveExpenses(_id: any) {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          'Archived!',
-          'Your file has been archived.',
-          'success'
-        )
-        this.expensesDataIsArchived = _id;
-        this.dataService.archiveItem('expenses', this.expensesDataIsArchived, { "isArchive": 1 }).subscribe((data: any) => {
-          console.log(data);
-        });
-        this.getExpenses();
-        /*this.load();*/
-      }
-    })
-  }
+  //archiveExpenses(_id: any) {
+  //  Swal.fire({
+  //    title: 'Are you sure?',
+  //    text: "You won't be able to revert this!",
+  //    icon: 'warning',
+  //    showCancelButton: true,
+  //    confirmButtonColor: '#3085d6',
+  //    cancelButtonColor: '#d33',
+  //    confirmButtonText: 'Yes, delete it!'
+  //  }).then((result) => {
+  //    if (result.isConfirmed) {
+  //      Swal.fire(
+  //        'Archived!',
+  //        'Your file has been archived.',
+  //        'success'
+  //      )
+  //      this.expensesDataIsArchived = _id;
+  //      this.dataService.archiveItem('expenses', this.expensesDataIsArchived, { "isArchive": 1 }).subscribe((data: any) => {
+  //        console.log(data);
+  //      });
+  //      this.getExpenses();
+  //      /*this.load();*/
+  //    }
+  //  })
+  //}
 
   //GRAPH
 
@@ -995,32 +995,32 @@ export class FinanceComponent implements OnInit {
 
   }
 
-  addSales() {
-    const dialogRef = this.matDialog.open(AddSalessComponent, {
-      height: '75%',
-      width: '100%'
-    });
+  //addSales() {
+  //  const dialogRef = this.matDialog.open(AddSalessComponent, {
+  //    height: '75%',
+  //    width: '100%'
+  //  });
 
-    dialogRef.afterClosed().subscribe(() => this.getSales());
-  }
+  //  dialogRef.afterClosed().subscribe(() => this.getSales());
+  //}
 
-  addPurchase() {
-    const dialogRef = this.matDialog.open(AddPurchaseFinanceComponent, {
-      height: '75%',
-      width: '100%'
-    });
+  //addPurchase() {
+  //  const dialogRef = this.matDialog.open(AddPurchaseFinanceComponent, {
+  //    height: '75%',
+  //    width: '100%'
+  //  });
 
-    dialogRef.afterClosed().subscribe();
-  }
+  //  dialogRef.afterClosed().subscribe();
+  //}
 
-  addPayroll() {
-    const dialogRef = this.matDialog.open(AddPurchaseFinanceComponent, {
-      height: '75%',
-      width: '100%'
-    });
+  //addPayroll() {
+  //  const dialogRef = this.matDialog.open(AddPurchaseFinanceComponent, {
+  //    height: '75%',
+  //    width: '100%'
+  //  });
 
-    dialogRef.afterClosed().subscribe();
-  }
+  //  dialogRef.afterClosed().subscribe();
+  //}
 
   loading = false;
 

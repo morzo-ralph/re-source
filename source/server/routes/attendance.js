@@ -2,15 +2,24 @@
 const express = require("express");
 const router = express.Router();
 
-const Attendance =  require('../database/models/attendance');
+const Attendance = require('../database/models/attendance');
 
-router.get('/getattendance', (req, res) => {
+router.get('/get', (req, res) => {
+
     Attendance.find({})
-        .then(data => res.send(data))
-        .catch(error => console.log(error));
-});
+        .then((attendance) => {
+            //console.log(attendance)
+            //console.log("Attendance Pulled")
+            res.json({ attendance, message: "Attendance pulled successfully", code: "200" })
+        })
+        .catch(error => {
+            console.log(error)
+            res.json({ message: "Something Went Wrong", error: error, code: "500" })
+        })
+})
 
-router.post('/newattendance', (req, res) => {
+
+router.post('/new', (req, res) => {
 
     console.log(req.body.data)
     new Attendance(req.body.data)
@@ -28,6 +37,25 @@ router.post('/newattendance', (req, res) => {
         });
     
 });
+
+
+
+router.patch('/edit', (req, res) => {
+
+    console.log(req.body.data)
+
+    Attendance.findOneAndUpdate({ "_id": req.body.data._id }, { $set: req.body.data })
+        .then((attendance) => {
+            console.log(attendance)
+            console.log("Attendance " + attendance._id + " Edited")
+            res.json({ attendance, message: "Account logged in successfully", code: "200" })
+        })
+        .catch((error) => {
+            console.log(error)
+            res.json({ message: "Something Went Wrong", error: error, code: "500" })
+        })
+
+})
 
 //new Time(req.body.data)
 //    .save()

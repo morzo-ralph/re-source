@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
-import { DataService } from 'src/app/services/data/dataservice.service';
-import { LibraryService } from 'src/app/services/library.service';
+import { DataService } from 'src/app/services/data/data.service';
+import { LibraryService } from 'src/app/services/library/library.service';
 
 import Swal from 'sweetalert2';
 
@@ -62,9 +62,11 @@ export class LoginComponent implements OnInit {
   login() {
     this.loginData.emp_id = this.id
     this.loginData.password = this.password
-    this.dataService.checkLogin('employees/login', this.loginData).subscribe((data: any) => {
+    this.dataService.post('employees/login', {data:this.loginData} ).subscribe((data: any) => {
 
-      if (data.status == 200) {
+      console.log(data)
+
+      if (data.code == 200) {
         localStorage.clear;
         localStorage.setItem('id', data.employee.emp_id);
         localStorage.setItem('imgUrl', data.employee.imgUrl);
@@ -80,21 +82,21 @@ export class LoginComponent implements OnInit {
           'success'
         ).then(()=>this.router.navigate(['home']))     
       }
-      else if (data.status == 401) {
+      else if (data.code == 401) {
         Swal.fire(
           'Invalid Credentials!',
           '',
           'error'
         )
       }
-      else if (data.status == 404) {
+      else if (data.code == 404) {
         Swal.fire(
           'Account Does Not Exist',
           '',
           'error'
         )
       }
-      else if (data.status == 500) {
+      else if (data.code == 500) {
         Swal.fire(
           'Server Error!',
           '',

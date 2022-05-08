@@ -68,7 +68,7 @@
                 <span style="flex: 1 1 auto;"></span>
                 <mat-form-field appearance="outline" style=" min-width: 50% ;flex:auto;border-radius: 16px !important">
                   <mat-label>Search</mat-label>
-                  <!--(keyup)="applyFilterInventories($any($event.target).value)"-->
+
                   <input matInput placeholder="Ex. Juan De" (keyup)="applyFilterEmp($event)">
                 </mat-form-field>
                 <span style="flex: 1 1 auto;"></span>
@@ -375,7 +375,7 @@
 
                     <ng-container matColumnDef="hours" sticky>
                       <mat-header-cell *matHeaderCellDef> Hours </mat-header-cell>
-                      <mat-cell *matCellDef="let element"> {{element.attendance_seconds/(3600000)  | number: '1.0'}} hours </mat-cell>
+                      <mat-cell *matCellDef="let element"> {{element.attendance_seconds | number: '1.0'}} hours </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="actions" stickyEnd>
@@ -597,7 +597,7 @@
                       </ng-container>
 
                       <ng-container matColumnDef="additions">
-                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> Additions </mat-header-cell>
                         <mat-cell *matCellDef="let element">
                           &nbsp;{{element.addition}}&nbsp;<span style="flex: 1 1 auto;"></span>
                           <button mat-raised-button color="accent" (click)="openDialogAddEdit(element)"> Add <mat-icon>add</mat-icon></button>
@@ -631,7 +631,6 @@
 
                       <mat-row *matRowDef="let row; columns: payrollDisplayedColumns;"></mat-row>
                       <mat-footer-row *matFooterRowDef="payrollDisplayedColumns"></mat-footer-row>
-
 
                     </mat-table>
 
@@ -911,7 +910,7 @@
 <!--For Edit Att-->
 
 <ng-template #attEditDialog let-data>
-  <h2 matDialogTitle>New Time-In</h2>
+  <h2 matDialogTitle>{{data.name}} | {{data.attendance_date | date}}</h2>
   <mat-dialog-content style="display:flex; align-content:center; flex-wrap:wrap">
 
     <br />
@@ -930,7 +929,7 @@
 
     <mat-form-field appearance="outline" style=" min-width: 30% ;flex:auto;border-radius: 16px !important">
       <mat-label>Hours</mat-label>
-      <input matInput placeholder="Ex. Juan De" [ngModel]="data.attendance_seconds/(360000)  | number: '1.00'" [ngStyle]="{'background-color': data.attendance_seconds? '' : 'var(--warn-lighter-color)'}">
+      <input matInput placeholder="Ex. Juan De" [(ngModel)]="data.attendance_seconds" [ngStyle]="{'background-color': data.attendance_seconds? '' : 'var(--warn-lighter-color)'}">
     </mat-form-field>&nbsp;
 
     <mat-form-field appearance="outline" style=" min-width: 30% ;flex:auto;border-radius: 16px !important">
@@ -953,7 +952,7 @@
 <!--For New Att-->
 
 <ng-template #attNewDialog let-data>
-  <h2 matDialogTitle>{{data.name}} | {{data.attendance_date | date}}</h2>
+  <h2 matDialogTitle>New Time-In</h2>
   <mat-dialog-content style="display:flex; align-content:center; flex-wrap:wrap">
 
     <br />
@@ -972,7 +971,7 @@
 
     <mat-form-field appearance="outline" style=" min-width: 30% ;flex:auto;border-radius: 16px !important">
       <mat-label>Hours</mat-label>
-      <input matInput placeholder="Ex. Juan De" [ngModel]="data.attendance_seconds/(360000)  | number: '1.00'" [ngStyle]="{'background-color': data.attendance_seconds? '' : 'var(--warn-lighter-color)'}">
+      <input matInput placeholder="Ex. Juan De" [(ngModel)]="data.attendance_seconds" [ngStyle]="{'background-color': data.attendance_seconds? '' : 'var(--warn-lighter-color)'}">
     </mat-form-field>&nbsp;
 
     <mat-form-field appearance="outline" style=" min-width: 30% ;flex:auto;border-radius: 16px !important">
@@ -987,7 +986,7 @@
 
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-raised-button matDialogClose color="primary" (click)="editAtt(data)">Ok</button>
+    <button mat-raised-button matDialogClose color="primary" (click)="newAtt(data)">Ok</button>
     <button mat-raised-button matDialogClose color="warn">Cancel</button>
   </mat-dialog-actions>
 </ng-template>

@@ -4,7 +4,6 @@ const router = express.Router();
 const path = require('path');
 
 const Inventory = require('../database/models/inventory');
-const Pagination = require('../middleware/paginatedResult');
 
 const MIME_TYPE_MAP = {
     'image/png': 'png', 

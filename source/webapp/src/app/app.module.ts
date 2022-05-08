@@ -10,39 +10,44 @@ import { FormsModule } from '@angular/forms';
 
 import { CommonModule, DatePipe } from '@angular/common';
 
-import { IntefaceComponent } from './pages/inteface/inteface.component';
+import { InterfaceComponent } from './interface/interface.component';
 import { HomeComponent } from './pages/home/home.component';
-import { HrComponent } from './pages/hr/hr/hr.component';
-import { FinanceComponent } from './pages/finance/finance/finance.component';
-import { AddRevenuesComponent } from './pages/finance/finance/add-revenues/add-revenues.component';
-import { EditRevenuesComponent } from './pages/finance/finance/edit-revenues/edit-revenues.component';
-import { EditExpensesComponent } from './pages/finance/finance/edit-expenses/edit-expenses.component';
-import { AddExpensesComponent } from './pages/finance/finance/add-expenses/add-expenses.component';
-import { AddPettyCashComponent } from './pages/finance/finance/add-petty-cash/add-petty-cash.component';
-import { EditPettyCashComponent } from './pages/finance/finance/edit-petty-cash/edit-petty-cash.component';
-import { LoginComponent } from './login/login/login.component';
-import { InventoryComponent } from './pages/inventory/inventory/inventory.component';
-import { AddItemComponent } from './pages/inventory/inventory/add-item/add-item.component';
-import { EditItemComponent } from './pages/inventory/inventory/edit-item/edit-item.component';
-import { AddPurchasesComponent } from './pages/inventory/inventory/add-purchases/add-purchases.component';
-import { EditPurchasesComponent } from './pages/inventory/inventory/edit-purchases/edit-purchases.component';
-import { AddSalesComponent } from './pages/inventory/inventory/add-sales/add-sales.component';
-import { EditSalesComponent } from './pages/inventory/inventory/edit-sales/edit-sales.component';
-import { ViewPettyCashComponent } from './pages/finance/finance/view-petty-cash/view-petty-cash.component';
-import { ViewExpensesComponent } from './pages/finance/finance/view-expenses/view-expenses.component';
-import { ViewRevenuesComponent } from './pages/finance/finance/view-revenues/view-revenues.component';
+import { HrComponent } from './pages/hr/hr.component';
+import { FinanceComponent } from './pages/finance/finance.component';
+import { InventoryComponent } from './pages/inventory/inventory.component';
 import { TaskboardComponent } from './pages/taskboard/taskboard.component';
-import { AddSalessComponent } from './pages/finance/finance/add-saless/add-saless.component';
-import { AddPayrollFinanceComponent } from './pages/finance/finance/add-payroll-finance/add-payroll-finance.component';
-import { AddPurchaseFinanceComponent } from './pages/finance/finance/add-purchase-finance/add-purchase-finance.component';
-import { ViewItemComponent } from './pages/inventory/inventory/view-item/view-item.component';
+import { LoginComponent } from './login/login/login.component';
 import { BundyComponent } from './bundy/bundy.component';
 import { MarketComponent } from './market/market.component';
-import { AddTaskComponent } from './pages/taskboard/add-task/add-task.component';
-import { ViewTaskComponent } from './pages/taskboard/view-task/view-task.component';
-import { ViewPayrollFinanceComponent } from './pages/finance/finance/view-payroll-finance/view-payroll-finance.component';
-import { ViewPurchaseFinanceComponent } from './pages/finance/finance/view-purchase-finance/view-purchase-finance.component';
-import { ViewSalessComponent } from './pages/finance/finance/view-saless/view-saless.component';
+
+//import { AddRevenuesComponent } from './pages/finance/finance/add-revenues/add-revenues.component';
+//import { EditRevenuesComponent } from './pages/finance/finance/edit-revenues/edit-revenues.component';
+//import { EditExpensesComponent } from './pages/finance/finance/edit-expenses/edit-expenses.component';
+//import { AddExpensesComponent } from './pages/finance/finance/add-expenses/add-expenses.component';
+//import { AddPettyCashComponent } from './pages/finance/finance/add-petty-cash/add-petty-cash.component';
+//import { EditPettyCashComponent } from './pages/finance/finance/edit-petty-cash/edit-petty-cash.component';
+
+//
+//import { AddItemComponent } from './pages/inventory/inventory/add-item/add-item.component';
+//import { EditItemComponent } from './pages/inventory/inventory/edit-item/edit-item.component';
+//import { AddPurchasesComponent } from './pages/inventory/inventory/add-purchases/add-purchases.component';
+//import { EditPurchasesComponent } from './pages/inventory/inventory/edit-purchases/edit-purchases.component';
+//import { AddSalesComponent } from './pages/inventory/inventory/add-sales/add-sales.component';
+//import { EditSalesComponent } from './pages/inventory/inventory/edit-sales/edit-sales.component';
+//import { ViewPettyCashComponent } from './pages/finance/finance/view-petty-cash/view-petty-cash.component';
+//import { ViewExpensesComponent } from './pages/finance/finance/view-expenses/view-expenses.component';
+//import { ViewRevenuesComponent } from './pages/finance/finance/view-revenues/view-revenues.component';
+//import { TaskboardComponent } from './pages/taskboard/taskboard.component';
+//import { AddSalessComponent } from './pages/finance/finance/add-saless/add-saless.component';
+//import { AddPayrollFinanceComponent } from './pages/finance/finance/add-payroll-finance/add-payroll-finance.component';
+//import { AddPurchaseFinanceComponent } from './pages/finance/finance/add-purchase-finance/add-purchase-finance.component';
+//import { ViewItemComponent } from './pages/inventory/inventory/view-item/view-item.component';
+//
+//import { AddTaskComponent } from './pages/taskboard/add-task/add-task.component';
+//import { ViewTaskComponent } from './pages/taskboard/view-task/view-task.component';
+//import { ViewPayrollFinanceComponent } from './pages/finance/finance/view-payroll-finance/view-payroll-finance.component';
+//import { ViewPurchaseFinanceComponent } from './pages/finance/finance/view-purchase-finance/view-purchase-finance.component';
+//import { ViewSalessComponent } from './pages/finance/finance/view-saless/view-saless.component';
 
 //Material Modules
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -99,39 +104,40 @@ import { SettingsComponent } from './settings/settings.component';
   declarations: [
     AppComponent,
 
-    IntefaceComponent,
+    InterfaceComponent,
     HomeComponent,
     HrComponent,
     FinanceComponent,
-    AddRevenuesComponent,
-    EditRevenuesComponent,
-    EditExpensesComponent,
-    AddExpensesComponent,
-    AddPettyCashComponent,
-    EditPettyCashComponent,
-    LoginComponent,
     InventoryComponent,
-    AddItemComponent,
-    EditItemComponent,
-    AddPurchasesComponent,
-    EditPurchasesComponent,
-    AddSalesComponent,
-    EditSalesComponent,
-    ViewPettyCashComponent,
-    ViewExpensesComponent,
-    ViewRevenuesComponent,
+    //AddRevenuesComponent,
+    //EditRevenuesComponent,
+    //EditExpensesComponent,
+    //AddExpensesComponent,
+    //AddPettyCashComponent,
+    //EditPettyCashComponent,
+    LoginComponent,
+    
+    //AddItemComponent,
+    //EditItemComponent,
+    //AddPurchasesComponent,
+    //EditPurchasesComponent,
+    //AddSalesComponent,
+    //EditSalesComponent,
+    //ViewPettyCashComponent,
+    //ViewExpensesComponent,
+    //ViewRevenuesComponent,
     TaskboardComponent,
-    AddSalessComponent,
-    AddPayrollFinanceComponent,
-    AddPurchaseFinanceComponent,
-    ViewItemComponent,
+    //AddSalessComponent,
+    //AddPayrollFinanceComponent,
+    //AddPurchaseFinanceComponent,
+    //ViewItemComponent,
     BundyComponent,
     MarketComponent,
-    AddTaskComponent,
-    ViewTaskComponent,
-    ViewPayrollFinanceComponent,
-    ViewPurchaseFinanceComponent,
-    ViewSalessComponent,
+    //AddTaskComponent,
+    //ViewTaskComponent,
+    //ViewPayrollFinanceComponent,
+    //ViewPurchaseFinanceComponent,
+    //ViewSalessComponent,
     AnnouncementComponent,
     ProfileComponent,
     SettingsComponent

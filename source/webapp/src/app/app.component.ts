@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { DataService } from './services/data/dataservice.service';
+import { DataService } from './services/data/data.service';
 import { ConnStatus } from 'src/app/services/data/data.model';
-import { LibraryService } from './services/library.service';
+import { LibraryService } from './services/library/library.service';
 
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
 

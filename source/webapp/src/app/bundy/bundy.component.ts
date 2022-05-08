@@ -6,8 +6,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { DataService } from 'src/app/services/data/dataservice.service';
-import { LibraryService } from 'src/app/services/library.service';
+import { DataService } from 'src/app/services/data/data.service';
+import { LibraryService } from 'src/app/services/library/library.service';
 import Swal from 'sweetalert2';
 import { Data } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -152,7 +152,6 @@ export class BundyComponent implements OnInit {
     }
   }
 
-
   employeesPayload: any;
   employeesData: Employees[] = [];
   employeesDataSource = new MatTableDataSource(this.employeesData);
@@ -160,30 +159,28 @@ export class BundyComponent implements OnInit {
 
   employeesIdArchive: any;
 
-  getEmployees() {
+  async getEmployees() {
 
-    this.dataService.getAllItem('employees')
+    this.dataService.get('employees/get')
       .subscribe((data: any) => {
+        console.log(data)
         this.employeesPayload = data;
-        this.employeesData = this.employeesPayload;
-        this.employeesDataSource.data = this.employeesPayload;
+        this.employeesData = this.employeesPayload.employees;
+        this.employeesDataSource.data = this.employeesData;
       });
   }
 
   timePayload: any;
   timeData: Time[] = []
   
-  getStatus() {
+  async getStatus() {
 
-    this.dataService.getTime('times/gettime')
-      .subscribe((data) => {
+    this.dataService.get('times/get')
+      .subscribe((data : any) => {
+        console.log(data)
 
-
-        this.timePayload = data
+        this.timePayload = data.time
         this.timeData = this.timePayload
-
-        //console.log(this.timeData)
-        ///*console.log(this.clockinId)*/
 
       })
 
@@ -202,11 +199,9 @@ export class BundyComponent implements OnInit {
         if (time.emp_id == id) {
           status = true
         }
-      })    
-
+      })
 
     return status
-
   }
 
   isclockedIn: boolean = false;
@@ -215,9 +210,8 @@ export class BundyComponent implements OnInit {
 
   checkIfAvailable() {
 
-    this.dataService.checkTime('times/checktime', this.clockinId)
+    this.dataService.get(`times/check/${this.clockinId}`)
       .subscribe((data: any) => {
-        /*console.log(data)*/
 
         if (data.code == 200) {
           this.isclockedIn = true
@@ -231,17 +225,13 @@ export class BundyComponent implements OnInit {
   }
 
   async timeIn() {
-
     
     this.clockinId = localStorage.getItem("id")
-    console.log(this.clockinId)
-
     let req = { "emp_id" : this.clockinId }
 
-    /*console.log(this.clockinId)*/
-
-    await this.dataService.timeIn('times/timein', req).
+    await this.dataService.post('times/timein', { data: req }).
       subscribe((data: any) => {
+
         console.log(data)
 
       })
@@ -250,32 +240,34 @@ export class BundyComponent implements OnInit {
   }
 
   async timeOut() {
-
     
     this.clockinId = localStorage.getItem("id")
+    let delreq = { "emp_id": this.clockinId }
+    let attreq = {}
+   
 
-    let req = { "emp_id": this.clockinId }
-    let req2 = {}
-
-    await this.dataService.timeOut('times/timeout', req).
-      subscribe((data: any) => {     
+    await this.dataService.post('times/timeout', { data : delreq }).
+      subscribe(async (data: any) => {
+        
         console.log(data)
 
-        let date = this.datepipe.transform(new Date(data.time.createdAt), 'YYYY-MM-dd')
-        req2 = { "emp_id": data.time.emp_id, "attendance_seconds": data.seconds, "attendance_date": this.datepipe.transform(date, 'YYYY-MM-dd') }    
+        if (data.code == 200) {
 
-      })
+          let date = this.datepipe.transform(new Date(data.time.createdAt), 'YYYY-MM-dd')
+          attreq = { "emp_id": data.time.emp_id, "attendance_seconds": data.seconds, "attendance_date": this.datepipe.transform(date, 'YYYY-MM-dd') }    
+          await this.dataService.post('attendance/newattendance', delreq)
+            .subscribe((data) => {
 
-    await this.delay(1000)
+              console.log(data)
 
-    await this.dataService.addTime('attendance/newattendance', req2)
-      .subscribe((data) => {
-        console.log(data)
+              this.isclockedIn = false
 
-      })
+             })
+        }
+       
+      })   
 
-    this.isclockedIn = false
-
+    await this.delay(1000) 
 
   }
 

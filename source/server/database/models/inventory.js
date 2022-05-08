@@ -21,17 +21,21 @@ const mongoose = require('mongoose');
 
 
 const InventorySchema = new mongoose.Schema({
+
     number: Number,
-    id: String,
+    inv_id: String,
     name: String,
     description: String,
     quantity: Number,
     price: Number,
     imageUrl: String,
+    supplier : String,
+    min_amount: Number,
 
     isArchive: Number,
     created_at: Date,
     updated_at: Date
+
 });
 
 InventorySchema.pre('save', function (next) {

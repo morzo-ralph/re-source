@@ -54,11 +54,12 @@ app.use((req, res, next) => {
 const employeesRouter = require('./routes/employees');
 const timesRouter = require('./routes/times');
 const attendanceRouter = require('./routes/attendance');
+const inventoriesRouter = require('./routes/inventories');
 
 //const drawsRouter = require('./routes/draws');
 
 //const expensesRouter = require('./routes/expenses');
-//const inventoriesRouter = require('./routes/inventories');
+
 //const pettycashRouter = require('./routes/pettycash');
 //const purchasesRouter = require('./routes/purchases');
 //const revenuesRouter = require('./routes/revenues');
@@ -76,11 +77,13 @@ const attendanceRouter = require('./routes/attendance');
 app.use("/api/employees", employeesRouter);
 app.use("/api/times", timesRouter);
 app.use("/api/attendance", attendanceRouter);
+app.use("/api/inventories", inventoriesRouter);
+
 
 
 //app.use("/api/draws", drawsRouter);
 //app.use("/api/expenses", expensesRouter);
-//app.use("/api/inventories", inventoriesRouter);
+
 //app.use("/api/pettycash", pettycashRouter);
 //app.use("/api/purchases", purchasesRouter);
 //app.use("/api/revenues", revenuesRouter);

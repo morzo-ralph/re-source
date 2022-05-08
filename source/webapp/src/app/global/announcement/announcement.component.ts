@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data/dataservice.service';
+import { DataService } from 'src/app/services/data/data.service';
 import { ChartType, Row } from 'angular-google-charts';
-import { LibraryService } from 'src/app/services/library.service';
+import { LibraryService } from 'src/app/services/library/library.service';
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation, rubberBandAnimation } from 'angular-animations';
 
 import { Announcement } from 'src/app/services/data/data.model';

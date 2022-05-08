@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DataService } from 'src/app/services/data/dataservice.service';
+import { DataService } from 'src/app/services/data/data.service';
 
 import Swal from 'sweetalert2';
 import { Data } from '@angular/router';
@@ -14,7 +14,7 @@ import { DatePipe } from '@angular/common';
 import { ConnStatus, Announcement, Employees, TaskBoard, Inventories, Attendance, Time } from 'src/app/services/data/data.model';
 
 
-import { LibraryService } from 'src/app/services/library.service';
+import { LibraryService } from 'src/app/services/library/library.service';
 
 
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
@@ -86,7 +86,6 @@ export class HrComponent implements OnInit{
   @ViewChild(MatSort) empSort!: MatSort;
 
   openDialogEditEmp(input: any) {
-    console.log(input)
     this.dialog.open(this.empDialog, { data: input });
   }
 
@@ -232,12 +231,14 @@ export class HrComponent implements OnInit{
 
   isToggleArchive = false
 
-  getEmployees() {
+  async getEmployees() {
 
-    this.dataService.getAllItem('employees')
+    this.dataService.get('employees/get')
       .subscribe((data: any) => {
-        /*console.log(data);*/
-        this.employeesPayload = data;
+
+        console.log(data)
+
+        this.employeesPayload = data.employees;
 
         if (this.isToggleArchive == true) {
           let array: any[] = []
@@ -261,14 +262,12 @@ export class HrComponent implements OnInit{
 
   getStatus() {
 
-    this.dataService.getTime('times/gettime')
-      .subscribe((data) => {
+    this.dataService.get('times/get')
+      .subscribe((data: any) => {
+        console.log(data)
 
-
-        this.timePayload = data
+        this.timePayload = data.time
         this.timeData = this.timePayload
-
-        /*console.log(this.timeData)*/
 
       })
 
@@ -294,11 +293,10 @@ export class HrComponent implements OnInit{
   }
 
   newEmp(input : any) {
-    console.log(input)
 
     delete input.password2
 
-    this.dataService.signUp('employees/signup', input).subscribe((data) => {
+    this.dataService.post('employees/signup', { data: input }).subscribe((data) => {
       console.log(data)
 
     })
@@ -306,11 +304,9 @@ export class HrComponent implements OnInit{
   }
 
   editEmp(input: any) {
-    console.log(input)
 
-    this.dataService.editEmp('employees/edit', input).subscribe((data) => {
+    this.dataService.patch('employees/edit', { data: input }).subscribe((data) => {
       console.log(data)
-
     })
 
   }
@@ -319,9 +315,8 @@ export class HrComponent implements OnInit{
 
     input.isArchive = 1;
 
-    this.dataService.editEmp('employees/edit', input).subscribe((data) => {
+    this.dataService.patch('employees/edit', { data: input }).subscribe((data) => {
       console.log(data)
-
     })
 
   }
@@ -347,8 +342,6 @@ export class HrComponent implements OnInit{
     this.calendarDisplayedColumns = this.calendarDisplayedColumns.concat(this.daysArray)
     this.calendarDisplayedColumns.push("total")
 
-    console.log(this.calendarDisplayedColumns)
-
   }
 
   fillPayrollTable() {
@@ -360,8 +353,6 @@ export class HrComponent implements OnInit{
     this.calendarDisplayedColumns.push("rate")
     this.calendarDisplayedColumns.push("rate_type")
     this.calendarDisplayedColumns.push("total")
-
-    console.log(this.calendarDisplayedColumns)
 
   }
 
@@ -379,7 +370,7 @@ export class HrComponent implements OnInit{
 
       let emp_name = emp.fname + ' ' + emp.lname
 
-      json = { emp_id: emp.emp_id, emp_name: emp_name, rate: emp.rate, attendance: this.buildDays(emp.emp_id), total: (this.getTotal(emp.emp_id) / 3600000).toFixed(0), salary: this.getSalary(emp.rate, emp.rate_Type, (this.getTotal(emp.emp_id) / 3600000).toFixed(0)) }
+      json = { emp_id: emp.emp_id, emp_name: emp_name, rate: emp.rate, attendance: this.buildDays(emp.emp_id), total: this.getTotal(emp.emp_id), salary: this.getSalary(emp.rate, emp.rate_Type, this.getTotal(emp.emp_id)) }
 
       Obj.push(json)
     })
@@ -436,7 +427,7 @@ export class HrComponent implements OnInit{
     let Obj: any = []
     this.daysArray.map((days) => {
       let json
-      json = { hours: (this.buildHours(days, emp) / 3600000).toFixed(0), date: days }
+      json = { hours: this.buildHours(days, emp), date: days }
       Obj.push(json)
     })
     return Obj
@@ -445,14 +436,12 @@ export class HrComponent implements OnInit{
   buildHours(day: any, emp: any) {
     let hours = 0
     this.attendanceData.map((atten) => {
-      if (emp == atten.emp_id) {
-        let date = this.datepipe.transform(new Date(atten.attendance_date), 'YYYY-MM-dd')
-        if (day == date) {
+      let date = this.datepipe.transform(new Date(atten.attendance_date), 'YYYY-MM-dd')
+      if (emp == atten.emp_id && day == date) {
           hours = hours + atten.attendance_seconds
-        } 
+        
       }
       else {
-        hours = 0
       }
     })
     return hours
@@ -474,10 +463,16 @@ export class HrComponent implements OnInit{
   }
 
   formatAtt() {
-    this.attendanceData.map((data) => {
+    this.attendanceData.map((data) => {      
+
       data.name = this.getName(data.emp_id)
+
+      data.attendance_seconds = Math.floor(Number(data.attendance_seconds) / 3600000)
+
     })
-    console.log(this.attendanceData)
+
+
+
   }
 
   attendancePayload: any;
@@ -492,33 +487,41 @@ export class HrComponent implements OnInit{
 
     this.calendarData = []
 
-    this.dataService.getAttendance('attendance/getattendance').subscribe((data) => {
+    this.dataService.get('attendance/get').subscribe((data: any) => {
+      console.log(data)
 
-      this.attendancePayload = data;  
+      this.attendancePayload = data.attendance;
       this.attendanceData = this.attendancePayload;
       this.formatAtt()
       this.attendanceDataSource.data = this.attendanceData
       this.attendanceDataSource.paginator = this.timePaginator
 
-
       this.calendarData = []
       this.calendarData = this.buildJSON()
       this.calendarDataSource.data = this.calendarData
       this.calendarDataSource.paginator = this.attPaginator
-
-
-      console.log(this.calendarDataSource.data)
-      console.log(this.attendanceDataSource.data)
     })   
   }
 
-  editAtt(input: any) {
-    console.log(input)
+  async editAtt(input: any) {
 
-    //this.dataService.editEmp('employees/edit', input).subscribe((data) => {
-    //  console.log(data)
+    input.attendance_seconds = Number(input.attendance_seconds * 3600000)
+    this.dataService.patch('attendance/edit', { data: input })
+      .subscribe((data) => {
+        console.log(data)
 
-    //})
+    })
+
+  }
+
+  async newAtt(input: any) {    
+
+    input.attendance_seconds = Number(input.attendance_seconds * 3600000)
+    this.dataService.post('attendance/new', { data: input })
+      .subscribe((data) => {
+        console.log(data)
+
+    })
 
   }
 
@@ -546,10 +549,7 @@ export class HrComponent implements OnInit{
 
     this.payrollDataSource.data = this.payrollData
 
-    this.calculateGrossTotal()
-
-    console.log(this.payrollDataSource.data)   
-
+    this.calculateGrossTotal()    
 
   }
 
@@ -689,8 +689,6 @@ export class HrComponent implements OnInit{
 
     this.getDaysArray()
 
-    console.log(this.startDate, this.endDate)
-
   }
 
   daysArray: any[] = []
@@ -702,41 +700,5 @@ export class HrComponent implements OnInit{
     
 
   }
-
-
-
-  //getDate() {
-  //  return this.libraryService.getDate("EEEE, MMMM d, y")
-  //}
-
-  //getMonth() {
-  //  return Number(this.libraryService.getDate("M")) - 1
-  //}
-
-  //getFirstDateofMonth() {
-  //  return Number(this.libraryService.getDate("M")) - 1
-  //}
-
-  //getLastDate() {
-  //  return this.libraryService.getLastDayofMonth(this.getMonth())
-  //}
-
-  //daysArray: string[] = []
-
-  //startMonth = this.Mon
-
-  //getDays() {
-  //  this.daysArray = this.libraryService.generateDaysArray(this.getMonth())
-  //}
-
-  //monthsArray: string[] = []
-
-  //getMonths() {
-  //  this.monthsArray = this.libraryService.generateMonthsArray()
-  //  /*console.log(this.monthsArray)*/
-  //}
-
-  
-
 
 }
